@@ -1,0 +1,14 @@
+{
+    "browser": true,
+    "es2021": true,
+    "jest": true,
+    "semi": false,
+    "trailingComma": "all",
+    "singleQuote": true,
+    "printWidth": 100,
+    "tabWidth": 2,
+    "arrowParens": "avoid",
+    "jsxSingleQuote": true,
+    "bracketSpacing": true
+  }
+  
