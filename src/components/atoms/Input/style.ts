@@ -21,4 +21,13 @@ export const InputGrid = styled(Grid)`
     gap: 8px;
     width: unset;
     flex-direction: column;
+    position: relative;
+`;
+
+export const StyledImg = styled.img`
+    position: absolute;
+    top: 60%;
+    right: 0;
+    width: 18px;
+    height: 18px;
 `;

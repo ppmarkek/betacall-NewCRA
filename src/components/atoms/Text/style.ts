@@ -6,49 +6,53 @@ type ButtonProps = {
     $small: string;
 }
 
-export const H1 = styled(Typography)`
+type ButtonProps2 = {
+    $light: string;
+}
+
+export const H1 = styled(Typography)<ButtonProps2>`
     font-family: 'Lato';
     font-style: normal;
     font-weight: 700;
     font-size: 34px;
     line-height: 42px;
-    color: #1A1C1D;
+    color: ${(props) => (props.$light ? '#8083A3' : '#1A1C1D')};
 `;
 
-export const H2 = styled(Typography)`
+export const H2 = styled(Typography)<ButtonProps2>`
     font-family: 'Lato';
     font-style: normal;
     font-weight: 700;
     font-size: 28px;
     line-height: 38px;
-    color: #1A1C1D;
+    color: ${(props) => (props.$light ? '#8083A3' : '#1A1C1D')};
 `;
 
-export const H3 = styled(Typography)`
+export const H3 = styled(Typography)<ButtonProps2>`
     font-family: 'Lato';
     font-style: normal;
     font-weight: 700;
     font-size: 25px;
     line-height: 32px;
-    color: #1A1C1D;
+    color: ${(props) => (props.$light ? '#8083A3' : '#1A1C1D')};
 `;
 
-export const H4 = styled(Typography)`
+export const H4 = styled(Typography)<ButtonProps2>`
     font-family: 'Lato';
     font-style: normal;
     font-weight: 700;
     font-size: 23px;
     line-height: 27px;
-    color: #1A1C1D;
+    color: ${(props) => (props.$light ? '#8083A3' : '#1A1C1D')};
 `;
 
-export const H5 = styled(Typography)`
+export const H5 = styled(Typography)<ButtonProps2>`
     font-family: 'Lato';
     font-style: normal;
     font-weight: 700;
     font-size: 21px;
     line-height: 24px;
-    color: #1A1C1D;
+    color: ${(props) => (props.$light ? '#8083A3' : '#1A1C1D')};
 `;
 
 export const Bold = styled(Typography)<ButtonProps>`
