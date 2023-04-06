@@ -30,7 +30,7 @@ const Recover = () => {
                         IconType={'Email'}
                         type={''}
                     />
-                    <Button variant={'FilledActive'} text={'Recover'} width={'420px'} to={''} />
+                    <Button variant={'FilledActive'} width={'420px'}>Recover</Button>
                 </Grid>
             </Title>
         </Wrapper>

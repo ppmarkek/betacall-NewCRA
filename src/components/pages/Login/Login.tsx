@@ -50,7 +50,7 @@ const Login = () => {
                     <Checkbox color={'#6B59CC'} bg={'#F0F0F3'} text={'Remember me'} />
                     <StyledLink to={'/Recover'}>Recover password</StyledLink>
                 </Grid>
-                <Button variant={'FilledActive'} text={'Sign In'} width={'420px'} to={''} />
+                <Button variant={'FilledActive'} width={'420px'}>Sign In</Button>
             </Grid>
             <OrGrid container>
                 <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>

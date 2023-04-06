@@ -6,6 +6,7 @@ export const SignIn = styled(Grid)`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-bottom: 91px;
 `;
 
 export const Title = styled(Grid)`
