@@ -11,14 +11,15 @@ const Recover = () => {
             <Title container>
                 <img src={RecoverImg} alt='' />
                 <Grid container gap={'11px'} justifyContent={'center'}>
-                    <Text variant={'H1'} small={''} text={'Lost your password?'} light={''} />
-                    <Text variant={'H1'} small={''} text={'Enter your details to recover.'} light={''} />
-                    <Text
-                        variant={'Light'}
-                        small={'small'}
-                        text={'Enter your details to proceed further'}
-                        light={'light'}
-                    />
+                    <Text variant={'H1'} small={''} light={''}>
+                        Lost your password?
+                    </Text>
+                    <Text variant={'H1'} small={''} light={''}>
+                        Enter your details to recover.
+                    </Text>
+                    <Text variant={'Light'} small={'small'} light={'light'}>
+                        Enter your details to proceed further
+                    </Text>
                 </Grid>
                 <Grid container gap={'49px'}>
                     <Input

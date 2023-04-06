@@ -3,47 +3,47 @@ import { Bold, H1, H2, H3, H4, H5, Light, Regular } from './style';
 type Value = {
     variant: string;
     small: string;
-    text: string;
+    children: string;
     light: string;
 };
 
-const Text = ({variant, small, text, light}: Value) => {
+const Text = ({variant, small, children, light}: Value) => {
     switch (variant) {
     case 'H1':
         return (
-            <H1 $light={light}>{text}</H1>
+            <H1 $light={light}>{children}</H1>
         );
     case 'H2':
         return (
-            <H2 $light={light}>{text}</H2>
+            <H2 $light={light}>{children}</H2>
         );
     case 'H3':
         return (
-            <H3 $light={light}>{text}</H3>
+            <H3 $light={light}>{children}</H3>
         );
     case 'H4':
         return (
-            <H4 $light={light}>{text}</H4>
+            <H4 $light={light}>{children}</H4>
         );
     case 'H5':
         return (
-            <H5 $light={light}>{text}</H5>
+            <H5 $light={light}>{children}</H5>
         );
     case 'Bold':
         return (
-            <Bold $small={small}>{text}</Bold>
+            <Bold $small={small}>{children}</Bold>
         );
     case 'Regular':
         return (
-            <Regular $small={small}>{text}</Regular>
+            <Regular $small={small}>{children}</Regular>
         );
     case 'Light':
         return (
-            <Light $small={small}>{text}</Light>
+            <Light $small={small}>{children}</Light>
         );
     default:
         return (
-            <Regular $small={small}>{text}</Regular>
+            <Regular $small={small}>{children}</Regular>
         );
     }
 };

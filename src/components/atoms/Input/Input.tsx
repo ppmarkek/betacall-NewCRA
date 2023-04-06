@@ -32,7 +32,7 @@ const Input = ({variant, type, text, width, color, title, IconType}: Value) => {
     case 'LightInput':
         return (
             <InputGrid container>
-                <Text variant={'Light'} small={'small'} text={title} light={''} />
+                <Text variant={'Light'} small={'small'} light={''}>{title}</Text>
                 <LightInput type={type} placeholder={text} $width={width} $color={color} onChange={(x) => CheackEmail(x.target.value)}/>
                 {IconType !== '' ? <StyledImg src={Icon} alt='' /> : <Grid></Grid>}
             </InputGrid>

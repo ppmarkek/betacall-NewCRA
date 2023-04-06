@@ -12,18 +12,12 @@ const Login = () => {
     return (
         <SignIn container xs={12}>
             <Title container>
-                <Text
-                    variant={'H1'}
-                    small={''}
-                    text={'Welcome to BetaCall Sign In to getting started.'}
-                    light={''}
-                />
-                <Text
-                    variant={'Light'}
-                    small={''}
-                    text={'Enter your details to proceed further'}
-                    light={''}
-                />
+                <Text variant={'H1'} small={''} light={''}>
+                    Welcome to BetaCall Sign In to getting started.
+                </Text>
+                <Text variant={'Light'}small={''} light={''}>
+                    Enter your details to proceed further
+                </Text>
             </Title>
             <Grid container gap={'34px'} flexDirection={'column'} width={'unset'}>
                 <Grid container gap={'19px'} width={'420px'}>
@@ -54,7 +48,9 @@ const Login = () => {
             </Grid>
             <OrGrid container>
                 <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>
-                <Text variant={'Light'} small={'small'} text={'Or'} light={''} />
+                <Text variant={'Light'} small={'small'} light={''}>
+                    Or
+                </Text>
                 <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>
             </OrGrid>
             <Grid container gap={'8px'} flexDirection={'column'} width={'unset'}>
