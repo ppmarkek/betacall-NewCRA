@@ -16,12 +16,12 @@ const Checkbox = ({color, bg, text}: Value) => {
     };
 
     return(
-        <CheckboxGrid container width={'unset'}>
+        <CheckboxGrid container>
             <StyledCheckbox>
                 <input type="checkbox" id="checkbox" onChange={(event) => handleChange(event)} />
                 <label htmlFor="checkbox" />
             </StyledCheckbox>
-            <Text variant={'H5'} small={''} text={text} light={textColor}/>
+            <Text variant={'H5'} small={''} light={textColor}>{text}</Text>
         </CheckboxGrid>
     );
 };

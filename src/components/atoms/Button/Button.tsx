@@ -1,23 +1,27 @@
 import { FilledActive, FilledRestingLight } from './style';
 
 type Value = {
-    variant: string;
-    text: string;
-    width: string;
-};
+  variant: string
+  children: any
+  width: string
+}
 
-const Button = ({variant, text, width}: Value) => {
+const Button = ({ variant, children, width }: Value) => {
     switch (variant) {
     case 'FilledRestingLight':
         return (
-            <FilledRestingLight to='/' $width={width}>{text}</FilledRestingLight>
+            <FilledRestingLight $width={width}>
+                {children}
+            </FilledRestingLight>
         );
     case 'FilledActive':
+        return <FilledActive $width={width}>{children}</FilledActive>;
+    default:
         return (
-            <FilledActive $width={width}>{text}</FilledActive>
+            <FilledRestingLight $width={width}>
+                {children}
+            </FilledRestingLight>
         );
-    default: 
-        return <FilledRestingLight to='/' $width={width}>{text}</FilledRestingLight>;
     }
 };
 

@@ -27,4 +27,6 @@ export const StyledCheckbox = styled(Grid)`
 
 export const CheckboxGrid = styled(Grid)`
     gap: 10px;
+    width: unset;
+    align-items: center;
 `;

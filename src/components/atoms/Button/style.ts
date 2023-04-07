@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 
-export const FilledRestingLight = styled(Link)`
+export const FilledRestingLight = styled(Button)`
+    all: unset;
     text-decoration: none;
     color: #8083A3;
     background: #FFFFFF;
@@ -17,6 +17,9 @@ export const FilledRestingLight = styled(Link)`
     font-weight: 700;
     width: ${(props: { $width: any; }) => (props.$width ? props.$width : '98px')};
     transition: all 0.4s;
+    span {
+        display: none;
+    }
     &:hover{
         border: 1px solid #6B59CC;
         color: #FFFFFF;
@@ -45,5 +48,8 @@ export const FilledActive = styled(Button)`
         color: #8083A3;
         background: #fff;
         border: 1px solid #ECEEF5;
+    }
+    span {
+        display: none;
     }
 `;
