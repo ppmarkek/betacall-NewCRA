@@ -13,15 +13,15 @@ const Step1 = () => {
         <Wrapper container>
             <Title container>
                 <Grid>
-                    <Text variant={'H1'} small={''} light={''}>
+                    <Text variant={'H1'} small={''} color={''}>
             Welcome to BetaCall
                     </Text>
-                    <Text variant={'H1'} small={''} light={''}>
+                    <Text variant={'H1'} small={''} color={''}>
             Sign Up to getting started.
                     </Text>
                 </Grid>
 
-                <Text variant={'Light'} small={''} light={''}>
+                <Text variant={'LIGHT'} small={''} color={''}>
           Enter your details to proceed further
                 </Text>
             </Title>
@@ -44,7 +44,7 @@ const Step1 = () => {
             </Grid>
             <OrGrid container>
                 <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>
-                <Text variant={'Light'} small={'small'} light={''}>
+                <Text variant={'LIGHT'} small={'small'} color={''}>
           Or
                 </Text>
                 <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>

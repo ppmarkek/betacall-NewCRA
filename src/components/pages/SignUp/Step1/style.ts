@@ -6,8 +6,7 @@ export const Wrapper = styled(Grid)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 131px;
-  padding-bottom: 142px;
+  height: 935px;
 `;
 
 export const Title = styled(Grid)`
@@ -15,13 +14,13 @@ export const Title = styled(Grid)`
   text-align: center;
   justify-content: center;
   flex-direction: column;
-  gap: 11px;
-  padding-bottom: 59px;
+  gap: 10px;
+  padding-bottom: 60px;
 `;
 
 export const OrGrid = styled(Grid)`
   align-items: center;
-  padding: 47px 0px;
+  padding: 48px 0px;
   gap: 16px;
   width: unset;
 `;

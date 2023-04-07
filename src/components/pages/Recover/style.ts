@@ -10,6 +10,6 @@ export const Title = styled(Grid)`
   width: 445px;
   gap: 35px;
   justify-content: center;
-  padding-top: 134px;
-  padding-bottom: 59px;
+  align-items: center;
+  height: 935px;
 `;

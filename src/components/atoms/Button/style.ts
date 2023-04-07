@@ -9,7 +9,7 @@ export const FilledRestingLight = styled(Button)`
     border: 1px solid #ECEEF5;
     border-radius: 10px;
     text-align: center;
-    padding: 13px 0px 15px 0;
+    padding: 14px 0px 15px 0;
     cursor: pointer;
     font-size: 18px;
     font-family: 'Lato';

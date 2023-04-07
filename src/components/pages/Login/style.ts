@@ -6,7 +6,7 @@ export const SignIn = styled(Grid)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-bottom: 91px;
+  height: 935px;
 `;
 
 export const Title = styled(Grid)`
@@ -15,8 +15,7 @@ export const Title = styled(Grid)`
   justify-content: center;
   flex-direction: column;
   gap: 11px;
-  padding-bottom: 59px;
-  padding-top: 97px;
+  padding-bottom: 60px;
 `;
 
 export const StyledLink = styled(Link)`
@@ -33,7 +32,7 @@ export const OrGrid = styled(Grid)`
   align-items: center;
   padding: 47px 0px;
   gap: 16px;
-  width: unset;
+  width: auto;
 `;
 
 export const SocialLink = styled(Link)`

@@ -10,18 +10,18 @@ const Recover = () => {
         <Wrapper container>
             <Title container>
                 <img src={RecoverImg} alt='' />
-                <Grid container gap={'11px'} justifyContent={'center'}>
-                    <Text variant={'H1'} small={''} light={''}>
-                        Lost your password?
+                <Grid container gap={'10px'} justifyContent={'center'}>
+                    <Text variant={'H1'} small={''} color={''}>
+            Lost your password?
                     </Text>
-                    <Text variant={'H1'} small={''} light={''}>
-                        Enter your details to recover.
+                    <Text variant={'H1'} small={''} color={''}>
+            Enter your details to recover.
                     </Text>
-                    <Text variant={'Light'} small={'small'} light={'light'}>
-                        Enter your details to proceed further
+                    <Text variant={'LIGHT'} small={'small'} color={'#8083A3'}>
+            Enter your details to proceed further
                     </Text>
                 </Grid>
-                <Grid container gap={'49px'}>
+                <Grid container gap={'50px'}>
                     <Input
                         variant='LightInput'
                         text={'Start typing ...'}
@@ -31,7 +31,9 @@ const Recover = () => {
                         IconType={'Email'}
                         type={''}
                     />
-                    <Button variant={'FilledActive'} width={'420px'}>Recover</Button>
+                    <Button variant={'FilledActive'} width={'420px'}>
+            Recover
+                    </Button>
                 </Grid>
             </Title>
         </Wrapper>
