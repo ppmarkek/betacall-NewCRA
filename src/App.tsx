@@ -4,6 +4,7 @@ import Login from './components/pages/Login/Login';
 import LoginHeader from './components/templates/LoginHeader/LoginHeader';
 import Recover from './components/pages/Recover/Recover';
 import Step1 from './components/pages/SignUp/Step1/Step1';
+import Step2 from './components/pages/SignUp/Step2/Step2';
 
 function App() {
     const LoginReg = ['/Login', '/Recover'];
@@ -18,6 +19,7 @@ function App() {
             )}
             <Routes>
                 <Route path='/Step1' element={<Step1 />} />
+                <Route path='/Step2' element={<Step2 />} />
                 <Route path='/Recover' element={<Recover />} />
                 <Route path='/Login' element={<Login />} />
             </Routes>
