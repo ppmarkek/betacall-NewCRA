@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const SignIn = styled(Grid)`
+export const Wrapper = styled(Grid)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -10,29 +10,19 @@ export const SignIn = styled(Grid)`
 `;
 
 export const Title = styled(Grid)`
-  width: 390px;
+  width: 400px;
   text-align: center;
   justify-content: center;
   flex-direction: column;
-  gap: 11px;
+  gap: 10px;
   padding-bottom: 60px;
-`;
-
-export const StyledLink = styled(Link)`
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 21px;
-  line-height: 19px;
-  color: #6b59cc;
-  text-decoration: none;
 `;
 
 export const OrGrid = styled(Grid)`
   align-items: center;
-  padding: 47px 0px;
+  padding: 48px 0px;
   gap: 16px;
-  width: auto;
+  width: unset;
 `;
 
 export const SocialLink = styled(Link)`
@@ -75,4 +65,8 @@ export const HoverGrid = styled(Grid)`
     color: #ffffff;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), #6b59cc;
   }
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
 `;
