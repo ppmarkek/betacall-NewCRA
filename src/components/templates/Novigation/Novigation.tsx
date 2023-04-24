@@ -1,5 +1,15 @@
 import { Grid } from '@mui/material';
-import { ButtonsGrid, LeftNovigation, StyledImg, StyledLink } from './style';
+import {
+    BorderGrid,
+    ButtonsGrid,
+    ChangeButton,
+    LeftNovigation,
+    NovigButton,
+    StyledImg,
+    StyledLink,
+    TopNovigation,
+    Wrapper,
+} from './style';
 import Logo from '../../../assets/Icon/Logo.svg';
 import { Link, useLocation } from 'react-router-dom';
 import Home from '../../../assets/NovigationIcon/Home.svg';
@@ -18,9 +28,15 @@ import ContactsActive from '../../../assets/NovigationIcon/ContactsActive.svg';
 import ScreenshareActive from '../../../assets/NovigationIcon/ScreenshareActive.svg';
 import ScheduleActive from '../../../assets/NovigationIcon/ScheduleActive.svg';
 import SettingsActive from '../../../assets/NovigationIcon/SettingsActive.svg';
+import Text from '../../atoms/Text/Text';
+import { useState } from 'react';
 
 const Novigation = () => {
     const location = useLocation();
+    const [checkClass, SetCheckClass] = useState('NotActive');
+    const ChangeClass = () => {
+        return checkClass === 'Active' ? SetCheckClass('NotActive') : SetCheckClass('Active');
+    };
 
     const Button = [
         {
@@ -58,7 +74,24 @@ const Novigation = () => {
     ];
 
     return (
-        <Grid height={'100%'}>
+        <Wrapper container>
+            <TopNovigation container xs={11.5}>
+                <Grid container gap={'15px'} alignItems={'center'}>
+                    <ChangeButton>
+                        <NovigButton className={checkClass} onClick={() => ChangeClass()}>
+                            <BorderGrid container>
+                                <label id={'Top'}></label>
+                                <label id={'Middle'}></label>
+                                <label id={'Bottom'}></label>
+                            </BorderGrid>
+                        </NovigButton>
+                    </ChangeButton>
+
+                    <Text variant={'H3'} small={''} color={''}>
+                        {location.pathname.replace('/', '')}
+                    </Text>
+                </Grid>
+            </TopNovigation>
             <LeftNovigation container xs={0.5}>
                 <Grid height={'5%'}>
                     <Link to='/'>
@@ -73,7 +106,7 @@ const Novigation = () => {
                     ))}
                 </ButtonsGrid>
             </LeftNovigation>
-        </Grid>
+        </Wrapper>
     );
 };
 
