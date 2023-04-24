@@ -8,6 +8,7 @@ export const LeftNovigation = styled(Grid)`
   align-items: center;
   flex-direction: column;
   padding: 22px 0px;
+  border-right: 1px solid #eceef5;
 `;
 
 export const ButtonsGrid = styled(Grid)`
