@@ -6,6 +6,7 @@ import Recover from './components/pages/Recover/Recover';
 import Step1 from './components/pages/SignUp/Step1/Step1';
 import Step2 from './components/pages/SignUp/Step2/Step2';
 import Step3 from './components/pages/SignUp/Step3/Step3';
+import Novigation from './components/templates/Novigation/Novigation';
 
 function App() {
     const LoginReg = ['/Login', '/Recover', '/Step1', '/Step2', '/Step3'];
@@ -16,7 +17,7 @@ function App() {
             {LoginReg.some(x => x === location.pathname) === true ? (
                 <LoginHeader key='' />
             ) : (
-                <LoginHeader key='' />
+                <Novigation key='' />
             )}
             <Routes>
                 <Route path='/Step1' element={<Step1 />} />
