@@ -142,3 +142,14 @@ export const ResultImg = styled.img`
   width: 22px;
   height: 22px;
 `;
+
+export const Status = styled(Grid)`
+  position: absolute;
+  bottom: 0px;
+  right: -4px;
+  background-color: #28c345;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-radius: 20px;
+`;

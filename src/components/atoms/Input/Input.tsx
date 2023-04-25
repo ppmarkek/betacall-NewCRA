@@ -14,6 +14,7 @@ import {
     SearchImg,
     SearchInput,
     SearchLink,
+    Status,
     StyledImg,
 } from './style';
 import { Fade, Grid } from '@mui/material';
@@ -152,7 +153,10 @@ const Input = ({ variant, type, text, width, color, title, IconType }: Value) =>
                         <Result container>
                             <SearchLink to='/'>
                                 <Grid container gap={'20px'}>
-                                    <img src={Avatar} alt='' />
+                                    <Grid position={'relative'}>
+                                        <img src={Avatar} alt='' />
+                                        <Status />
+                                    </Grid>
                                     <Grid>
                                         <Text variant={'BOLD'} small={''} color={''}>
                         John Doe
