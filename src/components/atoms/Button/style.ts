@@ -1,55 +1,59 @@
 import styled from 'styled-components';
 import { Button } from '@mui/material';
 
-export const FilledRestingLight = styled(Button)`
-    all: unset;
-    text-decoration: none;
-    color: #8083A3;
-    background: #FFFFFF;
-    border: 1px solid #ECEEF5;
-    border-radius: 10px;
-    text-align: center;
-    padding: 14px 0px 15px 0;
-    cursor: pointer;
-    font-size: 18px;
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 700;
-    width: ${(props: { $width: any; }) => (props.$width ? props.$width : '98px')};
-    transition: all 0.4s;
-    span {
-        display: none;
-    }
-    &:hover{
-        border: 1px solid #6B59CC;
-        color: #FFFFFF;
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), #6B59CC;
-        border-radius: 8px;
-    }
+type ButtonStyleProps = {
+  $width?: string
+}
+
+export const FilledRestingLight = styled(Button)<ButtonStyleProps>`
+  all: unset;
+  text-decoration: none;
+  color: #8083a3;
+  background: #ffffff;
+  border: 1px solid #eceef5;
+  border-radius: 10px;
+  text-align: center;
+  padding: 14px 0px 15px 0;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  width: ${props => props.$width || '98px'};
+  transition: all 0.4s;
+  span {
+    display: none;
+  }
+  &:hover {
+    border: 1px solid #6b59cc;
+    color: #ffffff;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), #6b59cc;
+    border-radius: 8px;
+  }
 `;
 
-export const FilledActive = styled(Button)`
-    all: unset;
-    cursor: pointer;
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 21px;
-    line-height: 19px;
-    color: #FFFFFF;
-    background: #6B59CC;
-    border-radius: 10px;
-    border: 1px solid #6B59CC;
-    height: 50px;
-    transition: all 0.4s;
-    text-align: center;
-    width: ${(props: { $width: any; }) => (props.$width ? props.$width : '98px')};
-    &:hover{
-        color: #8083A3;
-        background: #fff;
-        border: 1px solid #ECEEF5;
-    }
-    span {
-        display: none;
-    }
+export const FilledActive = styled(Button)<ButtonStyleProps>`
+  all: unset;
+  cursor: pointer;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 19px;
+  color: #ffffff;
+  background: #6b59cc;
+  border-radius: 10px;
+  border: 1px solid #6b59cc;
+  height: 50px;
+  transition: all 0.4s;
+  text-align: center;
+  width: ${props => props.$width || '98px'};
+  &:hover {
+    color: #8083a3;
+    background: #fff;
+    border: 1px solid #eceef5;
+  }
+  span {
+    display: none;
+  }
 `;
