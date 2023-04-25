@@ -8,7 +8,7 @@ export const Wrapper = styled(Grid)`
   flex-direction: row-reverse;
 `;
 
-export const LeftNovigation = styled(Grid)`
+export const LeftNavigation = styled(Grid)`
   min-height: 900px;
   height: 100%;
   align-items: center;
@@ -44,7 +44,7 @@ export const StyledImg = styled.img`
   height: 22px;
 `;
 
-export const TopNovigation = styled(Grid)`
+export const TopNavigation = styled(Grid)`
   height: 85px;
   align-items: space-between;
   flex-direction: column;

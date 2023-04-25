@@ -18,33 +18,33 @@ import {
     StyledImg,
 } from './style';
 import { Fade, Grid } from '@mui/material';
-import SPass from '../../../assets/Icon/SPass.svg';
+import SilverPass from '../../../assets/Icon/SilverPass.svg';
 import Pass from '../../../assets/Icon/Pass.svg';
 import Email from '../../../assets/Icon/Email.svg';
-import EmailS from '../../../assets/Icon/EmailS.svg';
+import EmailSilver from '../../../assets/Icon/EmailSilver.svg';
 import Men from '../../../assets/Icon/Men.svg';
-import MenS from '../../../assets/Icon/MenS.svg';
-import CheckS from '../../../assets/Icon/CheckS.svg';
+import MenSilver from '../../../assets/Icon/MenSilver.svg';
+import CheckSilver from '../../../assets/Icon/CheckSilver.svg';
 import Check from '../../../assets/Icon/Check.svg';
-import SearchS from '../../../assets/Icon/SearchS.svg';
+import SearchSilver from '../../../assets/Icon/SearchSilver.svg';
 import Search from '../../../assets/Icon/Search.svg';
 import Avatar from '../../../assets/Image/Avatar.svg';
-import Messenger from '../../../assets/NovigationIcon/Messenger.svg';
-import Calls from '../../../assets/NovigationIcon/Calls.svg';
+import Messenger from '../../../assets/NavigationIcon/Messenger.svg';
+import Calls from '../../../assets/NavigationIcon/Calls.svg';
 
 type Value = {
   variant: string
-  type: string
-  text: string
-  width: string
-  color: string
-  title: string
-  IconType: string
+  type?: string
+  text?: string
+  width?: string
+  color?: string
+  title?: string
+  IconType?: string
 }
 
 const Input = ({ variant, type, text, width, color, title, IconType }: Value) => {
-    const [Icon, setIcon] = useState(SPass);
-    const [Confirm, setConfirm] = useState(CheckS);
+    const [Icon, setIcon] = useState(SilverPass);
+    const [Confirm, setConfirm] = useState(CheckSilver);
     const [Value, setValue] = useState('');
     const [checked, setChecked] = useState(false);
 
@@ -54,30 +54,30 @@ const Input = ({ variant, type, text, width, color, title, IconType }: Value) =>
 
     const changeIcon = () => {
         if (IconType === 'Email') {
-            return setIcon(EmailS);
+            return setIcon(EmailSilver);
         } else if (IconType === 'Name') {
-            return setIcon(MenS);
+            return setIcon(MenSilver);
         }
     };
 
     const CheackIcon = (x: string) => {
         if (IconType === 'Email') {
-            return x === '' ? setIcon(EmailS) : setIcon(Email);
+            return x === '' ? setIcon(EmailSilver) : setIcon(Email);
         }
         if (IconType === 'Pass' && variant === 'ConfirmPassword') {
             setValue(x);
-            return x === '' ? setIcon(SPass) : setIcon(Pass);
+            return x === '' ? setIcon(SilverPass) : setIcon(Pass);
         }
         if (IconType === 'Pass') {
-            return x === '' ? setIcon(SPass) : setIcon(Pass);
+            return x === '' ? setIcon(SilverPass) : setIcon(Pass);
         }
         if (IconType === 'Name') {
-            return x === '' ? setIcon(MenS) : setIcon(Men);
+            return x === '' ? setIcon(MenSilver) : setIcon(Men);
         }
     };
 
     const CheackConfirmPass = (x: string) => {
-        return Value !== '' && Value === x ? setConfirm(Check) : setConfirm(CheckS);
+        return Value !== '' && Value === x ? setConfirm(Check) : setConfirm(CheckSilver);
     };
 
     useEffect(() => {
@@ -88,7 +88,7 @@ const Input = ({ variant, type, text, width, color, title, IconType }: Value) =>
     case 'LightInput':
         return (
             <InputGrid container>
-                <Text variant={'LIGHT'} small={'small'} color={''}>
+                <Text variant={'LIGHT'} small={'small'}>
                     {title}
                 </Text>
                 <LightInput
@@ -105,7 +105,7 @@ const Input = ({ variant, type, text, width, color, title, IconType }: Value) =>
         return (
             <ConfirmPassword container>
                 <InputGrid container>
-                    <Text variant={'LIGHT'} small={'small'} color={''}>
+                    <Text variant={'LIGHT'} small={'small'}>
               Password
                     </Text>
                     <LightInput
@@ -118,7 +118,7 @@ const Input = ({ variant, type, text, width, color, title, IconType }: Value) =>
                     <StyledImg src={Icon} alt='' />
                 </InputGrid>
                 <InputGrid container>
-                    <Text variant={'LIGHT'} small={'small'} color={''}>
+                    <Text variant={'LIGHT'} small={'small'}>
               Confirm password
                     </Text>
                     <LightInput
@@ -138,10 +138,10 @@ const Input = ({ variant, type, text, width, color, title, IconType }: Value) =>
                 <Grid>
                     <SearchButton onClick={() => ChangeSearch()}>
                         <Fade in={checked}>
-                            <SearchImg src={Search} alt='SearchS' />
+                            <SearchImg src={Search} alt='SearchSilver' />
                         </Fade>
                         <Fade in={!checked}>
-                            <SearchImg src={SearchS} alt='SearchS' />
+                            <SearchImg src={SearchSilver} alt='SearchSilver' />
                         </Fade>
                     </SearchButton>
                     <Fade in={checked}>
@@ -158,10 +158,8 @@ const Input = ({ variant, type, text, width, color, title, IconType }: Value) =>
                                         <Status />
                                     </Grid>
                                     <Grid>
-                                        <Text variant={'BOLD'} small={''} color={''}>
-                        John Doe
-                                        </Text>
-                                        <Text variant={'LIGHT'} small={'small'} color={''}>
+                                        <Text variant={'BOLD'}>John Doe</Text>
+                                        <Text variant={'LIGHT'} small={'small'}>
                         Developer
                                         </Text>
                                     </Grid>

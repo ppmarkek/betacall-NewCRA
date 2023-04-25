@@ -13,17 +13,11 @@ const Step1 = () => {
         <Wrapper container>
             <Title container>
                 <Grid>
-                    <Text variant={'H1'} small={''} color={''}>
-            Welcome to BetaCall
-                    </Text>
-                    <Text variant={'H1'} small={''} color={''}>
-            Sign Up to getting started.
-                    </Text>
+                    <Text variant={'H1'}>Welcome to BetaCall</Text>
+                    <Text variant={'H1'}>Sign Up to getting started.</Text>
                 </Grid>
 
-                <Text variant={'LIGHT'} small={''} color={''}>
-          Enter your details to proceed further
-                </Text>
+                <Text variant={'LIGHT'}>Enter your details to proceed further</Text>
             </Title>
             <Grid container gap={'36px'} flexDirection={'column'} width={'unset'}>
                 <Input
@@ -31,7 +25,6 @@ const Step1 = () => {
                     type={'text'}
                     text={'catherine.shaw@gmail.com'}
                     width={'420px'}
-                    color={''}
                     title={'Email'}
                     IconType={'Email'}
                 />
@@ -44,7 +37,7 @@ const Step1 = () => {
             </Grid>
             <OrGrid container>
                 <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>
-                <Text variant={'LIGHT'} small={'small'} color={''}>
+                <Text variant={'LIGHT'} small={'small'}>
           Or
                 </Text>
                 <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>

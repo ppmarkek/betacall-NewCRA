@@ -13,9 +13,9 @@ enum Variant {
 
 type Value = {
   variant: 'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'BOLD' | 'REGULAR' | 'LIGHT' | Variant
-  small: string
-  children: string
-  color: string
+  small?: string
+  children?: string
+  color?: string
 }
 
 const Text = ({ variant, small, children, color }: Value) => {

@@ -21,7 +21,7 @@ const Checkbox = ({ color, bg, text }: Value) => {
                 <input type='checkbox' id='checkbox' onChange={event => handleChange(event)} />
                 <label htmlFor='checkbox' />
             </StyledCheckbox>
-            <Text variant={'LIGHT'} small={''} color={textColor}>
+            <Text variant={'LIGHT'} color={textColor}>
                 {text}
             </Text>
         </CheckboxGrid>

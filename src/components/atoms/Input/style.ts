@@ -3,8 +3,8 @@ import { Input, Grid, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 type ButtonProps = {
-  $width: string
-  $color: string
+  $width?: string
+  $color?: string
 }
 
 export const LightInput = styled(Input)<ButtonProps>`

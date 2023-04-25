@@ -8,19 +8,15 @@ const Step3 = () => {
         <Wrapper container>
             <img src={Undraw} alt='' />
             <Grid container gap={'4px'} width={'465px'} justifyContent={'center'}>
-                <Text variant={'H1'} small={''} color={'#1A1C1D'}>
+                <Text variant={'H1'} color={'#1A1C1D'}>
           Thank you
                 </Text>
                 <Grid textAlign={'center'}>
-                    <Text variant={'LIGHT'} small={''} color={''}>
-            We sent an email to catherine.shaw@gmail.com
-                    </Text>
-                    <Text variant={'LIGHT'} small={''} color={''}>
-            Click confirmation link in the email to verify your account
-                    </Text>
+                    <Text variant={'LIGHT'}>We sent an email to catherine.shaw@gmail.com</Text>
+                    <Text variant={'LIGHT'}>Click confirmation link in the email to verify your account</Text>
                 </Grid>
             </Grid>
-            <StyledLink to={''}>Resend Email</StyledLink>
+            <StyledLink to={'/'}>Resend Email</StyledLink>
         </Wrapper>
     );
 };

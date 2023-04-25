@@ -12,12 +12,8 @@ const Login = () => {
     return (
         <SignIn container>
             <Title container>
-                <Text variant={'H1'} small={''} color={''}>
-          Welcome to BetaCall Sign In to getting started.
-                </Text>
-                <Text variant={'LIGHT'} small={''} color={''}>
-          Enter your details to proceed further
-                </Text>
+                <Text variant={'H1'}>Welcome to BetaCall Sign In to getting started.</Text>
+                <Text variant={'LIGHT'}>Enter your details to proceed further</Text>
             </Title>
             <Grid container gap={'34px'} flexDirection={'column'} width={'unset'}>
                 <Grid container gap={'20px'} width={'420px'}>
@@ -25,16 +21,13 @@ const Login = () => {
                         variant='LightInput'
                         text={'catherine.shaw@gmail.com'}
                         width={'420px'}
-                        color={''}
                         title={'Email'}
                         IconType={'Email'}
-                        type={''}
                     />
                     <Input
                         variant='LightInput'
                         text={'Start typing …'}
                         width={'420px'}
-                        color={''}
                         title={'Password'}
                         IconType={'Pass'}
                         type={'password'}
@@ -50,7 +43,7 @@ const Login = () => {
             </Grid>
             <OrGrid container>
                 <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>
-                <Text variant={'LIGHT'} small={'small'} color={''}>
+                <Text variant={'LIGHT'} small={'small'}>
           Or
                 </Text>
                 <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>

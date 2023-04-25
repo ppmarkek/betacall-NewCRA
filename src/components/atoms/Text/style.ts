@@ -2,11 +2,11 @@ import { Typography } from '@mui/material';
 import styled from 'styled-components';
 
 type ButtonProps = {
-  $small: string
+  $small?: string
 }
 
 type ButtonProps2 = {
-  $color: string
+  $color?: string
 }
 
 export const H1 = styled(Typography)<ButtonProps2>`

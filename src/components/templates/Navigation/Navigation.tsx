@@ -4,43 +4,43 @@ import {
     BorderGrid,
     ButtonsGrid,
     ChangeButton,
-    LeftNovigation,
+    LeftNavigation,
     NovigButton,
     StyledImg,
     StyledLink,
-    TopNovigation,
+    TopNavigation,
     Wrapper,
 } from './style';
 import Logo from '../../../assets/Icon/Logo.svg';
 import { Link, useLocation } from 'react-router-dom';
-import Home from '../../../assets/NovigationIcon/Home.svg';
-import Messenger from '../../../assets/NovigationIcon/Messenger.svg';
-import Calls from '../../../assets/NovigationIcon/Calls.svg';
-import Conference from '../../../assets/NovigationIcon/Conference.svg';
-import Contacts from '../../../assets/NovigationIcon/Contacts.svg';
-import Screenshare from '../../../assets/NovigationIcon/Screenshare.svg';
-import Schedule from '../../../assets/NovigationIcon/Schedule.svg';
-import Settings from '../../../assets/NovigationIcon/Settings.svg';
-import HomeActive from '../../../assets/NovigationIcon/HomeActive.svg';
-import MessengerActive from '../../../assets/NovigationIcon/MessengerActive.svg';
-import CallsActive from '../../../assets/NovigationIcon/CallsActive.svg';
-import ConferenceActive from '../../../assets/NovigationIcon/ConferenceActive.svg';
-import ContactsActive from '../../../assets/NovigationIcon/ContactsActive.svg';
-import ScreenshareActive from '../../../assets/NovigationIcon/ScreenshareActive.svg';
-import ScheduleActive from '../../../assets/NovigationIcon/ScheduleActive.svg';
-import SettingsActive from '../../../assets/NovigationIcon/SettingsActive.svg';
+import Home from '../../../assets/NavigationIcon/Home.svg';
+import Messenger from '../../../assets/NavigationIcon/Messenger.svg';
+import Calls from '../../../assets/NavigationIcon/Calls.svg';
+import Conference from '../../../assets/NavigationIcon/Conference.svg';
+import Contacts from '../../../assets/NavigationIcon/Contacts.svg';
+import Screenshare from '../../../assets/NavigationIcon/Screenshare.svg';
+import Schedule from '../../../assets/NavigationIcon/Schedule.svg';
+import Settings from '../../../assets/NavigationIcon/Settings.svg';
+import HomeActive from '../../../assets/NavigationIcon/HomeActive.svg';
+import MessengerActive from '../../../assets/NavigationIcon/MessengerActive.svg';
+import CallsActive from '../../../assets/NavigationIcon/CallsActive.svg';
+import ConferenceActive from '../../../assets/NavigationIcon/ConferenceActive.svg';
+import ContactsActive from '../../../assets/NavigationIcon/ContactsActive.svg';
+import ScreenshareActive from '../../../assets/NavigationIcon/ScreenshareActive.svg';
+import ScheduleActive from '../../../assets/NavigationIcon/ScheduleActive.svg';
+import SettingsActive from '../../../assets/NavigationIcon/SettingsActive.svg';
 import Avatar from '../../../assets/Image/Avatar.svg';
 import Text from '../../atoms/Text/Text';
 import { MouseEvent, useState } from 'react';
 import Input from '../../atoms/Input/Input';
 
-const Novigation = () => {
+const Navigation = () => {
     const location = useLocation();
-    const [checkClass, SetCheckClass] = useState('NotActive');
+    const [checkClass, setCheckClass] = useState('NotActive');
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
     const ChangeClass = () => {
-        return checkClass === 'Active' ? SetCheckClass('NotActive') : SetCheckClass('Active');
+        return checkClass === 'Active' ? setCheckClass('NotActive') : setCheckClass('Active');
     };
 
     const ButtonLink = [
@@ -88,7 +88,7 @@ const Novigation = () => {
 
     return (
         <Wrapper container>
-            <TopNovigation container xs={11.5}>
+            <TopNavigation container xs={11.5}>
                 <Grid container xs={6} gap={'15px'} alignItems={'center'}>
                     <ChangeButton>
                         <NovigButton className={checkClass} onClick={() => ChangeClass()}>
@@ -99,20 +99,10 @@ const Novigation = () => {
                             </BorderGrid>
                         </NovigButton>
                     </ChangeButton>
-                    <Text variant={'H3'} small={''} color={''}>
-                        {location.pathname.replace('/', '')}
-                    </Text>
+                    <Text variant={'H3'}>{location.pathname.replace('/', '')}</Text>
                 </Grid>
                 <Grid container xs={6} gap={'10px'} justifyContent={'flex-end'}>
-                    <Input
-                        variant={'Search'}
-                        type={''}
-                        text={'Search'}
-                        width={''}
-                        color={''}
-                        title={''}
-                        IconType={''}
-                    />
+                    <Input variant={'Search'} text={'Search'} />
                     <AvatarButton onClick={handleClick}>
                         <img src={Avatar} alt='avatar' />
                     </AvatarButton>
@@ -155,8 +145,8 @@ const Novigation = () => {
                         <MenuItem onClick={handleClose}>Logout</MenuItem>
                     </Menu>
                 </Grid>
-            </TopNovigation>
-            <LeftNovigation container xs={0.5}>
+            </TopNavigation>
+            <LeftNavigation container xs={0.5}>
                 <Grid height={'5%'}>
                     <Link to='/'>
                         <img src={Logo} alt='Logo' />
@@ -169,9 +159,9 @@ const Novigation = () => {
                         </StyledLink>
                     ))}
                 </ButtonsGrid>
-            </LeftNovigation>
+            </LeftNavigation>
         </Wrapper>
     );
 };
 
-export default Novigation;
+export default Navigation;

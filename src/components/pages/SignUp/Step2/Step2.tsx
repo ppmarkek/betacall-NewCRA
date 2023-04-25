@@ -9,12 +9,8 @@ const Step2 = () => {
     return (
         <Wrapper container>
             <Title container gap={'5px'}>
-                <Text variant={'H1'} small={''} color={''}>
-          Tell us more about yourself
-                </Text>
-                <Text variant={'LIGHT'} small={''} color={''}>
-          Enter your details to proceed further
-                </Text>
+                <Text variant={'H1'}>Tell us more about yourself</Text>
+                <Text variant={'LIGHT'}>Enter your details to proceed further</Text>
             </Title>
             <FormGrid container>
                 <Input
@@ -22,7 +18,6 @@ const Step2 = () => {
                     type={'text'}
                     text={'catherine.shaw@gmail.com'}
                     width={'100%'}
-                    color={''}
                     title={'Email'}
                     IconType={'Email'}
                 />
@@ -32,7 +27,6 @@ const Step2 = () => {
                         type={'text'}
                         text={'Enter your name'}
                         width={'100%'}
-                        color={''}
                         title={'First name'}
                         IconType={'Name'}
                     />
@@ -41,20 +35,11 @@ const Step2 = () => {
                         type={'text'}
                         text={'Enter your last name'}
                         width={'100%'}
-                        color={''}
                         title={'Last name'}
                         IconType={'Name'}
                     />
                 </Grid>
-                <Input
-                    variant={'ConfirmPassword'}
-                    type={''}
-                    text={''}
-                    width={'100%'}
-                    color={''}
-                    title={''}
-                    IconType={'Pass'}
-                />
+                <Input variant={'ConfirmPassword'} width={'100%'} IconType={'Pass'} />
             </FormGrid>
             <Grid container gap={'36px'} flexDirection={'column'} width={'auto'}>
                 <Checkbox color={'#6B59CC'} bg={'#F0F0F3'} text={'I agree with terms & conditions'} />
