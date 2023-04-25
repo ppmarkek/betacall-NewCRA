@@ -1,7 +1,22 @@
 import Text from '../Text/Text';
 import { useState, useEffect } from 'react';
-import { ConfirmPassword, InputGrid, LightInput, StyledImg } from './style';
-import { Grid } from '@mui/material';
+import {
+    ConfirmPassword,
+    InputGrid,
+    LightInput,
+    Result,
+    ResultImg,
+    ResultLink,
+    ResultLinkGrid,
+    ResultsGird,
+    SearchButton,
+    SearchGrid,
+    SearchImg,
+    SearchInput,
+    SearchLink,
+    StyledImg,
+} from './style';
+import { Fade, Grid } from '@mui/material';
 import SPass from '../../../assets/Icon/SPass.svg';
 import Pass from '../../../assets/Icon/Pass.svg';
 import Email from '../../../assets/Icon/Email.svg';
@@ -10,6 +25,11 @@ import Men from '../../../assets/Icon/Men.svg';
 import MenS from '../../../assets/Icon/MenS.svg';
 import CheckS from '../../../assets/Icon/CheckS.svg';
 import Check from '../../../assets/Icon/Check.svg';
+import SearchS from '../../../assets/Icon/SearchS.svg';
+import Search from '../../../assets/Icon/Search.svg';
+import Avatar from '../../../assets/Image/Avatar.svg';
+import Messenger from '../../../assets/NovigationIcon/Messenger.svg';
+import Calls from '../../../assets/NovigationIcon/Calls.svg';
 
 type Value = {
   variant: string
@@ -25,6 +45,11 @@ const Input = ({ variant, type, text, width, color, title, IconType }: Value) =>
     const [Icon, setIcon] = useState(SPass);
     const [Confirm, setConfirm] = useState(CheckS);
     const [Value, setValue] = useState('');
+    const [checked, setChecked] = useState(false);
+
+    const ChangeSearch = () => {
+        return checked === false ? setChecked(true) : setChecked(false);
+    };
 
     const changeIcon = () => {
         if (IconType === 'Email') {
@@ -105,6 +130,54 @@ const Input = ({ variant, type, text, width, color, title, IconType }: Value) =>
                     <StyledImg src={Confirm} alt='' />
                 </InputGrid>
             </ConfirmPassword>
+        );
+    case 'Search':
+        return (
+            <SearchGrid>
+                <Grid>
+                    <SearchButton onClick={() => ChangeSearch()}>
+                        <Fade in={checked}>
+                            <SearchImg src={Search} alt='SearchS' />
+                        </Fade>
+                        <Fade in={!checked}>
+                            <SearchImg src={SearchS} alt='SearchS' />
+                        </Fade>
+                    </SearchButton>
+                    <Fade in={checked}>
+                        <SearchInput />
+                    </Fade>
+                </Grid>
+                <Fade in={checked}>
+                    <ResultsGird container>
+                        <Result container>
+                            <SearchLink to='/'>
+                                <Grid container gap={'20px'}>
+                                    <img src={Avatar} alt='' />
+                                    <Grid>
+                                        <Text variant={'BOLD'} small={''} color={''}>
+                        John Doe
+                                        </Text>
+                                        <Text variant={'LIGHT'} small={'small'} color={''}>
+                        Developer
+                                        </Text>
+                                    </Grid>
+                                </Grid>
+                            </SearchLink>
+                            <ResultLinkGrid container>
+                                <ResultLink to='/'>
+                                    <ResultImg src={Messenger} alt='icon' />
+                                </ResultLink>
+                                <ResultLink to='/'>
+                                    <ResultImg src={Calls} alt='icon' />
+                                </ResultLink>
+                                <ResultLink to='/'>
+                                    <ResultImg src={Messenger} alt='icon' />
+                                </ResultLink>
+                            </ResultLinkGrid>
+                        </Result>
+                    </ResultsGird>
+                </Fade>
+            </SearchGrid>
         );
     default:
         return <LightInput placeholder={text} $width={width} $color={color} />;

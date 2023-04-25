@@ -1,5 +1,6 @@
 import { Grid } from '@mui/material';
 import {
+    AvatarButton,
     BorderGrid,
     ButtonsGrid,
     ChangeButton,
@@ -28,8 +29,10 @@ import ContactsActive from '../../../assets/NovigationIcon/ContactsActive.svg';
 import ScreenshareActive from '../../../assets/NovigationIcon/ScreenshareActive.svg';
 import ScheduleActive from '../../../assets/NovigationIcon/ScheduleActive.svg';
 import SettingsActive from '../../../assets/NovigationIcon/SettingsActive.svg';
+import Avatar from '../../../assets/Image/Avatar.svg';
 import Text from '../../atoms/Text/Text';
 import { useState } from 'react';
+import Input from '../../atoms/Input/Input';
 
 const Novigation = () => {
     const location = useLocation();
@@ -76,7 +79,7 @@ const Novigation = () => {
     return (
         <Wrapper container>
             <TopNovigation container xs={11.5}>
-                <Grid container gap={'15px'} alignItems={'center'}>
+                <Grid container xs={6} gap={'15px'} alignItems={'center'}>
                     <ChangeButton>
                         <NovigButton className={checkClass} onClick={() => ChangeClass()}>
                             <BorderGrid container>
@@ -86,10 +89,23 @@ const Novigation = () => {
                             </BorderGrid>
                         </NovigButton>
                     </ChangeButton>
-
                     <Text variant={'H3'} small={''} color={''}>
                         {location.pathname.replace('/', '')}
                     </Text>
+                </Grid>
+                <Grid container xs={6} gap={'10px'} justifyContent={'flex-end'}>
+                    <Input
+                        variant={'Search'}
+                        type={''}
+                        text={'Search'}
+                        width={''}
+                        color={''}
+                        title={''}
+                        IconType={''}
+                    />
+                    <AvatarButton>
+                        <img src={Avatar} alt='avatar' />
+                    </AvatarButton>
                 </Grid>
             </TopNovigation>
             <LeftNovigation container xs={0.5}>

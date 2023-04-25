@@ -46,8 +46,9 @@ export const StyledImg = styled.img`
 
 export const TopNovigation = styled(Grid)`
   height: 85px;
-  align-items: center;
-  justify-content: space-between;
+  align-items: space-between;
+  flex-direction: column;
+  justify-content: center;
   padding: 0px 35px;
   border-bottom: 1px solid #eceef5;
 `;
@@ -104,5 +105,17 @@ export const ChangeButton = styled(Grid)`
   .Active #Middle {
     transition: all 0.15s;
     border-color: #6b59cc;
+  }
+`;
+
+export const AvatarButton = styled(Button)`
+  all: unset;
+  border-radius: 8px;
+  span {
+    display: none;
+  }
+  &:hover {
+    all: unset;
+    cursor: pointer;
   }
 `;
