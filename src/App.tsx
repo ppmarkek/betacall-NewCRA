@@ -9,25 +9,24 @@ import Step3 from './components/pages/SignUp/Step3/Step3';
 import Navigation from './components/templates/Navigation/Navigation';
 
 function App() {
-    const LoginReg = ['/Login', '/Recover', '/Step1', '/Step2', '/Step3'];
-    const location = useLocation();
-
-    return (
-        <div className='App'>
-            {LoginReg.some(x => x === location.pathname) === true ? (
-                <LoginHeader key='' />
-            ) : (
-                <Navigation key='' />
-            )}
-            <Routes>
-                <Route path='/Step1' element={<Step1 />} />
-                <Route path='/Step2' element={<Step2 />} />
-                <Route path='/Step3' element={<Step3 />} />
-                <Route path='/Recover' element={<Recover />} />
-                <Route path='/Login' element={<Login />} />
-            </Routes>
-        </div>
-    );
+  const LoginReg = ['/Login', '/Recover', '/Step1', '/Step2', '/Step3'];
+  const location = useLocation();
+  return (
+    <div className='App'>
+      {LoginReg.some(x => x === location.pathname) === true ? (
+        <LoginHeader key='' />
+      ) : (
+        <LoginHeader key='' />
+      )}
+      <Routes>
+        <Route path='/Step1' element={<Step1 />} />
+        <Route path='/Step2' element={<Step2 />} />
+        <Route path='/Step3' element={<Step3 />} />
+        <Route path='/Recover' element={<Recover />} />
+        <Route path='/Login' element={<Login />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

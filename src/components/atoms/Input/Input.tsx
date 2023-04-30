@@ -80,11 +80,11 @@ const Input = ({ variant, type, text, width, color, title, IconType }: Value) =>
         return Value !== '' && Value === x ? setConfirm(Check) : setConfirm(CheckSilver);
     };
 
-    useEffect(() => {
-        changeIcon();
-    }, []);
+  useEffect(() => {
+    changeIcon();
+  }, []);
 
-    switch (variant) {
+  switch (variant) {
     case 'LightInput':
         return (
             <InputGrid container>
@@ -182,8 +182,8 @@ const Input = ({ variant, type, text, width, color, title, IconType }: Value) =>
             </SearchGrid>
         );
     default:
-        return <LightInput placeholder={text} $width={width} $color={color} />;
-    }
+      return <LightInput placeholder={text} $width={width} $color={color} />;
+  }
 };
 
 export default Input;

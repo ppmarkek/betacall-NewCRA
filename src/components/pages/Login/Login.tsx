@@ -45,31 +45,31 @@ const Login = () => {
                 <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>
                 <Text variant={'LIGHT'} small={'small'}>
           Or
-                </Text>
-                <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>
-            </OrGrid>
-            <Grid container gap={'8px'} flexDirection={'column'} width={'unset'}>
-                <SocialLink to={'/'}>
-                    <IconGrid borderRight={'1px solid #EEEEEE'} width={'48px'}>
-                        <img src={Google} alt='' />
-                    </IconGrid>
-                    <HoverGrid container>Sign Up with Google</HoverGrid>
-                </SocialLink>
-                <SocialLink to={'/'}>
-                    <IconGrid borderRight={'1px solid #EEEEEE'} width={'48px'}>
-                        <img src={Facebook} alt='' />
-                    </IconGrid>
-                    <HoverGrid container>Sign Up with Facebook</HoverGrid>
-                </SocialLink>
-                <SocialLink to={'/'}>
-                    <IconGrid borderRight={'1px solid #EEEEEE'} width={'48px'}>
-                        <img src={Twitter} alt='' />
-                    </IconGrid>
-                    <HoverGrid container>Sign Up with Twitter</HoverGrid>
-                </SocialLink>
-            </Grid>
-        </SignIn>
-    );
+        </Text>
+        <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>
+      </OrGrid>
+      <Grid container gap={'8px'} flexDirection={'column'} width={'unset'}>
+        <SocialLink to={'/'}>
+          <IconGrid borderRight={'1px solid #EEEEEE'} width={'48px'}>
+            <img src={Google} alt='' />
+          </IconGrid>
+          <HoverGrid container>Sign Up with Google</HoverGrid>
+        </SocialLink>
+        <SocialLink to={'/'}>
+          <IconGrid borderRight={'1px solid #EEEEEE'} width={'48px'}>
+            <img src={Facebook} alt='' />
+          </IconGrid>
+          <HoverGrid container>Sign Up with Facebook</HoverGrid>
+        </SocialLink>
+        <SocialLink to={'/'}>
+          <IconGrid borderRight={'1px solid #EEEEEE'} width={'48px'}>
+            <img src={Twitter} alt='' />
+          </IconGrid>
+          <HoverGrid container>Sign Up with Twitter</HoverGrid>
+        </SocialLink>
+      </Grid>
+    </SignIn>
+  );
 };
 
 export default Login;
