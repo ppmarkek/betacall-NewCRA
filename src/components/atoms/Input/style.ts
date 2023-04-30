@@ -31,7 +31,7 @@ export const ConfirmPassword = styled(Grid)`
   flex-direction: column;
 `;
 
-export const StyledImg = styled.img`
+export const StyledImg = styled.img<ButtonProps>`
   position: absolute;
   top: 60%;
   right: 0;
