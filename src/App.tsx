@@ -6,11 +6,11 @@ import Recover from './components/pages/Recover/Recover';
 import Step1 from './components/pages/SignUp/Step1/Step1';
 import Step2 from './components/pages/SignUp/Step2/Step2';
 import Step3 from './components/pages/SignUp/Step3/Step3';
+import Navigation from './components/templates/Navigation/Navigation';
 
 function App() {
   const LoginReg = ['/Login', '/Recover', '/Step1', '/Step2', '/Step3'];
   const location = useLocation();
-
   return (
     <div className='App'>
       {LoginReg.some(x => x === location.pathname) === true ? (

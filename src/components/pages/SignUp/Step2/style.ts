@@ -6,7 +6,8 @@ export const Wrapper = styled(Grid)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 935px;
+  min-height: 900px;
+  height: 100%;
 `;
 
 export const Title = styled(Grid)`

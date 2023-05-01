@@ -12,7 +12,7 @@ const Checkbox = ({ children }: Value) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.target.checked === false ? setTextColor('#8083A3') : setTextColor('');
   };
-
+  
   return (
     <CheckboxGrid container>
       <StyledCheckbox>
@@ -23,7 +23,6 @@ const Checkbox = ({ children }: Value) => {
         {children}
       </Text>
     </CheckboxGrid>
-  );
 };
 
 export default Checkbox;

@@ -9,41 +9,41 @@ import Twitter from '../../../assets/Icon/twitter.svg';
 import { HoverGrid, IconGrid, OrGrid, SignIn, SocialLink, StyledLink, Title } from './style';
 
 const Login = () => {
-  return (
-    <SignIn container>
-      <Title container>
-        <Text variant={'H1'}>Welcome to BetaCall Sign In to getting started.</Text>
-        <Text variant={'LIGHT'}>Enter your details to proceed further</Text>
-      </Title>
-      <Grid container gap={'34px'} flexDirection={'column'} width={'unset'}>
-        <Grid container gap={'20px'} width={'420px'}>
-          <Input
-            variant='LightInput'
-            text={'catherine.shaw@gmail.com'}
-            width={'420px'}
-            title={'Email'}
-            IconType={'Email'}
-          />
-          <Input
-            variant='LightInput'
-            text={'Start typing …'}
-            width={'420px'}
-            title={'Password'}
-            IconType={'Pass'}
-            type={'password'}
-          />
-        </Grid>
-        <Grid container justifyContent={'space-between'} alignItems={'center'}>
-          <Checkbox>Remember me</Checkbox>
-          <StyledLink to={'/Recover'}>Recover password</StyledLink>
-        </Grid>
-        <Button variant={'FilledActive'} width={'420px'}>
+    return (
+        <SignIn container>
+            <Title container>
+                <Text variant={'H1'}>Welcome to BetaCall Sign In to getting started.</Text>
+                <Text variant={'LIGHT'}>Enter your details to proceed further</Text>
+            </Title>
+            <Grid container gap={'34px'} flexDirection={'column'} width={'unset'}>
+                <Grid container gap={'20px'} width={'420px'}>
+                    <Input
+                        variant='LightInput'
+                        text={'catherine.shaw@gmail.com'}
+                        width={'420px'}
+                        title={'Email'}
+                        IconType={'Email'}
+                    />
+                    <Input
+                        variant='LightInput'
+                        text={'Start typing …'}
+                        width={'420px'}
+                        title={'Password'}
+                        IconType={'Pass'}
+                        type={'password'}
+                    />
+                </Grid>
+                <Grid container justifyContent={'space-between'} alignItems={'center'}>
+                    <Checkbox color={'#6B59CC'} bg={'#F0F0F3'} text={'Remember me'} />
+                    <StyledLink to={'/Recover'}>Recover password</StyledLink>
+                </Grid>
+                <Button variant={'FilledActive'} width={'420px'}>
           Sign In
-        </Button>
-      </Grid>
-      <OrGrid container>
-        <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>
-        <Text variant={'LIGHT'} small>
+                </Button>
+            </Grid>
+            <OrGrid container>
+                <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>
+                <Text variant={'LIGHT'} small={'small'}>
           Or
         </Text>
         <Grid borderBottom={'1px solid #EEEEEE'} width={'72px'} height={'1px'}></Grid>
