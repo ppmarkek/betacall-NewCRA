@@ -24,7 +24,7 @@ export const LeftNavigation = styled(Grid)`
   flex-direction: column;
   padding: 22px 0px;
   border-right: 1px solid #eceef5;
-  width: 3%;
+  width: 80px;
 `;
 
 export const ButtonsGrid = styled(Grid)`
@@ -33,6 +33,7 @@ export const ButtonsGrid = styled(Grid)`
   align-items: center;
   justify-content: center;
   height: 95%;
+  width: auto;
 `;
 
 export const ImageGrid = styled(Grid)`
@@ -73,7 +74,7 @@ export const TopNavigation = styled(Grid)`
   padding: 0px 35px;
   border-bottom: 1px solid #eceef5;
   transition: margin-left 0.3s;
-  margin-left: 4%;
+  margin-left: 80px;
 `;
 
 export const BorderGrid = styled(Grid)`

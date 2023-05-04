@@ -101,13 +101,13 @@ const Navigation = () => {
   const handleSlider = () => {
     if (checked === false) {
       setChecked(true)
-      ;(document.getElementById("LeftNavigation") as HTMLInputElement).style.width = "8%"
-      ;(document.getElementById("TopNavigation") as HTMLInputElement).style.marginLeft = "8%"
+      ;(document.getElementById("LeftNavigation") as HTMLInputElement).style.width = "200px"
+      ;(document.getElementById("TopNavigation") as HTMLInputElement).style.marginLeft = "200px"
       ;(document.getElementById("StyledLink") as HTMLInputElement).style.width = "100%";
     } else {
       setChecked(false)
-      ;(document.getElementById("LeftNavigation") as HTMLInputElement).style.width = "3%"
-      ;(document.getElementById("TopNavigation") as HTMLInputElement).style.marginLeft = "3%"
+      ;(document.getElementById("LeftNavigation") as HTMLInputElement).style.width = "80px"
+      ;(document.getElementById("TopNavigation") as HTMLInputElement).style.marginLeft = "80px"
       ;(document.getElementById("StyledLink") as HTMLInputElement).style.width = "200px";
     }
   };
