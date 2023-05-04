@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { Input, Grid, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import styled from "styled-components";
+import { Input, Grid, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 type InputStyleProps = {
   $width?: string
@@ -8,12 +8,12 @@ type InputStyleProps = {
 }
 
 export const LightInput = styled(Input)<InputStyleProps>`
-  width: ${props => props.$width || '100px'};
+  width: ${props => props.$width || "100px"};
   height: 36px;
   &::before {
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: ${props => props.$color || '#ECEEF5'};
+    border-bottom-color: ${props => props.$color || "#ECEEF5"};
   }
 `;
 
@@ -31,7 +31,7 @@ export const ConfirmPassword = styled(Grid)`
   flex-direction: column;
 `;
 
-export const StyledImg = styled.img<ButtonProps>`
+export const StyledImg = styled.img<InputStyleProps>`
   position: absolute;
   top: 60%;
   right: 0;
@@ -76,7 +76,7 @@ export const SearchInput = styled(Input)`
   padding-left: 20px;
   padding-right: 42px;
   color: #6b59cc;
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
