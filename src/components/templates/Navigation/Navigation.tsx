@@ -102,19 +102,19 @@ const Navigation = () => {
     if (checked === false) {
       setChecked(true)
       ;(document.getElementById("LeftNavigation") as HTMLInputElement).style.width = "200px"
-      ;(document.getElementById("TopNavigation") as HTMLInputElement).style.marginLeft = "200px"
+      ;(document.getElementsByClassName("App")[0] as HTMLInputElement).style.marginLeft = "200px"
       ;(document.getElementById("StyledLink") as HTMLInputElement).style.width = "100%";
     } else {
       setChecked(false)
       ;(document.getElementById("LeftNavigation") as HTMLInputElement).style.width = "80px"
-      ;(document.getElementById("TopNavigation") as HTMLInputElement).style.marginLeft = "80px"
+      ;(document.getElementsByClassName("App")[0] as HTMLInputElement).style.marginLeft = "80px"
       ;(document.getElementById("StyledLink") as HTMLInputElement).style.width = "200px";
     }
   };
 
   return (
     <Wrapper container>
-      <TopNavigation id={"TopNavigation"} container xs={12}>
+      <TopNavigation container xs={12}>
         <Grid container xs={6} gap={"15px"} alignItems={"center"}>
           <ChangeButton onClick={() => handleSlider()}>
             <NovigButton className={checkClass} onClick={() => ChangeClass()}>

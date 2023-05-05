@@ -72,8 +72,6 @@ export const TopNavigation = styled(Grid)`
   justify-content: center;
   padding: 0px 35px;
   border-bottom: 1px solid #eceef5;
-  transition: margin-left 0.3s;
-  margin-left: 80px;
 `;
 
 export const BorderGrid = styled(Grid)`

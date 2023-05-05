@@ -1,10 +1,11 @@
-import { Grid } from "@mui/material";
-import { Wrapper } from "./style";
+import { Profile, Wrapper } from "./style";
 
 const ProfileSettings = () => {
   return (
-    <Wrapper>
-      <Grid>ku</Grid>
+    <Wrapper xs={12}>
+      <Profile container xs={3}>
+        ku
+      </Profile>
     </Wrapper>
   );
 };
