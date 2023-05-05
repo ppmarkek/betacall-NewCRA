@@ -7,6 +7,7 @@ import Step1 from "./components/pages/SignUp/Step1/Step1";
 import Step2 from "./components/pages/SignUp/Step2/Step2";
 import Step3 from "./components/pages/SignUp/Step3/Step3";
 import Navigation from "./components/templates/Navigation/Navigation";
+import ProfileSettings from "./components/pages/ProfileSettings/ProfileSettings";
 
 function App() {
   const LoginReg = ["/Login", "/Recover", "/Step1", "/Step2", "/Step3"];
@@ -24,6 +25,7 @@ function App() {
         <Route path='/Step3' element={<Step3 />} />
         <Route path='/Recover' element={<Recover />} />
         <Route path='/Login' element={<Login />} />
+        <Route path='ProfileSettings' element={<ProfileSettings />} />
       </Routes>
     </div>
   );

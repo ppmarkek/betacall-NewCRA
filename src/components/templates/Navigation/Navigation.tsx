@@ -125,7 +125,9 @@ const Navigation = () => {
               </BorderGrid>
             </NovigButton>
           </ChangeButton>
-          <Text variant={"H3"}>{location.pathname.replace("/", "")}</Text>
+          <Text variant={"H3"}>
+            {location.pathname.replace("/", "").replace(/([a-zA-Z])([A-Z])([a-z])/g, "$1 $2$3")}
+          </Text>
         </Grid>
         <Grid container xs={6} gap={"10px"} justifyContent={"flex-end"}>
           <Input variant={"Search"} text={"Search"} />

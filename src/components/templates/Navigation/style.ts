@@ -8,7 +8,6 @@ type LinkProps = {
 
 export const Wrapper = styled(Grid)`
   flex-direction: column;
-  height: 100%;
   flex-direction: row-reverse;
 `;
 
