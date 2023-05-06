@@ -14,10 +14,10 @@ body {
 
 #root {
   height: 100%;
+  margin-left: 80px;
+  transition: margin-left 0.3s;
 }
 
 .App {
   height: 100%;
-  margin-left: 80px;
-  transition: margin-left 0.3s;
 }

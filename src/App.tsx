@@ -12,6 +12,9 @@ import ProfileSettings from "./components/pages/ProfileSettings/ProfileSettings"
 function App() {
   const LoginReg = ["/Login", "/Recover", "/Step1", "/Step2", "/Step3"];
   const location = useLocation();
+  LoginReg.some(x => x === location.pathname) === true
+    ? ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "0px")
+    : ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "80px");
   return (
     <div className='App'>
       {LoginReg.some(x => x === location.pathname) === true ? (

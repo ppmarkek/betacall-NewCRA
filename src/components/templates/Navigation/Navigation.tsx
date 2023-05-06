@@ -102,12 +102,12 @@ const Navigation = () => {
     if (checked === false) {
       setChecked(true)
       ;(document.getElementById("LeftNavigation") as HTMLInputElement).style.width = "200px"
-      ;(document.getElementsByClassName("App")[0] as HTMLInputElement).style.marginLeft = "200px"
+      ;(document.getElementById("root") as HTMLInputElement).style.marginLeft = "200px"
       ;(document.getElementById("StyledLink") as HTMLInputElement).style.width = "100%";
     } else {
       setChecked(false)
       ;(document.getElementById("LeftNavigation") as HTMLInputElement).style.width = "80px"
-      ;(document.getElementsByClassName("App")[0] as HTMLInputElement).style.marginLeft = "80px"
+      ;(document.getElementById("root") as HTMLInputElement).style.marginLeft = "80px"
       ;(document.getElementById("StyledLink") as HTMLInputElement).style.width = "200px";
     }
   };
