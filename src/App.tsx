@@ -14,7 +14,7 @@ function App() {
   const location = useLocation();
   LoginReg.some(x => x === location.pathname) === true
     ? ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "0px")
-    : ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "80px");
+    : 0;
   return (
     <div className='App'>
       {LoginReg.some(x => x === location.pathname) === true ? (
