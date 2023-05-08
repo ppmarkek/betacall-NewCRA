@@ -1,8 +1,9 @@
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import styled from "styled-components";
 
 type CategoryProps = {
-  $borderBottom: string
+  $display?: string
+  $background?: string
 }
 
 export const Wrapper = styled(Grid)`
@@ -30,12 +31,9 @@ export const StyledAvatarImg = styled.img`
   border-radius: 25px;
 `;
 
-export const Category = styled(Grid)<CategoryProps>`
+export const Category = styled(Grid)`
   height: 100px;
-  border-bottom: 1px solid #eceef5;
-  gap: 22px;
   align-items: center;
-  border-bottom: ${props => (props.$borderBottom ? props.$borderBottom : "1px solid #eceef5")};
 `;
 
 export const CategoryImg = styled.img`
@@ -55,4 +53,32 @@ export const SelectCategoryText = styled(Grid)`
   gap: 10px;
   text-align: center;
   justify-content: center;
+`;
+
+export const SelectCategoryButton = styled(Button)<CategoryProps>`
+  all: unset;
+  span {
+    display: none;
+  }
+  cursor: pointer;
+  width: 100%;
+  height: 72px;
+  border-radius: 6px;
+  transition: all 0.5s;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  margin: 0 15px;
+  padding: 0 20px;
+  background: ${props => (props.$background ? props.$background : "#fff")};
+  &:hover {
+    background: #f8f9fc;
+  }
+`;
+
+export const SelectCategoryBorder = styled(Grid)<CategoryProps>`
+  border-bottom: 1px solid #eceef5;
+  width: 100%;
+  margin: 0 30px;
+  display: ${props => (props.$display ? props.$display : "block")};
 `;

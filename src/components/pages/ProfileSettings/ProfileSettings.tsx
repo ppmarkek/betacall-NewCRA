@@ -4,6 +4,8 @@ import {
   CategoryImg,
   Profile,
   SelectCategory,
+  SelectCategoryBorder,
+  SelectCategoryButton,
   SelectCategoryText,
   StyledAvatarImg,
   Wrapper,
@@ -11,37 +13,48 @@ import {
 import AvatarImg from "../../../assets/Image/FullSizeAvatar.svg";
 import { Grid } from "@mui/material";
 import Text from "../../atoms/Text/Text";
+import GeneralInformationSilver from "../../../assets/Icon/GeneralInformationSilver.svg";
+import SecuritySilver from "../../../assets/Icon/SecuritySilver.svg";
+import BillingSilver from "../../../assets/Icon/BillingSilver.svg";
+import NotificationsSilver from "../../../assets/Icon/NotificationsSilver.svg";
 import GeneralInformation from "../../../assets/Icon/GeneralInformation.svg";
 import Security from "../../../assets/Icon/Security.svg";
 import Billing from "../../../assets/Icon/Billing.svg";
 import Notifications from "../../../assets/Icon/Notifications.svg";
 import SelectCategoryImg from "../../../assets/Image/SelectCategory.svg";
+import { useState } from "react";
 
 const ProfileSettings = () => {
+  const [category, setCategory] = useState("None");
+
   const allCategory = [
     {
-      Icon: GeneralInformation,
+      Icon: GeneralInformationSilver,
+      ActiveIcon: GeneralInformation,
       Title: "General information",
       Text: "Profile foto, name & language",
-      Border: "1px solid #eceef5",
+      Border: "Block",
     },
     {
-      Icon: Security,
+      Icon: SecuritySilver,
+      ActiveIcon: Security,
       Title: "Security",
       Text: "Password & security questions",
-      Border: "1px solid #eceef5",
+      Border: "Block",
     },
     {
-      Icon: Billing,
+      Icon: BillingSilver,
+      ActiveIcon: Billing,
       Title: "Billing",
       Text: "Setup payment methods",
-      Border: "1px solid #eceef5",
+      Border: "Block",
     },
     {
-      Icon: Notifications,
+      Icon: NotificationsSilver,
+      ActiveIcon: Notifications,
       Title: "Notifications",
       Text: "Set your email notifications",
-      Border: "unset",
+      Border: "none",
     },
   ];
 
@@ -55,14 +68,26 @@ const ProfileSettings = () => {
             <Text variant={"LIGHT"}>UI/UX Designer</Text>
           </Grid>
         </Avatar>
-        <Grid container padding={"0 32px"}>
+        <Grid container>
           {allCategory.map((x: any) => (
-            <Category $borderBottom={x.Border} container key={x.Icon}>
-              <CategoryImg src={x.Icon} alt='Icon' />
-              <Grid>
-                <Text variant={"BOLD"}>{x.Title}</Text>
-                <Text variant={"LIGHT"}>{x.Text}</Text>
-              </Grid>
+            <Category container key={x.Icon}>
+              <SelectCategoryButton
+                $background={category === x.Title ? "#F8F9FC" : "#fff"}
+                onClick={() => setCategory(x.Title)}
+              >
+                {category === x.Title ? (
+                  <CategoryImg src={x.ActiveIcon} alt='Icon' />
+                ) : (
+                  <CategoryImg src={x.Icon} alt='Icon' />
+                )}
+                <Grid>
+                  <Text variant={"BOLD"} color={category === x.Title ? "#6B59CC" : "#1A1C1D"}>
+                    {x.Title}
+                  </Text>
+                  <Text variant={"LIGHT"}>{x.Text}</Text>
+                </Grid>
+              </SelectCategoryButton>
+              <SelectCategoryBorder $display={x.Border} />
             </Category>
           ))}
         </Grid>
