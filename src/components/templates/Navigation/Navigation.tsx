@@ -12,6 +12,7 @@ import {
   Wrapper,
   StyledLink,
   LogoLink,
+  MenuLink,
 } from "./style";
 import Logo from "../../../assets/Icon/Logo.svg";
 import { useLocation } from "react-router-dom";
@@ -169,7 +170,9 @@ const Navigation = () => {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <MenuItem onClick={handleClose}>Settings</MenuItem>
+            <MenuLink to={"/ProfileSettings"}>
+              <MenuItem onClick={handleClose}>Profile Settings</MenuItem>
+            </MenuLink>
             <MenuItem onClick={handleClose}>Logout</MenuItem>
           </Menu>
         </Grid>

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Input, Grid, Button } from "@mui/material";
+import { Input, Grid, Button, FormControl } from "@mui/material";
 import { Link } from "react-router-dom";
 
 type InputStyleProps = {
@@ -8,18 +8,22 @@ type InputStyleProps = {
 }
 
 export const LightInput = styled(Input)<InputStyleProps>`
-  width: ${props => props.$width || "100px"};
+  width: 100%;
   height: 36px;
   &::before {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: ${props => props.$color || "#ECEEF5"};
   }
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
 `;
 
-export const InputGrid = styled(Grid)`
-  gap: 8px;
-  width: auto;
+export const InputGrid = styled(Grid)<InputStyleProps>`
+  gap: 10px;
+  width: ${props => props.$width || "100px"};
   flex-direction: column;
   position: relative;
 `;
@@ -49,7 +53,7 @@ export const SearchButton = styled(Button)`
   position: absolute;
   z-index: 3;
   right: 0;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid #eceef5;
   width: 40px;
   height: 40px;
@@ -130,7 +134,7 @@ export const ResultLink = styled(Link)`
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: 10px;
   transition: all 0.5s;
   border: 1px solid #eceef5;
   &:hover {
@@ -152,4 +156,31 @@ export const Status = styled(Grid)`
   height: 12px;
   border: 2px solid #fff;
   border-radius: 20px;
+`;
+
+export const StyledFormControl = styled(FormControl)`
+  .MuiInput-root::before {
+    border-bottom: 1px solid #eceef5;
+  }
+  .MuiInputBase-formControl {
+    margin-top: unset;
+  }
+  label {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    color: #a2a2a2;
+    transform: unset;
+    transition: color unset;
+  }
+  label .Mui-focused {
+    visibility: hidden;
+  }
+  svg {
+    color: #8083a3;
+  }
+  .MuiFormLabel-filled {
+    visibility: hidden;
+  }
 `;

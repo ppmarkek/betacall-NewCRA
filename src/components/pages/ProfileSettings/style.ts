@@ -42,8 +42,9 @@ export const CategoryImg = styled.img`
 `;
 
 export const SelectCategory = styled(Grid)`
-  gap: 37px;
-  justify-content: center;
+  gap: 40px;
+  padding: 35px 30px 20px 35px;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
 `;
@@ -81,4 +82,29 @@ export const SelectCategoryBorder = styled(Grid)<CategoryProps>`
   width: 100%;
   margin: 0 30px;
   display: ${props => (props.$display ? props.$display : "block")};
+`;
+
+export const GeneralInformationGrid = styled(Grid)`
+  flex-direction: column;
+  height: auto;
+  gap: 30px;
+`;
+
+export const InputGrid = styled(Grid)`
+  justify-content: space-between;
+  height: 450px;
+`;
+
+export const PlusImg = styled.img`
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+`;
+
+export const UpdateSettings = styled(Grid)`
+  justify-content: space-between;
+`;
+
+export const ButtonImg = styled.img`
+  margin-right: 10px;
 `;

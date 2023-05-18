@@ -148,3 +148,8 @@ export const LogoLink = styled(Link)`
   justify-content: center;
   gap: 20px;
 `;
+
+export const MenuLink = styled(Link)`
+  text-decoration: none;
+  color: #222526;
+`;
