@@ -14,6 +14,9 @@ import {
   PlusImg,
   UpdateSettings,
   ButtonImg,
+  SecurityGrid,
+  ChangePasswordGrid,
+  SecurityQuestions,
 } from "./style";
 import AvatarImg from "../../../assets/Image/FullSizeAvatar.svg";
 import { Grid } from "@mui/material";
@@ -37,6 +40,7 @@ const ProfileSettings = () => {
   const [category, setCategory] = useState("None");
   const [AddEmail, setAddEmail] = useState(false);
   const [AddPhoneNumber, setAddPhoneNumber] = useState(false);
+  const [Questions, setQuestions] = useState(false);
 
   const allCategory = [
     {
@@ -256,6 +260,78 @@ const ProfileSettings = () => {
               </Grid>
             </InputGrid>
           </GeneralInformationGrid>
+        ) : (
+          <></>
+        )}
+        {category === "Security" ? (
+          <SecurityGrid container>
+            <ChangePasswordGrid container>
+              <Text variant={"H4"}>Change password</Text>
+              <Input variant={"ChangePassword"} width={"440px"} />
+            </ChangePasswordGrid>
+            <SecurityQuestions container>
+              <Text variant={"H4"}>Security questions</Text>
+              <Grid container justifyContent={"space-between"} height={"140px"}>
+                <Grid container gap={"20px"} flexDirection={"column"} width={"auto"}>
+                  <Input
+                    variant={"LightInput"}
+                    width={"440px"}
+                    title={"Questions #1"}
+                    IconType={"Questions"}
+                    text={"Start typing …"}
+                  />
+                  <Input
+                    variant={"LightInput"}
+                    width={"440px"}
+                    title={"Questions #2"}
+                    IconType={"Questions"}
+                    text={"Start typing …"}
+                  />
+                </Grid>
+                <Grid container gap={"20px"} flexDirection={"column"} width={"auto"}>
+                  <Input
+                    variant={"LightInput"}
+                    width={"440px"}
+                    title={"Answer"}
+                    IconType={"Answer"}
+                    text={"Start typing …"}
+                  />
+                  <Input
+                    variant={"LightInput"}
+                    width={"440px"}
+                    title={"Answer"}
+                    IconType={"Answer"}
+                    text={"Start typing …"}
+                  />
+                </Grid>
+              </Grid>
+              {Questions === false ? (
+                <Grid container alignItems={"center"} height={"67px"} gap={"10px"}>
+                  <PlusImg src={Plus} alt='Add More' onClick={() => setQuestions(true)} />
+                  <Text variant={"BOLD"} color='#8083A3'>
+                    Add More
+                  </Text>
+                </Grid>
+              ) : (
+                <Grid container justifyContent={"space-between"}>
+                  <Input
+                    variant={"LightInput"}
+                    width={"440px"}
+                    title={"Questions #3"}
+                    IconType={"Questions"}
+                    text={"Start typing …"}
+                  />
+                  <Input
+                    variant={"LightInput"}
+                    width={"440px"}
+                    title={"Answer"}
+                    IconType={"Answer"}
+                    text={"Start typing …"}
+                  />
+                </Grid>
+              )}
+            </SecurityQuestions>
+          </SecurityGrid>
         ) : (
           <></>
         )}

@@ -108,3 +108,19 @@ export const UpdateSettings = styled(Grid)`
 export const ButtonImg = styled.img`
   margin-right: 10px;
 `;
+
+export const SecurityGrid = styled(Grid)`
+  flex-direction: column;
+  height: auto;
+  gap: 30px;
+`;
+
+export const ChangePasswordGrid = styled(Grid)`
+  flex-direction: column;
+  gap: 30px;
+`;
+
+export const SecurityQuestions = styled(Grid)`
+  flex-direction: column;
+  gap: 30px;
+`;

@@ -40,6 +40,11 @@ import RoleSilver from "../../../assets/Icon/RoleSilver.svg";
 import Role from "../../../assets/Icon/Role.svg";
 import LinkSilver from "../../../assets/Icon/LinkSilver.svg";
 import Link from "../../../assets/Icon/Link.svg";
+import CheckGreen from "../../../assets/Icon/CheckGreen.svg";
+import QuestionsSilver from "../../../assets/Icon/QuestionsSilver.svg";
+import Questions from "../../../assets/Icon/Questions.svg";
+import AnswerSilver from "../../../assets/Icon/AnswerSilver.svg";
+import Answer from "../../../assets/Icon/Answer.svg";
 
 type Value = {
   variant: string
@@ -69,6 +74,7 @@ const Input = ({
   const [Value, setValue] = useState("");
   const [checked, setChecked] = useState(false);
   const [select, setSelect] = useState("");
+  const [changePassword, setChangePassword] = useState(CheckSilver);
 
   const handleChange = (event: SelectChangeEvent) => {
     setSelect(event.target.value);
@@ -115,6 +121,10 @@ const Input = ({
       return setIcon(RoleSilver);
     } else if (IconType === "Link") {
       return setIcon(LinkSilver);
+    } else if (IconType === "Questions") {
+      return setIcon(QuestionsSilver);
+    } else if (IconType === "Answer") {
+      return setIcon(AnswerSilver);
     }
   };
 
@@ -123,7 +133,6 @@ const Input = ({
       return x === "" ? setIcon(EmailSilver) : setIcon(Email);
     }
     if (IconType === "Pass" && variant !== "ConfirmPassword") {
-      setValue(x);
       return x === "" ? setIcon(SilverPass) : setIcon(Pass);
     }
     if (IconType === "Pass") {
@@ -144,6 +153,22 @@ const Input = ({
     if (IconType === "Link") {
       return x === "" ? setIcon(LinkSilver) : setIcon(Link);
     }
+    if (IconType === "Questions") {
+      return x === "" ? setIcon(QuestionsSilver) : setIcon(Questions);
+    }
+    if (IconType === "Answer") {
+      return x === "" ? setIcon(AnswerSilver) : setIcon(Answer);
+    }
+  };
+
+  const CheackChangePassword = (x: string) => {
+    return x.length > 8 &&
+      /[A-Z]/.test(x) &&
+      /[a-z]/.test(x) &&
+      /[0-9]/.test(x) &&
+      /[?$#^%$@]/.test(x)
+      ? setChangePassword(CheckGreen)
+      : setChangePassword(CheckSilver);
   };
 
   const CheackConfirmPass = (x: string) => {
@@ -184,7 +209,7 @@ const Input = ({
               type={"password"}
               placeholder={"Enter your password"}
               $color={color}
-              onChange={x => CheackIcon(x.target.value)}
+              onChange={x => setValue(x.target.value)}
             />
             <StyledImg src={Icon} alt='' />
           </InputGrid>
@@ -273,6 +298,35 @@ const Input = ({
               ))}
             </Select>
           </StyledFormControl>
+        </Grid>
+      );
+    case "ChangePassword":
+      return (
+        <Grid container justifyContent={"space-between"} width={"auto"}>
+          <InputGrid container $width={width}>
+            <Text variant={"LIGHT"} small={true}>
+              Current password
+            </Text>
+            <LightInput
+              type={"password"}
+              placeholder={"Enter your password"}
+              $color={color}
+              onChange={x => setValue(x.target.value)}
+            />
+            <StyledImg src={Icon} alt='' />
+          </InputGrid>
+          <InputGrid container $width={width}>
+            <Text variant={"LIGHT"} small={true}>
+              New password
+            </Text>
+            <LightInput
+              type={"password"}
+              placeholder={"Confirm your password"}
+              $color={color}
+              onChange={x => CheackChangePassword(x.target.value)}
+            />
+            <StyledImg src={changePassword} alt='' />
+          </InputGrid>
         </Grid>
       );
     default:

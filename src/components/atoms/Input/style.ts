@@ -29,8 +29,7 @@ export const InputGrid = styled(Grid)<InputStyleProps>`
 `;
 
 export const ConfirmPassword = styled(Grid)`
-  gap: 18px;
-  height: 150px;
+  gap: 20px;
   width: auto;
   flex-direction: column;
 `;
