@@ -1,4 +1,5 @@
 import { Button, Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 type CategoryProps = {
@@ -123,4 +124,38 @@ export const ChangePasswordGrid = styled(Grid)`
 export const SecurityQuestions = styled(Grid)`
   flex-direction: column;
   gap: 30px;
+`;
+
+export const PaymentDetailsGrid = styled(Grid)`
+  height: 270px;
+  border: 1px solid #eceef5;
+  border-radius: 8px;
+`;
+
+export const PaymentDetailsPoints = styled(Grid)`
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+  padding: 0 20px;
+`;
+
+export const PaymentDetailsLink = styled(Link)`
+  text-decoration: none;
+  color: #6b59cc;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: "Lato";
+`;
+
+export const RecentPaymentsGrid = styled(Grid)`
+  height: 270px;
+  border: 1px solid #eceef5;
+  border-radius: 8px;
+`;
+
+export const RecentPaymentsPoints = styled(Grid)`
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+  padding: 0 20px;
 `;

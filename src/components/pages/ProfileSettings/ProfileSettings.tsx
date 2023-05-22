@@ -17,6 +17,11 @@ import {
   SecurityGrid,
   ChangePasswordGrid,
   SecurityQuestions,
+  PaymentDetailsGrid,
+  PaymentDetailsPoints,
+  PaymentDetailsLink,
+  RecentPaymentsGrid,
+  RecentPaymentsPoints,
 } from "./style";
 import AvatarImg from "../../../assets/Image/FullSizeAvatar.svg";
 import { Grid } from "@mui/material";
@@ -332,6 +337,80 @@ const ProfileSettings = () => {
               )}
             </SecurityQuestions>
           </SecurityGrid>
+        ) : (
+          <></>
+        )}
+        {category === "Billing" ? (
+          <Grid container flexDirection={"column"} gap={"30px"}>
+            <Grid container flexDirection={"column"} gap={"30px"}>
+              <Text variant={"H4"}>Payment details</Text>
+              <PaymentDetailsGrid>
+                <PaymentDetailsPoints container>
+                  <Text variant={"LIGHT"}>Payment method</Text>
+                  <Grid container gap={"20px"} width={"auto"}>
+                    <Text variant={"REGULAR"}>MasterCard ending in 4078, exp: 08/2020</Text>
+                    <PaymentDetailsLink to={"/"}>Update</PaymentDetailsLink>
+                  </Grid>
+                </PaymentDetailsPoints>
+                <PaymentDetailsPoints
+                  container
+                  borderBottom={"1px solid #EEEEEE"}
+                  borderTop={"1px solid #EEEEEE"}
+                >
+                  <Text variant={"LIGHT"}>Billing period</Text>
+                  <Grid container gap={"20px"} width={"auto"}>
+                    <Text variant={"REGULAR"}>Plan billed monthly</Text>
+                    <PaymentDetailsLink to={"/"}>Update</PaymentDetailsLink>
+                  </Grid>
+                </PaymentDetailsPoints>
+                <PaymentDetailsPoints container>
+                  <Text variant={"LIGHT"}>License keys</Text>
+                  <Grid container gap={"20px"} width={"auto"}>
+                    <PaymentDetailsLink to={"/"}>Redeem a license key</PaymentDetailsLink>
+                  </Grid>
+                </PaymentDetailsPoints>
+              </PaymentDetailsGrid>
+            </Grid>
+            <Grid container flexDirection={"column"} gap={"30px"}>
+              <Text variant={"H4"}>Recent payments</Text>
+              <RecentPaymentsGrid>
+                <RecentPaymentsPoints container>
+                  <Grid container gap={"45px"} width={"auto"}>
+                    <Text variant={"LIGHT"}>21 Oct 2018</Text>
+                    <Text variant={"REGULAR"}>CRM Pro (9/21/2018 to 10/21/2019)</Text>
+                  </Grid>
+                  <Grid container gap={"20px"} width={"auto"}>
+                    <Text variant={"BOLD"}>$34.00</Text>
+                    <PaymentDetailsLink to={"/"}>Invoice</PaymentDetailsLink>
+                  </Grid>
+                </RecentPaymentsPoints>
+                <RecentPaymentsPoints
+                  container
+                  borderBottom={"1px solid #EEEEEE"}
+                  borderTop={"1px solid #EEEEEE"}
+                >
+                  <Grid container gap={"45px"} width={"auto"}>
+                    <Text variant={"LIGHT"}>21 Oct 2018</Text>
+                    <Text variant={"REGULAR"}>CRM Pro (9/21/2018 to 10/21/2019)</Text>
+                  </Grid>
+                  <Grid container gap={"20px"} width={"auto"}>
+                    <Text variant={"BOLD"}>$34.00</Text>
+                    <PaymentDetailsLink to={"/"}>Invoice</PaymentDetailsLink>
+                  </Grid>
+                </RecentPaymentsPoints>
+                <RecentPaymentsPoints container>
+                  <Grid container gap={"45px"} width={"auto"}>
+                    <Text variant={"LIGHT"}>21 Oct 2018</Text>
+                    <Text variant={"REGULAR"}>CRM Pro (9/21/2018 to 10/21/2019)</Text>
+                  </Grid>
+                  <Grid container gap={"20px"} width={"auto"}>
+                    <Text variant={"BOLD"}>$34.00</Text>
+                    <PaymentDetailsLink to={"/"}>Invoice</PaymentDetailsLink>
+                  </Grid>
+                </RecentPaymentsPoints>
+              </RecentPaymentsGrid>
+            </Grid>
+          </Grid>
         ) : (
           <></>
         )}

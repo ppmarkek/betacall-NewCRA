@@ -37,7 +37,11 @@ const Text = ({ variant, small, children, color }: TextProps) => {
         </Bold>
       );
     case Variant[Variant.REGULAR]:
-      return <Regular $small={small}>{children}</Regular>;
+      return (
+        <Regular $small={small} $color={color}>
+          {children}
+        </Regular>
+      );
     case Variant[Variant.LIGHT]:
       return <Light $small={small}>{children}</Light>;
     default:

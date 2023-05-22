@@ -66,7 +66,7 @@ export const Regular = styled(Typography)<TextStyleProps>`
   font-weight: 400;
   font-size: ${props => (props.$small ? "16px" : "18px")};
   line-height: 21px;
-  color: #1a1c1d;
+  color: ${props => props.$color || "#1A1C1D"};
 `;
 
 export const Light = styled(Typography)<TextStyleProps>`
