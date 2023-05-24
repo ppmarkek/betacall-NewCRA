@@ -159,3 +159,9 @@ export const RecentPaymentsPoints = styled(Grid)`
   height: 90px;
   padding: 0 20px;
 `;
+
+export const NotificationsPoints = styled(Grid)`
+  height: 80px;
+  justify-content: space-between;
+  border-bottom: 1px solid #eceef5;
+`;

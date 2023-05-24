@@ -22,6 +22,7 @@ import {
   PaymentDetailsLink,
   RecentPaymentsGrid,
   RecentPaymentsPoints,
+  NotificationsPoints,
 } from "./style";
 import AvatarImg from "../../../assets/Image/FullSizeAvatar.svg";
 import { Grid } from "@mui/material";
@@ -40,12 +41,17 @@ import { useState } from "react";
 import Input from "../../atoms/Input/Input";
 import Button from "../../atoms/Button/Button";
 import DeactivateAccount from "../../../assets/Icon/DeactivateAccount.svg";
+import Switch from "../../atoms/Switch/Switch";
 
 const ProfileSettings = () => {
   const [category, setCategory] = useState("None");
-  const [AddEmail, setAddEmail] = useState(false);
-  const [AddPhoneNumber, setAddPhoneNumber] = useState(false);
-  const [Questions, setQuestions] = useState(false);
+  const [addEmail, setAddEmail] = useState(false);
+  const [addPhoneNumber, setAddPhoneNumber] = useState(false);
+  const [questions, setQuestions] = useState(false);
+  const [switchOne, setSwitchOne] = useState(true);
+  const [switchTwo, setSwitchTwo] = useState(false);
+  const [switchThree, setSwitchThree] = useState(false);
+  const [switchFour, setSwitchFour] = useState(false);
 
   const allCategory = [
     {
@@ -209,7 +215,7 @@ const ProfileSettings = () => {
                   text={"Start typing …"}
                 />
                 <Grid container alignItems={"center"} height={"67px"}>
-                  {AddEmail === false ? (
+                  {addEmail === false ? (
                     <Grid container gap={"10px"}>
                       <PlusImg src={Plus} alt='Add Email' onClick={() => setAddEmail(true)} />
                       <Text variant={"BOLD"} color='#8083A3'>
@@ -229,7 +235,7 @@ const ProfileSettings = () => {
                   )}
                 </Grid>
                 <Grid container alignItems={"center"} height={"67px"}>
-                  {AddPhoneNumber === false ? (
+                  {addPhoneNumber === false ? (
                     <Grid container gap={"10px"}>
                       <PlusImg src={Plus} alt='Add Email' onClick={() => setAddPhoneNumber(true)} />
                       <Text variant={"BOLD"} color='#8083A3'>
@@ -310,7 +316,7 @@ const ProfileSettings = () => {
                   />
                 </Grid>
               </Grid>
-              {Questions === false ? (
+              {questions === false ? (
                 <Grid container alignItems={"center"} height={"67px"} gap={"10px"}>
                   <PlusImg src={Plus} alt='Add More' onClick={() => setQuestions(true)} />
                   <Text variant={"BOLD"} color='#8083A3'>
@@ -409,6 +415,51 @@ const ProfileSettings = () => {
                   </Grid>
                 </RecentPaymentsPoints>
               </RecentPaymentsGrid>
+            </Grid>
+          </Grid>
+        ) : (
+          <></>
+        )}
+        {category === "Notifications" ? (
+          <Grid container flexDirection={"column"} gap={"30px"}>
+            <Text variant={"H4"}>Notifications</Text>
+            <Grid container flexDirection={"column"} gap={"25px"}>
+              <NotificationsPoints container>
+                <Grid container flexDirection={"column"} width={"auto"}>
+                  <Text variant={"BOLD"} color={switchOne === true ? "#1A1C1D" : "#8083a3"}>
+                    Product updates
+                  </Text>
+                  <Text variant={"LIGHT"}>Stair Lifts Feel The Freedom Of Your Home</Text>
+                </Grid>
+                <Switch variant={"defaultChecked"} onChange={value => setSwitchOne(value)} />
+              </NotificationsPoints>
+              <NotificationsPoints container>
+                <Grid container flexDirection={"column"} width={"auto"}>
+                  <Text variant={"BOLD"} color={switchTwo === true ? "#1A1C1D" : "#8083a3"}>
+                    Product updates
+                  </Text>
+                  <Text variant={"LIGHT"}>A Right Media Mix Can Make The Difference</Text>
+                </Grid>
+                <Switch onChange={value => setSwitchTwo(value)} />
+              </NotificationsPoints>
+              <NotificationsPoints container>
+                <Grid container flexDirection={"column"} width={"auto"}>
+                  <Text variant={"BOLD"} color={switchThree === true ? "#1A1C1D" : "#8083a3"}>
+                    Comments
+                  </Text>
+                  <Text variant={"LIGHT"}>Advertising Relationships Vs Business Decisions</Text>
+                </Grid>
+                <Switch onChange={value => setSwitchThree(value)} />
+              </NotificationsPoints>
+              <NotificationsPoints container>
+                <Grid container flexDirection={"column"} width={"auto"}>
+                  <Text variant={"BOLD"} color={switchFour === true ? "#1A1C1D" : "#8083a3"}>
+                    Notifications
+                  </Text>
+                  <Text variant={"LIGHT"}>Creating Remarkable Poster Prints Through</Text>
+                </Grid>
+                <Switch onChange={value => setSwitchFour(value)} />
+              </NotificationsPoints>
             </Grid>
           </Grid>
         ) : (
