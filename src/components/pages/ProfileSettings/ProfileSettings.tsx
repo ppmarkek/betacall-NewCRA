@@ -144,7 +144,7 @@ const ProfileSettings = () => {
         </Grid>
       </Profile>
       <SelectCategory container xs={9}>
-        {category === "None" ? (
+        {category === "None" && (
           <Grid
             container
             height={"100%"}
@@ -160,10 +160,8 @@ const ProfileSettings = () => {
               </Text>
             </SelectCategoryText>
           </Grid>
-        ) : (
-          <></>
         )}
-        {category === "General information" ? (
+        {category === "General information" && (
           <GeneralInformationGrid container>
             <Text variant={"H4"}>General information</Text>
             <InputGrid container>
@@ -271,10 +269,8 @@ const ProfileSettings = () => {
               </Grid>
             </InputGrid>
           </GeneralInformationGrid>
-        ) : (
-          <></>
         )}
-        {category === "Security" ? (
+        {category === "Security" && (
           <SecurityGrid container>
             <ChangePasswordGrid container>
               <Text variant={"H4"}>Change password</Text>
@@ -343,10 +339,8 @@ const ProfileSettings = () => {
               )}
             </SecurityQuestions>
           </SecurityGrid>
-        ) : (
-          <></>
         )}
-        {category === "Billing" ? (
+        {category === "Billing" && (
           <Grid container flexDirection={"column"} gap={"30px"}>
             <Grid container flexDirection={"column"} gap={"30px"}>
               <Text variant={"H4"}>Payment details</Text>
@@ -417,10 +411,8 @@ const ProfileSettings = () => {
               </RecentPaymentsGrid>
             </Grid>
           </Grid>
-        ) : (
-          <></>
         )}
-        {category === "Notifications" ? (
+        {category === "Notifications" && (
           <Grid container flexDirection={"column"} gap={"30px"}>
             <Text variant={"H4"}>Notifications</Text>
             <Grid container flexDirection={"column"} gap={"25px"}>
@@ -462,10 +454,8 @@ const ProfileSettings = () => {
               </NotificationsPoints>
             </Grid>
           </Grid>
-        ) : (
-          <></>
         )}
-        {category !== "None" ? (
+        {category !== "None" && (
           <UpdateSettings container justifyContent={"space-between"}>
             <Grid container gap={"10px"} width={"auto"}>
               <Button variant={"FilledActive"} width={"170px"}>
@@ -480,8 +470,6 @@ const ProfileSettings = () => {
               Deactivate Account
             </Button>
           </UpdateSettings>
-        ) : (
-          <></>
         )}
       </SelectCategory>
     </Wrapper>

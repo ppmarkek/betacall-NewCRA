@@ -195,7 +195,7 @@ const Input = ({
             defaultValue={inputValue}
             onChange={x => CheackIcon(x.target.value)}
           />
-          {IconType !== "" ? <StyledImg src={Icon} alt='' /> : <></>}
+          {IconType !== "" && <StyledImg src={Icon} alt='' />}
         </InputGrid>
       );
     case "ConfirmPassword":
