@@ -12,6 +12,7 @@ import {
   Wrapper,
   StyledLink,
   LogoLink,
+  MenuLink,
 } from "./style";
 import Logo from "../../../assets/Icon/Logo.svg";
 import { useLocation } from "react-router-dom";
@@ -102,19 +103,19 @@ const Navigation = () => {
     if (checked === false) {
       setChecked(true)
       ;(document.getElementById("LeftNavigation") as HTMLInputElement).style.width = "200px"
-      ;(document.getElementById("TopNavigation") as HTMLInputElement).style.marginLeft = "200px"
+      ;(document.getElementById("root") as HTMLInputElement).style.marginLeft = "200px"
       ;(document.getElementById("StyledLink") as HTMLInputElement).style.width = "100%";
     } else {
       setChecked(false)
       ;(document.getElementById("LeftNavigation") as HTMLInputElement).style.width = "80px"
-      ;(document.getElementById("TopNavigation") as HTMLInputElement).style.marginLeft = "80px"
+      ;(document.getElementById("root") as HTMLInputElement).style.marginLeft = "80px"
       ;(document.getElementById("StyledLink") as HTMLInputElement).style.width = "200px";
     }
   };
 
   return (
     <Wrapper container>
-      <TopNavigation id={"TopNavigation"} container xs={12}>
+      <TopNavigation container xs={12}>
         <Grid container xs={6} gap={"15px"} alignItems={"center"}>
           <ChangeButton onClick={() => handleSlider()}>
             <NovigButton className={checkClass} onClick={() => ChangeClass()}>
@@ -125,7 +126,9 @@ const Navigation = () => {
               </BorderGrid>
             </NovigButton>
           </ChangeButton>
-          <Text variant={"H3"}>{location.pathname.replace("/", "")}</Text>
+          <Text variant={"H3"}>
+            {location.pathname.replace("/", "").replace(/([a-zA-Z])([A-Z])([a-z])/g, "$1 $2$3")}
+          </Text>
         </Grid>
         <Grid container xs={6} gap={"10px"} justifyContent={"flex-end"}>
           <Input variant={"Search"} text={"Search"} />
@@ -167,7 +170,9 @@ const Navigation = () => {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <MenuItem onClick={handleClose}>Settings</MenuItem>
+            <MenuLink to={"/ProfileSettings"}>
+              <MenuItem onClick={handleClose}>Profile Settings</MenuItem>
+            </MenuLink>
             <MenuItem onClick={handleClose}>Logout</MenuItem>
           </Menu>
         </Grid>

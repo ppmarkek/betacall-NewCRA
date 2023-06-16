@@ -1,21 +1,21 @@
-import { FilledActive, FilledRestingLight } from './style';
+import { FilledActive, FilledRestingLight } from "./style";
 
 enum Variant {
-  'FilledRestingLight',
-  'FilledActive',
+  "FilledRestingLight",
+  "FilledActive",
 }
 
 type ButtonProps = {
-  variant: 'FilledActive' | 'FilledRestingLight' | Variant
-  children: string | number
+  variant: "FilledActive" | "FilledRestingLight" | Variant
+  children: any
   width: string
 }
 
 const Button = ({ variant, children, width }: ButtonProps) => {
   switch (variant) {
-    case Variant.FilledRestingLight:
+    case "FilledRestingLight":
       return <FilledRestingLight $width={width}>{children}</FilledRestingLight>;
-    case Variant.FilledActive:
+    case "FilledActive":
       return <FilledActive $width={width}>{children}</FilledActive>;
     default:
       return <FilledRestingLight $width={width}>{children}</FilledRestingLight>;

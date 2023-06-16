@@ -8,7 +8,6 @@ type LinkProps = {
 
 export const Wrapper = styled(Grid)`
   flex-direction: column;
-  height: 100%;
   flex-direction: row-reverse;
 `;
 
@@ -73,8 +72,6 @@ export const TopNavigation = styled(Grid)`
   justify-content: center;
   padding: 0px 35px;
   border-bottom: 1px solid #eceef5;
-  transition: margin-left 0.3s;
-  margin-left: 80px;
 `;
 
 export const BorderGrid = styled(Grid)`
@@ -150,4 +147,9 @@ export const LogoLink = styled(Link)`
   width: 175px;
   justify-content: center;
   gap: 20px;
+`;
+
+export const MenuLink = styled(Link)`
+  text-decoration: none;
+  color: #222526;
 `;

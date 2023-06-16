@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Button } from '@mui/material';
+import styled from "styled-components";
+import { Button } from "@mui/material";
 
 type ButtonStyleProps = {
   $width?: string
@@ -15,11 +15,11 @@ export const FilledRestingLight = styled(Button)<ButtonStyleProps>`
   text-align: center;
   padding: 14px 0px 15px 0;
   cursor: pointer;
-  font-size: 18px;
-  font-family: 'Lato';
+  font-size: 16px;
+  font-family: "Lato";
   font-style: normal;
   font-weight: 700;
-  width: ${props => props.$width || '98px'};
+  width: ${props => props.$width || "98px"};
   transition: all 0.4s;
   span {
     display: none;
@@ -35,10 +35,10 @@ export const FilledRestingLight = styled(Button)<ButtonStyleProps>`
 export const FilledActive = styled(Button)<ButtonStyleProps>`
   all: unset;
   cursor: pointer;
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: normal;
   font-weight: 700;
-  font-size: 21px;
+  font-size: 16px;
   line-height: 19px;
   color: #ffffff;
   background: #6b59cc;
@@ -47,7 +47,7 @@ export const FilledActive = styled(Button)<ButtonStyleProps>`
   height: 50px;
   transition: all 0.4s;
   text-align: center;
-  width: ${props => props.$width || '98px'};
+  width: ${props => props.$width || "98px"};
   &:hover {
     color: #8083a3;
     background: #fff;
