@@ -10,6 +10,8 @@ import {
   SelectCategoryBorder,
   SelectCategory,
   SelectCategoryText,
+  CompanyInformationGrid,
+  InputGrid,
 } from "./style";
 import Text from "../../atoms/Text/Text";
 import { useState } from "react";
@@ -23,6 +25,7 @@ import ReportsActive from "../../../assets/SettingsIcon/ReportsActive.svg";
 import TeamsUsers from "../../../assets/SettingsIcon/TeamsUsers.svg";
 import TeamsUsersActive from "../../../assets/SettingsIcon/TeamsUsersActive.svg";
 import SelectCategoryImg from "../../../assets/Image/SelectCategory.svg";
+import Input from "../../atoms/Input/Input";
 
 const Settings = () => {
   const [category, setCategory] = useState("None");
@@ -58,14 +61,44 @@ const Settings = () => {
     },
   ];
 
+  const LocationCategoty = [
+    {
+      Text: "Unites States of America",
+      value: 10,
+    },
+    {
+      Text: "Latvia",
+      value: 20,
+    },
+    {
+      Text: "Germany",
+      value: 30,
+    },
+  ];
+
+  const LanguageCategoty = [
+    {
+      Text: "Latvian",
+      value: 10,
+    },
+    {
+      Text: "Russian",
+      value: 20,
+    },
+    {
+      Text: "English",
+      value: 30,
+    },
+  ];
+
   return (
     <Wrapper container xs={12}>
       <Profile xs={3}>
         <Avatar container>
           <StyledAvatarImg src={AvatarImg} alt='Avatar' />
           <Grid textAlign={"center"}>
-            <Text variant={"H3"}>Johanna Stevens</Text>
-            <Text variant={"LIGHT"}>UI/UX Designer</Text>
+            <Text variant={"H3"}>WhiteUI.Store</Text>
+            <Text variant={"LIGHT"}>25 Employees</Text>
           </Grid>
         </Avatar>
         <Grid container>
@@ -109,6 +142,68 @@ const Settings = () => {
               </Text>
             </SelectCategoryText>
           </Grid>
+        )}
+        {category === "Company information" && (
+          <CompanyInformationGrid container>
+            <Text variant={"H4"}>Company information</Text>
+            <InputGrid container>
+              <Grid container gap={"20px"} width={"440px"} flexDirection={"column"}>
+                <Input
+                  variant={"LightInput"}
+                  width={"440px"}
+                  title={"Company name"}
+                  inputValue={"WhiteUI.Store"}
+                  IconType={"Company"}
+                  text={"Enter your company name"}
+                />
+                <Input
+                  variant={"LightInput"}
+                  width={"440px"}
+                  title={"Billing address"}
+                  IconType={"Address"}
+                  text={"Start typing …"}
+                />
+                <Input
+                  variant={"LightInput"}
+                  width={"440px"}
+                  title={"Phone"}
+                  IconType={"Calls"}
+                  text={"Start typing …"}
+                />
+                <Input
+                  variant={"LightInput"}
+                  width={"440px"}
+                  title={"Number of employees"}
+                  IconType={"Name"}
+                  text={"Start typing …"}
+                />
+              </Grid>
+              <Grid container gap={"20px"} width={"440px"} flexDirection={"column"}>
+                <Input
+                  variant={"Select"}
+                  width={"440px"}
+                  title={"Location"}
+                  text={"Select location"}
+                  SelectDefaultValue={"10"}
+                  SelectArray={LocationCategoty}
+                />
+                <Input
+                  variant={"LightInput"}
+                  width={"440px"}
+                  title={"Zip code"}
+                  IconType={"Email"}
+                  text={"Start typing …"}
+                />
+                <Input
+                  variant={"Select"}
+                  width={"440px"}
+                  title={"Location"}
+                  text={"Select language"}
+                  SelectArray={LanguageCategoty}
+                />
+              </Grid>
+            </InputGrid>
+          </CompanyInformationGrid>
         )}
       </SelectCategory>
     </Wrapper>
