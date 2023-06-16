@@ -7,10 +7,20 @@ import Step1 from "./components/pages/SignUp/Step1/Step1";
 import Step2 from "./components/pages/SignUp/Step2/Step2";
 import Step3 from "./components/pages/SignUp/Step3/Step3";
 import Navigation from "./components/templates/Navigation/Navigation";
+<<<<<<< Updated upstream
+=======
+import ProfileSettings from "./components/pages/ProfileSettings/ProfileSettings";
+import Settings from "./components/pages/Settings/Settings";
+>>>>>>> Stashed changes
 
 function App() {
   const LoginReg = ["/Login", "/Recover", "/Step1", "/Step2", "/Step3"];
   const location = useLocation();
+<<<<<<< Updated upstream
+=======
+  LoginReg.some(x => x === location.pathname) === true &&
+    ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "0px");
+>>>>>>> Stashed changes
   return (
     <div className='App'>
       {LoginReg.some(x => x === location.pathname) === true ? (
@@ -24,6 +34,11 @@ function App() {
         <Route path='/Step3' element={<Step3 />} />
         <Route path='/Recover' element={<Recover />} />
         <Route path='/Login' element={<Login />} />
+<<<<<<< Updated upstream
+=======
+        <Route path='/ProfileSettings' element={<ProfileSettings />} />
+        <Route path='/Settings' element={<Settings />} />
+>>>>>>> Stashed changes
       </Routes>
     </div>
   );
