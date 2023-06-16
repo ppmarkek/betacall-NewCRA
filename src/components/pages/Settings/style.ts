@@ -83,3 +83,14 @@ export const SelectCategoryBorder = styled(Grid)<CategoryProps>`
   margin: 0 30px;
   display: ${props => (props.$display ? props.$display : "block")};
 `;
+
+export const CompanyInformationGrid = styled(Grid)`
+  flex-direction: column;
+  height: auto;
+  gap: 30px;
+`;
+
+export const InputGrid = styled(Grid)`
+  justify-content: space-between;
+  height: 450px;
+`;

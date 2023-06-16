@@ -45,6 +45,8 @@ import QuestionsSilver from "../../../assets/Icon/QuestionsSilver.svg";
 import Questions from "../../../assets/Icon/Questions.svg";
 import AnswerSilver from "../../../assets/Icon/AnswerSilver.svg";
 import Answer from "../../../assets/Icon/Answer.svg";
+import CompanySilver from "../../../assets/Icon/CompanySilver.svg";
+import Company from "../../../assets/Icon/Company.svg";
 
 type Value = {
   variant: string
@@ -56,6 +58,7 @@ type Value = {
   IconType?: string
   inputValue?: string
   SelectArray?: Array<any>
+  SelectDefaultValue?: string
 }
 
 const Input = ({
@@ -68,6 +71,7 @@ const Input = ({
   IconType,
   inputValue,
   SelectArray,
+  SelectDefaultValue,
 }: Value) => {
   const [Icon, setIcon] = useState(SilverPass);
   const [Confirm, setConfirm] = useState(CheckSilver);
@@ -106,6 +110,15 @@ const Input = ({
     if (IconType === "Link" && typeof inputValue !== "undefined") {
       return setIcon(Link);
     }
+    if (IconType === "Questions" && typeof inputValue !== "undefined") {
+      return setIcon(Questions);
+    }
+    if (IconType === "Answer" && typeof inputValue !== "undefined") {
+      return setIcon(Answer);
+    }
+    if (IconType === "Company" && typeof inputValue !== "undefined") {
+      return setIcon(Company);
+    }
   };
 
   const changeIcon = () => {
@@ -125,6 +138,8 @@ const Input = ({
       return setIcon(QuestionsSilver);
     } else if (IconType === "Answer") {
       return setIcon(AnswerSilver);
+    } else if (IconType === "Company") {
+      return setIcon(CompanySilver);
     }
   };
 
@@ -159,6 +174,9 @@ const Input = ({
     if (IconType === "Answer") {
       return x === "" ? setIcon(AnswerSilver) : setIcon(Answer);
     }
+    if (IconType === "Company") {
+      return x === "" ? setIcon(CompanySilver) : setIcon(Company);
+    }
   };
 
   const CheackChangePassword = (x: string) => {
@@ -178,6 +196,7 @@ const Input = ({
   useEffect(() => {
     changeIcon();
     CheckInputValue();
+    typeof SelectDefaultValue !== "undefined" && setSelect(SelectDefaultValue);
   }, []);
 
   switch (variant) {
