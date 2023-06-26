@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Input, Grid, Button, FormControl } from "@mui/material";
+import { Input, Grid, Button, FormControl, MenuItem } from "@mui/material";
 import { Link } from "react-router-dom";
 
 type InputStyleProps = {
@@ -148,7 +148,7 @@ export const ResultImg = styled.img`
 
 export const Status = styled(Grid)`
   position: absolute;
-  bottom: 0px;
+  bottom: -4px;
   right: -4px;
   background-color: #28c345;
   width: 12px;
@@ -182,4 +182,10 @@ export const StyledFormControl = styled(FormControl)`
   .MuiFormLabel-filled {
     visibility: hidden;
   }
+`;
+
+export const StyledMenuItem = styled(MenuItem)`
+  font-size: 16px;
+  font-family: "Lato";
+  font-weight: 700;
 `;

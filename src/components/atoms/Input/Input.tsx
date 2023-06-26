@@ -17,8 +17,9 @@ import {
   Status,
   StyledFormControl,
   StyledImg,
+  StyledMenuItem,
 } from "./style";
-import { Fade, Grid, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { Fade, Grid, InputLabel, Select, SelectChangeEvent } from "@mui/material";
 import SilverPass from "../../../assets/Icon/SilverPass.svg";
 import Pass from "../../../assets/Icon/Pass.svg";
 import Email from "../../../assets/Icon/Email.svg";
@@ -267,7 +268,7 @@ const Input = ({
               <Result container>
                 <SearchLink to='/'>
                   <Grid container gap={"20px"}>
-                    <Grid position={"relative"}>
+                    <Grid position={"relative"} height={"40px"} width={"40px"}>
                       <img src={Avatar} alt='' />
                       <Status />
                     </Grid>
@@ -307,13 +308,14 @@ const Input = ({
               labelId='demo-simple-select-standard-label'
               id='demo-simple-select-standard'
               value={select}
+              style={{ fontFamily: "Lato", fontSize: "16px", fontWeight: "700" }}
               onChange={handleChange}
               label='select'
             >
               {SelectArray?.map((x: any) => (
-                <MenuItem key={x.Text} value={x.value}>
+                <StyledMenuItem key={x.Text} value={x.value}>
                   {x.Text}
-                </MenuItem>
+                </StyledMenuItem>
               ))}
             </Select>
           </StyledFormControl>
