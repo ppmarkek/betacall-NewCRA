@@ -4,6 +4,8 @@ import styled from "styled-components";
 type CategoryProps = {
   $display?: string
   $background?: string
+  $color?: string
+  $borderColor?: string
 }
 
 export const Wrapper = styled(Grid)`
@@ -93,4 +95,72 @@ export const CompanyInformationGrid = styled(Grid)`
 export const InputGrid = styled(Grid)`
   justify-content: space-between;
   height: 450px;
+`;
+
+export const TeamsAndUsers = styled(Grid)`
+  flex-direction: column;
+  height: auto;
+  gap: 30px;
+`;
+
+export const SelectStatus = styled(Grid)`
+  gap: 20px;
+  justify-content: flex-end;
+`;
+
+export const Status = styled(Grid)<CategoryProps>`
+  width: auto;
+  padding: 0px 30px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  color: #8083a3;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  color: ${props => props.$color || "#8083a3"};
+  border-color: ${props => props.$borderColor || "#fff"};
+  transition: all 0.5s;
+  &:hover {
+    color: #1a1c1d;
+  }
+`;
+
+export const AddIconGrid = styled(Grid)`
+  border: 1px solid #eceef5;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
+
+export const UsersGrid = styled(Grid)`
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  padding: 0px 20px;
+`;
+
+export const ProfileStatus = styled(Grid)<CategoryProps>`
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background: ${props => (props.$background ? props.$background : "#28c345")};
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-radius: 20px;
+`;
+
+export const UserStatus = styled(Grid)<CategoryProps>`
+  justify-content: center;
+  align-items: center;
+  background: ${props => (props.$background ? props.$background : "rgba(107, 89, 204, 0.1)")};
+  width: 95px;
+  height: 45px;
+  border-radius: 8px;
 `;

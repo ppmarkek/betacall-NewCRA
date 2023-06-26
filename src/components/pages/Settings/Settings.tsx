@@ -12,6 +12,13 @@ import {
   SelectCategoryText,
   CompanyInformationGrid,
   InputGrid,
+  TeamsAndUsers,
+  SelectStatus,
+  Status,
+  AddIconGrid,
+  UsersGrid,
+  ProfileStatus,
+  UserStatus,
 } from "./style";
 import Text from "../../atoms/Text/Text";
 import { useState } from "react";
@@ -26,9 +33,13 @@ import TeamsUsers from "../../../assets/SettingsIcon/TeamsUsers.svg";
 import TeamsUsersActive from "../../../assets/SettingsIcon/TeamsUsersActive.svg";
 import SelectCategoryImg from "../../../assets/Image/SelectCategory.svg";
 import Input from "../../atoms/Input/Input";
+import AvatarIcon from "../../../assets/Image/Avatar.svg";
+import AddIcon from "../../../assets/SettingsIcon/AddIcon.svg";
+import ThreeArrow from "../../../assets/SettingsIcon/ThreeArrow.svg";
 
 const Settings = () => {
   const [category, setCategory] = useState("None");
+  const [status, setStatus] = useState("All");
 
   const allCategory = [
     {
@@ -88,6 +99,34 @@ const Settings = () => {
     {
       Text: "English",
       value: 30,
+    },
+  ];
+
+  const TeamsUsersCategoty = [
+    {
+      Text: "Can manage",
+      value: 10,
+    },
+    {
+      Text: "Assign role",
+      value: 20,
+    },
+  ];
+
+  const Users = [
+    {
+      Name: "Nicholas Gordon",
+      Icon: AvatarIcon,
+      Value: 10,
+      Categoty: "Business",
+      ProfileStatus: "#28C345",
+    },
+    {
+      Name: "Marvin Lambert",
+      Icon: AvatarIcon,
+      Value: 20,
+      Categoty: "Private",
+      ProfileStatus: "#F6933E",
     },
   ];
 
@@ -204,6 +243,146 @@ const Settings = () => {
               </Grid>
             </InputGrid>
           </CompanyInformationGrid>
+        )}
+        {category === "Teams & Users" && (
+          <TeamsAndUsers container>
+            <Grid container justifyContent={"space-between"}>
+              <Grid xs={6}>
+                <Text variant={"H4"}>Teams & Users</Text>
+              </Grid>
+              <SelectStatus container xs={6}>
+                <Status
+                  container
+                  onClick={() => setStatus("All")}
+                  $color={status === "All" ? "#1A1C1D" : "#8083A3"}
+                  $borderColor={status === "All" ? "#ECEEF5" : "#fff"}
+                >
+                  All
+                </Status>
+                <Status
+                  container
+                  onClick={() => setStatus("Business")}
+                  $color={status === "Business" ? "#1A1C1D" : "#8083A3"}
+                  $borderColor={status === "Business" ? "#ECEEF5" : "#fff"}
+                >
+                  Business
+                </Status>
+                <Status
+                  container
+                  onClick={() => setStatus("Private")}
+                  $color={status === "Private" ? "#1A1C1D" : "#8083A3"}
+                  $borderColor={status === "Private" ? "#ECEEF5" : "#fff"}
+                >
+                  Private
+                </Status>
+                <AddIconGrid container>
+                  <img src={AddIcon} alt='Add' />
+                </AddIconGrid>
+              </SelectStatus>
+            </Grid>
+            <Grid container gap={"10px"}>
+              {status === "All"
+                ? Users.map((x: any) => (
+                    <UsersGrid container key={x.Categoty}>
+                      <Grid container alignItems={"center"} gap={"20px"} xs={6}>
+                        <Grid position={"relative"} height={"40px"} width={"40px"}>
+                          <img src={x.Icon} alt='Avatar' />
+                          <ProfileStatus />
+                        </Grid>
+                        <Text variant={"BOLD"}>{x.Name}</Text>
+                      </Grid>
+                      <Grid
+                        container
+                        xs={6}
+                        gap={"40px"}
+                        justifyContent={"flex-end"}
+                        alignContent={"center"}
+                      >
+                        <Grid>
+                          <Input
+                            variant={"Select"}
+                            width={"180px"}
+                            text={"Select location"}
+                            SelectDefaultValue={x.Value}
+                            SelectArray={TeamsUsersCategoty}
+                          />
+                        </Grid>
+                        <Grid container gap={"5px"} width={"auto"} alignItems={"center"}>
+                          <UserStatus
+                            container
+                            $background={
+                              x.Categoty === "Business"
+                                ? "rgba(107, 89, 204, 0.1)"
+                                : "rgba(246, 147, 62, 0.15)"
+                            }
+                          >
+                            <Text
+                              variant={"BOLD"}
+                              color={x.Categoty === "Business" ? "#6B59CC" : "#F6933E"}
+                            >
+                              {x.Categoty}
+                            </Text>
+                          </UserStatus>
+                          <AddIconGrid container>
+                            <img src={ThreeArrow} alt='Three Arrow Icon' />
+                          </AddIconGrid>
+                        </Grid>
+                      </Grid>
+                    </UsersGrid>
+                  ))
+                : Users.map(
+                    (x: any) =>
+                      x.Categoty === status && (
+                        <UsersGrid container key={x.Categoty}>
+                          <Grid container alignItems={"center"} gap={"20px"} xs={6}>
+                            <Grid position={"relative"} height={"40px"} width={"40px"}>
+                              <img src={x.Icon} alt='Avatar' />
+                              <ProfileStatus />
+                            </Grid>
+                            <Text variant={"BOLD"}>{x.Name}</Text>
+                          </Grid>
+                          <Grid
+                            container
+                            xs={6}
+                            gap={"40px"}
+                            justifyContent={"flex-end"}
+                            alignContent={"center"}
+                          >
+                            <Grid>
+                              <Input
+                                variant={"Select"}
+                                width={"180px"}
+                                text={"Select location"}
+                                SelectDefaultValue={x.Value}
+                                SelectArray={TeamsUsersCategoty}
+                              />
+                            </Grid>
+                            <Grid container gap={"5px"} width={"auto"} alignItems={"center"}>
+                              <UserStatus
+                                container
+                                $background={
+                                  x.Categoty === "Business"
+                                    ? "rgba(107, 89, 204, 0.1)"
+                                    : "rgba(246, 147, 62, 0.15)"
+                                }
+                              >
+                                <Text
+                                  variant={"BOLD"}
+                                  color={x.Categoty === "Business" ? "#6B59CC" : "#F6933E"}
+                                >
+                                  {x.Categoty}
+                                </Text>
+                              </UserStatus>
+                              <AddIconGrid container>
+                                <img src={ThreeArrow} alt='Three Arrow Icon' />
+                              </AddIconGrid>
+                            </Grid>
+                          </Grid>
+                        </UsersGrid>
+                      ),
+                  )}
+            </Grid>
+          </TeamsAndUsers>
         )}
       </SelectCategory>
     </Wrapper>
