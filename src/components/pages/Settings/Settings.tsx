@@ -19,6 +19,18 @@ import {
   UsersGrid,
   ProfileStatus,
   UserStatus,
+  ReportsGrid,
+  CallsSstatisticsGrid,
+  CallsSstatisticsBox,
+  ProgressCalls,
+  TopUsers,
+  TinyColumnImg,
+  TopUsersGrid,
+  MostActiveUsers,
+  MostActiveUsersGrid,
+  MostActiveUsersImg,
+  MostActiveUsersBox,
+  UsageStatistics,
 } from "./style";
 import Text from "../../atoms/Text/Text";
 import { useState } from "react";
@@ -36,10 +48,62 @@ import Input from "../../atoms/Input/Input";
 import AvatarIcon from "../../../assets/Image/Avatar.svg";
 import AddIcon from "../../../assets/SettingsIcon/AddIcon.svg";
 import ThreeArrow from "../../../assets/SettingsIcon/ThreeArrow.svg";
+import DateIcon from "../../../assets/SettingsIcon/DateIcon.svg";
+import VideoCalls from "../../../assets/SettingsIcon/VideoCalls.svg";
+import MessageIcon from "../../../assets/SettingsIcon/MessageIcon.svg";
+import MultiLink from "./MultiLink.json";
+import { Line, TinyColumn } from "@ant-design/charts";
+import { Link } from "react-router-dom";
 
 const Settings = () => {
   const [category, setCategory] = useState("None");
   const [status, setStatus] = useState("All");
+
+  const getDateFunction = () => {
+    const month = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const date = new Date();
+    return date.getDate() + " " + month[date.getMonth()] + " " + date.getFullYear();
+  };
+
+  const configCallsMinutes = {
+    height: 12,
+    width: 73,
+    autoFit: false,
+    percent: 0.25,
+    color: ["#ECEEF5", "#28C345"],
+  };
+
+  const configConferenceCalls = {
+    height: 12,
+    width: 73,
+    autoFit: false,
+    percent: 0.45,
+    color: ["#ECEEF5", "#F6933E"],
+  };
+
+  const configCallMembers = {
+    height: 12,
+    width: 73,
+    autoFit: false,
+    percent: 0.8,
+    color: ["#ECEEF5", "#FF808B"],
+    columnStyle: {
+      radius: [20, 20, 20, 20],
+    },
+  };
 
   const allCategory = [
     {
@@ -127,6 +191,100 @@ const Settings = () => {
       Value: 20,
       Categoty: "Private",
       ProfileStatus: "#F6933E",
+    },
+  ];
+
+  const TopUsersConfig = {
+    height: 90,
+    width: 20,
+    autoFit: false,
+    color: "#6B59CC",
+    columnStyle: {
+      radius: [20, 20, 20, 20],
+    },
+  };
+
+  const MostActiveUsersConfig = {
+    height: 340,
+    width: 20,
+    autoFit: false,
+    color: "#6B59CC",
+    columnStyle: {
+      radius: [20, 20, 20, 20],
+    },
+  };
+
+  const UsageStatisticsConfig = {
+    height: 500,
+    xField: "date",
+    yField: "value",
+    seriesField: "category",
+    yAxis: {
+      label: {
+        formatter: (v: any) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, s => `${s},`),
+      },
+    },
+  };
+
+  const MostActiveUsersBD = [
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
+    },
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
+    },
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
+    },
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
+    },
+  ];
+
+  const TopUsersBD = [
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
+    },
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
+    },
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
+    },
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
+    },
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
+    },
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
+    },
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
+    },
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
+    },
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
+    },
+    {
+      Avatar: AvatarIcon,
+      Value: [274, 337],
     },
   ];
 
@@ -383,6 +541,141 @@ const Settings = () => {
                   )}
             </Grid>
           </TeamsAndUsers>
+        )}
+        {category === "Reports" && (
+          <ReportsGrid container>
+            <Grid container justifyContent={"space-between"}>
+              <Grid xs={6}>
+                <Text variant={"H4"}>Reports</Text>
+              </Grid>
+              <Grid
+                xs={6}
+                container
+                justifyContent={"flex-end"}
+                gap={"10px"}
+                alignContent={"center"}
+              >
+                <img src={DateIcon} alt='Date Icon' />
+                <Grid>
+                  <Text variant={"BOLD"} color={"#8083A3"} small>
+                    17 Feb 2020 - {getDateFunction()}
+                  </Text>
+                </Grid>
+              </Grid>
+            </Grid>
+            <CallsSstatisticsGrid container>
+              <CallsSstatisticsBox container xs={4}>
+                <Grid container xs={8} gap={"5px"} flexDirection={"column"}>
+                  <Text variant={"H5"}>Call minutes</Text>
+                  <Text variant={"REGULAR"} small>
+                    Total time spent
+                  </Text>
+                </Grid>
+                <Grid container xs={4} gap={"5px"} flexDirection={"column"} alignItems={"flex-end"}>
+                  <Text variant={"H4"}>10.345</Text>
+                  <ProgressCalls {...configCallsMinutes} />
+                </Grid>
+              </CallsSstatisticsBox>
+              <CallsSstatisticsBox
+                container
+                xs={4}
+                borderLeft={"1px solid #ECEEF5"}
+                borderRight={"1px solid #ECEEF5"}
+              >
+                <Grid container xs={8} gap={"5px"} flexDirection={"column"}>
+                  <Text variant={"H5"}>Conference calls</Text>
+                  <Text variant={"REGULAR"} small>
+                    Total time spent
+                  </Text>
+                </Grid>
+                <Grid container xs={4} gap={"5px"} flexDirection={"column"} alignItems={"flex-end"}>
+                  <Text variant={"H4"}>31.500</Text>
+                  <ProgressCalls {...configConferenceCalls} />
+                </Grid>
+              </CallsSstatisticsBox>
+              <CallsSstatisticsBox container xs={4}>
+                <Grid container xs={8} gap={"5px"} flexDirection={"column"}>
+                  <Text variant={"H5"}>Call members</Text>
+                  <Text variant={"REGULAR"} small>
+                    Total call participants
+                  </Text>
+                </Grid>
+                <Grid container xs={4} gap={"5px"} flexDirection={"column"} alignItems={"flex-end"}>
+                  <Text variant={"H4"}>248</Text>
+                  <ProgressCalls {...configCallMembers} />
+                </Grid>
+              </CallsSstatisticsBox>
+            </CallsSstatisticsGrid>
+
+            <Grid container gap={"35px"} xs={5.8}>
+              <TopUsers container xs={12}>
+                <Grid container justifyContent={"space-between"} height={"50px"}>
+                  <Grid xs={6}>
+                    <Text variant={"H5"}>Top users</Text>
+                    <Text variant={"LIGHT"}>Week to week performance</Text>
+                  </Grid>
+                  <Grid
+                    container
+                    xs={6}
+                    alignItems={"center"}
+                    gap={"10px"}
+                    justifyContent={"flex-end"}
+                  >
+                    <img src={VideoCalls} alt='Icon Video Calls' />
+                    <Text variant={"BOLD"} color={"#8083A3"}>
+                      Video calls
+                    </Text>
+                  </Grid>
+                </Grid>
+                <Grid container justifyContent={"space-between"}>
+                  {TopUsersBD.map(x => (
+                    <TopUsersGrid container key={x.Avatar}>
+                      <TinyColumn data={x.Value} {...TopUsersConfig} />
+                      <Link to={"/"}>
+                        <TinyColumnImg src={x.Avatar} alt='Avatar' />
+                      </Link>
+                    </TopUsersGrid>
+                  ))}
+                </Grid>
+              </TopUsers>
+              <MostActiveUsers container xs={12}>
+                <Grid container justifyContent={"space-between"} height={"50px"}>
+                  <Grid xs={6}>
+                    <Text variant={"H5"}>Most active users</Text>
+                    <Text variant={"LIGHT"}>Week to week performance</Text>
+                  </Grid>
+                  <Grid
+                    container
+                    xs={6}
+                    alignItems={"center"}
+                    gap={"10px"}
+                    justifyContent={"flex-end"}
+                  >
+                    <img src={MessageIcon} alt='Icon Video Calls' />
+                    <Text variant={"BOLD"} color={"#8083A3"}>
+                      Video calls
+                    </Text>
+                  </Grid>
+                </Grid>
+                <MostActiveUsersBox container>
+                  {MostActiveUsersBD.map(x => (
+                    <MostActiveUsersGrid container key={x.Avatar}>
+                      <TinyColumn data={x.Value} {...MostActiveUsersConfig} />
+                      <Link to={"/"}>
+                        <MostActiveUsersImg src={x.Avatar} alt='Avatar' />
+                      </Link>
+                    </MostActiveUsersGrid>
+                  ))}
+                </MostActiveUsersBox>
+              </MostActiveUsers>
+            </Grid>
+            <UsageStatistics container xs={5.9}>
+              <Text variant={"H5"}>Usage statistics</Text>
+              <Grid>
+                <Line data={MultiLink} {...UsageStatisticsConfig} />
+              </Grid>
+            </UsageStatistics>
+          </ReportsGrid>
         )}
       </SelectCategory>
     </Wrapper>

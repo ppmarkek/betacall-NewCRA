@@ -1,0 +1,212 @@
+[
+  {
+    "date": "1",
+    "value": 3590,
+    "category": "Jan"
+  },
+  {
+    "date": "1",
+    "value": 1584,
+    "category": "Feb"
+  },
+  {
+    "date": "1",
+    "value": 415,
+    "category": "Mar"
+  },
+  {
+    "date": "1",
+    "value": 66,
+    "category": "Apr"
+  },
+  {
+    "date": "2",
+    "value": 3107,
+    "category": "May"
+  },
+  {
+    "date": "2",
+    "value": 3812,
+    "category": "Jan"
+  },
+  {
+    "date": "2",
+    "value": 1696,
+    "category": "Feb"
+  },
+  {
+    "date": "2",
+    "value": 446,
+    "category": "Mar"
+  },
+  {
+    "date": "2",
+    "value": 67,
+    "category": "Apr"
+  },
+  {
+    "date": "3",
+    "value": 3134,
+    "category": "May"
+  },
+  {
+    "date": "3",
+    "value": 4055,
+    "category": "Jan"
+  },
+  {
+    "date": "3",
+    "value": 1756,
+    "category": "Feb"
+  },
+  {
+    "date": "3",
+    "value": 494,
+    "category": "Mar"
+  },
+  {
+    "date": "3",
+    "value": 64,
+    "category": "Apr"
+  },
+  {
+    "date": "4",
+    "value": 3200,
+    "category": "May"
+  },
+  {
+    "date": "4",
+    "value": 4106,
+    "category": "Jan"
+  },
+  {
+    "date": "4",
+    "value": 1783,
+    "category": "Feb"
+  },
+  {
+    "date": "4",
+    "value": 519,
+    "category": "Mar"
+  },
+  {
+    "date": "4",
+    "value": 65,
+    "category": "Apr"
+  },
+  {
+    "date": "5",
+    "value": 3220,
+    "category": "May"
+  },
+  {
+    "date": "5",
+    "value": 4126,
+    "category": "Jan"
+  },
+  {
+    "date": "5",
+    "value": 1806,
+    "category": "Feb"
+  },
+  {
+    "date": "5",
+    "value": 554,
+    "category": "Mar"
+  },
+  {
+    "date": "5",
+    "value": 68,
+    "category": "Apr"
+  },
+  {
+    "date": "6",
+    "value": 3280,
+    "category": "May"
+  },
+  {
+    "date": "6",
+    "value": 4117,
+    "category": "Jan"
+  },
+  {
+    "date": "6",
+    "value": 1823,
+    "category": "Feb"
+  },
+  {
+    "date": "6",
+    "value": 4356,
+    "category": "Mar"
+  },
+  {
+    "date": "6",
+    "value": 7454,
+    "category": "Apr"
+  },
+  {
+    "date": "7",
+    "value": 122,
+    "category": "Jun"
+  },
+  {
+    "date": "7",
+    "value": 765,
+    "category": "Jul"
+  },
+  {
+    "date": "7",
+    "value": 3523,
+    "category": "Aug"
+  },
+  {
+    "date": "7",
+    "value": 4430,
+    "category": "Sep"
+  },
+  {
+    "date": "8",
+    "value": 3142,
+    "category": "Oct"
+  },
+  {
+    "date": "8",
+    "value": 130,
+    "category": "Jun"
+  },
+  {
+    "date": "9",
+    "value": 134,
+    "category": "Nov"
+  },
+  {
+    "date": "9",
+    "value": 1967,
+    "category": "Dec"
+  },
+  {
+    "date": "9",
+    "value": 4789,
+    "category": "Feb"
+  },
+  {
+    "date": "9",
+    "value": 7067,
+    "category": "Jun"
+  },
+  {
+    "date": "10",
+    "value": 534,
+    "category": "Sep"
+  },
+  {
+    "date": "10",
+    "value": 142,
+    "category": "Nov"
+  },
+  {
+    "date": "10",
+    "value": 2345,
+    "category": "Dec"
+  }
+]
