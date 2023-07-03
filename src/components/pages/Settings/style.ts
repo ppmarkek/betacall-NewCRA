@@ -248,3 +248,19 @@ export const UsageStatistics = styled(Grid)`
   border: 1px solid #eceef5;
   flex-direction: column;
 `;
+
+export const IntegrationsGrid = styled(Grid)`
+  height: auto;
+  gap: 30px;
+`;
+
+export const IntegrationsSwich = styled(Grid)`
+  height: 80px;
+  justify-content: space-between;
+  border-bottom: 1px solid #eceef5;
+`;
+
+export const IntegrationsImg = styled.img`
+  width: 35px;
+  height: 35px;
+`;

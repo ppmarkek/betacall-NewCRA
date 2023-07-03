@@ -31,6 +31,9 @@ import {
   MostActiveUsersImg,
   MostActiveUsersBox,
   UsageStatistics,
+  IntegrationsGrid,
+  IntegrationsSwich,
+  IntegrationsImg,
 } from "./style";
 import Text from "../../atoms/Text/Text";
 import { useState } from "react";
@@ -51,13 +54,28 @@ import ThreeArrow from "../../../assets/SettingsIcon/ThreeArrow.svg";
 import DateIcon from "../../../assets/SettingsIcon/DateIcon.svg";
 import VideoCalls from "../../../assets/SettingsIcon/VideoCalls.svg";
 import MessageIcon from "../../../assets/SettingsIcon/MessageIcon.svg";
+import Dropbox from "../../../assets/SettingsIcon/dropbox.svg";
+import Invision from "../../../assets/SettingsIcon/invision.svg";
+import Jira from "../../../assets/SettingsIcon/jira.svg";
+import Intercom from "../../../assets/SettingsIcon/intercom.svg";
+import Trello from "../../../assets/SettingsIcon/trello.svg";
+import ProductHunt from "../../../assets/SettingsIcon/producthunt.svg";
+import Gdocs from "../../../assets/SettingsIcon/gdocs.svg";
 import MultiLink from "./MultiLink.json";
 import { Line, TinyColumn } from "@ant-design/charts";
 import { Link } from "react-router-dom";
+import Switch from "../../atoms/Switch/Switch";
 
 const Settings = () => {
   const [category, setCategory] = useState("None");
   const [status, setStatus] = useState("All");
+  const [switchOne, setSwitchOne] = useState(true);
+  const [switchTwo, setSwitchTwo] = useState(true);
+  const [switchThree, setSwitchThree] = useState(true);
+  const [switchFour, setSwitchFour] = useState(true);
+  const [switchFive, setSwitchFive] = useState(false);
+  const [switchSix, setSwitchSix] = useState(false);
+  const [switchSeven, setSwitchSeven] = useState(false);
 
   const getDateFunction = () => {
     const month = [
@@ -676,6 +694,101 @@ const Settings = () => {
               </Grid>
             </UsageStatistics>
           </ReportsGrid>
+        )}
+        {category === "Integrations" && (
+          <IntegrationsGrid container>
+            <Text variant={"H4"}>Integrations</Text>
+            <Grid container flexDirection={"column"} gap={"25px"}>
+              <IntegrationsSwich container>
+                <Grid container width={"auto"} alignItems={"center"} gap={"25px"}>
+                  <IntegrationsImg src={Dropbox} alt='Intercom' />
+                  <Grid>
+                    <Text variant={"BOLD"} color={switchOne === true ? "#1A1C1D" : "#8083a3"}>
+                      Dropbox
+                    </Text>
+                    <Text variant={"LIGHT"}>
+                      Bring a faster teamwork and faster file synchronization
+                    </Text>
+                  </Grid>
+                </Grid>
+                <Switch variant={"defaultChecked"} onChange={value => setSwitchOne(value)} />
+              </IntegrationsSwich>
+              <IntegrationsSwich container>
+                <Grid container width={"auto"} alignItems={"center"} gap={"25px"}>
+                  <IntegrationsImg src={Invision} alt='Intercom' />
+                  <Grid>
+                    <Text variant={"BOLD"} color={switchTwo === true ? "#1A1C1D" : "#8083a3"}>
+                      Invision
+                    </Text>
+                    <Text variant={"LIGHT"}>Design better and faster</Text>
+                  </Grid>
+                </Grid>
+                <Switch variant={"defaultChecked"} onChange={value => setSwitchTwo(value)} />
+              </IntegrationsSwich>
+              <IntegrationsSwich container>
+                <Grid container width={"auto"} alignItems={"center"} gap={"25px"}>
+                  <IntegrationsImg src={Jira} alt='Intercom' />
+                  <Grid>
+                    <Text variant={"BOLD"} color={switchThree === true ? "#1A1C1D" : "#8083a3"}>
+                      Jira
+                    </Text>
+                    <Text variant={"LIGHT"}>Stay agile and increase productivity</Text>
+                  </Grid>
+                </Grid>
+                <Switch variant={"defaultChecked"} onChange={value => setSwitchThree(value)} />
+              </IntegrationsSwich>
+              <IntegrationsSwich container>
+                <Grid container width={"auto"} alignItems={"center"} gap={"25px"}>
+                  <IntegrationsImg src={Intercom} alt='Intercom' />
+                  <Grid>
+                    <Text variant={"BOLD"} color={switchFour === true ? "#1A1C1D" : "#8083a3"}>
+                      Intercom
+                    </Text>
+                    <Text variant={"LIGHT"}>Communicate faster with clients</Text>
+                  </Grid>
+                </Grid>
+                <Switch variant={"defaultChecked"} onChange={value => setSwitchFour(value)} />
+              </IntegrationsSwich>
+              <IntegrationsSwich container>
+                <Grid container width={"auto"} alignItems={"center"} gap={"25px"}>
+                  <IntegrationsImg src={Trello} alt='Intercom' />
+                  <Grid>
+                    <Text variant={"BOLD"} color={switchFive === true ? "#1A1C1D" : "#8083a3"}>
+                      Trello
+                    </Text>
+                    <Text variant={"LIGHT"}>Collaborate with your teammates faster</Text>
+                  </Grid>
+                </Grid>
+                <Switch onChange={value => setSwitchFive(value)} />
+              </IntegrationsSwich>
+              <IntegrationsSwich container>
+                <Grid container width={"auto"} alignItems={"center"} gap={"25px"}>
+                  <IntegrationsImg src={ProductHunt} alt='Intercom' />
+                  <Grid>
+                    <Text variant={"BOLD"} color={switchSix === true ? "#1A1C1D" : "#8083a3"}>
+                      Product Hunt
+                    </Text>
+                    <Text variant={"LIGHT"}>
+                      Get new products notifications right on your dashboard
+                    </Text>
+                  </Grid>
+                </Grid>
+                <Switch onChange={value => setSwitchSix(value)} />
+              </IntegrationsSwich>
+              <IntegrationsSwich container>
+                <Grid container width={"auto"} alignItems={"center"} gap={"25px"}>
+                  <IntegrationsImg src={Gdocs} alt='Intercom' />
+                  <Grid>
+                    <Text variant={"BOLD"} color={switchSeven === true ? "#1A1C1D" : "#8083a3"}>
+                      Google Docs
+                    </Text>
+                    <Text variant={"LIGHT"}>Connect all your documents in one place</Text>
+                  </Grid>
+                </Grid>
+                <Switch onChange={value => setSwitchSeven(value)} />
+              </IntegrationsSwich>
+            </Grid>
+          </IntegrationsGrid>
         )}
       </SelectCategory>
     </Wrapper>
