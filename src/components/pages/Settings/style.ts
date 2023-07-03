@@ -1,5 +1,6 @@
 import { Button, Grid } from "@mui/material";
 import styled from "styled-components";
+import { Progress } from "@ant-design/charts";
 
 type CategoryProps = {
   $display?: string
@@ -163,4 +164,87 @@ export const UserStatus = styled(Grid)<CategoryProps>`
   width: 95px;
   height: 45px;
   border-radius: 8px;
+`;
+
+export const ReportsGrid = styled(Grid)`
+  height: auto;
+  gap: 30px;
+`;
+
+export const CallsSstatisticsGrid = styled(Grid)`
+  border-radius: 10px;
+  border: 1px solid #eceef5;
+`;
+
+export const CallsSstatisticsBox = styled(Grid)`
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 25px;
+  height: 80px;
+`;
+
+export const ProgressCalls = styled(Progress)`
+  canvas {
+    border-radius: 20px;
+  }
+`;
+export const TopUsers = styled(Grid)`
+  height: 280px;
+  padding: 22px;
+  gap: 20px;
+  border-radius: 10px;
+  border: 1px solid #eceef5;
+`;
+
+export const TinyColumnImg = styled.img`
+  width: 25px;
+  height: 25px;
+`;
+
+export const TopUsersGrid = styled(Grid)`
+  width: auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+`;
+
+export const MostActiveUsers = styled(Grid)`
+  padding: 22px;
+  height: 280px;
+  gap: 20px;
+  border-radius: 10px;
+  border: 1px solid #eceef5;
+  position: relative;
+`;
+
+export const MostActiveUsersGrid = styled(Grid)`
+  width: auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+`;
+
+export const MostActiveUsersImg = styled.img`
+  width: 25px;
+  transform: rotate(270deg);
+  height: 25px;
+`;
+
+export const MostActiveUsersBox = styled(Grid)`
+  transform: rotate(90deg);
+  width: 150px;
+  height: 400px;
+  justify-content: space-between;
+  position: absolute;
+  top: -35px;
+  left: 132px;
+`;
+
+export const UsageStatistics = styled(Grid)`
+  padding: 22px;
+  height: 595px;
+  gap: 20px;
+  border-radius: 10px;
+  border: 1px solid #eceef5;
+  flex-direction: column;
 `;
