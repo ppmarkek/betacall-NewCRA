@@ -153,3 +153,33 @@ export const MenuLink = styled(Link)`
   text-decoration: none;
   color: #222526;
 `;
+
+export const ScheduleButtons = styled(Button)`
+  all: unset;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #eceef5;
+  &:hover {
+    background-color: #eceef5;
+  }
+`;
+
+export const ScheduleButtonsGrid = styled(Grid)`
+  position: relative;
+  width: 110px;
+  height: 42px;
+  z-index: 2;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 10px;
+`;
+
+export const ScheduleButtonsBorder = styled(Grid)`
+  height: 24px;
+  border: 1px solid #eceef5;
+`;
