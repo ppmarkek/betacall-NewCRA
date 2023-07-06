@@ -7,8 +7,8 @@ enum Variant {
 
 type ButtonProps = {
   variant: "FilledActive" | "FilledRestingLight" | Variant
-  children: any
-  width: string
+  children?: any
+  width?: string
 }
 
 const Button = ({ variant, children, width }: ButtonProps) => {

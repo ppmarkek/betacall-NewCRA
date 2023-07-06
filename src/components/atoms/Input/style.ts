@@ -43,8 +43,10 @@ export const StyledImg = styled.img<InputStyleProps>`
 `;
 
 export const SearchGrid = styled(Grid)`
-  position: relative;
+  position: absolute;
   width: 570px;
+  z-index: 3;
+  right: 0;
 `;
 
 export const SearchButton = styled(Button)`

@@ -13,6 +13,9 @@ import {
   StyledLink,
   LogoLink,
   MenuLink,
+  ScheduleButtons,
+  ScheduleButtonsGrid,
+  ScheduleButtonsBorder,
 } from "./style";
 import Logo from "../../../assets/Icon/Logo.svg";
 import { useLocation } from "react-router-dom";
@@ -37,12 +40,33 @@ import Text from "../../atoms/Text/Text";
 import { MouseEvent, useState } from "react";
 import Input from "../../atoms/Input/Input";
 import Betacall from "../../../assets/Icon/betacall.svg";
+import ArrowDown from "../../../assets/ScheduleIcon/ArrowDown.svg";
+import ArrowTop from "../../../assets/ScheduleIcon/ArrowTop.svg";
+import CalendarIcon from "../../../assets/ScheduleIcon/CalendarIcon.svg";
 
 const Navigation = () => {
   const location = useLocation();
   const [checkClass, setCheckClass] = useState("NotActive");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [checked, setChecked] = useState(false);
+  const getDateFunction = () => {
+    const month = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const date = new Date();
+    return month[date.getMonth()] + " " + date.getFullYear();
+  };
 
   const ChangeClass = () => {
     return checkClass === "Active" ? setCheckClass("NotActive") : setCheckClass("Active");
@@ -116,22 +140,47 @@ const Navigation = () => {
   return (
     <Wrapper container>
       <TopNavigation container xs={12}>
-        <Grid container xs={6} gap={"15px"} alignItems={"center"}>
-          <ChangeButton onClick={() => handleSlider()}>
-            <NovigButton className={checkClass} onClick={() => ChangeClass()}>
-              <BorderGrid container>
-                <label id={"Top"}></label>
-                <label id={"Middle"}></label>
-                <label id={"Bottom"}></label>
-              </BorderGrid>
-            </NovigButton>
-          </ChangeButton>
-          <Text variant={"H3"}>
-            {location.pathname.replace("/", "").replace(/([a-zA-Z])([A-Z])([a-z])/g, "$1 $2$3")}
-          </Text>
+        <Grid container xs={6}>
+          <Grid container xs={6} gap={"15px"} alignItems={"center"}>
+            <ChangeButton onClick={() => handleSlider()}>
+              <NovigButton className={checkClass} onClick={() => ChangeClass()}>
+                <BorderGrid container>
+                  <label id={"Top"}></label>
+                  <label id={"Middle"}></label>
+                  <label id={"Bottom"}></label>
+                </BorderGrid>
+              </NovigButton>
+            </ChangeButton>
+            <Text variant={"H3"}>
+              {location.pathname.replace("/", "").replace(/([a-zA-Z])([A-Z])([a-z])/g, "$1 $2$3")}
+            </Text>
+          </Grid>
+          {location.pathname === "/Schedule" && (
+            <Grid container xs={6} gap={"15px"} alignItems={"center"}>
+              <ScheduleButtons>
+                <img src={CalendarIcon} alt='Arrow Down' />
+              </ScheduleButtons>
+              <Text variant={"H3"}>{getDateFunction()}</Text>
+            </Grid>
+          )}
         </Grid>
-        <Grid container xs={6} gap={"10px"} justifyContent={"flex-end"}>
-          <Input variant={"Search"} text={"Search"} />
+        <Grid container xs={6} gap={"10px"} justifyContent={"flex-end"} position={"relative"}>
+          {location.pathname === "/Schedule" && (
+            <ScheduleButtonsGrid container>
+              <Grid container gap={"10px"}>
+                <ScheduleButtons>
+                  <img src={ArrowTop} alt='Arrow Down' />
+                </ScheduleButtons>
+                <ScheduleButtons>
+                  <img src={ArrowDown} alt='Arrow Down' />
+                </ScheduleButtons>
+              </Grid>
+              <ScheduleButtonsBorder />
+            </ScheduleButtonsGrid>
+          )}
+          <Grid position={"relative"} width={"40px"} height={"40px"}>
+            <Input variant={"Search"} text={"Search"} />
+          </Grid>
           <AvatarButton onClick={handleClick}>
             <img src={Avatar} alt='avatar' />
           </AvatarButton>
@@ -163,7 +212,7 @@ const Navigation = () => {
                   height: 10,
                   bgcolor: "background.paper",
                   transform: "translateY(-50%) rotate(45deg)",
-                  zIndex: 0,
+                  zIndex: 3,
                 },
               },
             }}

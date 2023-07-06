@@ -9,12 +9,13 @@ import Step3 from "./components/pages/SignUp/Step3/Step3";
 import Navigation from "./components/templates/Navigation/Navigation";
 import ProfileSettings from "./components/pages/ProfileSettings/ProfileSettings";
 import Settings from "./components/pages/Settings/Settings";
+import Schedule from "./components/pages/Schedule/Schedule";
 
 function App() {
   const LoginReg = ["/Login", "/Recover", "/Step1", "/Step2", "/Step3"];
   const location = useLocation();
-  LoginReg.some(x => x === location.pathname) === true
-  && ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "0px");
+  LoginReg.some(x => x === location.pathname) === true &&
+    ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "0px");
   return (
     <div className='App'>
       {LoginReg.some(x => x === location.pathname) === true ? (
@@ -30,6 +31,7 @@ function App() {
         <Route path='/Login' element={<Login />} />
         <Route path='/ProfileSettings' element={<ProfileSettings />} />
         <Route path='/Settings' element={<Settings />} />
+        <Route path='/Schedule' element={<Schedule />} />
       </Routes>
     </div>
   );
