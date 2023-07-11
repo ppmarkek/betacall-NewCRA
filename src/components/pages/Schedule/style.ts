@@ -1,4 +1,5 @@
 import { Button, Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 type CategoryProps = {
@@ -66,4 +67,8 @@ export const NoEventsFound = styled(Grid)`
   align-items: center;
   height: 100%;
   flex-direction: column;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
 `;

@@ -10,6 +10,7 @@ import Navigation from "./components/templates/Navigation/Navigation";
 import ProfileSettings from "./components/pages/ProfileSettings/ProfileSettings";
 import Settings from "./components/pages/Settings/Settings";
 import Schedule from "./components/pages/Schedule/Schedule";
+import AddNewEvent from "./components/pages/AddNewEvent/AddNewEvent";
 
 function App() {
   const LoginReg = ["/Login", "/Recover", "/Step1", "/Step2", "/Step3"];
@@ -32,6 +33,7 @@ function App() {
         <Route path='/ProfileSettings' element={<ProfileSettings />} />
         <Route path='/Settings' element={<Settings />} />
         <Route path='/Schedule' element={<Schedule />} />
+        <Route path='/AddNewEvent' element={<AddNewEvent />} />
       </Routes>
     </div>
   );

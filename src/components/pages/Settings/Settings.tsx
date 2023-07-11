@@ -289,8 +289,8 @@ const Settings = () => {
   ];
 
   return (
-    <Wrapper container xs={12}>
-      <Profile xs={3}>
+    <Wrapper container item xs={12}>
+      <Profile item xs={3}>
         <Avatar container>
           <StyledAvatarImg src={AvatarImg} alt='Avatar' />
           <Grid textAlign={"center"}>
@@ -322,7 +322,7 @@ const Settings = () => {
           ))}
         </Grid>
       </Profile>
-      <SelectCategory container xs={9}>
+      <SelectCategory container item xs={9}>
         {category === "None" && (
           <Grid
             container
@@ -405,10 +405,10 @@ const Settings = () => {
         {category === "Teams & Users" && (
           <TeamsAndUsers container>
             <Grid container justifyContent={"space-between"}>
-              <Grid xs={6}>
+              <Grid item xs={6}>
                 <Text variant={"H4"}>Teams & Users</Text>
               </Grid>
-              <SelectStatus container xs={6}>
+              <SelectStatus container item xs={6}>
                 <Status
                   container
                   onClick={() => setStatus("All")}
@@ -451,6 +451,7 @@ const Settings = () => {
                       </Grid>
                       <Grid
                         container
+                        item
                         xs={6}
                         gap={"40px"}
                         justifyContent={"flex-end"}
@@ -492,7 +493,7 @@ const Settings = () => {
                     (x: any) =>
                       x.Categoty === status && (
                         <UsersGrid container key={x.Categoty}>
-                          <Grid container alignItems={"center"} gap={"20px"} xs={6}>
+                          <Grid container alignItems={"center"} gap={"20px"} item xs={6}>
                             <Grid position={"relative"} height={"40px"} width={"40px"}>
                               <img src={x.Icon} alt='Avatar' />
                               <ProfileStatus />
@@ -545,7 +546,7 @@ const Settings = () => {
         {category === "Reports" && (
           <ReportsGrid container>
             <Grid container justifyContent={"space-between"}>
-              <Grid xs={6}>
+              <Grid item xs={6}>
                 <Text variant={"H4"}>Reports</Text>
               </Grid>
               <Grid
@@ -564,58 +565,81 @@ const Settings = () => {
               </Grid>
             </Grid>
             <CallsSstatisticsGrid container>
-              <CallsSstatisticsBox container xs={4}>
-                <Grid container xs={8} gap={"5px"} flexDirection={"column"}>
+              <CallsSstatisticsBox container item xs={4}>
+                <Grid container item xs={8} gap={"5px"} flexDirection={"column"}>
                   <Text variant={"H5"}>Call minutes</Text>
                   <Text variant={"REGULAR"} small>
                     Total time spent
                   </Text>
                 </Grid>
-                <Grid container xs={4} gap={"5px"} flexDirection={"column"} alignItems={"flex-end"}>
+                <Grid
+                  container
+                  item
+                  xs={4}
+                  gap={"5px"}
+                  flexDirection={"column"}
+                  alignItems={"flex-end"}
+                >
                   <Text variant={"H4"}>10.345</Text>
                   <ProgressCalls {...configCallsMinutes} />
                 </Grid>
               </CallsSstatisticsBox>
               <CallsSstatisticsBox
                 container
+                item
                 xs={4}
                 borderLeft={"1px solid #ECEEF5"}
                 borderRight={"1px solid #ECEEF5"}
               >
-                <Grid container xs={8} gap={"5px"} flexDirection={"column"}>
+                <Grid container item xs={8} gap={"5px"} flexDirection={"column"}>
                   <Text variant={"H5"}>Conference calls</Text>
                   <Text variant={"REGULAR"} small>
                     Total time spent
                   </Text>
                 </Grid>
-                <Grid container xs={4} gap={"5px"} flexDirection={"column"} alignItems={"flex-end"}>
+                <Grid
+                  container
+                  item
+                  xs={4}
+                  gap={"5px"}
+                  flexDirection={"column"}
+                  alignItems={"flex-end"}
+                >
                   <Text variant={"H4"}>31.500</Text>
                   <ProgressCalls {...configConferenceCalls} />
                 </Grid>
               </CallsSstatisticsBox>
-              <CallsSstatisticsBox container xs={4}>
-                <Grid container xs={8} gap={"5px"} flexDirection={"column"}>
+              <CallsSstatisticsBox container item xs={4}>
+                <Grid container item xs={8} gap={"5px"} flexDirection={"column"}>
                   <Text variant={"H5"}>Call members</Text>
                   <Text variant={"REGULAR"} small>
                     Total call participants
                   </Text>
                 </Grid>
-                <Grid container xs={4} gap={"5px"} flexDirection={"column"} alignItems={"flex-end"}>
+                <Grid
+                  container
+                  item
+                  xs={4}
+                  gap={"5px"}
+                  flexDirection={"column"}
+                  alignItems={"flex-end"}
+                >
                   <Text variant={"H4"}>248</Text>
                   <ProgressCalls {...configCallMembers} />
                 </Grid>
               </CallsSstatisticsBox>
             </CallsSstatisticsGrid>
 
-            <Grid container gap={"35px"} xs={5.8}>
-              <TopUsers container xs={12}>
+            <Grid container gap={"35px"} item xs={5.8}>
+              <TopUsers container item xs={12}>
                 <Grid container justifyContent={"space-between"} height={"50px"}>
-                  <Grid xs={6}>
+                  <Grid item xs={6}>
                     <Text variant={"H5"}>Top users</Text>
                     <Text variant={"LIGHT"}>Week to week performance</Text>
                   </Grid>
                   <Grid
                     container
+                    item
                     xs={6}
                     alignItems={"center"}
                     gap={"10px"}
@@ -638,14 +662,15 @@ const Settings = () => {
                   ))}
                 </Grid>
               </TopUsers>
-              <MostActiveUsers container xs={12}>
+              <MostActiveUsers container item xs={12}>
                 <Grid container justifyContent={"space-between"} height={"50px"}>
-                  <Grid xs={6}>
+                  <Grid item xs={6}>
                     <Text variant={"H5"}>Most active users</Text>
                     <Text variant={"LIGHT"}>Week to week performance</Text>
                   </Grid>
                   <Grid
                     container
+                    item
                     xs={6}
                     alignItems={"center"}
                     gap={"10px"}
@@ -669,7 +694,7 @@ const Settings = () => {
                 </MostActiveUsersBox>
               </MostActiveUsers>
             </Grid>
-            <UsageStatistics container xs={5.9}>
+            <UsageStatistics container item xs={5.9}>
               <Text variant={"H5"}>Usage statistics</Text>
               <Grid>
                 <Line data={MultiLink} {...UsageStatisticsConfig} />

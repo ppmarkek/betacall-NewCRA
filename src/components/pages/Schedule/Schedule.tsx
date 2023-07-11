@@ -8,6 +8,7 @@ import {
   NewGroup,
   NoEventsFound,
   SelectCategoryButton,
+  StyledLink,
   Wrapper,
 } from "./style";
 import Text from "../../atoms/Text/Text";
@@ -22,8 +23,8 @@ const Schedule = () => {
   const EventsArray = [];
 
   return (
-    <Wrapper container xs={12}>
-      <Events xs={3} container>
+    <Wrapper container item xs={12}>
+      <Events item xs={3} container>
         <Grid container height={"110px"}>
           <Grid container padding={"20px 0"}>
             <SelectCategoryButton
@@ -56,7 +57,7 @@ const Schedule = () => {
           </SelectCategoryButton>
         </NewGroup>
       </Events>
-      <EventCalendar container xs={9}>
+      <EventCalendar container item xs={9}>
         {category === "All Events" && EventsArray.length === 0 && (
           <NoEventsFound container>
             <img src={NoEventsFoundImg} alt='No Events Found Image' />
@@ -66,9 +67,11 @@ const Schedule = () => {
                 Try to create new calendar events or sync your calendar service
               </Text>
             </Grid>
-            <Button variant={"FilledActive"} width={"200px"}>
-              Add New Event
-            </Button>
+            <StyledLink to={"/AddNewEvent"}>
+              <Button variant={"FilledActive"} width={"200px"}>
+                Add New Event
+              </Button>
+            </StyledLink>
           </NoEventsFound>
         )}
       </EventCalendar>
