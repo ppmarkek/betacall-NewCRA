@@ -110,8 +110,8 @@ const ProfileSettings = () => {
   ];
 
   return (
-    <Wrapper container xs={12}>
-      <Profile xs={3}>
+    <Wrapper container item xs={12}>
+      <Profile item xs={3}>
         <Avatar container>
           <StyledAvatarImg src={AvatarImg} alt='Avatar' />
           <Grid textAlign={"center"}>
@@ -143,7 +143,7 @@ const ProfileSettings = () => {
           ))}
         </Grid>
       </Profile>
-      <SelectCategory container xs={9}>
+      <SelectCategory container item xs={9}>
         {category === "None" && (
           <Grid
             container
@@ -456,7 +456,7 @@ const ProfileSettings = () => {
           </Grid>
         )}
         {category !== "None" && (
-          <UpdateSettings container justifyContent={"space-between"}>
+          <UpdateSettings container>
             <Grid container gap={"10px"} width={"auto"}>
               <Button variant={"FilledActive"} width={"170px"}>
                 Update Settings

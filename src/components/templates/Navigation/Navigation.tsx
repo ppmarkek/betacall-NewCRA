@@ -104,7 +104,10 @@ const Navigation = () => {
       Text: "Screenshare",
     },
     {
-      Icon: location.pathname === "/Schedule" ? ScheduleActive : Schedule,
+      Icon:
+        location.pathname === "/Schedule" || location.pathname === "/AddNewEvent"
+          ? ScheduleActive
+          : Schedule,
       Link: "/Schedule",
       Text: "Schedule",
     },
@@ -139,9 +142,9 @@ const Navigation = () => {
 
   return (
     <Wrapper container>
-      <TopNavigation container xs={12}>
-        <Grid container xs={6}>
-          <Grid container xs={6} gap={"15px"} alignItems={"center"}>
+      <TopNavigation container item xs={12}>
+        <Grid container item xs={6}>
+          <Grid container item xs={6} gap={"15px"} alignItems={"center"}>
             <ChangeButton onClick={() => handleSlider()}>
               <NovigButton className={checkClass} onClick={() => ChangeClass()}>
                 <BorderGrid container>
@@ -156,7 +159,7 @@ const Navigation = () => {
             </Text>
           </Grid>
           {location.pathname === "/Schedule" && (
-            <Grid container xs={6} gap={"15px"} alignItems={"center"}>
+            <Grid container item xs={6} gap={"15px"} alignItems={"center"}>
               <ScheduleButtons>
                 <img src={CalendarIcon} alt='Arrow Down' />
               </ScheduleButtons>
@@ -164,7 +167,7 @@ const Navigation = () => {
             </Grid>
           )}
         </Grid>
-        <Grid container xs={6} gap={"10px"} justifyContent={"flex-end"} position={"relative"}>
+        <Grid container item xs={6} gap={"10px"} justifyContent={"flex-end"} position={"relative"}>
           {location.pathname === "/Schedule" && (
             <ScheduleButtonsGrid container>
               <Grid container gap={"10px"}>
