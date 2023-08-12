@@ -1,15 +1,28 @@
 import { Grid } from "@mui/material";
 import { useState } from "react";
 import {
+  AboutEventGrid,
+  AddNewEventByDate,
+  AddNewEventByDateGrid,
   Border,
   CategoryImg,
+  DateGrid,
   EventCalendar,
+  EventGrid,
   Events,
+  EventTime,
+  GroupEventGrid,
   NewGroup,
   NoEventsFound,
   SelectCategoryButton,
   StyledLink,
+  TimeImg,
+  TimeImgGrid,
   Wrapper,
+  EditEventGrid,
+  Avatar,
+  EditButton,
+  EventsLength,
 } from "./style";
 import Text from "../../atoms/Text/Text";
 import AllEvents from "../../../assets/ScheduleIcon/AllEvents.svg";
@@ -17,10 +30,83 @@ import AllEventsActive from "../../../assets/ScheduleIcon/AllEventsActive.svg";
 import AddNewGroup from "../../../assets/ScheduleIcon/AddNewGroup.svg";
 import NoEventsFoundImg from "../../../assets/ScheduleIcon/NoEventsFoundImg.svg";
 import Button from "../../atoms/Button/Button";
+import { Event } from "./Data";
+import MembersAvatar from "../../../assets/Image/Avatar.svg";
+import TimeIcon from "../../../assets/ScheduleIcon/TimeIcon.svg";
+import EditIcon from "../../../assets/ScheduleIcon/EditIcon.svg";
 
 const Schedule = () => {
+  interface UsersInterface {
+    AllDate: any
+    Events: any
+  }
+
+  const startDate = new Date();
+  const endDate = new Date(`${new Date().getFullYear() + 1}-01-01`);
+  const datesArray: UsersInterface[] = [];
+  for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+    datesArray.push({ AllDate: new Date(date), Events: [] });
+  }
+  Event.length !== 0 &&
+    Event.map(x =>
+      datesArray.some(
+        y =>
+          x.Date.getFullYear() + "/" + (x.Date.getMonth() + 1) + "/" + x.Date.getDate() ===
+            y.AllDate.getFullYear() +
+              "/" +
+              (y.AllDate.getMonth() + 1) +
+              "/" +
+              y.AllDate.getDate() && y.Events.push(x),
+      ),
+    );
+
+  const Days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const Month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   const [category, setCategory] = useState("All Events");
-  const EventsArray = [];
+
+  const EventColor = (variant: string) => {
+    switch (variant) {
+      case "Business":
+        return "#6B59CC";
+      case "Personal":
+        return "#28C345";
+      case "Cloud":
+        return "#F6933E";
+      case "Customers":
+        return "#FF808B";
+      default:
+        return "#6B59CC";
+    }
+  };
+
+  const EventBackground = (variant: string) => {
+    switch (variant) {
+      case "Business":
+        return "rgba(107, 89, 204, 0.1)";
+      case "Personal":
+        return "rgba(40, 195, 69, 0.1)";
+      case "Cloud":
+        return "rgba(246, 147, 62, 0.1)";
+      case "Customers":
+        return "rgba(255, 128, 139, 0.1)";
+      default:
+        return "rgba(107, 89, 204, 0.1)";
+    }
+  };
 
   return (
     <Wrapper container item xs={12}>
@@ -36,10 +122,13 @@ const Schedule = () => {
               ) : (
                 <CategoryImg src={AllEvents} alt='Icon' />
               )}
-              <Grid>
-                <Text variant={"BOLD"} color={category === "All Events" ? "#6B59CC" : "#1A1C1D"}>
-                  All Events
-                </Text>
+              <Grid container>
+                <Grid container justifyContent={"space-between"}>
+                  <Text variant={"BOLD"} color={category === "All Events" ? "#6B59CC" : "#1A1C1D"}>
+                    All Events
+                  </Text>
+                  {Event.length > 1 && <EventsLength container>{Event.length}</EventsLength>}
+                </Grid>
                 <Text variant={"LIGHT"}>All messages unified</Text>
               </Grid>
             </SelectCategoryButton>
@@ -58,7 +147,7 @@ const Schedule = () => {
         </NewGroup>
       </Events>
       <EventCalendar container item xs={9}>
-        {category === "All Events" && EventsArray.length === 0 && (
+        {category === "All Events" && Event.length === 0 && (
           <NoEventsFound container>
             <img src={NoEventsFoundImg} alt='No Events Found Image' />
             <Grid container gap={"10px"} flexDirection={"column"} alignItems={"center"}>
@@ -73,6 +162,54 @@ const Schedule = () => {
               </Button>
             </StyledLink>
           </NoEventsFound>
+        )}
+        {category === "All Events" && Event.length !== 0 && (
+          <Grid container gap={"10px"}>
+            {datesArray.map((x: any) => (
+              <>
+                <DateGrid container key={x.AllDate}>
+                  <Text variant={"BOLD"}>
+                    {Days[x.AllDate.getDay()]}, {Month[x.AllDate.getMonth()]} {x.AllDate.getDate()},{" "}
+                    {x.AllDate.getFullYear()}
+                  </Text>
+                  <AddNewEventByDateGrid container>
+                    <AddNewEventByDate src={AddNewGroup} alt='Add New Event By Date' />
+                  </AddNewEventByDateGrid>
+                </DateGrid>
+                <EventGrid container>
+                  <EventTime container item xs={3}>
+                    <TimeImgGrid container>
+                      <TimeImg src={TimeIcon} alt='Time Icon' />
+                    </TimeImgGrid>
+                    <Text variant={"BOLD"}>
+                      {x.Events.TimeFrom.getHours()}:{x.Events.TimeFrom.getMinutes()}
+                    </Text>
+                    <Text variant={"LIGHT"}>
+                      {x.Events.TimeTo.getHours()}:{x.Events.TimeTo.getMinutes()}
+                    </Text>
+                  </EventTime>
+                  <AboutEventGrid container item xs={6}>
+                    <GroupEventGrid
+                      container
+                      $color={EventColor(x.Events.Group)}
+                      $background={EventBackground(x.Events.Group)}
+                    >
+                      {x.Events.Group}
+                    </GroupEventGrid>
+                    <Text variant={"BOLD"} color={"#8083A3"} small>
+                      {x.Events.Note}
+                    </Text>
+                  </AboutEventGrid>
+                  <EditEventGrid container item xs={3}>
+                    <Avatar src={MembersAvatar} alt='Avatar' />
+                    <EditButton>
+                      <img src={EditIcon} alt='Edit Button ' />
+                    </EditButton>
+                  </EditEventGrid>
+                </EventGrid>
+              </>
+            ))}
+          </Grid>
         )}
       </EventCalendar>
     </Wrapper>

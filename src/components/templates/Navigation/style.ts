@@ -27,11 +27,11 @@ export const LeftNavigation = styled(Grid)`
 `;
 
 export const ButtonsGrid = styled(Grid)`
-  gap: 30px;
+  gap: 2%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 95%;
+  height: 90%;
   width: auto;
 `;
 

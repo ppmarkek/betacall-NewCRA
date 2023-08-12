@@ -16,6 +16,7 @@ import {
   SelectCategoryButton,
   StyledAvatarImg,
   StyledDatePicker,
+  StyledLink,
   StyledTimePicker,
   TimePickerGrid,
   UserGrid,
@@ -38,18 +39,22 @@ import MembersAvatar from "../../../assets/AddNewEventIcon/MembersAvatar.svg";
 import Delete from "../../../assets/AddNewEventIcon/Del.svg";
 import Input from "../../atoms/Input/Input";
 import Button from "../../atoms/Button/Button";
+import { Event } from "../Schedule/Data";
 
 const AddNewEvent = () => {
+  const [note, setNote] = useState("");
+  const [timeTo, setTimeTo] = useState("");
+  const [timeFrom, setTimeFrom] = useState("");
+  const [date, setDate] = useState("");
   const [category, setCategory] = useState("General information");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [allMembersUsers, setAllMembersUsers] = useState([
-    {
-      Name: "Blake Burton",
-      Icon: MembersAvatar,
-    },
-  ]);
+  interface UsersInterface {
+    Name: string
+    Icon: string
+  }
+  const [allMembersUsers, setAllMembersUsers] = useState<UsersInterface[]>([]);
   const [addUsersArray, setAddUsersArray] = useState([
     {
       Name: "Beatrice Hill",
@@ -166,15 +171,16 @@ const AddNewEvent = () => {
               <Grid container item xs={5} flexDirection={"column"}>
                 <Text variant={"LIGHT"}>Date</Text>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <StyledDatePicker />
+                  <StyledDatePicker onChange={(x: any) => setDate(x.$d)} />
                 </LocalizationProvider>
               </Grid>
               <Grid container item xs={5} justifyContent={"space-between"}>
-                <TimePickerGrid container item xs={5}>
+                <TimePickerGrid container item xs={5.5}>
                   <Text variant={"LIGHT"}>Time from</Text>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={["TimePicker"]}>
                       <StyledTimePicker
+                        onChange={(x: any) => setTimeFrom(x.$d)}
                         viewRenderers={{
                           hours: renderTimeViewClock,
                           minutes: renderTimeViewClock,
@@ -184,11 +190,12 @@ const AddNewEvent = () => {
                     </DemoContainer>
                   </LocalizationProvider>
                 </TimePickerGrid>
-                <TimePickerGrid container item xs={5}>
+                <TimePickerGrid container item xs={5.5}>
                   <Text variant={"LIGHT"}>Time to</Text>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={["TimePicker"]}>
                       <StyledTimePicker
+                        onChange={(x: any) => setTimeTo(x.$d)}
                         viewRenderers={{
                           hours: renderTimeViewClock,
                           minutes: renderTimeViewClock,
@@ -205,7 +212,7 @@ const AddNewEvent = () => {
                 <Text variant={"LIGHT"}>Members</Text>
               </Grid>
               <Grid container gap={"10px"} height={"150px"}>
-                {allMembersUsers.map(x => (
+                {allMembersUsers.map((x: any) => (
                   <UserGrid container key={x.Name}>
                     <MembersImg src={x.Icon} alt={"Avatar"} />
                     <Text variant={"BOLD"}>{x.Name}</Text>
@@ -252,6 +259,7 @@ const AddNewEvent = () => {
                 IconType={"Email"}
                 title={"Note"}
                 text={"Start typing …"}
+                onChange={(value: string) => setNote(value)}
               />
             </Note>
           </GeneralInformationGrid>
@@ -259,13 +267,29 @@ const AddNewEvent = () => {
         {category !== "Notifications" && (
           <Grid container justifyContent={"space-between"}>
             <Grid container gap={"10px"} width={"auto"}>
-              <Button variant={"FilledActive"} width={"220px"}>
+              <Button
+                onClick={x =>
+                  x === true &&
+                  Event.push({
+                    Date: date,
+                    TimeFrom: timeFrom,
+                    TimeTo: timeTo,
+                    Members: allMembersUsers,
+                    Note: note,
+                    Group: "Business",
+                  })
+                }
+                variant={"FilledActive"}
+                width={"220px"}
+              >
                 Create New Event
               </Button>
             </Grid>
-            <Button variant={"FilledRestingLight"} width={"125px"}>
-              Cancel
-            </Button>
+            <StyledLink to={"/Schedule"}>
+              <Button variant={"FilledRestingLight"} width={"125px"}>
+                Cancel
+              </Button>
+            </StyledLink>
           </Grid>
         )}
       </SelectCategory>

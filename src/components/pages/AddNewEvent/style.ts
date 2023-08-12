@@ -2,6 +2,7 @@ import { Button, Grid } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import styled from "styled-components";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { Link } from "react-router-dom";
 
 type CategoryProps = {
   $background?: string
@@ -146,7 +147,7 @@ export const Box = styled(Grid)`
 `;
 
 export const UserGrid = styled(Grid)`
-  width: 240px;
+  width: 24%;
   height: 55px;
   padding: 10px;
   justify-content: space-between;
@@ -188,4 +189,8 @@ export const DeleteImg = styled.img`
 export const Note = styled(Grid)`
   height: 90px;
   gap: 10px;
+`;
+
+export const StyledLink = styled(Link)`
+  all: unset;
 `;

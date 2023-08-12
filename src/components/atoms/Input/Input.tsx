@@ -1,5 +1,5 @@
 import Text from "../Text/Text";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import {
   ConfirmPassword,
   InputGrid,
@@ -60,6 +60,7 @@ type Value = {
   inputValue?: string
   SelectArray?: Array<any>
   SelectDefaultValue?: string
+  onChange?: (value: string) => void
 }
 
 const Input = ({
@@ -73,6 +74,7 @@ const Input = ({
   inputValue,
   SelectArray,
   SelectDefaultValue,
+  onChange,
 }: Value) => {
   const [Icon, setIcon] = useState(SilverPass);
   const [Confirm, setConfirm] = useState(CheckSilver);
@@ -144,7 +146,10 @@ const Input = ({
     }
   };
 
-  const CheackIcon = (x: string) => {
+  const CheackIcon = (x: string, event: ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(event.target.value);
+    }
     if (IconType === "Email") {
       return x === "" ? setIcon(EmailSilver) : setIcon(Email);
     }
@@ -213,7 +218,7 @@ const Input = ({
             $width={width}
             $color={color}
             defaultValue={inputValue}
-            onChange={x => CheackIcon(x.target.value)}
+            onChange={(x: any) => CheackIcon(x.target.value, x)}
           />
           {IconType !== "" && <StyledImg src={Icon} alt='' />}
         </InputGrid>

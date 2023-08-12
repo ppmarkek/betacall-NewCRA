@@ -630,76 +630,78 @@ const Settings = () => {
               </CallsSstatisticsBox>
             </CallsSstatisticsGrid>
 
-            <Grid container gap={"35px"} item xs={5.8}>
-              <TopUsers container item xs={12}>
-                <Grid container justifyContent={"space-between"} height={"50px"}>
-                  <Grid item xs={6}>
-                    <Text variant={"H5"}>Top users</Text>
-                    <Text variant={"LIGHT"}>Week to week performance</Text>
+            <Grid container gap={"2.5%"}>
+              <Grid container gap={"35px"} item xs={5.8}>
+                <TopUsers container item xs={12}>
+                  <Grid container justifyContent={"space-between"} height={"50px"}>
+                    <Grid item xs={6}>
+                      <Text variant={"H5"}>Top users</Text>
+                      <Text variant={"LIGHT"}>Week to week performance</Text>
+                    </Grid>
+                    <Grid
+                      container
+                      item
+                      xs={6}
+                      alignItems={"center"}
+                      gap={"10px"}
+                      justifyContent={"flex-end"}
+                    >
+                      <img src={VideoCalls} alt='Icon Video Calls' />
+                      <Text variant={"BOLD"} color={"#8083A3"}>
+                        Video calls
+                      </Text>
+                    </Grid>
                   </Grid>
-                  <Grid
-                    container
-                    item
-                    xs={6}
-                    alignItems={"center"}
-                    gap={"10px"}
-                    justifyContent={"flex-end"}
-                  >
-                    <img src={VideoCalls} alt='Icon Video Calls' />
-                    <Text variant={"BOLD"} color={"#8083A3"}>
-                      Video calls
-                    </Text>
+                  <Grid container justifyContent={"space-between"}>
+                    {TopUsersBD.map(x => (
+                      <TopUsersGrid container key={x.Avatar}>
+                        <TinyColumn data={x.Value} {...TopUsersConfig} />
+                        <Link to={"/"}>
+                          <TinyColumnImg src={x.Avatar} alt='Avatar' />
+                        </Link>
+                      </TopUsersGrid>
+                    ))}
                   </Grid>
-                </Grid>
-                <Grid container justifyContent={"space-between"}>
-                  {TopUsersBD.map(x => (
-                    <TopUsersGrid container key={x.Avatar}>
-                      <TinyColumn data={x.Value} {...TopUsersConfig} />
-                      <Link to={"/"}>
-                        <TinyColumnImg src={x.Avatar} alt='Avatar' />
-                      </Link>
-                    </TopUsersGrid>
-                  ))}
-                </Grid>
-              </TopUsers>
-              <MostActiveUsers container item xs={12}>
-                <Grid container justifyContent={"space-between"} height={"50px"}>
-                  <Grid item xs={6}>
-                    <Text variant={"H5"}>Most active users</Text>
-                    <Text variant={"LIGHT"}>Week to week performance</Text>
+                </TopUsers>
+                <MostActiveUsers container item xs={12}>
+                  <Grid container justifyContent={"space-between"} height={"50px"}>
+                    <Grid item xs={6}>
+                      <Text variant={"H5"}>Most active users</Text>
+                      <Text variant={"LIGHT"}>Week to week performance</Text>
+                    </Grid>
+                    <Grid
+                      container
+                      item
+                      xs={6}
+                      alignItems={"center"}
+                      gap={"10px"}
+                      justifyContent={"flex-end"}
+                    >
+                      <img src={MessageIcon} alt='Icon Video Calls' />
+                      <Text variant={"BOLD"} color={"#8083A3"}>
+                        Video calls
+                      </Text>
+                    </Grid>
                   </Grid>
-                  <Grid
-                    container
-                    item
-                    xs={6}
-                    alignItems={"center"}
-                    gap={"10px"}
-                    justifyContent={"flex-end"}
-                  >
-                    <img src={MessageIcon} alt='Icon Video Calls' />
-                    <Text variant={"BOLD"} color={"#8083A3"}>
-                      Video calls
-                    </Text>
-                  </Grid>
-                </Grid>
-                <MostActiveUsersBox container>
-                  {MostActiveUsersBD.map(x => (
-                    <MostActiveUsersGrid container key={x.Avatar}>
-                      <TinyColumn data={x.Value} {...MostActiveUsersConfig} />
-                      <Link to={"/"}>
-                        <MostActiveUsersImg src={x.Avatar} alt='Avatar' />
-                      </Link>
-                    </MostActiveUsersGrid>
-                  ))}
-                </MostActiveUsersBox>
-              </MostActiveUsers>
-            </Grid>
-            <UsageStatistics container item xs={5.9}>
-              <Text variant={"H5"}>Usage statistics</Text>
-              <Grid>
-                <Line data={MultiLink} {...UsageStatisticsConfig} />
+                  <MostActiveUsersBox container>
+                    {MostActiveUsersBD.map(x => (
+                      <MostActiveUsersGrid container key={x.Avatar}>
+                        <TinyColumn data={x.Value} {...MostActiveUsersConfig} />
+                        <Link to={"/"}>
+                          <MostActiveUsersImg src={x.Avatar} alt='Avatar' />
+                        </Link>
+                      </MostActiveUsersGrid>
+                    ))}
+                  </MostActiveUsersBox>
+                </MostActiveUsers>
               </Grid>
-            </UsageStatistics>
+              <UsageStatistics container item xs={5.9}>
+                <Text variant={"H5"}>Usage statistics</Text>
+                <Grid>
+                  <Line data={MultiLink} {...UsageStatisticsConfig} />
+                </Grid>
+              </UsageStatistics>
+            </Grid>
           </ReportsGrid>
         )}
       </SelectCategory>
