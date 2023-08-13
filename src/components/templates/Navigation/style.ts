@@ -167,6 +167,9 @@ export const ScheduleButtons = styled(Button)`
   &:hover {
     background-color: #eceef5;
   }
+  span {
+    display: none;
+  }
 `;
 
 export const ScheduleButtonsGrid = styled(Grid)`

@@ -47,6 +47,7 @@ const Schedule = () => {
   for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
     datesArray.push({ AllDate: new Date(date), Events: [] });
   }
+
   Event.length !== 0 &&
     Event.map(x =>
       datesArray.some(
@@ -127,7 +128,7 @@ const Schedule = () => {
                   <Text variant={"BOLD"} color={category === "All Events" ? "#6B59CC" : "#1A1C1D"}>
                     All Events
                   </Text>
-                  {Event.length > 1 && <EventsLength container>{Event.length}</EventsLength>}
+                  {Event.length >= 1 && <EventsLength container>{Event.length}</EventsLength>}
                 </Grid>
                 <Text variant={"LIGHT"}>All messages unified</Text>
               </Grid>
@@ -137,12 +138,16 @@ const Schedule = () => {
         </Grid>
         <NewGroup container>
           <SelectCategoryButton>
-            <CategoryImg src={AddNewGroup} alt='Icon' />
-            <Grid>
-              <Text variant={"BOLD"} color={"#8083A3"}>
-                Type to add new group
-              </Text>
-            </Grid>
+            <StyledLink to={"/AddNewEvent"}>
+              <Grid container alignItems={"center"} gap={"22px"}>
+                <CategoryImg src={AddNewGroup} alt='Icon' />
+                <Grid>
+                  <Text variant={"BOLD"} color={"#8083A3"}>
+                    Add New Event
+                  </Text>
+                </Grid>
+              </Grid>
+            </StyledLink>
           </SelectCategoryButton>
         </NewGroup>
       </Events>
@@ -176,37 +181,39 @@ const Schedule = () => {
                     <AddNewEventByDate src={AddNewGroup} alt='Add New Event By Date' />
                   </AddNewEventByDateGrid>
                 </DateGrid>
-                <EventGrid container>
-                  <EventTime container item xs={3}>
-                    <TimeImgGrid container>
-                      <TimeImg src={TimeIcon} alt='Time Icon' />
-                    </TimeImgGrid>
-                    <Text variant={"BOLD"}>
-                      {x.Events.TimeFrom.getHours()}:{x.Events.TimeFrom.getMinutes()}
-                    </Text>
-                    <Text variant={"LIGHT"}>
-                      {x.Events.TimeTo.getHours()}:{x.Events.TimeTo.getMinutes()}
-                    </Text>
-                  </EventTime>
-                  <AboutEventGrid container item xs={6}>
-                    <GroupEventGrid
-                      container
-                      $color={EventColor(x.Events.Group)}
-                      $background={EventBackground(x.Events.Group)}
-                    >
-                      {x.Events.Group}
-                    </GroupEventGrid>
-                    <Text variant={"BOLD"} color={"#8083A3"} small>
-                      {x.Events.Note}
-                    </Text>
-                  </AboutEventGrid>
-                  <EditEventGrid container item xs={3}>
-                    <Avatar src={MembersAvatar} alt='Avatar' />
-                    <EditButton>
-                      <img src={EditIcon} alt='Edit Button ' />
-                    </EditButton>
-                  </EditEventGrid>
-                </EventGrid>
+                {x.Events.map((y: any) => (
+                  <EventGrid container key={y.Note}>
+                    <EventTime container item xs={3}>
+                      <TimeImgGrid container>
+                        <TimeImg src={TimeIcon} alt='Time Icon' />
+                      </TimeImgGrid>
+                      <Text variant={"BOLD"}>
+                        {y.TimeFrom.getHours()}:{y.TimeFrom.getMinutes()}
+                      </Text>
+                      <Text variant={"LIGHT"}>
+                        {y.TimeTo.getHours()}:{y.TimeTo.getMinutes()}
+                      </Text>
+                    </EventTime>
+                    <AboutEventGrid container item xs={6}>
+                      <GroupEventGrid
+                        container
+                        $color={EventColor(y.Group)}
+                        $background={EventBackground(y.Group)}
+                      >
+                        {y.Group}
+                      </GroupEventGrid>
+                      <Text variant={"BOLD"} color={"#8083A3"} small>
+                        {y.Note}
+                      </Text>
+                    </AboutEventGrid>
+                    <EditEventGrid container item xs={3}>
+                      <Avatar src={MembersAvatar} alt='Avatar' />
+                      <EditButton>
+                        <img src={EditIcon} alt='Edit Button ' />
+                      </EditButton>
+                    </EditEventGrid>
+                  </EventGrid>
+                ))}
               </>
             ))}
           </Grid>
