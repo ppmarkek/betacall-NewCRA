@@ -40,6 +40,10 @@ import BusinessIcon from "../../../assets/ScheduleIcon/Business.svg";
 import PersonalIcon from "../../../assets/ScheduleIcon/Personal.svg";
 import CloudIcon from "../../../assets/ScheduleIcon/Cloud.svg";
 import CustomersIcon from "../../../assets/ScheduleIcon/Customers.svg";
+import ActiveBusinessIcon from "../../../assets/ScheduleIcon/ActiveBusiness.svg";
+import ActivePersonalIcon from "../../../assets/ScheduleIcon/ActivePersonal.svg";
+import ActiveCloudIcon from "../../../assets/ScheduleIcon/ActiveCloud.svg";
+import ActiveCustomersIcon from "../../../assets/ScheduleIcon/ActiveCustomers.svg";
 
 const Schedule = () => {
   interface UsersInterface {
@@ -47,6 +51,7 @@ const Schedule = () => {
     Events: any
   }
 
+  const [category, setCategory] = useState("All Events");
   const startDate = new Date();
   const endDate = new Date(`${new Date().getFullYear() + 1}-01-01`);
   const datesArray: UsersInterface[] = [];
@@ -55,21 +60,25 @@ const Schedule = () => {
       Group: "Business",
       Value: false,
       Icon: BusinessIcon,
+      ActiveIcon: ActiveBusinessIcon,
     },
     {
       Group: "Personal",
       Value: false,
       Icon: PersonalIcon,
+      ActiveIcon: ActivePersonalIcon,
     },
     {
       Group: "Cloud",
       Value: false,
       Icon: CloudIcon,
+      ActiveIcon: ActiveCloudIcon,
     },
     {
       Group: "Customers",
       Value: false,
       Icon: CustomersIcon,
+      ActiveIcon: ActiveCustomersIcon,
     },
   ];
   for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
@@ -112,8 +121,6 @@ const Schedule = () => {
     "November",
     "December",
   ];
-
-  const [category, setCategory] = useState("All Events");
 
   const EventColor = (variant: string) => {
     switch (variant) {
@@ -177,11 +184,18 @@ const Schedule = () => {
             x =>
               x.Value === true && (
                 <Grid key={x.Group} container height={"73px"}>
-                  <SelectCategoryButton>
+                  <SelectCategoryButton
+                    $background={category === x.Group ? "#F8F9FC" : "#fff"}
+                    onClick={() => setCategory(x.Group)}
+                  >
                     <Grid container alignItems={"center"} gap={"22px"}>
-                      <CategoryImg src={x.Icon} alt='Icon' />
+                      {category === x.Group ? (
+                        <CategoryImg src={x.ActiveIcon} alt='Icon' />
+                      ) : (
+                        <CategoryImg src={x.Icon} alt='Icon' />
+                      )}
                       <Grid>
-                        <Text variant={"BOLD"} color={"#8083A3"}>
+                        <Text variant={"BOLD"} color={category === x.Group ? "#6B59CC" : "#1A1C1D"}>
                           {x.Group}
                         </Text>
                       </Grid>
@@ -238,7 +252,7 @@ const Schedule = () => {
                       </AddNewEventByDateGrid>
                     </DateGrid>
                     {x.Events.map((y: any) => (
-                      <EventGrid container key={y.Note}>
+                      <EventGrid container key={y.Id}>
                         <EventTime container item xs={3}>
                           <TimeImgGrid container>
                             <TimeImg src={TimeIcon} alt='Time Icon' />
@@ -270,6 +284,62 @@ const Schedule = () => {
                         </EditEventGrid>
                       </EventGrid>
                     ))}
+                  </>
+                ),
+            )}
+          </AllEventsGrid>
+        )}
+        {category !== "All Events" && Event.length !== 0 && (
+          <AllEventsGrid container id={"AllEventsGrid"}>
+            {datesArray.map(
+              (x: any) =>
+                x.Events.length >= 1 && (
+                  <>
+                    <DateGrid container key={x.AllDate}>
+                      <Text variant={"BOLD"}>
+                        {Days[x.AllDate.getDay()]}, {Month[x.AllDate.getMonth()]}{" "}
+                        {x.AllDate.getDate()}, {x.AllDate.getFullYear()}
+                      </Text>
+                      <AddNewEventByDateGrid container>
+                        <AddNewEventByDate src={AddNewGroup} alt='Add New Event By Date' />
+                      </AddNewEventByDateGrid>
+                    </DateGrid>
+                    {x.Events.map(
+                      (y: any) =>
+                        y.Group === category && (
+                          <EventGrid container key={y.Id}>
+                            <EventTime container item xs={3}>
+                              <TimeImgGrid container>
+                                <TimeImg src={TimeIcon} alt='Time Icon' />
+                              </TimeImgGrid>
+                              <Text variant={"BOLD"}>
+                                {y.TimeFrom.getHours()}:{y.TimeFrom.getMinutes()}
+                              </Text>
+                              <Text variant={"LIGHT"}>
+                                {y.TimeTo.getHours()}:{y.TimeTo.getMinutes()}
+                              </Text>
+                            </EventTime>
+                            <AboutEventGrid container item xs={6}>
+                              <GroupEventGrid
+                                container
+                                $color={EventColor(y.Group)}
+                                $background={EventBackground(y.Group)}
+                              >
+                                {y.Group}
+                              </GroupEventGrid>
+                              <Text variant={"BOLD"} color={"#8083A3"} small>
+                                {y.Title}
+                              </Text>
+                            </AboutEventGrid>
+                            <EditEventGrid container item xs={3}>
+                              <Avatar src={MembersAvatar} alt='Avatar' />
+                              <EditButton>
+                                <img src={EditIcon} alt='Edit Button ' />
+                              </EditButton>
+                            </EditEventGrid>
+                          </EventGrid>
+                        ),
+                    )}
                   </>
                 ),
             )}

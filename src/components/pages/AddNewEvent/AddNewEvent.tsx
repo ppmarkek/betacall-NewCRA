@@ -327,6 +327,7 @@ const AddNewEvent = () => {
                     Note: note,
                     Group: group,
                     Title: title,
+                    Id: Event.length + 1,
                   })
                 }
                 variant={"FilledActive"}

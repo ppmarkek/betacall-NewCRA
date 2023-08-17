@@ -11,6 +11,7 @@ interface UsersInterface {
   Note: string
   Group: string
   Title: string
+  Id: number
 }
 
 export const Event: UsersInterface[] = [];
