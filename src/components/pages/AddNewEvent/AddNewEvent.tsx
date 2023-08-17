@@ -10,7 +10,6 @@ import {
   Members,
   MembersAvatarButton,
   MembersImg,
-  Note,
   PlusImg,
   SelectCategory,
   SelectCategoryButton,
@@ -43,11 +42,13 @@ import { Event } from "../Schedule/Data";
 
 const AddNewEvent = () => {
   const [note, setNote] = useState("");
+  const [title, setTitle] = useState("");
   const [timeTo, setTimeTo] = useState("");
   const [timeFrom, setTimeFrom] = useState("");
   const [date, setDate] = useState("");
   const [category, setCategory] = useState("General information");
   const [open, setOpen] = useState(false);
+  const [group, setGroup] = useState("Business");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   interface UsersInterface {
@@ -82,6 +83,25 @@ const AddNewEvent = () => {
     },
   ]);
 
+  const GroupCategoty = [
+    {
+      Text: "Business",
+      value: 10,
+    },
+    {
+      Text: "Personal",
+      value: 20,
+    },
+    {
+      Text: "Cloud",
+      value: 30,
+    },
+    {
+      Text: "Customers",
+      value: 40,
+    },
+  ];
+
   const isObject = (object: any) => {
     return object != null && typeof object === "object";
   };
@@ -112,6 +132,10 @@ const AddNewEvent = () => {
   const DeleteUsersArray = (x: { Name: string; Icon: string }) => {
     setAllMembersUsers([...allMembersUsers.filter(y => isEqual(x, y) === false)]);
     return setAddUsersArray([...addUsersArray, x]);
+  };
+
+  const searchGroup = (value: number) => {
+    return GroupCategoty.some(x => x.value === value && setGroup(x.Text));
   };
 
   return (
@@ -168,14 +192,27 @@ const AddNewEvent = () => {
           <GeneralInformationGrid container>
             <Text variant={"H4"}>General information</Text>
             <Grid container justifyContent={"space-between"}>
-              <Grid container item xs={5} flexDirection={"column"}>
-                <Text variant={"LIGHT"}>Date</Text>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <StyledDatePicker onChange={(x: any) => setDate(x.$d)} />
-                </LocalizationProvider>
+              <Grid container item xs={5} justifyContent={"space-between"}>
+                <Grid item xs={6} container>
+                  <Text variant={"LIGHT"}>Date</Text>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <StyledDatePicker onChange={(x: any) => setDate(x.$d)} />
+                  </LocalizationProvider>
+                </Grid>
+                <Grid item xs={6}>
+                  <Input
+                    variant={"Select"}
+                    width={"90%"}
+                    title={"Group"}
+                    text={"Select group"}
+                    SelectDefaultValue={"10"}
+                    SelectArray={GroupCategoty}
+                    onChange={(value: number) => searchGroup(value)}
+                  />
+                </Grid>
               </Grid>
               <Grid container item xs={5} justifyContent={"space-between"}>
-                <TimePickerGrid container item xs={5.5}>
+                <TimePickerGrid container item xs={6}>
                   <Text variant={"LIGHT"}>Time from</Text>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={["TimePicker"]}>
@@ -190,7 +227,7 @@ const AddNewEvent = () => {
                     </DemoContainer>
                   </LocalizationProvider>
                 </TimePickerGrid>
-                <TimePickerGrid container item xs={5.5}>
+                <TimePickerGrid container item xs={6}>
                   <Text variant={"LIGHT"}>Time to</Text>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={["TimePicker"]}>
@@ -252,16 +289,28 @@ const AddNewEvent = () => {
                 )}
               </Grid>
             </Members>
-            <Note>
-              <Input
-                variant={"LightInput"}
-                width={"100%"}
-                IconType={"Email"}
-                title={"Note"}
-                text={"Start typing …"}
-                onChange={(value: string) => setNote(value)}
-              />
-            </Note>
+            <Grid container height={"90px"} justifyContent={"space-between"}>
+              <Grid item xs={6}>
+                <Input
+                  variant={"LightInput"}
+                  width={"90%"}
+                  IconType={"Email"}
+                  title={"Title"}
+                  text={"Start typing …"}
+                  onChange={(value: string) => setTitle(value)}
+                />
+              </Grid>
+              <Grid container item xs={6} flexDirection={"column"} alignItems={"flex-end"}>
+                <Input
+                  variant={"LightInput"}
+                  width={"90%"}
+                  IconType={"Email"}
+                  title={"Note"}
+                  text={"Start typing …"}
+                  onChange={(value: string) => setNote(value)}
+                />
+              </Grid>
+            </Grid>
           </GeneralInformationGrid>
         )}
         {category !== "Notifications" && (
@@ -276,7 +325,8 @@ const AddNewEvent = () => {
                     TimeTo: timeTo,
                     Members: allMembersUsers,
                     Note: note,
-                    Group: "Business",
+                    Group: group,
+                    Title: title,
                   })
                 }
                 variant={"FilledActive"}

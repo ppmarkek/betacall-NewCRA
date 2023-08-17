@@ -60,7 +60,7 @@ type Value = {
   inputValue?: string
   SelectArray?: Array<any>
   SelectDefaultValue?: string
-  onChange?: (value: string) => void
+  onChange?: (value: any) => void
 }
 
 const Input = ({
@@ -84,6 +84,9 @@ const Input = ({
   const [changePassword, setChangePassword] = useState(CheckSilver);
 
   const handleChange = (event: SelectChangeEvent) => {
+    if (onChange) {
+      onChange(event.target.value);
+    }
     setSelect(event.target.value);
   };
 

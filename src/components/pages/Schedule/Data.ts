@@ -10,6 +10,7 @@ interface UsersInterface {
   Members: Array<MembersInterface>
   Note: string
   Group: string
+  Title: string
 }
 
 export const Event: UsersInterface[] = [];

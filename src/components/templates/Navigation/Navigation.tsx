@@ -171,10 +171,18 @@ const Navigation = () => {
           {location.pathname === "/Schedule" && (
             <ScheduleButtonsGrid container>
               <Grid container gap={"10px"}>
-                <ScheduleButtons>
-                  <img src={ArrowTop} alt='Arrow Down' />
+                <ScheduleButtons
+                  onClick={() =>
+                    ((document.getElementById("AllEventsGrid") as HTMLInputElement).scrollTop -= 20)
+                  }
+                >
+                  <img src={ArrowTop} alt='Arrow Up' />
                 </ScheduleButtons>
-                <ScheduleButtons>
+                <ScheduleButtons
+                  onClick={() =>
+                    ((document.getElementById("AllEventsGrid") as HTMLInputElement).scrollTop += 20)
+                  }
+                >
                   <img src={ArrowDown} alt='Arrow Down' />
                 </ScheduleButtons>
               </Grid>

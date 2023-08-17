@@ -79,32 +79,40 @@ export const GeneralInformationGrid = styled(Grid)`
 `;
 
 export const StyledDatePicker = styled(DatePicker)`
-  width: 100%;
+  width: 90%;
   .MuiInputBase-root {
     border-radius: unset;
   }
   fieldset {
     border: unset;
-    border-bottom: 1px solid #8083a3;
+    border-bottom: 1px solid #eceef5;
   }
   input {
     padding: unset;
-    padding: 14px 0;
+    padding: 16px 0px 3px;
+  }
+  button {
+    margin-bottom: -10px;
+    padding: 3px;
   }
 `;
 
 export const StyledTimePicker = styled(TimePicker)`
-  width: 100%;
+  width: 90%;
   .MuiInputBase-root {
     border-radius: unset;
   }
   fieldset {
     border: unset;
-    border-bottom: 1px solid #8083a3;
+    border-bottom: 1px solid #eceef5;
   }
   input {
     padding: unset;
-    padding: 14px 0;
+    padding: 16px 0px 3px;
+  }
+  button {
+    margin-bottom: -10px;
+    padding: 3px;
   }
 `;
 
@@ -112,6 +120,10 @@ export const TimePickerGrid = styled(Grid)`
   flex-direction: column;
   .MuiStack-root {
     padding-top: unset;
+    overflow: unset;
+  }
+  .MuiTextField-root {
+    min-width: unset;
   }
 `;
 
@@ -184,11 +196,6 @@ export const DeleteImg = styled.img`
   width: 20px;
   height: 20px;
   cursor: pointer;
-`;
-
-export const Note = styled(Grid)`
-  height: 90px;
-  gap: 10px;
 `;
 
 export const StyledLink = styled(Link)`

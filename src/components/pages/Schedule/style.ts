@@ -50,8 +50,8 @@ export const Border = styled(Grid)`
 `;
 
 export const NewGroup = styled(Grid)`
-  gap: 30px;
   height: calc(100% - 140px);
+  align-content: flex-start;
 `;
 
 export const EventCalendar = styled(Grid)`
@@ -60,6 +60,7 @@ export const EventCalendar = styled(Grid)`
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
+  height: 100%;
 `;
 
 export const NoEventsFound = styled(Grid)`
@@ -183,4 +184,16 @@ export const EventsLength = styled(Grid)`
   justify-content: center;
   background: #28c345;
   border-radius: 12px;
+`;
+
+export const AllEventsGrid = styled(Grid)`
+  gap: 20px;
+  overflow-y: auto;
+`;
+
+export const AddNewEventLink = styled(Link)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  text-decoration: none;
 `;
