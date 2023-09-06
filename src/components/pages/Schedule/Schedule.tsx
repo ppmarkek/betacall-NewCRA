@@ -1,5 +1,5 @@
-import { Grid } from "@mui/material";
-import { useState } from "react";
+import { Grid, Menu, MenuItem } from "@mui/material";
+import { MouseEvent, useState } from "react";
 import {
   AboutEventGrid,
   AddNewEventByDate,
@@ -21,10 +21,14 @@ import {
   Wrapper,
   EditEventGrid,
   Avatar,
-  EditButton,
+  EditButtons,
   EventsLength,
   AllEventsGrid,
   AddNewEventLink,
+  EditInfoGrid,
+  StyledDatePicker,
+  TimePickerGrid,
+  StyledTimePicker,
 } from "./style";
 import Text from "../../atoms/Text/Text";
 import AllEvents from "../../../assets/ScheduleIcon/AllEvents.svg";
@@ -38,12 +42,20 @@ import TimeIcon from "../../../assets/ScheduleIcon/TimeIcon.svg";
 import EditIcon from "../../../assets/ScheduleIcon/EditIcon.svg";
 import BusinessIcon from "../../../assets/ScheduleIcon/Business.svg";
 import PersonalIcon from "../../../assets/ScheduleIcon/Personal.svg";
+import EditInfoIcon from "../../../assets/ScheduleIcon/Edit.svg";
 import CloudIcon from "../../../assets/ScheduleIcon/Cloud.svg";
 import CustomersIcon from "../../../assets/ScheduleIcon/Customers.svg";
 import ActiveBusinessIcon from "../../../assets/ScheduleIcon/ActiveBusiness.svg";
 import ActivePersonalIcon from "../../../assets/ScheduleIcon/ActivePersonal.svg";
 import ActiveCloudIcon from "../../../assets/ScheduleIcon/ActiveCloud.svg";
 import ActiveCustomersIcon from "../../../assets/ScheduleIcon/ActiveCustomers.svg";
+import DeleteEventIcon from "../../../assets/ScheduleIcon/DeleteEvent.svg";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
+import Input from "../../atoms/Input/Input";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 
 const Schedule = () => {
   interface UsersInterface {
@@ -51,10 +63,18 @@ const Schedule = () => {
     Events: any
   }
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [category, setCategory] = useState("All Events");
   const startDate = new Date();
   const endDate = new Date(`${new Date().getFullYear() + 1}-01-01`);
   const datesArray: UsersInterface[] = [];
+  const [group, setGroup] = useState("Business");
+  const [timeTo, setTimeTo] = useState("");
+  const [timeFrom, setTimeFrom] = useState("");
+  const [date, setDate] = useState("");
+  const [note, setNote] = useState("");
+  const [title, setTitle] = useState("");
+  const [editClick, setEditClick] = useState(-1);
   const EventsGroup = [
     {
       Group: "Business",
@@ -150,6 +170,44 @@ const Schedule = () => {
       default:
         return "rgba(107, 89, 204, 0.1)";
     }
+  };
+
+  const GroupCategoty = [
+    {
+      Text: "Business",
+      value: 10,
+    },
+    {
+      Text: "Personal",
+      value: 20,
+    },
+    {
+      Text: "Cloud",
+      value: 30,
+    },
+    {
+      Text: "Customers",
+      value: 40,
+    },
+  ];
+
+  const searchGroup = (value: number) => {
+    return GroupCategoty.some(x => x.value === value && setGroup(x.Text));
+  };
+
+  const open = Boolean(anchorEl);
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setEditClick(-1);
+    setAnchorEl(null);
+  };
+
+  const DeleteEvent = (id: number) => {
+    console.log(id);
+    return console.log(Event.filter(x => x.Id !== id));
   };
 
   return (
@@ -278,9 +336,156 @@ const Schedule = () => {
                         </AboutEventGrid>
                         <EditEventGrid container item xs={3}>
                           <Avatar src={MembersAvatar} alt='Avatar' />
-                          <EditButton>
-                            <img src={EditIcon} alt='Edit Button ' />
-                          </EditButton>
+                          <Grid borderRadius={"10px"} onClick={() => setEditClick(y.Id)}>
+                            <EditButtons
+                              onClick={handleClick}
+                              $background={editClick !== y.Id ? "#fff" : "#eceef5"}
+                            >
+                              <img src={EditIcon} alt='Edit Button' />
+                            </EditButtons>
+                          </Grid>
+
+                          <Menu
+                            anchorEl={anchorEl}
+                            id='account-menu'
+                            open={open}
+                            onClose={handleClose}
+                            PaperProps={{
+                              elevation: 0,
+                              sx: {
+                                overflow: "visible",
+                                filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                                mt: 1.5,
+                                "& .MuiAvatar-root": {
+                                  width: 32,
+                                  height: 32,
+                                  ml: -0.5,
+                                  mr: 1,
+                                },
+                                "&:before": {
+                                  content: '""',
+                                  display: "block",
+                                  position: "absolute",
+                                  top: 0,
+                                  right: 14,
+                                  width: 10,
+                                  height: 10,
+                                  bgcolor: "background.paper",
+                                  transform: "translateY(-50%) rotate(45deg)",
+                                  zIndex: 3,
+                                },
+                              },
+                            }}
+                            transformOrigin={{ horizontal: "right", vertical: "top" }}
+                            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                          >
+                            <EditInfoGrid container>
+                              <Grid container justifyContent={"space-between"}>
+                                <EditButtons>
+                                  <img src={EditInfoIcon} alt='Edit Info' />
+                                </EditButtons>
+                                <EditButtons onClick={() => DeleteEvent(y.Id)}>
+                                  <img src={DeleteEventIcon} alt='Delete Event' />
+                                </EditButtons>
+                              </Grid>
+                              <Grid container justifyContent={"space-between"}>
+                                <Grid item xs={5.5} container>
+                                  <Text variant={"LIGHT"}>Date</Text>
+                                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <StyledDatePicker
+                                      defaultValue={dayjs(
+                                        `${y.Date.getFullYear()}-${
+                                          y.Date.getMonth() + 1
+                                        }-${y.Date.getDate()}`,
+                                      )}
+                                      onChange={(value: any) => setDate(value)}
+                                    />
+                                  </LocalizationProvider>
+                                </Grid>
+                                <Grid item xs={5.5}>
+                                  <Input
+                                    variant={"Select"}
+                                    width={"100%"}
+                                    title={"Group"}
+                                    text={"Select group"}
+                                    SelectDefaultValue={"10"}
+                                    SelectArray={GroupCategoty}
+                                    onChange={(value: number) => searchGroup(value)}
+                                  />
+                                </Grid>
+                              </Grid>
+                              <Grid container justifyContent={"space-between"}>
+                                <TimePickerGrid container item xs={5.5}>
+                                  <Text variant={"LIGHT"}>Time from</Text>
+                                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DemoContainer components={["TimePicker"]}>
+                                      <StyledTimePicker
+                                        defaultValue={dayjs(
+                                          `${y.Date.getFullYear()}-${
+                                            y.Date.getMonth() + 1
+                                          }-${y.Date.getDate()}T${y.TimeFrom.getHours()}:${y.TimeFrom.getMinutes()}`,
+                                        )}
+                                        onChange={(value: any) => setTimeFrom(value.$d)}
+                                        viewRenderers={{
+                                          hours: renderTimeViewClock,
+                                          minutes: renderTimeViewClock,
+                                          seconds: renderTimeViewClock,
+                                        }}
+                                      />
+                                    </DemoContainer>
+                                  </LocalizationProvider>
+                                </TimePickerGrid>
+                                <TimePickerGrid container item xs={5.5}>
+                                  <Text variant={"LIGHT"}>Time to</Text>
+                                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DemoContainer components={["TimePicker"]}>
+                                      <StyledTimePicker
+                                        defaultValue={dayjs(
+                                          `${y.Date.getFullYear()}-${
+                                            y.Date.getMonth() + 1
+                                          }-${y.Date.getDate()}T${y.TimeTo.getHours()}:${y.TimeTo.getMinutes()}`,
+                                        )}
+                                        onChange={(value: any) => setTimeTo(value.$d)}
+                                        viewRenderers={{
+                                          hours: renderTimeViewClock,
+                                          minutes: renderTimeViewClock,
+                                          seconds: renderTimeViewClock,
+                                        }}
+                                      />
+                                    </DemoContainer>
+                                  </LocalizationProvider>
+                                </TimePickerGrid>
+                              </Grid>
+                              <Grid container flexDirection={"column"} gap={"10px"}>
+                                <Text variant={"LIGHT"}>Shared with</Text>
+                                <Grid container gap={"5px"}>
+                                  {y.Members.map((users: any) => (
+                                    <Grid key={users.Name}>
+                                      <Avatar src={users.Icon} alt='Avatar' />
+                                    </Grid>
+                                  ))}
+                                </Grid>
+                              </Grid>
+                              <Input
+                                variant={"LightInput"}
+                                width={"100%"}
+                                IconType={"Email"}
+                                title={"Title"}
+                                text={"Start typing …"}
+                                inputValue={y.Title}
+                                onChange={(value: string) => setTitle(value)}
+                              />
+                              <Input
+                                variant={"LightInput"}
+                                width={"100%"}
+                                IconType={"Email"}
+                                title={"Note"}
+                                text={"Start typing …"}
+                                inputValue={y.Note}
+                                onChange={(value: string) => setTitle(value)}
+                              />
+                            </EditInfoGrid>
+                          </Menu>
                         </EditEventGrid>
                       </EventGrid>
                     ))}
@@ -333,9 +538,153 @@ const Schedule = () => {
                             </AboutEventGrid>
                             <EditEventGrid container item xs={3}>
                               <Avatar src={MembersAvatar} alt='Avatar' />
-                              <EditButton>
-                                <img src={EditIcon} alt='Edit Button ' />
-                              </EditButton>
+                              <Grid borderRadius={"10px"} onClick={() => setEditClick(y.Id)}>
+                                <EditButtons
+                                  onClick={handleClick}
+                                  $background={editClick !== y.Id ? "#fff" : "#eceef5"}
+                                >
+                                  <img src={EditIcon} alt='Edit Button' />
+                                </EditButtons>
+                              </Grid>
+                              <Menu
+                                anchorEl={anchorEl}
+                                id='account-menu'
+                                open={open}
+                                onClose={handleClose}
+                                PaperProps={{
+                                  elevation: 0,
+                                  sx: {
+                                    overflow: "visible",
+                                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                                    mt: 1.5,
+                                    "& .MuiAvatar-root": {
+                                      width: 32,
+                                      height: 32,
+                                      ml: -0.5,
+                                      mr: 1,
+                                    },
+                                    "&:before": {
+                                      content: '""',
+                                      display: "block",
+                                      position: "absolute",
+                                      top: 0,
+                                      right: 14,
+                                      width: 10,
+                                      height: 10,
+                                      bgcolor: "background.paper",
+                                      transform: "translateY(-50%) rotate(45deg)",
+                                      zIndex: 3,
+                                    },
+                                  },
+                                }}
+                                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                              >
+                                <EditInfoGrid container>
+                                  <Grid container justifyContent={"space-between"}>
+                                    <EditButtons>
+                                      <img src={EditInfoIcon} alt='Edit Info' />
+                                    </EditButtons>
+                                    <EditButtons onClick={() => DeleteEvent(y.Id)}>
+                                      <img src={DeleteEventIcon} alt='Delete Event' />
+                                    </EditButtons>
+                                  </Grid>
+                                  <Grid container justifyContent={"space-between"}>
+                                    <Grid item xs={5.5} container>
+                                      <Text variant={"LIGHT"}>Date</Text>
+                                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <StyledDatePicker
+                                          defaultValue={dayjs(
+                                            `${y.Date.getFullYear()}-${
+                                              y.Date.getMonth() + 1
+                                            }-${y.Date.getDate()}`,
+                                          )}
+                                          onChange={(value: any) => setDate(value)}
+                                        />
+                                      </LocalizationProvider>
+                                    </Grid>
+                                    <Grid item xs={5.5}>
+                                      <Input
+                                        variant={"Select"}
+                                        width={"100%"}
+                                        title={"Group"}
+                                        text={"Select group"}
+                                        SelectDefaultValue={"10"}
+                                        SelectArray={GroupCategoty}
+                                        onChange={(value: number) => searchGroup(value)}
+                                      />
+                                    </Grid>
+                                  </Grid>
+                                  <Grid container justifyContent={"space-between"}>
+                                    <TimePickerGrid container item xs={5.5}>
+                                      <Text variant={"LIGHT"}>Time from</Text>
+                                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DemoContainer components={["TimePicker"]}>
+                                          <StyledTimePicker
+                                            defaultValue={dayjs(
+                                              `${y.Date.getFullYear()}-${
+                                                y.Date.getMonth() + 1
+                                              }-${y.Date.getDate()}T${y.TimeFrom.getHours()}:${y.TimeFrom.getMinutes()}`,
+                                            )}
+                                            onChange={(value: any) => setTimeFrom(value.$d)}
+                                            viewRenderers={{
+                                              hours: renderTimeViewClock,
+                                              minutes: renderTimeViewClock,
+                                              seconds: renderTimeViewClock,
+                                            }}
+                                          />
+                                        </DemoContainer>
+                                      </LocalizationProvider>
+                                    </TimePickerGrid>
+                                    <TimePickerGrid container item xs={5.5}>
+                                      <Text variant={"LIGHT"}>Time to</Text>
+                                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DemoContainer components={["TimePicker"]}>
+                                          <StyledTimePicker
+                                            defaultValue={dayjs(
+                                              `${y.Date.getFullYear()}-${
+                                                y.Date.getMonth() + 1
+                                              }-${y.Date.getDate()}T${y.TimeTo.getHours()}:${y.TimeTo.getMinutes()}`,
+                                            )}
+                                            onChange={(value: any) => setTimeTo(value.$d)}
+                                            viewRenderers={{
+                                              hours: renderTimeViewClock,
+                                              minutes: renderTimeViewClock,
+                                              seconds: renderTimeViewClock,
+                                            }}
+                                          />
+                                        </DemoContainer>
+                                      </LocalizationProvider>
+                                    </TimePickerGrid>
+                                  </Grid>
+                                  <Grid container flexDirection={"column"} gap={"10px"}>
+                                    <Text variant={"LIGHT"}>Shared with</Text>
+                                    {y.Members.map((users: any) => (
+                                      <Grid container gap={"5px"} key={users.Name}>
+                                        <Avatar src={users.Icon} alt='Avatar' />
+                                      </Grid>
+                                    ))}
+                                  </Grid>
+                                  <Input
+                                    variant={"LightInput"}
+                                    width={"100%"}
+                                    IconType={"Email"}
+                                    title={"Title"}
+                                    text={"Start typing …"}
+                                    inputValue={y.Title}
+                                    onChange={(value: string) => setTitle(value)}
+                                  />
+                                  <Input
+                                    variant={"LightInput"}
+                                    width={"100%"}
+                                    IconType={"Email"}
+                                    title={"Note"}
+                                    text={"Start typing …"}
+                                    inputValue={y.Note}
+                                    onChange={(value: string) => setTitle(value)}
+                                  />
+                                </EditInfoGrid>
+                              </Menu>
                             </EditEventGrid>
                           </EventGrid>
                         ),

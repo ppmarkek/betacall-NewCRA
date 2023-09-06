@@ -1,4 +1,5 @@
 import { Button, Grid } from "@mui/material";
+import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -154,7 +155,7 @@ export const Avatar = styled.img`
   border-radius: 10px;
 `;
 
-export const EditButton = styled(Button)`
+export const EditButtons = styled(Button)<CategoryProps>`
   all: unset;
   span {
     display: none;
@@ -168,7 +169,7 @@ export const EditButton = styled(Button)`
   align-items: center;
   justify-content: center;
   transition: all 0.5s;
-  background-color: #fff;
+  background-color: ${props => (props.$background ? props.$background : "#fff")};
   &:hover {
     background-color: #eceef5;
   }
@@ -196,4 +197,61 @@ export const AddNewEventLink = styled(Link)`
   height: 100%;
   display: flex;
   text-decoration: none;
+`;
+
+export const EditInfoGrid = styled(Grid)`
+  padding: 20px;
+  width: 300px;
+  height: 400px;
+  overflow-x: auto;
+  gap: 15px;
+`;
+
+export const StyledDatePicker = styled(DatePicker)`
+  width: 100%;
+  .MuiInputBase-root {
+    border-radius: unset;
+  }
+  fieldset {
+    border: unset;
+    border-bottom: 1px solid #eceef5;
+  }
+  input {
+    padding: unset;
+    padding: 16px 0px 3px;
+  }
+  button {
+    margin-bottom: -10px;
+    padding: 3px;
+  }
+`;
+
+export const TimePickerGrid = styled(Grid)`
+  flex-direction: column;
+  .MuiStack-root {
+    padding-top: unset;
+    overflow: unset;
+  }
+  .MuiTextField-root {
+    min-width: unset;
+  }
+`;
+
+export const StyledTimePicker = styled(TimePicker)`
+  width: 100%;
+  .MuiInputBase-root {
+    border-radius: unset;
+  }
+  fieldset {
+    border: unset;
+    border-bottom: 1px solid #eceef5;
+  }
+  input {
+    padding: unset;
+    padding: 16px 0px 3px;
+  }
+  button {
+    margin-bottom: -10px;
+    padding: 3px;
+  }
 `;
