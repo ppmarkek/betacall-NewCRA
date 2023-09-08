@@ -61,6 +61,7 @@ type Value = {
   SelectArray?: Array<any>
   SelectDefaultValue?: string
   onChange?: (value: any) => void
+  value?: string
 }
 
 const Input = ({
@@ -75,6 +76,7 @@ const Input = ({
   SelectArray,
   SelectDefaultValue,
   onChange,
+  value,
 }: Value) => {
   const [Icon, setIcon] = useState(SilverPass);
   const [Confirm, setConfirm] = useState(CheckSilver);
@@ -222,6 +224,7 @@ const Input = ({
             $color={color}
             defaultValue={inputValue}
             onChange={(x: any) => CheackIcon(x.target.value, x)}
+            value={value}
           />
           {IconType !== "" && <StyledImg src={Icon} alt='' />}
         </InputGrid>
@@ -238,6 +241,7 @@ const Input = ({
               placeholder={"Enter your password"}
               $color={color}
               onChange={(x: any) => setValue(x.target.value)}
+              value={value}
             />
             <StyledImg src={Icon} alt='' />
           </InputGrid>
@@ -250,6 +254,7 @@ const Input = ({
               placeholder={"Confirm your password"}
               $color={color}
               onChange={(x: any) => CheackConfirmPass(x.target.value)}
+              value={value}
             />
             <StyledImg src={Confirm} alt='' />
           </InputGrid>
@@ -341,6 +346,7 @@ const Input = ({
               placeholder={"Enter your password"}
               $color={color}
               onChange={(x: any) => setValue(x.target.value)}
+              value={value}
             />
             <StyledImg src={Icon} alt='' />
           </InputGrid>
@@ -353,13 +359,14 @@ const Input = ({
               placeholder={"Confirm your password"}
               $color={color}
               onChange={(x: any) => CheackChangePassword(x.target.value)}
+              value={value}
             />
             <StyledImg src={changePassword} alt='' />
           </InputGrid>
         </Grid>
       );
     default:
-      return <LightInput placeholder={text} $width={width} $color={color} />;
+      return <LightInput placeholder={text} $width={width} $color={color} value={value} />;
   }
 };
 

@@ -5,15 +5,27 @@ import Input from "../../../atoms/Input/Input";
 import Button from "../../../atoms/Button/Button";
 import Checkbox from "../../../atoms/Checkbox/Checkbox";
 import { addUser } from "../../../../requests";
+import { useFormik } from "formik";
 
 const Step2 = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: "foobar@example.com",
+      firstName: "name",
+      lastName: "name",
+      password: "foobar",
+    },
+    onSubmit: values => {
+      addUser(values);
+    },
+  });
+
   return (
     <Wrapper container>
       <Title container gap={"5px"}>
         <Text variant={"H1"}>Tell us more about yourself</Text>
         <Text variant='LIGHT'>Enter your details to proceed further</Text>
       </Title>
-
       <FormGrid container>
         <Input
           variant={"LightInput"}
@@ -22,6 +34,7 @@ const Step2 = () => {
           width={"100%"}
           title={"Email"}
           IconType={"Email"}
+          value={formik.values.email}
         />
         <Grid container gap={"28px"}>
           <Input
@@ -31,6 +44,7 @@ const Step2 = () => {
             width={"100%"}
             title={"First name"}
             IconType={"Name"}
+            value={formik.values.firstName}
           />
           <Input
             variant={"LightInput"}
@@ -39,14 +53,20 @@ const Step2 = () => {
             width={"100%"}
             title={"Last name"}
             IconType={"Name"}
+            value={formik.values.lastName}
           />
         </Grid>
-        <Input variant={"ConfirmPassword"} width={"100%"} IconType={"Pass"} />
+        <Input
+          variant={"ConfirmPassword"}
+          width={"100%"}
+          IconType={"Pass"}
+          value={formik.values.password}
+        />
       </FormGrid>
       <Grid container gap={"36px"} flexDirection={"column"} width={"auto"}>
         <Checkbox>I agree with terms & conditions</Checkbox>
         <StyledLink to={"/Step3"}>
-          <Button variant={"FilledActive"} width={"420px"} onClick={addUser}>
+          <Button variant={"FilledActive"} width={"420px"} onClick={() => formik.submitForm()}>
             Continue
           </Button>
         </StyledLink>
