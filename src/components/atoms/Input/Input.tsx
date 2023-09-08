@@ -48,7 +48,6 @@ import AnswerSilver from "../../../assets/Icon/AnswerSilver.svg";
 import Answer from "../../../assets/Icon/Answer.svg";
 import CompanySilver from "../../../assets/Icon/CompanySilver.svg";
 import Company from "../../../assets/Icon/Company.svg";
-import { Field } from "formik";
 
 type Value = {
   variant: string
@@ -216,8 +215,7 @@ const Input = ({
           <Text variant={"LIGHT"} small={true}>
             {title}
           </Text>
-          <Field
-            component={LightInput}
+          <LightInput
             type={type}
             placeholder={text}
             $width={width}
@@ -235,8 +233,7 @@ const Input = ({
             <Text variant={"LIGHT"} small={true}>
               Password
             </Text>
-            <Field
-              component={LightInput}
+            <LightInput
               type={"password"}
               placeholder={"Enter your password"}
               $color={color}
@@ -248,8 +245,7 @@ const Input = ({
             <Text variant={"LIGHT"} small={true}>
               Confirm password
             </Text>
-            <Field
-              component={LightInput}
+            <LightInput
               type={"password"}
               placeholder={"Confirm your password"}
               $color={color}
@@ -272,7 +268,7 @@ const Input = ({
               </Fade>
             </SearchButton>
             <Fade in={checked}>
-              <Field component={SearchInput} />
+              <SearchInput />
             </Fade>
           </Grid>
           <Fade in={checked}>
@@ -340,8 +336,7 @@ const Input = ({
             <Text variant={"LIGHT"} small={true}>
               Current password
             </Text>
-            <Field
-              component={LightInput}
+            <LightInput
               type={"password"}
               placeholder={"Enter your password"}
               $color={color}
@@ -353,8 +348,7 @@ const Input = ({
             <Text variant={"LIGHT"} small={true}>
               New password
             </Text>
-            <Field
-              component={LightInput}
+            <LightInput
               type={"password"}
               placeholder={"Confirm your password"}
               $color={color}
@@ -365,7 +359,7 @@ const Input = ({
         </Grid>
       );
     default:
-      return <Field component={LightInput} placeholder={text} $width={width} $color={color} />;
+      return <LightInput placeholder={text} $width={width} $color={color} />;
   }
 };
 

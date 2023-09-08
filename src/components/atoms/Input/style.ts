@@ -1,14 +1,13 @@
 import styled from "styled-components";
-import { Grid, Button, FormControl, MenuItem } from "@mui/material";
+import { Grid, Button, FormControl, MenuItem, Input } from "@mui/material";
 import { Link } from "react-router-dom";
-import { TextField } from "formik-mui";
 
 type InputStyleProps = {
   $width?: string
   $color?: string
 }
 
-export const LightInput = styled(TextField)<InputStyleProps>`
+export const LightInput = styled(Input)<InputStyleProps>`
   width: 100%;
   height: 36px;
   &::before {
@@ -72,7 +71,7 @@ export const SearchButton = styled(Button)`
   }
 `;
 
-export const SearchInput = styled(TextField)`
+export const SearchInput = styled(Input)`
   position: absolute;
   top: 0;
   background: #eceef5;
