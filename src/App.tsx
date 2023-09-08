@@ -15,11 +15,11 @@ import AddNewEvent from "./components/pages/AddNewEvent/AddNewEvent";
 function App() {
   const LoginReg = ["/Login", "/Recover", "/Step1", "/Step2", "/Step3"];
   const location = useLocation();
-  LoginReg.some(x => x === location.pathname) === true &&
+  LoginReg.some(x => x.toLowerCase() === location.pathname.toLowerCase()) === true &&
     ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "0px");
   return (
     <div className='App'>
-      {LoginReg.some(x => x === location.pathname) === true ? (
+      {LoginReg.some(x => x.toLowerCase() === location.pathname.toLowerCase()) === true ? (
         <LoginHeader key='' />
       ) : (
         <Navigation key='' />
