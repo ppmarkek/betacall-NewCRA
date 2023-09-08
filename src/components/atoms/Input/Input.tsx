@@ -48,6 +48,7 @@ import AnswerSilver from "../../../assets/Icon/AnswerSilver.svg";
 import Answer from "../../../assets/Icon/Answer.svg";
 import CompanySilver from "../../../assets/Icon/CompanySilver.svg";
 import Company from "../../../assets/Icon/Company.svg";
+import { Field } from "formik";
 
 type Value = {
   variant: string
@@ -215,7 +216,8 @@ const Input = ({
           <Text variant={"LIGHT"} small={true}>
             {title}
           </Text>
-          <LightInput
+          <Field
+            component={LightInput}
             type={type}
             placeholder={text}
             $width={width}
@@ -233,11 +235,12 @@ const Input = ({
             <Text variant={"LIGHT"} small={true}>
               Password
             </Text>
-            <LightInput
+            <Field
+              component={LightInput}
               type={"password"}
               placeholder={"Enter your password"}
               $color={color}
-              onChange={x => setValue(x.target.value)}
+              onChange={(x: any) => setValue(x.target.value)}
             />
             <StyledImg src={Icon} alt='' />
           </InputGrid>
@@ -245,11 +248,12 @@ const Input = ({
             <Text variant={"LIGHT"} small={true}>
               Confirm password
             </Text>
-            <LightInput
+            <Field
+              component={LightInput}
               type={"password"}
               placeholder={"Confirm your password"}
               $color={color}
-              onChange={x => CheackConfirmPass(x.target.value)}
+              onChange={(x: any) => CheackConfirmPass(x.target.value)}
             />
             <StyledImg src={Confirm} alt='' />
           </InputGrid>
@@ -268,7 +272,7 @@ const Input = ({
               </Fade>
             </SearchButton>
             <Fade in={checked}>
-              <SearchInput />
+              <Field component={SearchInput} />
             </Fade>
           </Grid>
           <Fade in={checked}>
@@ -336,11 +340,12 @@ const Input = ({
             <Text variant={"LIGHT"} small={true}>
               Current password
             </Text>
-            <LightInput
+            <Field
+              component={LightInput}
               type={"password"}
               placeholder={"Enter your password"}
               $color={color}
-              onChange={x => setValue(x.target.value)}
+              onChange={(x: any) => setValue(x.target.value)}
             />
             <StyledImg src={Icon} alt='' />
           </InputGrid>
@@ -348,18 +353,19 @@ const Input = ({
             <Text variant={"LIGHT"} small={true}>
               New password
             </Text>
-            <LightInput
+            <Field
+              component={LightInput}
               type={"password"}
               placeholder={"Confirm your password"}
               $color={color}
-              onChange={x => CheackChangePassword(x.target.value)}
+              onChange={(x: any) => CheackChangePassword(x.target.value)}
             />
             <StyledImg src={changePassword} alt='' />
           </InputGrid>
         </Grid>
       );
     default:
-      return <LightInput placeholder={text} $width={width} $color={color} />;
+      return <Field component={LightInput} placeholder={text} $width={width} $color={color} />;
   }
 };
 
