@@ -246,7 +246,7 @@ const Schedule = () => {
               mr: 1,
             },
             "&:before": {
-              content: '""',
+              content: "",
               display: "block",
               position: "absolute",
               top: 0,
@@ -263,7 +263,7 @@ const Schedule = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <EditInfoGrid container>
-          <Grid container justifyContent={"space-between"}>
+          <Grid container justifyContent='space-between'>
             <EditButtons>
               <img src={EditInfoIcon} alt='Edit Info' />
             </EditButtons>
@@ -271,9 +271,9 @@ const Schedule = () => {
               <img src={DeleteEventIcon} alt='Delete Event' />
             </EditButtons>
           </Grid>
-          <Grid container justifyContent={"space-between"}>
+          <Grid container justifyContent='space-between'>
             <Grid item xs={5.5} container>
-              <Text variant={"LIGHT"}>Date</Text>
+              <Text variant='LIGHT'>Date</Text>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <StyledDatePicker
                   defaultValue={dayjs(
@@ -287,19 +287,19 @@ const Schedule = () => {
             </Grid>
             <Grid item xs={5.5}>
               <Input
-                variant={"Select"}
-                width={"100%"}
-                title={"Group"}
-                text={"Select group"}
-                SelectDefaultValue={"10"}
+                variant='Select'
+                width='100%'
+                title='Group'
+                text='Select group'
+                SelectDefaultValue='10'
                 SelectArray={GroupCategoty}
                 onChange={(value: number) => searchGroup(value)}
               />
             </Grid>
           </Grid>
-          <Grid container justifyContent={"space-between"}>
+          <Grid container justifyContent='space-between'>
             <TimePickerGrid container item xs={5.5}>
-              <Text variant={"LIGHT"}>Time from</Text>
+              <Text variant='LIGHT'>Time from</Text>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["TimePicker"]}>
                   <StyledTimePicker
@@ -319,7 +319,7 @@ const Schedule = () => {
               </LocalizationProvider>
             </TimePickerGrid>
             <TimePickerGrid container item xs={5.5}>
-              <Text variant={"LIGHT"}>Time to</Text>
+              <Text variant='LIGHT'>Time to</Text>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["TimePicker"]}>
                   <StyledTimePicker
@@ -339,9 +339,9 @@ const Schedule = () => {
               </LocalizationProvider>
             </TimePickerGrid>
           </Grid>
-          <Grid container flexDirection={"column"} gap={"10px"}>
-            <Text variant={"LIGHT"}>Shared with</Text>
-            <Grid container gap={"5px"}>
+          <Grid container flexDirection='column' gap='10px'>
+            <Text variant='LIGHT'>Shared with</Text>
+            <Grid container gap='5px'>
               {menuInfo?.Members.map((users: any) => (
                 <Grid key={users.Name}>
                   <Avatar src={users.Icon} alt='Avatar' />
@@ -350,20 +350,20 @@ const Schedule = () => {
             </Grid>
           </Grid>
           <Input
-            variant={"LightInput"}
-            width={"100%"}
-            IconType={"Email"}
-            title={"Title"}
-            text={"Start typing …"}
+            variant='LightInput'
+            width='100%'
+            IconType='Email'
+            title='Title'
+            text='Start typing …'
             inputValue={menuInfo?.Title}
             onChange={(value: string) => setTitle(value)}
           />
           <Input
-            variant={"LightInput"}
-            width={"100%"}
-            IconType={"Email"}
-            title={"Note"}
-            text={"Start typing …"}
+            variant='LightInput'
+            width='100%'
+            IconType='Email'
+            title='Note'
+            text='Start typing …'
             inputValue={menuInfo?.Note}
             onChange={(value: string) => setTitle(value)}
           />
@@ -375,8 +375,8 @@ const Schedule = () => {
   return (
     <Wrapper container item xs={12}>
       <Events item xs={3} container>
-        <Grid container height={"110px"}>
-          <Grid container padding={"20px 0"}>
+        <Grid container height='110px'>
+          <Grid container padding='20px 0'>
             <SelectCategoryButton
               $background={category === "All Events" ? "#F8F9FC" : "#fff"}
               onClick={() => setCategory("All Events")}
@@ -387,13 +387,13 @@ const Schedule = () => {
                 <CategoryImg src={AllEvents} alt='Icon' />
               )}
               <Grid container>
-                <Grid container justifyContent={"space-between"}>
-                  <Text variant={"BOLD"} color={category === "All Events" ? "#6B59CC" : "#1A1C1D"}>
+                <Grid container justifyContent='space-between'>
+                  <Text variant='BOLD' color={category === "All Events" ? "#6B59CC" : "#1A1C1D"}>
                     All Events
                   </Text>
                   {Event.length >= 1 && <EventsLength container>{Event.length}</EventsLength>}
                 </Grid>
-                <Text variant={"LIGHT"}>All messages unified</Text>
+                <Text variant='LIGHT'>All messages unified</Text>
               </Grid>
             </SelectCategoryButton>
           </Grid>
@@ -403,19 +403,19 @@ const Schedule = () => {
           {EventsGroup.map(
             x =>
               x.Value === true && (
-                <Grid key={x.Group} container height={"73px"}>
+                <Grid key={x.Group} container height='73px'>
                   <SelectCategoryButton
                     $background={category === x.Group ? "#F8F9FC" : "#fff"}
                     onClick={() => setCategory(x.Group)}
                   >
-                    <Grid container alignItems={"center"} gap={"22px"}>
+                    <Grid container alignItems='center' gap='22px'>
                       {category === x.Group ? (
                         <CategoryImg src={x.ActiveIcon} alt='Icon' />
                       ) : (
                         <CategoryImg src={x.Icon} alt='Icon' />
                       )}
                       <Grid>
-                        <Text variant={"BOLD"} color={category === x.Group ? "#6B59CC" : "#1A1C1D"}>
+                        <Text variant='BOLD' color={category === x.Group ? "#6B59CC" : "#1A1C1D"}>
                           {x.Group}
                         </Text>
                       </Grid>
@@ -426,11 +426,11 @@ const Schedule = () => {
               ),
           )}
           <SelectCategoryButton>
-            <AddNewEventLink to={"/AddNewEvent"}>
-              <Grid container alignItems={"center"} gap={"22px"}>
+            <AddNewEventLink to='/AddNewEvent'>
+              <Grid container alignItems='center' gap='22px'>
                 <CategoryImg src={AddNewGroup} alt='Icon' />
                 <Grid>
-                  <Text variant={"BOLD"} color={"#8083A3"}>
+                  <Text variant='BOLD' color='#8083A3'>
                     Add New Event
                   </Text>
                 </Grid>
@@ -443,27 +443,27 @@ const Schedule = () => {
         {category === "All Events" && Event.length === 0 && (
           <NoEventsFound container>
             <img src={NoEventsFoundImg} alt='No Events Found Image' />
-            <Grid container gap={"10px"} flexDirection={"column"} alignItems={"center"}>
-              <Text variant={"H1"}>No events found?</Text>
-              <Text variant={"LIGHT"} small>
+            <Grid container gap='10px' flexDirection='column' alignItems='center'>
+              <Text variant='H1'>No events found?</Text>
+              <Text variant='LIGHT' small>
                 Try to create new calendar events or sync your calendar service
               </Text>
             </Grid>
-            <StyledLink to={"/AddNewEvent"}>
-              <Button variant={"FilledActive"} width={"200px"}>
+            <StyledLink to='/AddNewEvent'>
+              <Button variant='FilledActive' width='200px'>
                 Add New Event
               </Button>
             </StyledLink>
           </NoEventsFound>
         )}
         {category === "All Events" && Event.length !== 0 && (
-          <AllEventsGrid container id={"AllEventsGrid"}>
+          <AllEventsGrid container id='AllEventsGrid'>
             {datesArray.map(
               (x: any) =>
                 x.Events.length >= 1 && (
                   <>
                     <DateGrid container key={x.AllDate}>
-                      <Text variant={"BOLD"}>
+                      <Text variant='BOLD'>
                         {Days[x.AllDate.getDay()]}, {Month[x.AllDate.getMonth()]}{" "}
                         {x.AllDate.getDate()}, {x.AllDate.getFullYear()}
                       </Text>
@@ -477,10 +477,10 @@ const Schedule = () => {
                           <TimeImgGrid container>
                             <TimeImg src={TimeIcon} alt='Time Icon' />
                           </TimeImgGrid>
-                          <Text variant={"BOLD"}>
+                          <Text variant='BOLD'>
                             {y.TimeFrom.getHours()}:{y.TimeFrom.getMinutes()}
                           </Text>
-                          <Text variant={"LIGHT"}>
+                          <Text variant='LIGHT'>
                             {y.TimeTo.getHours()}:{y.TimeTo.getMinutes()}
                           </Text>
                         </EventTime>
@@ -492,13 +492,13 @@ const Schedule = () => {
                           >
                             {y.Group}
                           </GroupEventGrid>
-                          <Text variant={"BOLD"} color={"#8083A3"} small>
+                          <Text variant='BOLD' color='#8083A3' small>
                             {y.Title}
                           </Text>
                         </AboutEventGrid>
                         <EditEventGrid container item xs={3}>
                           <Avatar src={MembersAvatar} alt='Avatar' />
-                          <Grid borderRadius={"10px"} onClick={() => setDateOnClick(y.Id, y)}>
+                          <Grid borderRadius='10px' onClick={() => setDateOnClick(y.Id, y)}>
                             <EditButtons
                               onClick={handleClick}
                               $background={editClick !== y.Id ? "#fff" : "#eceef5"}
@@ -516,13 +516,13 @@ const Schedule = () => {
           </AllEventsGrid>
         )}
         {category !== "All Events" && Event.length !== 0 && (
-          <AllEventsGrid container id={"AllEventsGrid"}>
+          <AllEventsGrid container id='AllEventsGrid'>
             {datesArray.map(
               (x: any) =>
                 x.Events.length >= 1 && (
                   <>
                     <DateGrid container key={x.AllDate}>
-                      <Text variant={"BOLD"}>
+                      <Text variant='BOLD'>
                         {Days[x.AllDate.getDay()]}, {Month[x.AllDate.getMonth()]}{" "}
                         {x.AllDate.getDate()}, {x.AllDate.getFullYear()}
                       </Text>
@@ -538,10 +538,10 @@ const Schedule = () => {
                               <TimeImgGrid container>
                                 <TimeImg src={TimeIcon} alt='Time Icon' />
                               </TimeImgGrid>
-                              <Text variant={"BOLD"}>
+                              <Text variant='BOLD'>
                                 {y.TimeFrom.getHours()}:{y.TimeFrom.getMinutes()}
                               </Text>
-                              <Text variant={"LIGHT"}>
+                              <Text variant='LIGHT'>
                                 {y.TimeTo.getHours()}:{y.TimeTo.getMinutes()}
                               </Text>
                             </EventTime>
@@ -553,13 +553,13 @@ const Schedule = () => {
                               >
                                 {y.Group}
                               </GroupEventGrid>
-                              <Text variant={"BOLD"} color={"#8083A3"} small>
+                              <Text variant='BOLD' color='#8083A3' small>
                                 {y.Title}
                               </Text>
                             </AboutEventGrid>
                             <EditEventGrid container item xs={3}>
                               <Avatar src={MembersAvatar} alt='Avatar' />
-                              <Grid borderRadius={"10px"} onClick={() => setDateOnClick(y.Id, y)}>
+                              <Grid borderRadius='10px' onClick={() => setDateOnClick(y.Id, y)}>
                                 <EditButtons
                                   onClick={handleClick}
                                   $background={editClick !== y.Id ? "#fff" : "#eceef5"}

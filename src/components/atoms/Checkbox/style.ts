@@ -1,5 +1,5 @@
-import { Grid } from '@mui/material';
-import styled from 'styled-components';
+import { Grid } from "@mui/material";
+import styled from "styled-components";
 
 export const StyledCheckbox = styled(Grid)`
   width: 20px;
@@ -14,12 +14,12 @@ export const StyledCheckbox = styled(Grid)`
     width: 20px;
   }
 
-  input[type='checkbox'] {
+  input[type="checkbox"] {
     visibility: hidden;
     position: absolute;
   }
 
-  input[type='checkbox']:checked + label {
+  input[type="checkbox"]:checked + label {
     border-color: #6b59cc;
     background-color: #fff;
   }

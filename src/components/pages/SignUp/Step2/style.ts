@@ -1,6 +1,6 @@
-import Grid from '@mui/material/Grid';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import Grid from "@mui/material/Grid";
+import {Link} from "react-router-dom";
+import styled from "styled-components";
 
 export const Wrapper = styled(Grid)`
   justify-content: center;
@@ -24,8 +24,6 @@ export const StyledLink = styled(Link)`
 `;
 
 export const FormGrid = styled(Grid)`
-  gap: 20px;
   width: 420px;
   flex-direction: column;
-  padding-bottom: 36px;
 `;

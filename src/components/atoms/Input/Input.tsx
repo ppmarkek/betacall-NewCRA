@@ -214,7 +214,7 @@ const Input = ({
     case "LightInput":
       return (
         <InputGrid container $width={width}>
-          <Text variant={"LIGHT"} small={true}>
+          <Text variant='LIGHT' small={true}>
             {title}
           </Text>
           <LightInput
@@ -233,12 +233,12 @@ const Input = ({
       return (
         <ConfirmPassword container>
           <InputGrid container $width={width}>
-            <Text variant={"LIGHT"} small={true}>
+            <Text variant='LIGHT' small={true}>
               Password
             </Text>
             <LightInput
-              type={"password"}
-              placeholder={"Enter your password"}
+              type='password'
+              placeholder='Enter your password'
               $color={color}
               onChange={(x: any) => setValue(x.target.value)}
               value={value}
@@ -246,12 +246,12 @@ const Input = ({
             <StyledImg src={Icon} alt='' />
           </InputGrid>
           <InputGrid container $width={width}>
-            <Text variant={"LIGHT"} small={true}>
+            <Text variant='LIGHT' small={true}>
               Confirm password
             </Text>
             <LightInput
-              type={"password"}
-              placeholder={"Confirm your password"}
+              type='password'
+              placeholder='Confirm your password'
               $color={color}
               onChange={(x: any) => CheackConfirmPass(x.target.value)}
               value={value}
@@ -280,14 +280,14 @@ const Input = ({
             <ResultsGird container>
               <Result container>
                 <SearchLink to='/'>
-                  <Grid container gap={"20px"}>
-                    <Grid position={"relative"} height={"40px"} width={"40px"}>
+                  <Grid container gap='20px'>
+                    <Grid position='relative' height='40px' width='40px'>
                       <img src={Avatar} alt='' />
                       <Status />
                     </Grid>
                     <Grid>
-                      <Text variant={"BOLD"}>John Doe</Text>
-                      <Text variant={"LIGHT"} small={true}>
+                      <Text variant='BOLD'>John Doe</Text>
+                      <Text variant='LIGHT' small={true}>
                         Developer
                       </Text>
                     </Grid>
@@ -311,8 +311,8 @@ const Input = ({
       );
     case "Select":
       return (
-        <Grid container gap={"10px"} flexDirection={"column"}>
-          <Text variant={"LIGHT"} small={true}>
+        <Grid container gap='10px' flexDirection='column'>
+          <Text variant='LIGHT' small={true}>
             {title}
           </Text>
           <StyledFormControl variant='standard' sx={{ width: width }}>
@@ -336,14 +336,14 @@ const Input = ({
       );
     case "ChangePassword":
       return (
-        <Grid container justifyContent={"space-between"} width={"auto"}>
+        <Grid container justifyContent='space-between' width='auto'>
           <InputGrid container $width={width}>
-            <Text variant={"LIGHT"} small={true}>
+            <Text variant='LIGHT' small={true}>
               Current password
             </Text>
             <LightInput
-              type={"password"}
-              placeholder={"Enter your password"}
+              type='password'
+              placeholder='Enter your password'
               $color={color}
               onChange={(x: any) => setValue(x.target.value)}
               value={value}
@@ -351,12 +351,12 @@ const Input = ({
             <StyledImg src={Icon} alt='' />
           </InputGrid>
           <InputGrid container $width={width}>
-            <Text variant={"LIGHT"} small={true}>
+            <Text variant='LIGHT' small={true}>
               New password
             </Text>
             <LightInput
-              type={"password"}
-              placeholder={"Confirm your password"}
+              type='password'
+              placeholder='Confirm your password'
               $color={color}
               onChange={(x: any) => CheackChangePassword(x.target.value)}
               value={value}

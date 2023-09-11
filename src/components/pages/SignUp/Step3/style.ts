@@ -1,6 +1,6 @@
-import Grid from '@mui/material/Grid';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import Grid from "@mui/material/Grid";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const Wrapper = styled(Grid)`
   justify-content: center;
@@ -14,7 +14,7 @@ export const Wrapper = styled(Grid)`
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: #6b59cc;
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: normal;
   font-weight: 700;
   font-size: 16px;

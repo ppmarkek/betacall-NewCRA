@@ -144,8 +144,8 @@ const AddNewEvent = () => {
         <Avatar container>
           <StyledAvatarImg src={AddNewEventImg} alt='Avatar' />
         </Avatar>
-        <Grid container height={"110px"}>
-          <Grid container padding={"20px 0"}>
+        <Grid container height='110px'>
+          <Grid container padding='20px 0'>
             <SelectCategoryButton
               $background={category === "General information" ? "#F8F9FC" : "#fff"}
               onClick={() => setCategory("General information")}
@@ -157,18 +157,18 @@ const AddNewEvent = () => {
               )}
               <Grid>
                 <Text
-                  variant={"BOLD"}
+                  variant='BOLD'
                   color={category === "General information" ? "#6B59CC" : "#1A1C1D"}
                 >
                   General information
                 </Text>
-                <Text variant={"LIGHT"}>Profile foto, name & language</Text>
+                <Text variant='LIGHT'>Profile foto, name & language</Text>
               </Grid>
             </SelectCategoryButton>
           </Grid>
           <Border />
         </Grid>
-        <Grid container padding={"20px 0"}>
+        <Grid container padding='20px 0'>
           <SelectCategoryButton
             $background={category === "Notifications" ? "#F8F9FC" : "#fff"}
             onClick={() => setCategory("Notifications")}
@@ -179,10 +179,10 @@ const AddNewEvent = () => {
               <CategoryImg src={NotificationsIcon} alt='Icon' />
             )}
             <Grid>
-              <Text variant={"BOLD"} color={category === "Notifications" ? "#6B59CC" : "#1A1C1D"}>
+              <Text variant='BOLD' color={category === "Notifications" ? "#6B59CC" : "#1A1C1D"}>
                 Notifications
               </Text>
-              <Text variant={"LIGHT"}>Set your email notifications</Text>
+              <Text variant='LIGHT'>Set your email notifications</Text>
             </Grid>
           </SelectCategoryButton>
         </Grid>
@@ -190,30 +190,30 @@ const AddNewEvent = () => {
       <SelectCategory container item xs={9}>
         {category === "General information" && (
           <GeneralInformationGrid container>
-            <Text variant={"H4"}>General information</Text>
-            <Grid container justifyContent={"space-between"}>
-              <Grid container item xs={5} justifyContent={"space-between"}>
+            <Text variant='H4'>General information</Text>
+            <Grid container justifyContent='space-between'>
+              <Grid container item xs={5} justifyContent='space-between'>
                 <Grid item xs={6} container>
-                  <Text variant={"LIGHT"}>Date</Text>
+                  <Text variant='LIGHT'>Date</Text>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <StyledDatePicker onChange={(x: any) => setDate(x.$d)} />
                   </LocalizationProvider>
                 </Grid>
                 <Grid item xs={6}>
                   <Input
-                    variant={"Select"}
-                    width={"90%"}
-                    title={"Group"}
-                    text={"Select group"}
-                    SelectDefaultValue={"10"}
+                    variant='Select'
+                    width='90%'
+                    title='Group'
+                    text='Select group'
+                    SelectDefaultValue='10'
                     SelectArray={GroupCategoty}
                     onChange={(value: number) => searchGroup(value)}
                   />
                 </Grid>
               </Grid>
-              <Grid container item xs={5} justifyContent={"space-between"}>
+              <Grid container item xs={5} justifyContent='space-between'>
                 <TimePickerGrid container item xs={6}>
-                  <Text variant={"LIGHT"}>Time from</Text>
+                  <Text variant='LIGHT'>Time from</Text>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={["TimePicker"]}>
                       <StyledTimePicker
@@ -228,7 +228,7 @@ const AddNewEvent = () => {
                   </LocalizationProvider>
                 </TimePickerGrid>
                 <TimePickerGrid container item xs={6}>
-                  <Text variant={"LIGHT"}>Time to</Text>
+                  <Text variant='LIGHT'>Time to</Text>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={["TimePicker"]}>
                       <StyledTimePicker
@@ -246,27 +246,21 @@ const AddNewEvent = () => {
             </Grid>
             <Members container>
               <Grid container>
-                <Text variant={"LIGHT"}>Members</Text>
+                <Text variant='LIGHT'>Members</Text>
               </Grid>
-              <Grid container gap={"10px"} height={"150px"}>
+              <Grid container gap='10px' height='150px'>
                 {allMembersUsers.map((x: any) => (
                   <UserGrid container key={x.Name}>
-                    <MembersImg src={x.Icon} alt={"Avatar"} />
-                    <Text variant={"BOLD"}>{x.Name}</Text>
+                    <MembersImg src={x.Icon} alt='Avatar' />
+                    <Text variant='BOLD'>{x.Name}</Text>
                     <DeleteImg src={Delete} alt='Delete' onClick={() => DeleteUsersArray(x)} />
                   </UserGrid>
                 ))}
                 {allMembersUsers.length <= 6 && (
                   <>
-                    <Grid
-                      container
-                      gap={"10px"}
-                      width={"auto"}
-                      height={"55px"}
-                      alignItems={"center"}
-                    >
+                    <Grid container gap='10px' width='auto' height='55px' alignItems='center'>
                       <PlusImg src={Plus} alt='Add Email' onClick={handleOpen} />
-                      <Text variant={"BOLD"} color='#8083A3'>
+                      <Text variant='BOLD' color='#8083A3'>
                         Add User
                       </Text>
                     </Grid>
@@ -279,8 +273,8 @@ const AddNewEvent = () => {
                       <Box container>
                         {addUsersArray.map(x => (
                           <MembersAvatarButton key={x.Name} onClick={() => CutUsersArray(x)}>
-                            <MembersImg src={x.Icon} alt={"Avatar"} />
-                            <Text variant={"BOLD"}>{x.Name}</Text>
+                            <MembersImg src={x.Icon} alt='Avatar' />
+                            <Text variant='BOLD'>{x.Name}</Text>
                           </MembersAvatarButton>
                         ))}
                       </Box>
@@ -289,24 +283,24 @@ const AddNewEvent = () => {
                 )}
               </Grid>
             </Members>
-            <Grid container height={"90px"} justifyContent={"space-between"}>
+            <Grid container height='90px' justifyContent='space-between'>
               <Grid item xs={6}>
                 <Input
-                  variant={"LightInput"}
-                  width={"90%"}
-                  IconType={"Email"}
-                  title={"Title"}
-                  text={"Start typing …"}
+                  variant='LightInput'
+                  width='90%'
+                  IconType='Email'
+                  title='Title'
+                  text='Start typing …'
                   onChange={(value: string) => setTitle(value)}
                 />
               </Grid>
-              <Grid container item xs={6} flexDirection={"column"} alignItems={"flex-end"}>
+              <Grid container item xs={6} flexDirection='column' alignItems='flex-end'>
                 <Input
-                  variant={"LightInput"}
-                  width={"90%"}
-                  IconType={"Email"}
-                  title={"Note"}
-                  text={"Start typing …"}
+                  variant='LightInput'
+                  width='90%'
+                  IconType='Email'
+                  title='Note'
+                  text='Start typing …'
                   onChange={(value: string) => setNote(value)}
                 />
               </Grid>
@@ -314,8 +308,8 @@ const AddNewEvent = () => {
           </GeneralInformationGrid>
         )}
         {category !== "Notifications" && (
-          <Grid container justifyContent={"space-between"}>
-            <Grid container gap={"10px"} width={"auto"}>
+          <Grid container justifyContent='space-between'>
+            <Grid container gap='10px' width='auto'>
               <Button
                 onClick={x =>
                   x === true &&
@@ -330,14 +324,14 @@ const AddNewEvent = () => {
                     Id: Event.length + 1,
                   })
                 }
-                variant={"FilledActive"}
-                width={"220px"}
+                variant='FilledActive'
+                width='220px'
               >
                 Create New Event
               </Button>
             </Grid>
-            <StyledLink to={"/Schedule"}>
-              <Button variant={"FilledRestingLight"} width={"125px"}>
+            <StyledLink to='/Schedule'>
+              <Button variant='FilledRestingLight' width='125px'>
                 Cancel
               </Button>
             </StyledLink>
