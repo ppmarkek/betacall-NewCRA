@@ -1,7 +1,7 @@
-import {IconButton, InputAdornment, InputLabel} from "@mui/material";
-import {Field} from "formik";
-import {MouseEventHandler, ReactNode} from "react";
-import {InputField} from "./style";
+import { IconButton, InputAdornment, InputLabel } from "@mui/material";
+import { Field } from "formik";
+import { MouseEventHandler, ReactNode } from "react";
+import { InputField } from "./style";
 
 type InputWithFormikProps = {
   name: string

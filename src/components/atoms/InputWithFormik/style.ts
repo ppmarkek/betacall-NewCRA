@@ -16,4 +16,10 @@ export const InputField = styled(TextField)<InputStyleProps>`
   fieldset {
     border: 0;
   }
+  .MuiInputAdornment-root svg {
+    cursor: pointer;
+    :focus {
+      fill: red;
+    }
+  }
 `;

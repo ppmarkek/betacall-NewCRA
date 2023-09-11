@@ -16,6 +16,11 @@ const SignupSchema = yup.object().shape({
   confirmPassword: yup.string().oneOf([yup.ref("password"), undefined], "Passwords must match"),
 });
 
+const validatePassword = yup.object().shape({
+  password: yup.string().required("Password is required"),
+  confirmPassword: yup.string().oneOf([yup.ref("password"), undefined], "Passwords must match"),
+});
+
 const Step2 = () => {
   return (
     <Wrapper container>
@@ -29,8 +34,10 @@ const Step2 = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={values => addUser(values)}
+        validateOnChange
+        validateOnBlur
       >
-        {() => (
+        {({ values }) => (
           <Form>
             <Title container gap="5px">
               <Text variant="H1">Tell us more about yourself</Text>
@@ -44,7 +51,11 @@ const Step2 = () => {
               <InputWithFormik
                 name="confirmPassword"
                 label="Confirm Password"
-                endIcon={<CheckCircle />}
+                endIcon={
+                  <CheckCircle
+                    color={validatePassword.isValidSync(values) ? "success" : "inherit"}
+                  />
+                }
               />
             </FormGrid>
             <Checkbox>I agree with terms & conditions</Checkbox>
