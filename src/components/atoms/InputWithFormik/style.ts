@@ -20,14 +20,10 @@ export const InputField = styled(TextField)<InputStyleProps>`
 `;
 
 export const InputAdornmentWithStyle = styled(InputAdornment)<{
-  focused: boolean
-  onInputColor: string
+  $focused: boolean
+  $inputIconColor: string
 }>`
   svg {
-    ${({ focused, onInputColor }) =>
-      focused &&
-      `
-    fill: ${onInputColor};
-  `}
+    fill: ${({ $focused, $inputIconColor }) => ($focused ? $inputIconColor : undefined)};
   }
 `;

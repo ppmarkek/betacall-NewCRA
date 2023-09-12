@@ -10,7 +10,7 @@ type InputWithFormikProps = {
   endIcon?: ReactNode
   hideInput?: boolean
   onIconClick?: MouseEventHandler<HTMLButtonElement>
-  onInputColor?: string
+  inputIconColor?: string
 }
 
 export const InputWithFormik = ({
@@ -20,7 +20,7 @@ export const InputWithFormik = ({
   endIcon,
   hideInput = true,
   onIconClick,
-  onInputColor = "black",
+  inputIconColor = "black",
 }: InputWithFormikProps) => {
   const [inputInFocus, setInputInFocus] = useState(false);
   return (
@@ -36,8 +36,8 @@ export const InputWithFormik = ({
           endAdornment: endIcon && (
             <InputAdornmentWithStyle
               position="end"
-              focused={inputInFocus}
-              onInputColor={onInputColor}
+              $focused={inputInFocus}
+              $inputIconColor={inputIconColor}
             >
               {onIconClick ? (
                 <IconButton aria-label={`${name} input icon`} edge="end" onClick={onIconClick}>
