@@ -51,6 +51,7 @@ const Step2 = () => {
               <InputWithFormik
                 name="confirmPassword"
                 label="Confirm Password"
+                onInputColor={validatePassword.isValidSync(values) ? "success" : "black"}
                 endIcon={
                   <CheckCircle
                     color={validatePassword.isValidSync(values) ? "success" : "inherit"}

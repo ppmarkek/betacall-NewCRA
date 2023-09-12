@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { TextField } from "formik-mui";
+import { InputAdornment } from "@mui/material";
 
 type InputStyleProps = {
   fullWidth?: boolean
@@ -16,10 +17,17 @@ export const InputField = styled(TextField)<InputStyleProps>`
   fieldset {
     border: 0;
   }
-  .MuiInputAdornment-root svg {
-    cursor: pointer;
-    :focus {
-      fill: red;
-    }
+`;
+
+export const InputAdornmentWithStyle = styled(InputAdornment)<{
+  focused: boolean
+  onInputColor: string
+}>`
+  svg {
+    ${({ focused, onInputColor }) =>
+      focused &&
+      `
+    fill: ${onInputColor};
+  `}
   }
 `;

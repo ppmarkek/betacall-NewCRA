@@ -1,7 +1,7 @@
-import { IconButton, InputAdornment, InputLabel } from "@mui/material";
+import { IconButton, InputLabel } from "@mui/material";
 import { Field } from "formik";
-import { MouseEventHandler, ReactNode } from "react";
-import { InputField } from "./style";
+import { MouseEventHandler, ReactNode, useState } from "react";
+import { InputAdornmentWithStyle, InputField } from "./style";
 
 type InputWithFormikProps = {
   name: string
@@ -10,6 +10,7 @@ type InputWithFormikProps = {
   endIcon?: ReactNode
   hideInput?: boolean
   onIconClick?: MouseEventHandler<HTMLButtonElement>
+  onInputColor?: string
 }
 
 export const InputWithFormik = ({
@@ -19,7 +20,9 @@ export const InputWithFormik = ({
   endIcon,
   hideInput = true,
   onIconClick,
+  onInputColor = "black",
 }: InputWithFormikProps) => {
+  const [inputInFocus, setInputInFocus] = useState(false);
   return (
     <>
       <InputLabel>{label}</InputLabel>
@@ -27,9 +30,15 @@ export const InputWithFormik = ({
         component={InputField}
         name={name}
         type={hideInput ? type : "password"}
+        onBlur={() => setInputInFocus(false)}
+        onFocus={() => setInputInFocus(true)}
         InputProps={{
           endAdornment: endIcon && (
-            <InputAdornment position="end">
+            <InputAdornmentWithStyle
+              position="end"
+              focused={inputInFocus}
+              onInputColor={onInputColor}
+            >
               {onIconClick ? (
                 <IconButton aria-label={`${name} input icon`} edge="end" onClick={onIconClick}>
                   {endIcon}
@@ -37,7 +46,7 @@ export const InputWithFormik = ({
               ) : (
                 endIcon
               )}
-            </InputAdornment>
+            </InputAdornmentWithStyle>
           ),
         }}
       />
