@@ -3,6 +3,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import styled from "styled-components";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { Link } from "react-router-dom";
+import { Form } from "formik";
 
 type CategoryProps = {
   $background?: string
@@ -67,9 +68,6 @@ export const StyledAvatarImg = styled.img`
 export const SelectCategory = styled(Grid)`
   gap: 40px;
   padding: 35px 30px 20px 35px;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
 `;
 
 export const GeneralInformationGrid = styled(Grid)`
@@ -200,4 +198,12 @@ export const DeleteImg = styled.img`
 
 export const StyledLink = styled(Link)`
   all: unset;
+`;
+
+export const StyledForm = styled(Form)`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
 `;

@@ -1,4 +1,4 @@
-import { IconButton, InputLabel } from "@mui/material";
+import { Grid, IconButton, InputLabel } from "@mui/material";
 import { Field } from "formik";
 import { MouseEventHandler, ReactNode, useState } from "react";
 import { InputAdornmentWithStyle, InputField } from "./style";
@@ -24,7 +24,7 @@ export const InputWithFormik = ({
 }: InputWithFormikProps) => {
   const [inputInFocus, setInputInFocus] = useState(false);
   return (
-    <>
+    <Grid display={"flex"} flexDirection={"column"} height={"75px"} width={"100%"}>
       <InputLabel>{label}</InputLabel>
       <Field
         component={InputField}
@@ -50,6 +50,6 @@ export const InputWithFormik = ({
           ),
         }}
       />
-    </>
+    </Grid>
   );
 };

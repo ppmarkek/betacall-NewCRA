@@ -17,7 +17,7 @@ const Step1 = () => {
           <Text variant={"H1"}>Sign Up to getting started.</Text>
         </Grid>
 
-        <Text variant='LIGHT'>Enter your details to proceed further</Text>
+        <Text variant="LIGHT">Enter your details to proceed further</Text>
       </Title>
       <Grid container gap={"36px"} flexDirection={"column"} width={"unset"}>
         <Input
@@ -37,7 +37,7 @@ const Step1 = () => {
       </Grid>
       <OrGrid container>
         <Grid borderBottom={"1px solid #EEEEEE"} width={"72px"} height={"1px"}></Grid>
-        <Text variant='LIGHT' small>
+        <Text variant="LIGHT" small>
           Or
         </Text>
         <Grid borderBottom={"1px solid #EEEEEE"} width={"72px"} height={"1px"}></Grid>
@@ -45,19 +45,19 @@ const Step1 = () => {
       <Grid container gap={"8px"} flexDirection={"column"} width={"unset"}>
         <SocialLink to={"/"}>
           <IconGrid borderRight={"1px solid #EEEEEE"} width={"48px"}>
-            <img src={Google} alt='' />
+            <img src={Google} alt="" />
           </IconGrid>
           <HoverGrid container>Sign Up with Google</HoverGrid>
         </SocialLink>
         <SocialLink to={"/"}>
           <IconGrid borderRight={"1px solid #EEEEEE"} width={"48px"}>
-            <img src={Facebook} alt='' />
+            <img src={Facebook} alt="" />
           </IconGrid>
           <HoverGrid container>Sign Up with Facebook</HoverGrid>
         </SocialLink>
         <SocialLink to={"/"}>
           <IconGrid borderRight={"1px solid #EEEEEE"} width={"48px"}>
-            <img src={Twitter} alt='' />
+            <img src={Twitter} alt="" />
           </IconGrid>
           <HoverGrid container>Sign Up with Twitter</HoverGrid>
         </SocialLink>

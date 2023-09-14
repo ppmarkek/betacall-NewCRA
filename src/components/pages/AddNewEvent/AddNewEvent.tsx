@@ -15,6 +15,7 @@ import {
   SelectCategoryButton,
   StyledAvatarImg,
   StyledDatePicker,
+  StyledForm,
   StyledLink,
   StyledTimePicker,
   TimePickerGrid,
@@ -39,18 +40,17 @@ import Delete from "../../../assets/AddNewEventIcon/Del.svg";
 import Input from "../../atoms/Input/Input";
 import Button from "../../atoms/Button/Button";
 import { Event } from "../Schedule/Data";
+import { Formik } from "formik";
+import * as yup from "yup";
+import { addEvent } from "../../../requests";
 
 const AddNewEvent = () => {
-  const [note, setNote] = useState("");
-  const [title, setTitle] = useState("");
-  const [timeTo, setTimeTo] = useState("");
-  const [timeFrom, setTimeFrom] = useState("");
-  const [date, setDate] = useState("");
+  const [group, setGroup] = useState("Business");
   const [category, setCategory] = useState("General information");
   const [open, setOpen] = useState(false);
-  const [group, setGroup] = useState("Business");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   interface UsersInterface {
     Name: string
     Icon: string
@@ -138,206 +138,236 @@ const AddNewEvent = () => {
     return GroupCategoty.some(x => x.value === value && setGroup(x.Text));
   };
 
+  const CreateEventSchema = yup.object().shape({
+    title: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
+    note: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
+    email: yup.string().required("Required"),
+    date: yup.string().required("Required"),
+    timeFrom: yup.string().required("Required"),
+    timeTo: yup.string().required("Required"),
+    group: yup.string().required("Required"),
+  });
+
   return (
     <Wrapper container item xs={12}>
       <Events item xs={3}>
         <Avatar container>
-          <StyledAvatarImg src={AddNewEventImg} alt='Avatar' />
+          <StyledAvatarImg src={AddNewEventImg} alt="Avatar" />
         </Avatar>
-        <Grid container height='110px'>
-          <Grid container padding='20px 0'>
+        <Grid container height="110px">
+          <Grid container padding="20px 0">
             <SelectCategoryButton
               $background={category === "General information" ? "#F8F9FC" : "#fff"}
               onClick={() => setCategory("General information")}
             >
               {category === "General information" ? (
-                <CategoryImg src={AllEventsActive} alt='Icon' />
+                <CategoryImg src={AllEventsActive} alt="Icon" />
               ) : (
-                <CategoryImg src={AllEvents} alt='Icon' />
+                <CategoryImg src={AllEvents} alt="Icon" />
               )}
               <Grid>
                 <Text
-                  variant='BOLD'
+                  variant="BOLD"
                   color={category === "General information" ? "#6B59CC" : "#1A1C1D"}
                 >
                   General information
                 </Text>
-                <Text variant='LIGHT'>Profile foto, name & language</Text>
+                <Text variant="LIGHT">Profile foto, name & language</Text>
               </Grid>
             </SelectCategoryButton>
           </Grid>
           <Border />
         </Grid>
-        <Grid container padding='20px 0'>
+        <Grid container padding="20px 0">
           <SelectCategoryButton
             $background={category === "Notifications" ? "#F8F9FC" : "#fff"}
             onClick={() => setCategory("Notifications")}
           >
             {category === "Notifications" ? (
-              <CategoryImg src={NotificationsActiveIcon} alt='Icon' />
+              <CategoryImg src={NotificationsActiveIcon} alt="Icon" />
             ) : (
-              <CategoryImg src={NotificationsIcon} alt='Icon' />
+              <CategoryImg src={NotificationsIcon} alt="Icon" />
             )}
             <Grid>
-              <Text variant='BOLD' color={category === "Notifications" ? "#6B59CC" : "#1A1C1D"}>
+              <Text variant="BOLD" color={category === "Notifications" ? "#6B59CC" : "#1A1C1D"}>
                 Notifications
               </Text>
-              <Text variant='LIGHT'>Set your email notifications</Text>
+              <Text variant="LIGHT">Set your email notifications</Text>
             </Grid>
           </SelectCategoryButton>
         </Grid>
       </Events>
-      <SelectCategory container item xs={9}>
-        {category === "General information" && (
-          <GeneralInformationGrid container>
-            <Text variant='H4'>General information</Text>
-            <Grid container justifyContent='space-between'>
-              <Grid container item xs={5} justifyContent='space-between'>
-                <Grid item xs={6} container>
-                  <Text variant='LIGHT'>Date</Text>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <StyledDatePicker onChange={(x: any) => setDate(x.$d)} />
-                  </LocalizationProvider>
-                </Grid>
-                <Grid item xs={6}>
-                  <Input
-                    variant='Select'
-                    width='90%'
-                    title='Group'
-                    text='Select group'
-                    SelectDefaultValue='10'
-                    SelectArray={GroupCategoty}
-                    onChange={(value: number) => searchGroup(value)}
-                  />
-                </Grid>
-              </Grid>
-              <Grid container item xs={5} justifyContent='space-between'>
-                <TimePickerGrid container item xs={6}>
-                  <Text variant='LIGHT'>Time from</Text>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={["TimePicker"]}>
-                      <StyledTimePicker
-                        onChange={(x: any) => setTimeFrom(x.$d)}
-                        viewRenderers={{
-                          hours: renderTimeViewClock,
-                          minutes: renderTimeViewClock,
-                          seconds: renderTimeViewClock,
-                        }}
-                      />
-                    </DemoContainer>
-                  </LocalizationProvider>
-                </TimePickerGrid>
-                <TimePickerGrid container item xs={6}>
-                  <Text variant='LIGHT'>Time to</Text>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={["TimePicker"]}>
-                      <StyledTimePicker
-                        onChange={(x: any) => setTimeTo(x.$d)}
-                        viewRenderers={{
-                          hours: renderTimeViewClock,
-                          minutes: renderTimeViewClock,
-                          seconds: renderTimeViewClock,
-                        }}
-                      />
-                    </DemoContainer>
-                  </LocalizationProvider>
-                </TimePickerGrid>
-              </Grid>
-            </Grid>
-            <Members container>
-              <Grid container>
-                <Text variant='LIGHT'>Members</Text>
-              </Grid>
-              <Grid container gap='10px' height='150px'>
-                {allMembersUsers.map((x: any) => (
-                  <UserGrid container key={x.Name}>
-                    <MembersImg src={x.Icon} alt='Avatar' />
-                    <Text variant='BOLD'>{x.Name}</Text>
-                    <DeleteImg src={Delete} alt='Delete' onClick={() => DeleteUsersArray(x)} />
-                  </UserGrid>
-                ))}
-                {allMembersUsers.length <= 6 && (
-                  <>
-                    <Grid container gap='10px' width='auto' height='55px' alignItems='center'>
-                      <PlusImg src={Plus} alt='Add Email' onClick={handleOpen} />
-                      <Text variant='BOLD' color='#8083A3'>
-                        Add User
-                      </Text>
+      <Formik
+        initialValues={{
+          title: "",
+          note: "",
+          date: "",
+          timeFrom: "",
+          timeTo: "",
+          group: "",
+          members: "",
+        }}
+        validationSchema={CreateEventSchema}
+        onSubmit={(values: any) => console.log(values)}
+        validateOnChange
+        validateOnBlur
+      >
+        {({ form }) => (
+          <SelectCategory container item xs={9}>
+            <StyledForm>
+              {category === "General information" && (
+                <GeneralInformationGrid container>
+                  <Text variant="H4">General information</Text>
+                  <Grid container justifyContent="space-between">
+                    <Grid container item xs={5} justifyContent="space-between">
+                      <Grid item xs={6} container>
+                        <Text variant="LIGHT">Date</Text>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <StyledDatePicker
+                            onChange={form.handleChange}
+                            value={form.values.date}
+                            name="date"
+                          />
+                        </LocalizationProvider>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Input
+                          variant="Select"
+                          width="90%"
+                          title="Group"
+                          text="Select group"
+                          SelectDefaultValue="10"
+                          SelectArray={GroupCategoty}
+                          onChange={(value: number) => searchGroup(value)}
+                        />
+                      </Grid>
                     </Grid>
-                    <Modal
-                      open={open}
-                      onClose={handleClose}
-                      aria-labelledby='modal-modal-title'
-                      aria-describedby='modal-modal-description'
-                    >
-                      <Box container>
-                        {addUsersArray.map(x => (
-                          <MembersAvatarButton key={x.Name} onClick={() => CutUsersArray(x)}>
-                            <MembersImg src={x.Icon} alt='Avatar' />
-                            <Text variant='BOLD'>{x.Name}</Text>
-                          </MembersAvatarButton>
-                        ))}
-                      </Box>
-                    </Modal>
-                  </>
-                )}
-              </Grid>
-            </Members>
-            <Grid container height='90px' justifyContent='space-between'>
-              <Grid item xs={6}>
-                <Input
-                  variant='LightInput'
-                  width='90%'
-                  IconType='Email'
-                  title='Title'
-                  text='Start typing …'
-                  onChange={(value: string) => setTitle(value)}
-                />
-              </Grid>
-              <Grid container item xs={6} flexDirection='column' alignItems='flex-end'>
-                <Input
-                  variant='LightInput'
-                  width='90%'
-                  IconType='Email'
-                  title='Note'
-                  text='Start typing …'
-                  onChange={(value: string) => setNote(value)}
-                />
-              </Grid>
-            </Grid>
-          </GeneralInformationGrid>
+                    <Grid container item xs={5} justifyContent="space-between">
+                      <TimePickerGrid container item xs={6}>
+                        <Text variant="LIGHT">Time from</Text>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DemoContainer components={["TimePicker"]}>
+                            <StyledTimePicker
+                              onChange={form.handleChange}
+                              value={form.values.timeFrom}
+                              name="timeFrom"
+                              viewRenderers={{
+                                hours: renderTimeViewClock,
+                                minutes: renderTimeViewClock,
+                                seconds: renderTimeViewClock,
+                              }}
+                            />
+                          </DemoContainer>
+                        </LocalizationProvider>
+                      </TimePickerGrid>
+                      <TimePickerGrid container item xs={6}>
+                        <Text variant="LIGHT">Time to</Text>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DemoContainer components={["TimePicker"]}>
+                            <StyledTimePicker
+                              onChange={form.handleChange}
+                              value={form.values.timeFrom}
+                              name="timeFrom"
+                              viewRenderers={{
+                                hours: renderTimeViewClock,
+                                minutes: renderTimeViewClock,
+                                seconds: renderTimeViewClock,
+                              }}
+                            />
+                          </DemoContainer>
+                        </LocalizationProvider>
+                      </TimePickerGrid>
+                    </Grid>
+                  </Grid>
+                  <Members container>
+                    <Grid container>
+                      <Text variant="LIGHT">Members</Text>
+                    </Grid>
+                    <Grid container gap="10px" height="150px">
+                      {allMembersUsers.map((x: any) => (
+                        <UserGrid container key={x.Name}>
+                          <MembersImg src={x.Icon} alt="Avatar" />
+                          <Text variant="BOLD">{x.Name}</Text>
+                          <DeleteImg
+                            src={Delete}
+                            alt="Delete"
+                            onClick={() => DeleteUsersArray(x)}
+                          />
+                        </UserGrid>
+                      ))}
+                      {allMembersUsers.length <= 6 && (
+                        <>
+                          <Grid container gap="10px" width="auto" height="55px" alignItems="center">
+                            <PlusImg src={Plus} alt="Add Email" onClick={handleOpen} />
+                            <Text variant="BOLD" color="#8083A3">
+                              Add User
+                            </Text>
+                          </Grid>
+                          <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                          >
+                            <Box container>
+                              {addUsersArray.map(x => (
+                                <MembersAvatarButton key={x.Name} onClick={() => CutUsersArray(x)}>
+                                  <MembersImg src={x.Icon} alt="Avatar" />
+                                  <Text variant="BOLD">{x.Name}</Text>
+                                </MembersAvatarButton>
+                              ))}
+                            </Box>
+                          </Modal>
+                        </>
+                      )}
+                    </Grid>
+                  </Members>
+                  <Grid container height="90px" justifyContent="space-between">
+                    <Grid item xs={5.5}>
+                      <Input
+                        variant="LightInput"
+                        IconType="Email"
+                        width="100%"
+                        title="Title"
+                        text="Start typing …"
+                        onChange={form.handleChange}
+                        value={form.values.title}
+                        name="title"
+                      />
+                    </Grid>
+                    <Grid container item xs={5.5} flexDirection="column" alignItems="flex-end">
+                      <Input
+                        variant="LightInput"
+                        IconType="Email"
+                        title="Note"
+                        width="100%"
+                        text="Start typing …"
+                        onChange={form.handleChange}
+                        value={form.values.note}
+                        name="note"
+                      />
+                    </Grid>
+                  </Grid>
+                </GeneralInformationGrid>
+              )}
+              {category !== "Notifications" && (
+                <Grid container justifyContent="space-between">
+                  <Grid container gap="10px" width="auto">
+                    <Button variant="FilledActive" width="220px" type="submit">
+                      Create New Event
+                    </Button>
+                  </Grid>
+                  <StyledLink to="/Schedule">
+                    <Button variant="FilledRestingLight" width="125px">
+                      Cancel
+                    </Button>
+                  </StyledLink>
+                </Grid>
+              )}
+            </StyledForm>
+          </SelectCategory>
         )}
-        {category !== "Notifications" && (
-          <Grid container justifyContent='space-between'>
-            <Grid container gap='10px' width='auto'>
-              <Button
-                onClick={x =>
-                  x === true &&
-                  Event.push({
-                    Date: date,
-                    TimeFrom: timeFrom,
-                    TimeTo: timeTo,
-                    Members: allMembersUsers,
-                    Note: note,
-                    Group: group,
-                    Title: title,
-                    Id: Event.length + 1,
-                  })
-                }
-                variant='FilledActive'
-                width='220px'
-              >
-                Create New Event
-              </Button>
-            </Grid>
-            <StyledLink to='/Schedule'>
-              <Button variant='FilledRestingLight' width='125px'>
-                Cancel
-              </Button>
-            </StyledLink>
-          </Grid>
-        )}
-      </SelectCategory>
+      </Formik>
     </Wrapper>
   );
 };

@@ -33,7 +33,7 @@ const Step2 = () => {
           confirmPassword: "",
         }}
         validationSchema={SignupSchema}
-        onSubmit={values => addUser(values)}
+        onSubmit={(values: any) => addUser(values)}
         validateOnChange
         validateOnBlur
       >
@@ -47,19 +47,24 @@ const Step2 = () => {
               <InputWithFormik name="email" type="email" label="Email" endIcon={<Email />} />
               <InputWithFormik name="firstname" label="First Name" endIcon={<Person />} />
               <InputWithFormik name="lastname" label="Last Name" endIcon={<Person />} />
-              <InputWithFormik name="password" label="Password" endIcon={<Lock />} />
+              <InputWithFormik
+                name="password"
+                type="password"
+                label="Password"
+                endIcon={<Lock />}
+              />
               <InputWithFormik
                 name="confirmPassword"
+                type="password"
                 label="Confirm Password"
-                onInputColor={validatePassword.isValidSync(values) ? "success" : "black"}
                 endIcon={
                   <CheckCircle
                     color={validatePassword.isValidSync(values) ? "success" : "inherit"}
                   />
                 }
               />
+              <Checkbox>I agree with terms & conditions</Checkbox>
             </FormGrid>
-            <Checkbox>I agree with terms & conditions</Checkbox>
             <Button variant="FilledActive" width="420px" type="submit">
               Continue
             </Button>

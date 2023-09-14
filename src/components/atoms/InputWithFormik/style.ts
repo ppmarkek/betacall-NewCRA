@@ -9,13 +9,22 @@ type InputStyleProps = {
 
 export const InputField = styled(TextField)<InputStyleProps>`
   width: 100%;
+  padding-right: 0px;
+  .MuiOutlinedInput-root {
+    border-bottom: 1px solid #eceef5;
+    padding-right: 0px;
+    border-radius: 0px;
+    padding-bottom: 3px;
+  }
   input {
     padding: 0;
   }
-  input:focus {
-  }
   fieldset {
     border: 0;
+  }
+  .Mui-error {
+    margin: 0;
+    margin-top: 5px;
   }
 `;
 
