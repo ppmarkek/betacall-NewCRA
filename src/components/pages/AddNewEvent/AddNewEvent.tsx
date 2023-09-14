@@ -43,6 +43,7 @@ import { Event } from "../Schedule/Data";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { addEvent } from "../../../requests";
+import { DatePickerWithFormik } from "../../atoms/DatePickerWithFormik/DatePickerWithFormik";
 
 const AddNewEvent = () => {
   const [group, setGroup] = useState("Business");
@@ -264,7 +265,8 @@ const AddNewEvent = () => {
                         <Text variant="LIGHT">Time to</Text>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <DemoContainer components={["TimePicker"]}>
-                            <StyledTimePicker
+                            <DatePickerWithFormik onChange={form.handleChange} name="timeFrom" />
+                            {/* <StyledTimePicker
                               onChange={form.handleChange}
                               value={form.values.timeFrom}
                               name="timeFrom"
@@ -273,7 +275,7 @@ const AddNewEvent = () => {
                                 minutes: renderTimeViewClock,
                                 seconds: renderTimeViewClock,
                               }}
-                            />
+                            /> */}
                           </DemoContainer>
                         </LocalizationProvider>
                       </TimePickerGrid>
