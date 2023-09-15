@@ -26,7 +26,7 @@ jobs:
         env:
           DEFAULT_BRANCH: "main"
           VALIDATE_ALL_CODEBASE: true
-          VALIDATE_JAVASCRIPT_STANDARD: false
+          VALIDATE_JAVASCRIPT_STANDARD: true
           VALIDATE_JAVASCRIPT_ES: true
           VALIDATE_HTML: false
           LINTER_RULES_PATH: /
