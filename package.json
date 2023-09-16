@@ -16,7 +16,7 @@
   "dependencies": {
     "@ant-design/charts": "^1.4.2",
     "@mui/icons-material": "^5.14.8",
-    "@mui/material": "^5.11.14",
+    "@mui/material": "^5.14.9",
     "@mui/styled-engine": "npm:@mui/styled-engine-sc@^5.11.11",
     "@mui/x-date-pickers": "^6.9.2",
     "@reduxjs/toolkit": "^1.9.3",
