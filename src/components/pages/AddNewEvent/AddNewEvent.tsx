@@ -39,14 +39,13 @@ import MembersAvatar from "../../../assets/AddNewEventIcon/MembersAvatar.svg";
 import Delete from "../../../assets/AddNewEventIcon/Del.svg";
 import Input from "../../atoms/Input/Input";
 import Button from "../../atoms/Button/Button";
-import { Event } from "../Schedule/Data";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { addEvent } from "../../../requests";
-import { DatePickerWithFormik } from "../../atoms/DatePickerWithFormik/DatePickerWithFormik";
+import { InputWithFormik } from "../../atoms/InputWithFormik/InputWithFormik";
+import { Email } from "@mui/icons-material";
 
 const AddNewEvent = () => {
-  const [group, setGroup] = useState("Business");
   const [category, setCategory] = useState("General information");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -55,32 +54,40 @@ const AddNewEvent = () => {
   interface UsersInterface {
     Name: string
     Icon: string
+    Id: string
   }
+
   const [allMembersUsers, setAllMembersUsers] = useState<UsersInterface[]>([]);
   const [addUsersArray, setAddUsersArray] = useState([
     {
       Name: "Beatrice Hill",
       Icon: MembersAvatar,
+      Id: 233,
     },
     {
       Name: "Mildred Patrick",
       Icon: MembersAvatar,
+      Id: 232,
     },
     {
       Name: "Cordelia Stone",
       Icon: MembersAvatar,
+      Id: 231,
     },
     {
       Name: "Victoria Garner",
       Icon: MembersAvatar,
+      Id: 230,
     },
     {
       Name: "Etta Brady",
       Icon: MembersAvatar,
+      Id: 229,
     },
     {
       Name: "Olivia Massey",
       Icon: MembersAvatar,
+      Id: 228,
     },
   ]);
 
@@ -124,19 +131,15 @@ const AddNewEvent = () => {
     return true;
   };
 
-  const CutUsersArray = (x: { Name: string; Icon: string }) => {
+  const CutUsersArray = (x: UsersInterface) => {
     addUsersArray.length === 1 && handleClose();
-    setAddUsersArray([...addUsersArray.filter(y => isEqual(x, y) === false)]);
-    return setAllMembersUsers([...allMembersUsers, x]);
+    setAddUsersArray(prevAddUsersArray => prevAddUsersArray.filter(y => !isEqual(x, y)));
+    setAllMembersUsers(prevAllMembersUsers => [...prevAllMembersUsers, x]);
   };
 
-  const DeleteUsersArray = (x: { Name: string; Icon: string }) => {
-    setAllMembersUsers([...allMembersUsers.filter(y => isEqual(x, y) === false)]);
+  const DeleteUsersArray = (x: { Name: string; Icon: string; Id: number }) => {
+    setAllMembersUsers([...allMembersUsers.filter(y => !isEqual(x, y))]);
     return setAddUsersArray([...addUsersArray, x]);
-  };
-
-  const searchGroup = (value: number) => {
-    return GroupCategoty.some(x => x.value === value && setGroup(x.Text));
   };
 
   const CreateEventSchema = yup.object().shape({
@@ -206,14 +209,14 @@ const AddNewEvent = () => {
           timeFrom: "",
           timeTo: "",
           group: "",
-          members: "",
+          members: allMembersUsers,
         }}
         validationSchema={CreateEventSchema}
         onSubmit={(values: any) => console.log(values)}
         validateOnChange
         validateOnBlur
       >
-        {({ form }) => (
+        {props => (
           <SelectCategory container item xs={9}>
             <StyledForm>
               {category === "General information" && (
@@ -225,9 +228,8 @@ const AddNewEvent = () => {
                         <Text variant="LIGHT">Date</Text>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <StyledDatePicker
-                            onChange={form.handleChange}
-                            value={form.values.date}
-                            name="date"
+                            onChange={value => props.setFieldValue("date", value, true)}
+                            value={props.values.timeFrom}
                           />
                         </LocalizationProvider>
                       </Grid>
@@ -239,7 +241,11 @@ const AddNewEvent = () => {
                           text="Select group"
                           SelectDefaultValue="10"
                           SelectArray={GroupCategoty}
-                          onChange={(value: number) => searchGroup(value)}
+                          onChange={(value: number) =>
+                            GroupCategoty.some(
+                              x => x.value === value && props.setFieldValue("group", x.Text, true),
+                            )
+                          }
                         />
                       </Grid>
                     </Grid>
@@ -249,9 +255,8 @@ const AddNewEvent = () => {
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <DemoContainer components={["TimePicker"]}>
                             <StyledTimePicker
-                              onChange={form.handleChange}
-                              value={form.values.timeFrom}
-                              name="timeFrom"
+                              onChange={value => props.setFieldValue("timeFrom", value, true)}
+                              value={props.values.timeFrom}
                               viewRenderers={{
                                 hours: renderTimeViewClock,
                                 minutes: renderTimeViewClock,
@@ -265,17 +270,15 @@ const AddNewEvent = () => {
                         <Text variant="LIGHT">Time to</Text>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <DemoContainer components={["TimePicker"]}>
-                            <DatePickerWithFormik onChange={form.handleChange} name="timeFrom" />
-                            {/* <StyledTimePicker
-                              onChange={form.handleChange}
-                              value={form.values.timeFrom}
-                              name="timeFrom"
+                            <StyledTimePicker
+                              onChange={value => props.setFieldValue("timeTo", value, true)}
+                              value={props.values.timeTo}
                               viewRenderers={{
                                 hours: renderTimeViewClock,
                                 minutes: renderTimeViewClock,
                                 seconds: renderTimeViewClock,
                               }}
-                            /> */}
+                            />
                           </DemoContainer>
                         </LocalizationProvider>
                       </TimePickerGrid>
@@ -326,28 +329,10 @@ const AddNewEvent = () => {
                   </Members>
                   <Grid container height="90px" justifyContent="space-between">
                     <Grid item xs={5.5}>
-                      <Input
-                        variant="LightInput"
-                        IconType="Email"
-                        width="100%"
-                        title="Title"
-                        text="Start typing …"
-                        onChange={form.handleChange}
-                        value={form.values.title}
-                        name="title"
-                      />
+                      <InputWithFormik name="title" type="text" label="Title" endIcon={<Email />} />
                     </Grid>
                     <Grid container item xs={5.5} flexDirection="column" alignItems="flex-end">
-                      <Input
-                        variant="LightInput"
-                        IconType="Email"
-                        title="Note"
-                        width="100%"
-                        text="Start typing …"
-                        onChange={form.handleChange}
-                        value={form.values.note}
-                        name="note"
-                      />
+                      <InputWithFormik name="note" type="text" label="Note" endIcon={<Email />} />
                     </Grid>
                   </Grid>
                 </GeneralInformationGrid>
@@ -355,7 +340,7 @@ const AddNewEvent = () => {
               {category !== "Notifications" && (
                 <Grid container justifyContent="space-between">
                   <Grid container gap="10px" width="auto">
-                    <Button variant="FilledActive" width="220px" type="submit">
+                    <Button type="submit" variant="FilledActive" width="220px">
                       Create New Event
                     </Button>
                   </Grid>

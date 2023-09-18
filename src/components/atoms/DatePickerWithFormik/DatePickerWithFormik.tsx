@@ -5,7 +5,7 @@ import { DatePicker } from "formik-mui-lab";
 type DatePickerWithFormikProps = {
   name: string
   label?: string
-  onChange?: React.ChangeEvent<HTMLInputElement>
+  onChange?: any
 }
 
 export const DatePickerWithFormik = ({ name, label, onChange }: DatePickerWithFormikProps) => {
