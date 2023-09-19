@@ -188,8 +188,8 @@ export const EventsLength = styled(Grid)`
 `;
 
 export const AllEventsGrid = styled(Grid)`
-  gap: 20px;
   overflow-y: auto;
+  gap: 20px;
 `;
 
 export const AddNewEventLink = styled(Link)`

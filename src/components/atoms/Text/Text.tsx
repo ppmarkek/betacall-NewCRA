@@ -14,7 +14,7 @@ enum Variant {
 type TextProps = {
   variant: "H1" | "H2" | "H3" | "H4" | "H5" | "BOLD" | "REGULAR" | "LIGHT" | Variant
   small?: boolean
-  children?: string | string[]
+  children?: any
   color?: string
 }
 

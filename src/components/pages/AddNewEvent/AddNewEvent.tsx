@@ -145,11 +145,9 @@ const AddNewEvent = () => {
   const CreateEventSchema = yup.object().shape({
     title: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
     note: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-    email: yup.string().required("Required"),
-    date: yup.string().required("Required"),
-    timeFrom: yup.string().required("Required"),
-    timeTo: yup.string().required("Required"),
-    group: yup.string().required("Required"),
+    date: yup.object().required("Required"),
+    timeFrom: yup.object().required("Required"),
+    timeTo: yup.object().required("Required"),
   });
 
   return (
@@ -208,11 +206,11 @@ const AddNewEvent = () => {
           date: "",
           timeFrom: "",
           timeTo: "",
-          group: "",
-          members: allMembersUsers,
+          group: "Business",
+          members: [],
         }}
         validationSchema={CreateEventSchema}
-        onSubmit={(values: any) => console.log(values)}
+        onSubmit={(values: any) => addEvent(values)}
         validateOnChange
         validateOnBlur
       >
@@ -315,7 +313,7 @@ const AddNewEvent = () => {
                             aria-describedby="modal-modal-description"
                           >
                             <Box container>
-                              {addUsersArray.map(x => (
+                              {addUsersArray.map((x: any) => (
                                 <MembersAvatarButton key={x.Name} onClick={() => CutUsersArray(x)}>
                                   <MembersImg src={x.Icon} alt="Avatar" />
                                   <Text variant="BOLD">{x.Name}</Text>
@@ -340,7 +338,18 @@ const AddNewEvent = () => {
               {category !== "Notifications" && (
                 <Grid container justifyContent="space-between">
                   <Grid container gap="10px" width="auto">
-                    <Button type="submit" variant="FilledActive" width="220px">
+                    <Button
+                      type="submit"
+                      variant="FilledActive"
+                      width="220px"
+                      onClick={() =>
+                        props.setFieldValue(
+                          "members",
+                          allMembersUsers.map(value => value.Id),
+                          true,
+                        )
+                      }
+                    >
                       Create New Event
                     </Button>
                   </Grid>

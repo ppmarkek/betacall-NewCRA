@@ -2,7 +2,7 @@ interface UsersInterface {
   date: any
   timeFrom: string
   timeTo: string
-  members: string
+  members: any
   note: string
   group: string
   title: string
