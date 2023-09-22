@@ -2,8 +2,8 @@ import { Grid, Menu } from "@mui/material";
 import { MouseEvent, useState, useEffect } from "react";
 import {
   AboutEventGrid,
-  AddNewEventByDate,
-  AddNewEventByDateGrid,
+  AddNew,
+  AddNewGrid,
   Border,
   CategoryImg,
   DateGrid,
@@ -29,6 +29,10 @@ import {
   StyledDatePicker,
   TimePickerGrid,
   StyledTimePicker,
+  DeleteUser,
+  DeleteUserImg,
+  MembersIcon,
+  DeleteUserImgGrid,
 } from "./style";
 import Text from "../../atoms/Text/Text";
 import AllEvents from "../../../assets/ScheduleIcon/AllEvents.svg";
@@ -49,29 +53,35 @@ import ActivePersonalIcon from "../../../assets/ScheduleIcon/ActivePersonal.svg"
 import ActiveCloudIcon from "../../../assets/ScheduleIcon/ActiveCloud.svg";
 import ActiveCustomersIcon from "../../../assets/ScheduleIcon/ActiveCustomers.svg";
 import DeleteEventIcon from "../../../assets/ScheduleIcon/DeleteEvent.svg";
+import DeleteMembersIcon from "../../../assets/ScheduleIcon/DeleteMembersIcon.svg";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import Input from "../../atoms/Input/Input";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
-import { findAll } from "../../../requests";
+import { findAll, removeEvent, updateEvent } from "../../../requests";
+import { Email } from "@mui/icons-material";
+import { InputWithFormik } from "../../atoms/InputWithFormik/InputWithFormik";
+import { Form, Formik } from "formik";
+
+let defaultDate: any = 0;
 
 const Schedule = () => {
-  interface UsersInterface {
+  interface AllDateInterface {
     AllDate: any
     Events: any
   }
 
   interface UsersInterface {
     date?: any
-    timeFrom?: string
-    timeTo?: string
+    timeFrom?: any
+    timeTo?: any
     members?: any
-    note?: string
-    group?: string
-    title?: string
-    id?: number
+    note?: any
+    group?: any
+    title?: any
+    _id?: any
   }
 
   const [allEventsRequests, setAllEventsRequests] = useState([]);
@@ -79,13 +89,7 @@ const Schedule = () => {
   const [category, setCategory] = useState("All Events");
   const startDate = new Date();
   const endDate = new Date(`${new Date().getFullYear() + 1}-01-01`);
-  const datesArray: UsersInterface[] = [];
-  const [group, setGroup] = useState("Business");
-  const [timeTo, setTimeTo] = useState("");
-  const [timeFrom, setTimeFrom] = useState("");
-  const [date, setDate] = useState("");
-  const [note, setNote] = useState("");
-  const [title, setTitle] = useState("");
+  const datesArray: AllDateInterface[] = [];
   const [editClick, setEditClick] = useState(-1);
   const [menuInfo, setMenuInfo] = useState<UsersInterface>();
   const EventsGroup = [
@@ -223,10 +227,6 @@ const Schedule = () => {
     setMenuInfo(array);
   };
 
-  const searchGroup = (value: number) => {
-    return GroupCategoty.some(x => x.value === value && setGroup(x.Text));
-  };
-
   const open = Boolean(anchorEl);
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -237,14 +237,36 @@ const Schedule = () => {
     setAnchorEl(null);
   };
 
-  const DeleteEvent = (id: number) => {
-    return console.log(allEventsRequests.filter((x: any) => x.id !== id));
-  };
-
   const FilterEvents = (arr: any) => {
     return arr.some((value: any) => value.group === category);
   };
 
+  const selectGroup = () => {
+    const answ = GroupCategoty.filter(value => value.Text === menuInfo?.group);
+    return answ.map(value => value.value).toString();
+  };
+
+  const updateMapWithDatabaseData = async (values: any) => {
+    updateEvent(menuInfo?._id, values).then(async () => {
+      const response = await findAll();
+      setAllEventsRequests(response);
+    });
+  };
+
+  const updateMembers = (users: number) => {
+    const newArrMembers = menuInfo?.members.filter((value: number) => value !== users);
+    const newArr: UsersInterface = {
+      date: menuInfo?.date,
+      timeFrom: menuInfo?.timeFrom,
+      timeTo: menuInfo?.timeTo,
+      members: newArrMembers,
+      note: menuInfo?.note,
+      group: menuInfo?.group,
+      title: menuInfo?.title,
+      _id: menuInfo?._id,
+    };
+    return setMenuInfo(newArr);
+  };
   const EditMenu = () => {
     return (
       <Menu
@@ -281,112 +303,152 @@ const Schedule = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <EditInfoGrid container>
-          <Grid container justifyContent="space-between">
-            <EditButtons>
-              <img src={EditInfoIcon} alt="Edit Info" />
-            </EditButtons>
-            <EditButtons onClick={() => DeleteEvent(menuInfo?.id)}>
-              <img src={DeleteEventIcon} alt="Delete Event" />
-            </EditButtons>
-          </Grid>
-          <Grid container justifyContent="space-between">
-            <Grid item xs={5.5} container>
-              <Text variant="LIGHT">Date</Text>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <StyledDatePicker
-                  defaultValue={dayjs(
-                    `${menuInfo?.date.getFullYear()}-${
-                      menuInfo?.date.getMonth() + 1
-                    }-${menuInfo?.date.getDate()}`,
-                  )}
-                  onChange={(value: any) => setDate(value)}
-                />
-              </LocalizationProvider>
-            </Grid>
-            <Grid item xs={5.5}>
-              <Input
-                variant="Select"
-                width="100%"
-                title="Group"
-                text="Select group"
-                SelectDefaultValue="10"
-                SelectArray={GroupCategoty}
-                onChange={(value: number) => searchGroup(value)}
-              />
-            </Grid>
-          </Grid>
-          <Grid container justifyContent="space-between">
-            <TimePickerGrid container item xs={5.5}>
-              <Text variant="LIGHT">Time from</Text>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["TimePicker"]}>
-                  <StyledTimePicker
-                    defaultValue={dayjs(
-                      `${menuInfo?.date.getFullYear()}-${
-                        menuInfo?.date.getMonth() + 1
-                      }-${menuInfo?.date.getDate()}T${menuInfo?.timeFrom.getHours()}:${menuInfo?.timeFrom.getMinutes()}`,
-                    )}
-                    onChange={(value: any) => setTimeFrom(value.$d)}
-                    viewRenderers={{
-                      hours: renderTimeViewClock,
-                      minutes: renderTimeViewClock,
-                      seconds: renderTimeViewClock,
-                    }}
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
-            </TimePickerGrid>
-            <TimePickerGrid container item xs={5.5}>
-              <Text variant="LIGHT">Time to</Text>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["TimePicker"]}>
-                  <StyledTimePicker
-                    defaultValue={dayjs(
-                      `${menuInfo?.date.getFullYear()}-${
-                        menuInfo?.date.getMonth() + 1
-                      }-${menuInfo?.date.getDate()}T${menuInfo?.timeTo.getHours()}:${menuInfo?.timeTo.getMinutes()}`,
-                    )}
-                    onChange={(value: any) => setTimeTo(value.$d)}
-                    viewRenderers={{
-                      hours: renderTimeViewClock,
-                      minutes: renderTimeViewClock,
-                      seconds: renderTimeViewClock,
-                    }}
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
-            </TimePickerGrid>
-          </Grid>
-          <Grid container flexDirection="column" gap="10px">
-            <Text variant="LIGHT">Shared with</Text>
-            <Grid container gap="5px">
-              {menuInfo?.members.map((users: any) => (
-                <Grid key={users.Name}>
-                  <Avatar src={users.icon} alt="Avatar" />
+        <Formik
+          initialValues={{
+            title: menuInfo?.title,
+            note: menuInfo?.note,
+            date: menuInfo?.date,
+            timeFrom: menuInfo?.timeFrom,
+            timeTo: menuInfo?.timeTo,
+            group: menuInfo?.group,
+            members: menuInfo?.members,
+          }}
+          onSubmit={(values: any) => updateMapWithDatabaseData(values)}
+          validateOnChange
+          validateOnBlur
+        >
+          {props => (
+            <Form>
+              <EditInfoGrid container>
+                <Grid container justifyContent="space-between">
+                  <EditButtons
+                    onClick={() => props.setFieldValue("members", menuInfo?.members, true)}
+                    type="submit"
+                  >
+                    <img src={EditInfoIcon} alt="Edit Info" />
+                  </EditButtons>
+                  <EditButtons onClick={() => removeEvent(menuInfo?._id)}>
+                    <img src={DeleteEventIcon} alt="Delete Event" />
+                  </EditButtons>
                 </Grid>
-              ))}
-            </Grid>
-          </Grid>
-          <Input
-            variant="LightInput"
-            width="100%"
-            IconType="Email"
-            title="Title"
-            text="Start typing …"
-            inputValue={menuInfo?.title}
-            onChange={(value: string) => setTitle(value)}
-          />
-          <Input
-            variant="LightInput"
-            width="100%"
-            IconType="Email"
-            title="Note"
-            text="Start typing …"
-            inputValue={menuInfo?.note}
-            onChange={(value: string) => setTitle(value)}
-          />
-        </EditInfoGrid>
+                <Grid container justifyContent="space-between">
+                  <Grid item xs={5.5} container>
+                    <Text variant="LIGHT">Date</Text>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <StyledDatePicker
+                        onChange={value => props.setFieldValue("date", value, true)}
+                        defaultValue={dayjs(
+                          `${new Date(menuInfo?.date).getFullYear()}-${
+                            new Date(menuInfo?.date).getMonth() + 1
+                          }-${new Date(menuInfo?.date).getDate()}`,
+                        )}
+                      />
+                    </LocalizationProvider>
+                  </Grid>
+                  <Grid item xs={5.5}>
+                    <Input
+                      variant="Select"
+                      width="100%"
+                      title="Group"
+                      text="Select group"
+                      SelectDefaultValue={selectGroup()}
+                      SelectArray={GroupCategoty}
+                      onChange={(value: number) =>
+                        GroupCategoty.some(
+                          GroupCategotyValue =>
+                            GroupCategotyValue.value === value &&
+                            props.setFieldValue("group", GroupCategotyValue.Text, true),
+                        )
+                      }
+                    />
+                  </Grid>
+                </Grid>
+                <Grid container justifyContent="space-between">
+                  <TimePickerGrid container item xs={5.5}>
+                    <Text variant="LIGHT">Time from</Text>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DemoContainer components={["TimePicker"]}>
+                        <StyledTimePicker
+                          onChange={value => props.setFieldValue("timeFrom", value, true)}
+                          defaultValue={dayjs(
+                            `${new Date(menuInfo?.date).getFullYear()}-${
+                              new Date(menuInfo?.date).getMonth() + 1
+                            }-${new Date(menuInfo?.date).getDate()}T${new Date(
+                              menuInfo?.timeFrom,
+                            ).getHours()}:${new Date(menuInfo?.timeFrom).getMinutes()}`,
+                          )}
+                          viewRenderers={{
+                            hours: renderTimeViewClock,
+                            minutes: renderTimeViewClock,
+                            seconds: renderTimeViewClock,
+                          }}
+                        />
+                      </DemoContainer>
+                    </LocalizationProvider>
+                  </TimePickerGrid>
+                  <TimePickerGrid container item xs={5.5}>
+                    <Text variant="LIGHT">Time to</Text>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DemoContainer components={["TimePicker"]}>
+                        <StyledTimePicker
+                          onChange={value => props.setFieldValue("timeTo", value, true)}
+                          defaultValue={dayjs(
+                            `${new Date(menuInfo?.date).getFullYear()}-${
+                              new Date(menuInfo?.date).getMonth() + 1
+                            }-${new Date(menuInfo?.date).getDate()}T${new Date(
+                              menuInfo?.timeTo,
+                            ).getHours()}:${new Date(menuInfo?.timeTo).getMinutes()}`,
+                          )}
+                          viewRenderers={{
+                            hours: renderTimeViewClock,
+                            minutes: renderTimeViewClock,
+                            seconds: renderTimeViewClock,
+                          }}
+                        />
+                      </DemoContainer>
+                    </LocalizationProvider>
+                  </TimePickerGrid>
+                </Grid>
+                <Grid container flexDirection="column" gap="10px">
+                  <Text variant="LIGHT">Shared with</Text>
+                  <Grid container gap="5px">
+                    {menuInfo?.members.map((users: number) => (
+                      <DeleteUser key={users} container>
+                        <DeleteUserImgGrid
+                          container
+                          className={"DeleteUserImg"}
+                          onClick={() => updateMembers(users)}
+                        >
+                          <DeleteUserImg src={DeleteMembersIcon} alt="Delete Avatar" />
+                        </DeleteUserImgGrid>
+                        <MembersIcon src={MembersAvatar} alt="Avatar" />
+                      </DeleteUser>
+                    ))}
+                    {menuInfo?.members.length < 6 && (
+                      <AddNewGrid container>
+                        <AddNew src={AddNewGroup} alt="Add New Event By Date" />
+                      </AddNewGrid>
+                    )}
+                  </Grid>
+                </Grid>
+                <InputWithFormik
+                  name="title"
+                  value={props.values.title}
+                  type="text"
+                  label="Title"
+                  endIcon={<Email />}
+                />
+                <InputWithFormik
+                  name="note"
+                  value={props.values.note}
+                  type="text"
+                  label="Note"
+                  endIcon={<Email />}
+                />
+              </EditInfoGrid>
+            </Form>
+          )}
+        </Formik>
       </Menu>
     );
   };
@@ -422,22 +484,25 @@ const Schedule = () => {
         </Grid>
         <NewGroup container>
           {EventsGroup.map(
-            x =>
-              x.value === true && (
-                <Grid key={x.group} container height="73px">
+            EventsGroupValue =>
+              EventsGroupValue.value === true && (
+                <Grid key={EventsGroupValue.group} container height="73px">
                   <SelectCategoryButton
-                    $background={category === x.group ? "#F8F9FC" : "#fff"}
-                    onClick={() => setCategory(x.group)}
+                    $background={category === EventsGroupValue.group ? "#F8F9FC" : "#fff"}
+                    onClick={() => setCategory(EventsGroupValue.group)}
                   >
                     <Grid container alignItems="center" gap="22px">
-                      {category === x.group ? (
-                        <CategoryImg src={x.activeIcon} alt="Icon" />
+                      {category === EventsGroupValue.group ? (
+                        <CategoryImg src={EventsGroupValue.activeIcon} alt="Icon" />
                       ) : (
-                        <CategoryImg src={x.icon} alt="Icon" />
+                        <CategoryImg src={EventsGroupValue.icon} alt="Icon" />
                       )}
                       <Grid>
-                        <Text variant="BOLD" color={category === x.group ? "#6B59CC" : "#1A1C1D"}>
-                          {x.group}
+                        <Text
+                          variant="BOLD"
+                          color={category === EventsGroupValue.group ? "#6B59CC" : "#1A1C1D"}
+                        >
+                          {EventsGroupValue.group}
                         </Text>
                       </Grid>
                     </Grid>
@@ -480,55 +545,72 @@ const Schedule = () => {
         {category === "All Events" && allEventsRequests.length !== 0 && (
           <AllEventsGrid container id="AllEventsGrid">
             {datesArray.map(
-              (x: any) =>
-                x.Events.length >= 1 && (
+              (datesValues: any) =>
+                datesValues.Events.length >= 1 && (
                   <>
                     <DateGrid container>
                       <Text variant="BOLD">
-                        {Days[new Date(x.AllDate).getDay()]},{" "}
-                        {Month[new Date(x.AllDate).getMonth()]} {x.AllDate.getDate()},{" "}
-                        {x.AllDate.getFullYear()}
+                        {Days[new Date(datesValues.AllDate).getDay()]},{" "}
+                        {Month[new Date(datesValues.AllDate).getMonth()]}{" "}
+                        {datesValues.AllDate.getDate()},{" "}
+                        {new Date(datesValues.AllDate).getFullYear()}
                       </Text>
-                      <AddNewEventByDateGrid container>
-                        <AddNewEventByDate src={AddNewGroup} alt="Add New Event By Date" />
-                      </AddNewEventByDateGrid>
+                      <StyledLink to={"/AddNewEvent"}>
+                        <AddNewGrid
+                          container
+                          onClick={() => {
+                            defaultDate = datesValues.AllDate;
+                          }}
+                        >
+                          <AddNew src={AddNewGroup} alt="Add New Event By Date" />
+                        </AddNewGrid>
+                      </StyledLink>
                     </DateGrid>
-                    {x.Events.map((y: any) => (
-                      <EventGrid container key={y.id}>
+                    {datesValues.Events.map((eventsValues: any) => (
+                      <EventGrid container key={eventsValues._id}>
                         <EventTime container item xs={3}>
                           <TimeImgGrid container>
                             <TimeImg src={TimeIcon} alt="Time Icon" />
                           </TimeImgGrid>
                           <Text variant="BOLD">
-                            {new Date(y.timeFrom).getHours()}:{new Date(y.timeFrom).getMinutes()}
+                            {new Date(eventsValues.timeFrom).getHours()}:
+                            {new Date(eventsValues.timeFrom).getMinutes() < 10
+                              ? `0${new Date(eventsValues.timeFrom).getMinutes()}`
+                              : new Date(eventsValues.timeFrom).getMinutes()}
                           </Text>
                           <Text variant="LIGHT">
-                            {new Date(y.timeTo).getHours()}:{new Date(y.timeTo).getMinutes()}
+                            {new Date(eventsValues.timeTo).getHours()}:
+                            {new Date(eventsValues.timeTo).getMinutes() < 10
+                              ? `0${new Date(eventsValues.timeTo).getMinutes()}`
+                              : new Date(eventsValues.timeTo).getMinutes()}
                           </Text>
                         </EventTime>
                         <AboutEventGrid container item xs={6}>
                           <GroupEventGrid
                             container
-                            $color={EventColor(y.group)}
-                            $background={EventBackground(y.group)}
+                            $color={EventColor(eventsValues.group)}
+                            $background={EventBackground(eventsValues.group)}
                           >
-                            {y.group}
+                            {eventsValues.group}
                           </GroupEventGrid>
                           <Text variant="BOLD" color="#8083A3" small>
-                            {y.title}
+                            {eventsValues.title}
                           </Text>
                         </AboutEventGrid>
                         <EditEventGrid container item xs={3}>
                           <Avatar src={MembersAvatar} alt="Avatar" />
-                          <Grid borderRadius="10px" onClick={() => setDateOnClick(y.id, y)}>
+                          <Grid
+                            borderRadius="10px"
+                            onClick={() => setDateOnClick(eventsValues._id, eventsValues)}
+                          >
                             <EditButtons
                               onClick={handleClick}
-                              $background={editClick !== y.id ? "#fff" : "#eceef5"}
+                              $background={editClick !== eventsValues._id ? "#fff" : "#eceef5"}
                             >
                               <img src={EditIcon} alt="Edit Button" />
                             </EditButtons>
                           </Grid>
-                          {/* {editClick === y.id && EditMenu()} */}
+                          {editClick === eventsValues._id && EditMenu()}
                         </EditEventGrid>
                       </EventGrid>
                     ))}
@@ -540,59 +622,68 @@ const Schedule = () => {
         {category !== "All Events" && allEventsRequests.length !== 0 && (
           <AllEventsGrid container id="AllEventsGrid">
             {datesArray.map(
-              (x: any) =>
-                x.Events.length >= 1 &&
-                FilterEvents(x.Events) === true && (
+              (datesValues: any) =>
+                datesValues.Events.length >= 1 &&
+                FilterEvents(datesValues.Events) === true && (
                   <>
-                    <DateGrid container key={x.AllDate}>
+                    <DateGrid container key={datesValues.AllDate}>
                       <Text variant="BOLD">
-                        {Days[new Date(x.AllDate).getDay()]},{" "}
-                        {Month[new Date(x.AllDate).getMonth()]} {new Date(x.AllDate).getDate()},{" "}
-                        {new Date(x.AllDate).getFullYear()}
+                        {Days[new Date(datesValues.AllDate).getDay()]},{" "}
+                        {Month[new Date(datesValues.AllDate).getMonth()]}{" "}
+                        {new Date(datesValues.AllDate).getDate()},{" "}
+                        {new Date(datesValues.AllDate).getFullYear()}
                       </Text>
-                      <AddNewEventByDateGrid container>
-                        <AddNewEventByDate src={AddNewGroup} alt="Add New Event By Date" />
-                      </AddNewEventByDateGrid>
+                      <AddNewGrid container>
+                        <AddNew src={AddNewGroup} alt="Add New Event By Date" />
+                      </AddNewGrid>
                     </DateGrid>
-                    {x.Events.map(
-                      (y: any) =>
-                        y.group === category && (
-                          <EventGrid container key={y.id}>
+                    {datesValues.Events.map(
+                      (eventsValues: any) =>
+                        eventsValues.group === category && (
+                          <EventGrid container key={eventsValues._id}>
                             <EventTime container item xs={3}>
                               <TimeImgGrid container>
                                 <TimeImg src={TimeIcon} alt="Time Icon" />
                               </TimeImgGrid>
                               <Text variant="BOLD">
-                                {new Date(y.timeFrom).getHours()}:
-                                {new Date(y.timeFrom).getMinutes()}
+                                {new Date(eventsValues.timeFrom).getHours()}:
+                                {new Date(eventsValues.timeFrom).getMinutes() < 10
+                                  ? `0${new Date(eventsValues.timeFrom).getMinutes()}`
+                                  : new Date(eventsValues.timeFrom).getMinutes()}
                               </Text>
                               <Text variant="LIGHT">
-                                {new Date(y.timeTo).getHours()}:{new Date(y.timeTo).getMinutes()}
+                                {new Date(eventsValues.timeTo).getHours()}:
+                                {new Date(eventsValues.timeTo).getMinutes() < 10
+                                  ? `0${new Date(eventsValues.timeTo).getMinutes()}`
+                                  : new Date(eventsValues.timeTo).getMinutes()}
                               </Text>
                             </EventTime>
                             <AboutEventGrid container item xs={6}>
                               <GroupEventGrid
                                 container
-                                $color={EventColor(y.group)}
-                                $background={EventBackground(y.group)}
+                                $color={EventColor(eventsValues.group)}
+                                $background={EventBackground(eventsValues.group)}
                               >
-                                {y.group}
+                                {eventsValues.group}
                               </GroupEventGrid>
                               <Text variant="BOLD" color="#8083A3" small>
-                                {y.title}
+                                {eventsValues.title}
                               </Text>
                             </AboutEventGrid>
                             <EditEventGrid container item xs={3}>
                               <Avatar src={MembersAvatar} alt="Avatar" />
-                              <Grid borderRadius="10px" onClick={() => setDateOnClick(y.id, y)}>
+                              <Grid
+                                borderRadius="10px"
+                                onClick={() => setDateOnClick(eventsValues._id, eventsValues)}
+                              >
                                 <EditButtons
                                   onClick={handleClick}
-                                  $background={editClick !== y.id ? "#fff" : "#eceef5"}
+                                  $background={editClick !== eventsValues._id ? "#fff" : "#eceef5"}
                                 >
                                   <img src={EditIcon} alt="Edit Button" />
                                 </EditButtons>
                               </Grid>
-                              {/* {editClick === y.id && EditMenu()} */}
+                              {editClick === eventsValues._id && EditMenu()}
                             </EditEventGrid>
                           </EventGrid>
                         ),
@@ -608,3 +699,5 @@ const Schedule = () => {
 };
 
 export default Schedule;
+
+export { defaultDate };

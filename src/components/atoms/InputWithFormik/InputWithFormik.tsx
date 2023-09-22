@@ -11,6 +11,7 @@ type InputWithFormikProps = {
   hideInput?: boolean
   onIconClick?: MouseEventHandler<HTMLButtonElement>
   inputIconColor?: string
+  value?: string
 }
 
 export const InputWithFormik = ({
@@ -21,6 +22,7 @@ export const InputWithFormik = ({
   hideInput = true,
   onIconClick,
   inputIconColor = "black",
+  value,
 }: InputWithFormikProps) => {
   const [inputInFocus, setInputInFocus] = useState(false);
   return (
@@ -29,6 +31,7 @@ export const InputWithFormik = ({
       <Field
         component={InputField}
         name={name}
+        value={value}
         type={hideInput ? type : "password"}
         onBlur={() => setInputInFocus(false)}
         onFocus={() => setInputInFocus(true)}

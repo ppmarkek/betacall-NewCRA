@@ -81,12 +81,12 @@ export const DateGrid = styled(Grid)`
   align-items: center;
 `;
 
-export const AddNewEventByDate = styled.img`
+export const AddNew = styled.img`
   width: 17px;
   height: 17px;
 `;
 
-export const AddNewEventByDateGrid = styled(Grid)`
+export const AddNewGrid = styled(Grid)`
   cursor: pointer;
   width: 35px;
   height: 35px;
@@ -254,4 +254,89 @@ export const StyledTimePicker = styled(TimePicker)`
     margin-bottom: -10px;
     padding: 3px;
   }
+`;
+
+export const DeleteUser = styled(Grid)`
+  transition: all 0.3s;
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  &:hover .DeleteUserImg {
+    opacity: 1;
+  }
+`;
+
+export const DeleteUserImgGrid = styled(Grid)`
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(236, 238, 245);
+  opacity: 0;
+  transition: all 0.5s;
+`;
+
+export const DeleteUserImg = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+`;
+
+export const MembersIcon = styled.img`
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 1;
+`;
+
+export const Box = styled(Grid)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15%;
+  height: 35%;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 8px;
+  align-content: flex-start;
+  gap: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &:focus-visible {
+    outline: unset;
+  }
+`;
+
+export const MembersAvatarButton = styled(Button)`
+  all: unset;
+  border: 1px solid #eceef5;
+  border-radius: 8px;
+  align-items: center;
+  gap: 20px;
+  height: 55px;
+  width: calc(100% - 25px);
+  padding: 0px 10px;
+  display: flex;
+  cursor: pointer;
+  span {
+    display: none;
+  }
+  &:hover {
+    background: #eceef5;
+  }
+`;
+
+export const MembersImg = styled.img`
+  width: 35px;
+  height: 35px;
 `;

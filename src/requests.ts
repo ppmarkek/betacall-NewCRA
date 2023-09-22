@@ -59,16 +59,16 @@ export async function findAll() {
 }
 
 export async function findOne(id: string) {
-  const response = await axios.get(`${urlEvents}get-event/:${id}`);
+  const response = await axios.get(`${urlEvents}get-event/${id}`);
   return response.data;
 }
 
-export async function updateEvent(id: string) {
-  const response = await axios.put(`${urlEvents}update-event/:${id}`);
+export async function updateEvent(id: string, data: any) {
+  const response = await axios.put(`${urlEvents}update-event/${id}`, data);
   return response.data;
 }
 
 export async function removeEvent(id: string) {
-  const response = await axios.delete(`${urlEvents}remove-event/:${id}`);
+  const response = await axios.delete(`${urlEvents}remove-event/${id}`);
   return response.data;
 }

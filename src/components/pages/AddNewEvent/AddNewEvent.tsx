@@ -44,6 +44,8 @@ import * as yup from "yup";
 import { addEvent } from "../../../requests";
 import { InputWithFormik } from "../../atoms/InputWithFormik/InputWithFormik";
 import { Email } from "@mui/icons-material";
+import { defaultDate } from "../Schedule/Schedule";
+import dayjs from "dayjs";
 
 const AddNewEvent = () => {
   const [category, setCategory] = useState("General information");
@@ -52,42 +54,42 @@ const AddNewEvent = () => {
   const handleClose = () => setOpen(false);
 
   interface UsersInterface {
-    Name: string
-    Icon: string
-    Id: string
+    name: string
+    icon: string
+    id: string
   }
 
   const [allMembersUsers, setAllMembersUsers] = useState<UsersInterface[]>([]);
   const [addUsersArray, setAddUsersArray] = useState([
     {
-      Name: "Beatrice Hill",
-      Icon: MembersAvatar,
-      Id: 233,
+      name: "Beatrice Hill",
+      icon: MembersAvatar,
+      id: 233,
     },
     {
-      Name: "Mildred Patrick",
-      Icon: MembersAvatar,
-      Id: 232,
+      name: "Mildred Patrick",
+      icon: MembersAvatar,
+      id: 232,
     },
     {
-      Name: "Cordelia Stone",
-      Icon: MembersAvatar,
-      Id: 231,
+      name: "Cordelia Stone",
+      icon: MembersAvatar,
+      id: 231,
     },
     {
-      Name: "Victoria Garner",
-      Icon: MembersAvatar,
-      Id: 230,
+      name: "Victoria Garner",
+      icon: MembersAvatar,
+      id: 230,
     },
     {
-      Name: "Etta Brady",
-      Icon: MembersAvatar,
-      Id: 229,
+      name: "Etta Brady",
+      icon: MembersAvatar,
+      id: 229,
     },
     {
-      Name: "Olivia Massey",
-      Icon: MembersAvatar,
-      Id: 228,
+      name: "Olivia Massey",
+      icon: MembersAvatar,
+      id: 228,
     },
   ]);
 
@@ -131,15 +133,17 @@ const AddNewEvent = () => {
     return true;
   };
 
-  const CutUsersArray = (x: UsersInterface) => {
+  const CutUsersArray = (value: UsersInterface) => {
     addUsersArray.length === 1 && handleClose();
-    setAddUsersArray(prevAddUsersArray => prevAddUsersArray.filter(y => !isEqual(x, y)));
-    setAllMembersUsers(prevAllMembersUsers => [...prevAllMembersUsers, x]);
+    setAddUsersArray(prevAddUsersArray =>
+      prevAddUsersArray.filter(value2 => !isEqual(value, value2)),
+    );
+    setAllMembersUsers(prevAllMembersUsers => [...prevAllMembersUsers, value]);
   };
 
-  const DeleteUsersArray = (x: { Name: string; Icon: string; Id: number }) => {
-    setAllMembersUsers([...allMembersUsers.filter(y => !isEqual(x, y))]);
-    return setAddUsersArray([...addUsersArray, x]);
+  const DeleteUsersArray = (value: { name: string; icon: string; id: number }) => {
+    setAllMembersUsers([...allMembersUsers.filter(value2 => !isEqual(value, value2))]);
+    return setAddUsersArray([...addUsersArray, value]);
   };
 
   const CreateEventSchema = yup.object().shape({
@@ -226,8 +230,16 @@ const AddNewEvent = () => {
                         <Text variant="LIGHT">Date</Text>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <StyledDatePicker
+                            defaultValue={
+                              defaultDate !== 0
+                                ? dayjs(
+                                    `${new Date(defaultDate).getFullYear()}-${new Date(
+                                      defaultDate,
+                                    ).getMonth()}-${new Date(defaultDate).getDate()}`,
+                                  )
+                                : dayjs(`${new Date()}`)
+                            }
                             onChange={value => props.setFieldValue("date", value, true)}
-                            value={props.values.timeFrom}
                           />
                         </LocalizationProvider>
                       </Grid>
@@ -288,9 +300,9 @@ const AddNewEvent = () => {
                     </Grid>
                     <Grid container gap="10px" height="150px">
                       {allMembersUsers.map((x: any) => (
-                        <UserGrid container key={x.Name}>
-                          <MembersImg src={x.Icon} alt="Avatar" />
-                          <Text variant="BOLD">{x.Name}</Text>
+                        <UserGrid container key={x.name}>
+                          <MembersImg src={x.icon} alt="Avatar" />
+                          <Text variant="BOLD">{x.name}</Text>
                           <DeleteImg
                             src={Delete}
                             alt="Delete"
@@ -298,7 +310,7 @@ const AddNewEvent = () => {
                           />
                         </UserGrid>
                       ))}
-                      {allMembersUsers.length <= 6 && (
+                      {allMembersUsers.length < 6 && (
                         <>
                           <Grid container gap="10px" width="auto" height="55px" alignItems="center">
                             <PlusImg src={Plus} alt="Add Email" onClick={handleOpen} />
@@ -314,9 +326,9 @@ const AddNewEvent = () => {
                           >
                             <Box container>
                               {addUsersArray.map((x: any) => (
-                                <MembersAvatarButton key={x.Name} onClick={() => CutUsersArray(x)}>
-                                  <MembersImg src={x.Icon} alt="Avatar" />
-                                  <Text variant="BOLD">{x.Name}</Text>
+                                <MembersAvatarButton key={x.name} onClick={() => CutUsersArray(x)}>
+                                  <MembersImg src={x.icon} alt="Avatar" />
+                                  <Text variant="BOLD">{x.name}</Text>
                                 </MembersAvatarButton>
                               ))}
                             </Box>
@@ -345,7 +357,7 @@ const AddNewEvent = () => {
                       onClick={() =>
                         props.setFieldValue(
                           "members",
-                          allMembersUsers.map(value => value.Id),
+                          allMembersUsers.map(value => value.id),
                           true,
                         )
                       }
