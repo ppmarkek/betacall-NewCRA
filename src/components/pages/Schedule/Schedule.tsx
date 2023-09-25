@@ -253,6 +253,13 @@ const Schedule = () => {
     });
   };
 
+  const DeleteEvent = async () => {
+    removeEvent(menuInfo?._id).then(async () => {
+      const response = await findAll();
+      setAllEventsRequests(response);
+    });
+  };
+
   const updateMembers = (users: number) => {
     const newArrMembers = menuInfo?.members.filter((value: number) => value !== users);
     const newArr: UsersInterface = {
@@ -327,7 +334,7 @@ const Schedule = () => {
                   >
                     <img src={EditInfoIcon} alt="Edit Info" />
                   </EditButtons>
-                  <EditButtons onClick={() => removeEvent(menuInfo?._id)}>
+                  <EditButtons onClick={() => DeleteEvent()}>
                     <img src={DeleteEventIcon} alt="Delete Event" />
                   </EditButtons>
                 </Grid>
