@@ -8,6 +8,6 @@
   "printWidth": 100,
   "tabWidth": 2,
   "arrowParens": "avoid",
-  "jsxSingleQuote": true,
+  "jsxSingleQuote": false,
   "bracketSpacing": true
 }

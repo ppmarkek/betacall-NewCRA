@@ -1,13 +1,12 @@
-import Grid from '@mui/material/Grid';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import Grid from "@mui/material/Grid";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const Wrapper = styled(Grid)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: 900px;
-  height: 100%;
+  height: calc(100% - 85px);
 `;
 
 export const Title = styled(Grid)`
@@ -24,8 +23,6 @@ export const StyledLink = styled(Link)`
 `;
 
 export const FormGrid = styled(Grid)`
-  gap: 20px;
-  width: 420px;
   flex-direction: column;
-  padding-bottom: 36px;
+  padding-bottom: 35px;
 `;

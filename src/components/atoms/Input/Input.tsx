@@ -1,5 +1,5 @@
 import Text from "../Text/Text";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import {
   ConfirmPassword,
   InputGrid,
@@ -60,6 +60,9 @@ type Value = {
   inputValue?: string
   SelectArray?: Array<any>
   SelectDefaultValue?: string
+  onChange?: (value: any) => void
+  name?: string
+  value?: string
 }
 
 const Input = ({
@@ -73,6 +76,9 @@ const Input = ({
   inputValue,
   SelectArray,
   SelectDefaultValue,
+  onChange,
+  value,
+  name,
 }: Value) => {
   const [Icon, setIcon] = useState(SilverPass);
   const [Confirm, setConfirm] = useState(CheckSilver);
@@ -82,6 +88,9 @@ const Input = ({
   const [changePassword, setChangePassword] = useState(CheckSilver);
 
   const handleChange = (event: SelectChangeEvent) => {
+    if (onChange) {
+      onChange(event.target.value);
+    }
     setSelect(event.target.value);
   };
 
@@ -144,7 +153,10 @@ const Input = ({
     }
   };
 
-  const CheackIcon = (x: string) => {
+  const CheackIcon = (x: string, event: ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(event.target.value);
+    }
     if (IconType === "Email") {
       return x === "" ? setIcon(EmailSilver) : setIcon(Email);
     }
@@ -204,46 +216,50 @@ const Input = ({
     case "LightInput":
       return (
         <InputGrid container $width={width}>
-          <Text variant={"LIGHT"} small={true}>
+          <Text variant="LIGHT" small={true}>
             {title}
           </Text>
           <LightInput
+            name={name}
             type={type}
             placeholder={text}
             $width={width}
             $color={color}
             defaultValue={inputValue}
-            onChange={x => CheackIcon(x.target.value)}
+            onChange={(x: any) => CheackIcon(x.target.value, x)}
+            value={value}
           />
-          {IconType !== "" && <StyledImg src={Icon} alt='' />}
+          {IconType !== "" && <StyledImg src={Icon} alt="" />}
         </InputGrid>
       );
     case "ConfirmPassword":
       return (
         <ConfirmPassword container>
           <InputGrid container $width={width}>
-            <Text variant={"LIGHT"} small={true}>
+            <Text variant="LIGHT" small={true}>
               Password
             </Text>
             <LightInput
-              type={"password"}
-              placeholder={"Enter your password"}
+              type="password"
+              placeholder="Enter your password"
               $color={color}
-              onChange={x => setValue(x.target.value)}
+              onChange={(x: any) => setValue(x.target.value)}
+              value={value}
             />
-            <StyledImg src={Icon} alt='' />
+            <StyledImg src={Icon} alt="" />
           </InputGrid>
           <InputGrid container $width={width}>
-            <Text variant={"LIGHT"} small={true}>
+            <Text variant="LIGHT" small={true}>
               Confirm password
             </Text>
             <LightInput
-              type={"password"}
-              placeholder={"Confirm your password"}
+              type="password"
+              placeholder="Confirm your password"
               $color={color}
-              onChange={x => CheackConfirmPass(x.target.value)}
+              onChange={(x: any) => CheackConfirmPass(x.target.value)}
+              value={value}
             />
-            <StyledImg src={Confirm} alt='' />
+            <StyledImg src={Confirm} alt="" />
           </InputGrid>
         </ConfirmPassword>
       );
@@ -253,10 +269,10 @@ const Input = ({
           <Grid>
             <SearchButton onClick={() => ChangeSearch()}>
               <Fade in={checked}>
-                <SearchImg src={Search} alt='SearchSilver' />
+                <SearchImg src={Search} alt="SearchSilver" />
               </Fade>
               <Fade in={!checked}>
-                <SearchImg src={SearchSilver} alt='SearchSilver' />
+                <SearchImg src={SearchSilver} alt="SearchSilver" />
               </Fade>
             </SearchButton>
             <Fade in={checked}>
@@ -266,29 +282,29 @@ const Input = ({
           <Fade in={checked}>
             <ResultsGird container>
               <Result container>
-                <SearchLink to='/'>
-                  <Grid container gap={"20px"}>
-                    <Grid position={"relative"} height={"40px"} width={"40px"}>
-                      <img src={Avatar} alt='' />
+                <SearchLink to="/">
+                  <Grid container gap="20px">
+                    <Grid position="relative" height="40px" width="40px">
+                      <img src={Avatar} alt="" />
                       <Status />
                     </Grid>
                     <Grid>
-                      <Text variant={"BOLD"}>John Doe</Text>
-                      <Text variant={"LIGHT"} small={true}>
+                      <Text variant="BOLD">John Doe</Text>
+                      <Text variant="LIGHT" small={true}>
                         Developer
                       </Text>
                     </Grid>
                   </Grid>
                 </SearchLink>
                 <ResultLinkGrid container>
-                  <ResultLink to='/'>
-                    <ResultImg src={Messenger} alt='icon' />
+                  <ResultLink to="/">
+                    <ResultImg src={Messenger} alt="icon" />
                   </ResultLink>
-                  <ResultLink to='/'>
-                    <ResultImg src={CallsSilver} alt='icon' />
+                  <ResultLink to="/">
+                    <ResultImg src={CallsSilver} alt="icon" />
                   </ResultLink>
-                  <ResultLink to='/'>
-                    <ResultImg src={MoreSilver} alt='icon' />
+                  <ResultLink to="/">
+                    <ResultImg src={MoreSilver} alt="icon" />
                   </ResultLink>
                 </ResultLinkGrid>
               </Result>
@@ -298,19 +314,19 @@ const Input = ({
       );
     case "Select":
       return (
-        <Grid container gap={"10px"} flexDirection={"column"}>
-          <Text variant={"LIGHT"} small={true}>
+        <Grid container gap="10px" flexDirection="column">
+          <Text variant="LIGHT" small={true}>
             {title}
           </Text>
-          <StyledFormControl variant='standard' sx={{ width: width }}>
-            <InputLabel id='demo-simple-select-filled-label'>{text}</InputLabel>
+          <StyledFormControl variant="standard" sx={{ width: width }}>
+            <InputLabel id="demo-simple-select-filled-label">{text}</InputLabel>
             <Select
-              labelId='demo-simple-select-standard-label'
-              id='demo-simple-select-standard'
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
               value={select}
               style={{ fontFamily: "Lato", fontSize: "16px", fontWeight: "700" }}
               onChange={handleChange}
-              label='select'
+              label="select"
             >
               {SelectArray?.map((x: any) => (
                 <StyledMenuItem key={x.Text} value={x.value}>
@@ -323,35 +339,39 @@ const Input = ({
       );
     case "ChangePassword":
       return (
-        <Grid container justifyContent={"space-between"} width={"auto"}>
+        <Grid container justifyContent="space-between" width="auto">
           <InputGrid container $width={width}>
-            <Text variant={"LIGHT"} small={true}>
+            <Text variant="LIGHT" small={true}>
               Current password
             </Text>
             <LightInput
-              type={"password"}
-              placeholder={"Enter your password"}
+              type="password"
+              placeholder="Enter your password"
               $color={color}
-              onChange={x => setValue(x.target.value)}
+              onChange={(x: any) => setValue(x.target.value)}
+              value={value}
             />
-            <StyledImg src={Icon} alt='' />
+            <StyledImg src={Icon} alt="" />
           </InputGrid>
           <InputGrid container $width={width}>
-            <Text variant={"LIGHT"} small={true}>
+            <Text variant="LIGHT" small={true}>
               New password
             </Text>
             <LightInput
-              type={"password"}
-              placeholder={"Confirm your password"}
+              type="password"
+              placeholder="Confirm your password"
               $color={color}
-              onChange={x => CheackChangePassword(x.target.value)}
+              onChange={(x: any) => CheackChangePassword(x.target.value)}
+              value={value}
             />
-            <StyledImg src={changePassword} alt='' />
+            <StyledImg src={changePassword} alt="" />
           </InputGrid>
         </Grid>
       );
     default:
-      return <LightInput placeholder={text} $width={width} $color={color} />;
+      return (
+        <LightInput name={name} placeholder={text} $width={width} $color={color} value={value} />
+      );
   }
 };
 

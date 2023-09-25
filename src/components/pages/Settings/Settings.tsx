@@ -307,13 +307,13 @@ const Settings = () => {
   ];
 
   return (
-    <Wrapper container xs={12}>
-      <Profile xs={3}>
+    <Wrapper container item xs={12}>
+      <Profile item xs={3}>
         <Avatar container>
           <StyledAvatarImg src={AvatarImg} alt='Avatar' />
-          <Grid textAlign={"center"}>
-            <Text variant={"H3"}>WhiteUI.Store</Text>
-            <Text variant={"LIGHT"}>25 Employees</Text>
+          <Grid textAlign='center'>
+            <Text variant='H3'>WhiteUI.Store</Text>
+            <Text variant='LIGHT'>25 Employees</Text>
           </Grid>
         </Avatar>
         <Grid container>
@@ -329,10 +329,10 @@ const Settings = () => {
                   <CategoryImg src={x.Icon} alt='Icon' />
                 )}
                 <Grid>
-                  <Text variant={"BOLD"} color={category === x.Title ? "#6B59CC" : "#1A1C1D"}>
+                  <Text variant='BOLD' color={category === x.Title ? "#6B59CC" : "#1A1C1D"}>
                     {x.Title}
                   </Text>
-                  <Text variant={"LIGHT"}>{x.Text}</Text>
+                  <Text variant='LIGHT'>{x.Text}</Text>
                 </Grid>
               </SelectCategoryButton>
               <SelectCategoryBorder $display={x.Border} />
@@ -340,19 +340,19 @@ const Settings = () => {
           ))}
         </Grid>
       </Profile>
-      <SelectCategory container xs={9}>
+      <SelectCategory container item xs={9}>
         {category === "None" && (
           <Grid
             container
-            height={"100%"}
-            alignContent={"center"}
-            justifyContent={"center"}
-            flexDirection={"column"}
+            height='100%'
+            alignContent='center'
+            justifyContent='center'
+            flexDirection='column'
           >
             <img src={SelectCategoryImg} alt='Image' />
             <SelectCategoryText container>
-              <Text variant={"H1"}>Select category</Text>
-              <Text variant={"LIGHT"}>
+              <Text variant='H1'>Select category</Text>
+              <Text variant='LIGHT'>
                 You can select required category to setup details about your account
               </Text>
             </SelectCategoryText>
@@ -360,60 +360,60 @@ const Settings = () => {
         )}
         {category === "Company information" && (
           <CompanyInformationGrid container>
-            <Text variant={"H4"}>Company information</Text>
+            <Text variant='H4'>Company information</Text>
             <InputGrid container>
-              <Grid container gap={"20px"} width={"440px"} flexDirection={"column"}>
+              <Grid container gap='20px' width='440px' flexDirection='column'>
                 <Input
-                  variant={"LightInput"}
-                  width={"440px"}
-                  title={"Company name"}
-                  inputValue={"WhiteUI.Store"}
-                  IconType={"Company"}
-                  text={"Enter your company name"}
+                  variant='LightInput'
+                  width='440px'
+                  title='Company name'
+                  inputValue='WhiteUI.Store'
+                  IconType='Company'
+                  text='Enter your company name'
                 />
                 <Input
-                  variant={"LightInput"}
-                  width={"440px"}
-                  title={"Billing address"}
-                  IconType={"Address"}
-                  text={"Start typing …"}
+                  variant='LightInput'
+                  width='440px'
+                  title='Billing address'
+                  IconType='Address'
+                  text='Start typing …'
                 />
                 <Input
-                  variant={"LightInput"}
-                  width={"440px"}
-                  title={"Phone"}
-                  IconType={"Calls"}
-                  text={"Start typing …"}
+                  variant='LightInput'
+                  width='440px'
+                  title='Phone'
+                  IconType='Calls'
+                  text='Start typing …'
                 />
                 <Input
-                  variant={"LightInput"}
-                  width={"440px"}
-                  title={"Number of employees"}
-                  IconType={"Name"}
-                  text={"Start typing …"}
+                  variant='LightInput'
+                  width='440px'
+                  title='Number of employees'
+                  IconType='Name'
+                  text='Start typing …'
                 />
               </Grid>
-              <Grid container gap={"20px"} width={"440px"} flexDirection={"column"}>
+              <Grid container gap='20px' width='440px' flexDirection='column'>
                 <Input
-                  variant={"Select"}
-                  width={"440px"}
-                  title={"Location"}
-                  text={"Select location"}
-                  SelectDefaultValue={"10"}
+                  variant='Select'
+                  width='440px'
+                  title='Location'
+                  text='Select location'
+                  SelectDefaultValue='10'
                   SelectArray={LocationCategoty}
                 />
                 <Input
-                  variant={"LightInput"}
-                  width={"440px"}
-                  title={"Zip code"}
-                  IconType={"Email"}
-                  text={"Start typing …"}
+                  variant='LightInput'
+                  width='440px'
+                  title='Zip code'
+                  IconType='Email'
+                  text='Start typing …'
                 />
                 <Input
-                  variant={"Select"}
-                  width={"440px"}
-                  title={"Location"}
-                  text={"Select language"}
+                  variant='Select'
+                  width='440px'
+                  title='Location'
+                  text='Select language'
                   SelectArray={LanguageCategoty}
                 />
               </Grid>
@@ -422,11 +422,11 @@ const Settings = () => {
         )}
         {category === "Teams & Users" && (
           <TeamsAndUsers container>
-            <Grid container justifyContent={"space-between"}>
-              <Grid xs={6}>
-                <Text variant={"H4"}>Teams & Users</Text>
+            <Grid container justifyContent='space-between'>
+              <Grid item xs={6}>
+                <Text variant='H4'>Teams & Users</Text>
               </Grid>
-              <SelectStatus container xs={6}>
+              <SelectStatus container item xs={6}>
                 <Status
                   container
                   onClick={() => setStatus("All")}
@@ -456,34 +456,35 @@ const Settings = () => {
                 </AddIconGrid>
               </SelectStatus>
             </Grid>
-            <Grid container gap={"10px"}>
+            <Grid container gap='10px'>
               {status === "All"
                 ? Users.map((x: any) => (
                     <UsersGrid container key={x.Categoty}>
-                      <Grid container alignItems={"center"} gap={"20px"} xs={6}>
-                        <Grid position={"relative"} height={"40px"} width={"40px"}>
+                      <Grid container alignItems='center' gap='20px' xs={6}>
+                        <Grid position='relative' height='40px' width='40px'>
                           <img src={x.Icon} alt='Avatar' />
                           <ProfileStatus />
                         </Grid>
-                        <Text variant={"BOLD"}>{x.Name}</Text>
+                        <Text variant='BOLD'>{x.Name}</Text>
                       </Grid>
                       <Grid
                         container
+                        item
                         xs={6}
-                        gap={"40px"}
-                        justifyContent={"flex-end"}
-                        alignContent={"center"}
+                        gap='40px'
+                        justifyContent='flex-end'
+                        alignContent='center'
                       >
                         <Grid>
                           <Input
-                            variant={"Select"}
-                            width={"180px"}
-                            text={"Select location"}
+                            variant='Select'
+                            width='180px'
+                            text='Select location'
                             SelectDefaultValue={x.Value}
                             SelectArray={TeamsUsersCategoty}
                           />
                         </Grid>
-                        <Grid container gap={"5px"} width={"auto"} alignItems={"center"}>
+                        <Grid container gap='5px' width='auto' alignItems='center'>
                           <UserStatus
                             container
                             $background={
@@ -493,7 +494,7 @@ const Settings = () => {
                             }
                           >
                             <Text
-                              variant={"BOLD"}
+                              variant='BOLD'
                               color={x.Categoty === "Business" ? "#6B59CC" : "#F6933E"}
                             >
                               {x.Categoty}
@@ -510,30 +511,30 @@ const Settings = () => {
                     (x: any) =>
                       x.Categoty === status && (
                         <UsersGrid container key={x.Categoty}>
-                          <Grid container alignItems={"center"} gap={"20px"} xs={6}>
-                            <Grid position={"relative"} height={"40px"} width={"40px"}>
+                          <Grid container alignItems='center' gap='20px' item xs={6}>
+                            <Grid position='relative' height='40px' width='40px'>
                               <img src={x.Icon} alt='Avatar' />
                               <ProfileStatus />
                             </Grid>
-                            <Text variant={"BOLD"}>{x.Name}</Text>
+                            <Text variant='BOLD'>{x.Name}</Text>
                           </Grid>
                           <Grid
                             container
                             xs={6}
-                            gap={"40px"}
-                            justifyContent={"flex-end"}
-                            alignContent={"center"}
+                            gap='40px'
+                            justifyContent='flex-end'
+                            alignContent='center'
                           >
                             <Grid>
                               <Input
-                                variant={"Select"}
-                                width={"180px"}
-                                text={"Select location"}
+                                variant='Select'
+                                width='180px'
+                                text='Select location'
                                 SelectDefaultValue={x.Value}
                                 SelectArray={TeamsUsersCategoty}
                               />
                             </Grid>
-                            <Grid container gap={"5px"} width={"auto"} alignItems={"center"}>
+                            <Grid container gap='5px' width='auto' alignItems='center'>
                               <UserStatus
                                 container
                                 $background={
@@ -543,7 +544,7 @@ const Settings = () => {
                                 }
                               >
                                 <Text
-                                  variant={"BOLD"}
+                                  variant='BOLD'
                                   color={x.Categoty === "Business" ? "#6B59CC" : "#F6933E"}
                                 >
                                   {x.Categoty}
@@ -562,137 +563,136 @@ const Settings = () => {
         )}
         {category === "Reports" && (
           <ReportsGrid container>
-            <Grid container justifyContent={"space-between"}>
-              <Grid xs={6}>
-                <Text variant={"H4"}>Reports</Text>
+            <Grid container justifyContent='space-between'>
+              <Grid item xs={6}>
+                <Text variant='H4'>Reports</Text>
               </Grid>
-              <Grid
-                xs={6}
-                container
-                justifyContent={"flex-end"}
-                gap={"10px"}
-                alignContent={"center"}
-              >
+              <Grid xs={6} container justifyContent='flex-end' gap='10px' alignContent='center'>
                 <img src={DateIcon} alt='Date Icon' />
                 <Grid>
-                  <Text variant={"BOLD"} color={"#8083A3"} small>
+                  <Text variant='BOLD' color='#8083A3' small>
                     17 Feb 2020 - {getDateFunction()}
                   </Text>
                 </Grid>
               </Grid>
             </Grid>
             <CallsSstatisticsGrid container>
-              <CallsSstatisticsBox container xs={4}>
-                <Grid container xs={8} gap={"5px"} flexDirection={"column"}>
-                  <Text variant={"H5"}>Call minutes</Text>
-                  <Text variant={"REGULAR"} small>
+              <CallsSstatisticsBox container item xs={4}>
+                <Grid container item xs={8} gap='5px' flexDirection='column'>
+                  <Text variant='H5'>Call minutes</Text>
+                  <Text variant='REGULAR' small>
                     Total time spent
                   </Text>
                 </Grid>
-                <Grid container xs={4} gap={"5px"} flexDirection={"column"} alignItems={"flex-end"}>
-                  <Text variant={"H4"}>10.345</Text>
+                <Grid container item xs={4} gap='5px' flexDirection='column' alignItems='flex-end'>
+                  <Text variant='H4'>10.345</Text>
                   <ProgressCalls {...configCallsMinutes} />
                 </Grid>
               </CallsSstatisticsBox>
               <CallsSstatisticsBox
                 container
+                item
                 xs={4}
-                borderLeft={"1px solid #ECEEF5"}
-                borderRight={"1px solid #ECEEF5"}
+                borderLeft='1px solid #ECEEF5'
+                borderRight='1px solid #ECEEF5'
               >
-                <Grid container xs={8} gap={"5px"} flexDirection={"column"}>
-                  <Text variant={"H5"}>Conference calls</Text>
-                  <Text variant={"REGULAR"} small>
+                <Grid container item xs={8} gap='5px' flexDirection='column'>
+                  <Text variant='H5'>Conference calls</Text>
+                  <Text variant='REGULAR' small>
                     Total time spent
                   </Text>
                 </Grid>
-                <Grid container xs={4} gap={"5px"} flexDirection={"column"} alignItems={"flex-end"}>
-                  <Text variant={"H4"}>31.500</Text>
+                <Grid container item xs={4} gap='5px' flexDirection='column' alignItems='flex-end'>
+                  <Text variant='H4'>31.500</Text>
                   <ProgressCalls {...configConferenceCalls} />
                 </Grid>
               </CallsSstatisticsBox>
-              <CallsSstatisticsBox container xs={4}>
-                <Grid container xs={8} gap={"5px"} flexDirection={"column"}>
-                  <Text variant={"H5"}>Call members</Text>
-                  <Text variant={"REGULAR"} small>
+              <CallsSstatisticsBox container item xs={4}>
+                <Grid container item xs={8} gap='5px' flexDirection='column'>
+                  <Text variant='H5'>Call members</Text>
+                  <Text variant='REGULAR' small>
                     Total call participants
                   </Text>
                 </Grid>
-                <Grid container xs={4} gap={"5px"} flexDirection={"column"} alignItems={"flex-end"}>
-                  <Text variant={"H4"}>248</Text>
+                <Grid container item xs={4} gap='5px' flexDirection='column' alignItems='flex-end'>
+                  <Text variant='H4'>248</Text>
                   <ProgressCalls {...configCallMembers} />
                 </Grid>
               </CallsSstatisticsBox>
             </CallsSstatisticsGrid>
 
-            <Grid container gap={"35px"} xs={5.8}>
-              <TopUsers container xs={12}>
-                <Grid container justifyContent={"space-between"} height={"50px"}>
-                  <Grid xs={6}>
-                    <Text variant={"H5"}>Top users</Text>
-                    <Text variant={"LIGHT"}>Week to week performance</Text>
+            <Grid container gap='2.5%'>
+              <Grid container gap='35px' item xs={5.8}>
+                <TopUsers container item xs={12}>
+                  <Grid container justifyContent='space-between' height='50px'>
+                    <Grid item xs={6}>
+                      <Text variant='H5'>Top users</Text>
+                      <Text variant='LIGHT'>Week to week performance</Text>
+                    </Grid>
+                    <Grid
+                      container
+                      item
+                      xs={6}
+                      alignItems='center'
+                      gap='10px'
+                      justifyContent='flex-end'
+                    >
+                      <img src={VideoCalls} alt='Icon Video Calls' />
+                      <Text variant='BOLD' color='#8083A3'>
+                        Video calls
+                      </Text>
+                    </Grid>
                   </Grid>
-                  <Grid
-                    container
-                    xs={6}
-                    alignItems={"center"}
-                    gap={"10px"}
-                    justifyContent={"flex-end"}
-                  >
-                    <img src={VideoCalls} alt='Icon Video Calls' />
-                    <Text variant={"BOLD"} color={"#8083A3"}>
-                      Video calls
-                    </Text>
+                  <Grid container justifyContent='space-between'>
+                    {TopUsersBD.map(x => (
+                      <TopUsersGrid container key={x.Avatar}>
+                        <TinyColumn data={x.Value} {...TopUsersConfig} />
+                        <Link to='/'>
+                          <TinyColumnImg src={x.Avatar} alt='Avatar' />
+                        </Link>
+                      </TopUsersGrid>
+                    ))}
                   </Grid>
-                </Grid>
-                <Grid container justifyContent={"space-between"}>
-                  {TopUsersBD.map(x => (
-                    <TopUsersGrid container key={x.Avatar}>
-                      <TinyColumn data={x.Value} {...TopUsersConfig} />
-                      <Link to={"/"}>
-                        <TinyColumnImg src={x.Avatar} alt='Avatar' />
-                      </Link>
-                    </TopUsersGrid>
-                  ))}
-                </Grid>
-              </TopUsers>
-              <MostActiveUsers container xs={12}>
-                <Grid container justifyContent={"space-between"} height={"50px"}>
-                  <Grid xs={6}>
-                    <Text variant={"H5"}>Most active users</Text>
-                    <Text variant={"LIGHT"}>Week to week performance</Text>
+                </TopUsers>
+                <MostActiveUsers container item xs={12}>
+                  <Grid container justifyContent='space-between' height='50px'>
+                    <Grid item xs={6}>
+                      <Text variant='H5'>Most active users</Text>
+                      <Text variant='LIGHT'>Week to week performance</Text>
+                    </Grid>
+                    <Grid
+                      container
+                      item
+                      xs={6}
+                      alignItems='center'
+                      gap='10px'
+                      justifyContent='flex-end'
+                    >
+                      <img src={MessageIcon} alt='Icon Video Calls' />
+                      <Text variant='BOLD' color='#8083A3'>
+                        Video calls
+                      </Text>
+                    </Grid>
                   </Grid>
-                  <Grid
-                    container
-                    xs={6}
-                    alignItems={"center"}
-                    gap={"10px"}
-                    justifyContent={"flex-end"}
-                  >
-                    <img src={MessageIcon} alt='Icon Video Calls' />
-                    <Text variant={"BOLD"} color={"#8083A3"}>
-                      Video calls
-                    </Text>
-                  </Grid>
-                </Grid>
-                <MostActiveUsersBox container>
-                  {MostActiveUsersBD.map(x => (
-                    <MostActiveUsersGrid container key={x.Avatar}>
-                      <TinyColumn data={x.Value} {...MostActiveUsersConfig} />
-                      <Link to={"/"}>
-                        <MostActiveUsersImg src={x.Avatar} alt='Avatar' />
-                      </Link>
-                    </MostActiveUsersGrid>
-                  ))}
-                </MostActiveUsersBox>
-              </MostActiveUsers>
-            </Grid>
-            <UsageStatistics container xs={5.9}>
-              <Text variant={"H5"}>Usage statistics</Text>
-              <Grid>
-                <Line data={MultiLink} {...UsageStatisticsConfig} />
+                  <MostActiveUsersBox container>
+                    {MostActiveUsersBD.map(x => (
+                      <MostActiveUsersGrid container key={x.Avatar}>
+                        <TinyColumn data={x.Value} {...MostActiveUsersConfig} />
+                        <Link to='/'>
+                          <MostActiveUsersImg src={x.Avatar} alt='Avatar' />
+                        </Link>
+                      </MostActiveUsersGrid>
+                    ))}
+                  </MostActiveUsersBox>
+                </MostActiveUsers>
               </Grid>
-            </UsageStatistics>
+              <UsageStatistics container item xs={5.9}>
+                <Text variant='H5'>Usage statistics</Text>
+                <Grid>
+                  <Line data={MultiLink} {...UsageStatisticsConfig} />
+                </Grid>
+              </UsageStatistics>
+            </Grid>
           </ReportsGrid>
         )}
         {category === "Integrations" && (

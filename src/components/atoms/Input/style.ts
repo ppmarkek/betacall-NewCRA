@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Input, Grid, Button, FormControl, MenuItem } from "@mui/material";
+import { Grid, Button, FormControl, MenuItem, Input } from "@mui/material";
 import { Link } from "react-router-dom";
 
 type InputStyleProps = {
@@ -43,8 +43,10 @@ export const StyledImg = styled.img<InputStyleProps>`
 `;
 
 export const SearchGrid = styled(Grid)`
-  position: relative;
+  position: absolute;
   width: 570px;
+  z-index: 3;
+  right: 0;
 `;
 
 export const SearchButton = styled(Button)`

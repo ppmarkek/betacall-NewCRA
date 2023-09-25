@@ -1,5 +1,5 @@
-import Grid from '@mui/material/Grid';
-import styled from 'styled-components';
+import Grid from "@mui/material/Grid";
+import styled from "styled-components";
 
 export const Wrapper = styled(Grid)`
   justify-content: center;

@@ -1,13 +1,12 @@
-import Grid from '@mui/material/Grid';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import Grid from "@mui/material/Grid";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const Wrapper = styled(Grid)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: 900px;
-  height: 100%;
+  height: calc(100% - 85px);
 `;
 
 export const Title = styled(Grid)`
@@ -34,7 +33,7 @@ export const SocialLink = styled(Link)`
   height: 50px;
   border: 1px solid #eceef5;
   border-radius: 10px;
-  font-family: 'Lato';
+  font-family: "Lato";
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
@@ -54,7 +53,7 @@ export const HoverGrid = styled(Grid)`
   padding-top: 14px;
   padding-left: 16px;
   height: 100%;
-  font-family: 'Lato';
+  font-family: "Lato";
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
