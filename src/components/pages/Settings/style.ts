@@ -1,6 +1,9 @@
 import { Button, Grid } from "@mui/material";
 import styled from "styled-components";
 import { Progress } from "@ant-design/charts";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { Link } from "react-router-dom";
+import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 
 type CategoryProps = {
   $display?: string
@@ -137,6 +140,17 @@ export const AddIconGrid = styled(Grid)`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: all 0.5s;
+  background-color: #fff;
+  &:hover {
+    background-color: #eceef5;
+  }
+`;
+
+export const StyledPersonAddIcon = styled(PersonAddIcon)`
+  color: #8083a3;
+  width: 22px;
+  height: 22px;
 `;
 
 export const UsersGrid = styled(Grid)`
@@ -263,4 +277,14 @@ export const IntegrationsSwich = styled(Grid)`
 export const IntegrationsImg = styled.img`
   width: 35px;
   height: 35px;
+`;
+
+export const StyledLink = styled(Link)`
+  all: unset;
+`;
+
+export const StyledDeleteSweepIcon = styled(DeleteSweepIcon)`
+  color: #8083a3;
+  width: 22px;
+  height: 22px;
 `;
