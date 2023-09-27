@@ -439,6 +439,7 @@ const Schedule = () => {
                   </Grid>
                 </Grid>
                 <InputWithFormik
+                  placeholder={"Start typing..."}
                   name="title"
                   value={props.values.title}
                   type="text"
@@ -446,6 +447,7 @@ const Schedule = () => {
                   endIcon={<Email />}
                 />
                 <InputWithFormik
+                  placeholder={"Start typing..."}
                   name="note"
                   value={props.values.note}
                   type="text"

@@ -339,10 +339,22 @@ const AddNewEvent = () => {
                   </Members>
                   <Grid container height="90px" justifyContent="space-between">
                     <Grid item xs={5.5}>
-                      <InputWithFormik name="title" type="text" label="Title" endIcon={<Email />} />
+                      <InputWithFormik
+                        placeholder={"Start typing..."}
+                        name="title"
+                        type="text"
+                        label="Title"
+                        endIcon={<Email />}
+                      />
                     </Grid>
                     <Grid container item xs={5.5} flexDirection="column" alignItems="flex-end">
-                      <InputWithFormik name="note" type="text" label="Note" endIcon={<Email />} />
+                      <InputWithFormik
+                        placeholder={"Start typing..."}
+                        name="note"
+                        type="text"
+                        label="Note"
+                        endIcon={<Email />}
+                      />
                     </Grid>
                   </Grid>
                 </GeneralInformationGrid>

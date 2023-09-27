@@ -44,9 +44,25 @@ const Step2 = () => {
               <Text variant="LIGHT">Enter your details to proceed further</Text>
             </Title>
             <FormGrid container>
-              <InputWithFormik name="email" type="email" label="Email" endIcon={<Email />} />
-              <InputWithFormik name="firstname" label="First Name" endIcon={<Person />} />
-              <InputWithFormik name="lastname" label="Last Name" endIcon={<Person />} />
+              <InputWithFormik
+                placeholder={"Start typing..."}
+                name="email"
+                type="email"
+                label="Email"
+                endIcon={<Email />}
+              />
+              <InputWithFormik
+                placeholder={"Start typing..."}
+                name="firstname"
+                label="First Name"
+                endIcon={<Person />}
+              />
+              <InputWithFormik
+                placeholder={"Start typing..."}
+                name="lastname"
+                label="Last Name"
+                endIcon={<Person />}
+              />
               <InputWithFormik
                 name="password"
                 type="password"
@@ -54,6 +70,7 @@ const Step2 = () => {
                 endIcon={<Lock />}
               />
               <InputWithFormik
+                placeholder={"Start typing..."}
                 name="confirmPassword"
                 type="password"
                 label="Confirm Password"

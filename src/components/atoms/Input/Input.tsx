@@ -19,7 +19,7 @@ import {
   StyledImg,
   StyledMenuItem,
 } from "./style";
-import { Fade, Grid, InputLabel, Select, SelectChangeEvent } from "@mui/material";
+import { Fade, Grid, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import SilverPass from "../../../assets/Icon/SilverPass.svg";
 import Pass from "../../../assets/Icon/Pass.svg";
 import Email from "../../../assets/Icon/Email.svg";
@@ -329,9 +329,9 @@ const Input = ({
               label="select"
             >
               {SelectArray?.map((x: any) => (
-                <StyledMenuItem key={x.Text} value={x.value}>
+                <MenuItem key={x.Text} value={x.value}>
                   {x.Text}
-                </StyledMenuItem>
+                </MenuItem>
               ))}
             </Select>
           </StyledFormControl>

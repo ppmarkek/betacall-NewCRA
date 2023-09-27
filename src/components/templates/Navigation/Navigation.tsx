@@ -22,7 +22,7 @@ import {
   StyledPersonAddIcon,
 } from "./style";
 import Logo from "../../../assets/Icon/Logo.svg";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Home from "../../../assets/NavigationIcon/Home.svg";
 import Messenger from "../../../assets/NavigationIcon/Messenger.svg";
 import Calls from "../../../assets/NavigationIcon/Calls.svg";
@@ -207,9 +207,11 @@ const Navigation = () => {
           {location.pathname === "/Contacts" && (
             <ContactsButtonsGrid container>
               <Grid width={"54px"}>
-                <IconButtons>
-                  <StyledPersonAddIcon />
-                </IconButtons>
+                <Link to={"/AddNewContact"}>
+                  <IconButtons>
+                    <StyledPersonAddIcon />
+                  </IconButtons>
+                </Link>
               </Grid>
               <ButtonsBorder />
             </ContactsButtonsGrid>
