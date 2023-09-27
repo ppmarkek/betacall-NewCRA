@@ -1,6 +1,9 @@
 import { Button, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import TuneIcon from "@mui/icons-material/Tune";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 type LinkProps = {
   $backgroundColor?: string
@@ -154,7 +157,7 @@ export const MenuLink = styled(Link)`
   color: #222526;
 `;
 
-export const ScheduleButtons = styled(Button)`
+export const IconButtons = styled(Button)`
   all: unset;
   cursor: pointer;
   width: 40px;
@@ -164,6 +167,7 @@ export const ScheduleButtons = styled(Button)`
   align-items: center;
   justify-content: center;
   border: 1px solid #eceef5;
+  transition: all 0.5s;
   &:hover {
     background-color: #eceef5;
   }
@@ -182,7 +186,36 @@ export const ScheduleButtonsGrid = styled(Grid)`
   margin-right: 10px;
 `;
 
-export const ScheduleButtonsBorder = styled(Grid)`
+export const ButtonsBorder = styled(Grid)`
   height: 24px;
+  width: 1px;
   border: 1px solid #eceef5;
+`;
+
+export const StyledTuneIcon = styled(TuneIcon)`
+  color: rgba(128, 131, 163, 1);
+  width: 20px;
+  height: 20px;
+`;
+
+export const StyledMoreVertIcon = styled(MoreVertIcon)`
+  color: rgba(128, 131, 163, 1);
+  width: 20px;
+  height: 20px;
+`;
+
+export const ContactsButtonsGrid = styled(Grid)`
+  position: relative;
+  width: 50px;
+  height: 42px;
+  z-index: 2;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 10px;
+`;
+
+export const StyledPersonAddIcon = styled(PersonAddIcon)`
+  color: rgba(128, 131, 163, 1);
+  width: 20px;
+  height: 20px;
 `;

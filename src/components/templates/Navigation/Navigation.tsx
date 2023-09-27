@@ -13,9 +13,13 @@ import {
   StyledLink,
   LogoLink,
   MenuLink,
-  ScheduleButtons,
+  IconButtons,
   ScheduleButtonsGrid,
-  ScheduleButtonsBorder,
+  ButtonsBorder,
+  StyledTuneIcon,
+  StyledMoreVertIcon,
+  ContactsButtonsGrid,
+  StyledPersonAddIcon,
 } from "./style";
 import Logo from "../../../assets/Icon/Logo.svg";
 import { useLocation } from "react-router-dom";
@@ -145,60 +149,80 @@ const Navigation = () => {
     <Wrapper container>
       <TopNavigation container item xs={12}>
         <Grid container item xs={6}>
-          <Grid container item xs={6} gap='15px' alignItems='center'>
+          <Grid container item xs={6} gap="15px" alignItems="center">
             <ChangeButton onClick={() => handleSlider()}>
               <NovigButton className={checkClass} onClick={() => ChangeClass()}>
                 <BorderGrid container>
-                  <label id='Top'></label>
-                  <label id='Middle'></label>
-                  <label id='Bottom'></label>
+                  <label id="Top"></label>
+                  <label id="Middle"></label>
+                  <label id="Bottom"></label>
                 </BorderGrid>
               </NovigButton>
             </ChangeButton>
-            <Text variant='H3'>
+            <Text variant="H3">
               {location.pathname.replace("/", "").replace(/([a-zA-Z])([A-Z])([a-z])/g, "$1 $2$3")}
             </Text>
           </Grid>
           {location.pathname === "/Schedule" && (
-            <Grid container item xs={6} gap='15px' alignItems='center'>
-              <ScheduleButtons>
-                <img src={CalendarIcon} alt='Arrow Down' />
-              </ScheduleButtons>
-              <Text variant='H3'>{getDateFunction()}</Text>
+            <Grid container item xs={6} gap="15px" alignItems="center">
+              <IconButtons>
+                <img src={CalendarIcon} alt="Arrow Down" />
+              </IconButtons>
+              <Text variant="H3">{getDateFunction()}</Text>
+            </Grid>
+          )}
+          {location.pathname === "/Contacts" && (
+            <Grid container item xs={6} gap="15px" alignItems="center">
+              <IconButtons>
+                <StyledTuneIcon />
+              </IconButtons>
+              <IconButtons>
+                <StyledMoreVertIcon />
+              </IconButtons>
             </Grid>
           )}
         </Grid>
-        <Grid container item xs={6} gap='10px' justifyContent='flex-end' position='relative'>
+        <Grid container item xs={6} gap="10px" justifyContent="flex-end" position="relative">
           {location.pathname === "/Schedule" && (
             <ScheduleButtonsGrid container>
-              <Grid container gap='10px'>
-                <ScheduleButtons
+              <Grid container gap="10px">
+                <IconButtons
                   onClick={() =>
                     ((document.getElementById("AllEventsGrid") as HTMLInputElement).scrollTop -= 20)
                   }
                 >
-                  <img src={ArrowTop} alt='Arrow Up' />
-                </ScheduleButtons>
-                <ScheduleButtons
+                  <img src={ArrowTop} alt="Arrow Up" />
+                </IconButtons>
+                <IconButtons
                   onClick={() =>
                     ((document.getElementById("AllEventsGrid") as HTMLInputElement).scrollTop += 20)
                   }
                 >
-                  <img src={ArrowDown} alt='Arrow Down' />
-                </ScheduleButtons>
+                  <img src={ArrowDown} alt="Arrow Down" />
+                </IconButtons>
               </Grid>
-              <ScheduleButtonsBorder />
+              <ButtonsBorder />
             </ScheduleButtonsGrid>
           )}
-          <Grid position='relative' width='40px' height='40px'>
-            <Input variant='Search' text='Search' />
+          {location.pathname === "/Contacts" && (
+            <ContactsButtonsGrid container>
+              <Grid width={"54px"}>
+                <IconButtons>
+                  <StyledPersonAddIcon />
+                </IconButtons>
+              </Grid>
+              <ButtonsBorder />
+            </ContactsButtonsGrid>
+          )}
+          <Grid position="relative" width="40px" height="40px">
+            <Input variant="Search" text="Search" />
           </Grid>
           <AvatarButton onClick={handleClick}>
-            <img src={Avatar} alt='avatar' />
+            <img src={Avatar} alt="avatar" />
           </AvatarButton>
           <Menu
             anchorEl={anchorEl}
-            id='account-menu'
+            id="account-menu"
             open={open}
             onClose={handleClose}
             onClick={handleClose}
@@ -231,18 +255,18 @@ const Navigation = () => {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <MenuLink to='/ProfileSettings'>
+            <MenuLink to="/ProfileSettings">
               <MenuItem onClick={handleClose}>Profile Settings</MenuItem>
             </MenuLink>
             <MenuItem onClick={handleClose}>Logout</MenuItem>
           </Menu>
         </Grid>
       </TopNavigation>
-      <LeftNavigation id='LeftNavigation' container>
-        <Grid height='5%'>
-          <LogoLink to='/'>
-            <img src={Logo} alt='Logo' />
-            <img src={Betacall} alt='Logo' />
+      <LeftNavigation id="LeftNavigation" container>
+        <Grid height="5%">
+          <LogoLink to="/">
+            <img src={Logo} alt="Logo" />
+            <img src={Betacall} alt="Logo" />
           </LogoLink>
         </Grid>
         <ButtonsGrid container>
@@ -253,12 +277,12 @@ const Navigation = () => {
               $backgroundColor={
                 location.pathname === `${x.Link}` && checked === true ? "#F8F9FC" : "#fff"
               }
-              id='StyledLink'
+              id="StyledLink"
             >
               <ImageGrid>
-                <StyledImg src={x.Icon} alt='Icon' />
+                <StyledImg src={x.Icon} alt="Icon" />
               </ImageGrid>
-              <Grid width='100px'>
+              <Grid width="100px">
                 <Text variant={location.pathname === `${x.Link}` ? "BOLD" : "LIGHT"}>{x.Text}</Text>
               </Grid>
             </StyledLink>
