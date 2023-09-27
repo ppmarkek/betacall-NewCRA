@@ -797,7 +797,7 @@ const Settings = () => {
             </Grid>
           </IntegrationsGrid>
         )}
-        {category !== "Reports" && (
+        {category !== "Reports" && category !== "None" && (
           <Grid container justifyContent="space-between">
             <Grid container gap="10px" width="auto">
               <Button type="submit" variant="FilledActive" width="220px">

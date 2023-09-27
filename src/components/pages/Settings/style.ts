@@ -265,11 +265,10 @@ export const UsageStatistics = styled(Grid)`
 
 export const IntegrationsGrid = styled(Grid)`
   height: auto;
-  gap: 30px;
 `;
 
 export const IntegrationsSwich = styled(Grid)`
-  height: 80px;
+  height: 70px;
   justify-content: space-between;
   border-bottom: 1px solid #eceef5;
 `;
