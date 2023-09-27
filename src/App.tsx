@@ -11,6 +11,7 @@ import ProfileSettings from "./components/pages/ProfileSettings/ProfileSettings"
 import Settings from "./components/pages/Settings/Settings";
 import Schedule from "./components/pages/Schedule/Schedule";
 import AddNewEvent from "./components/pages/AddNewEvent/AddNewEvent";
+import Contacts from "./components/pages/Contacts/Contacts";
 
 function App() {
   const LoginReg = ["/Login", "/Recover", "/Step1", "/Step2", "/Step3"];
@@ -18,22 +19,23 @@ function App() {
   LoginReg.some(x => x.toLowerCase() === location.pathname.toLowerCase()) === true &&
     ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "0px");
   return (
-    <div className='App'>
+    <div className="App">
       {LoginReg.some(x => x.toLowerCase() === location.pathname.toLowerCase()) === true ? (
-        <LoginHeader key='' />
+        <LoginHeader key="" />
       ) : (
-        <Navigation key='' />
+        <Navigation key="" />
       )}
       <Routes>
-        <Route path='/Step1' element={<Step1 />} />
-        <Route path='/Step2' element={<Step2 />} />
-        <Route path='/Step3' element={<Step3 />} />
-        <Route path='/Recover' element={<Recover />} />
-        <Route path='/Login' element={<Login />} />
-        <Route path='/ProfileSettings' element={<ProfileSettings />} />
-        <Route path='/Settings' element={<Settings />} />
-        <Route path='/Schedule' element={<Schedule />} />
-        <Route path='/AddNewEvent' element={<AddNewEvent />} />
+        <Route path="/Step1" element={<Step1 />} />
+        <Route path="/Step2" element={<Step2 />} />
+        <Route path="/Step3" element={<Step3 />} />
+        <Route path="/Recover" element={<Recover />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/ProfileSettings" element={<ProfileSettings />} />
+        <Route path="/Settings" element={<Settings />} />
+        <Route path="/Schedule" element={<Schedule />} />
+        <Route path="/AddNewEvent" element={<AddNewEvent />} />
+        <Route path="/Contacts" element={<Contacts />} />
       </Routes>
     </div>
   );
