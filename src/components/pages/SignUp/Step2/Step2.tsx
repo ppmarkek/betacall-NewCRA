@@ -6,20 +6,7 @@ import { addUser } from "../../../../requests";
 import { Formik, Form } from "formik";
 import { InputWithFormik } from "../../../atoms/InputWithFormik/InputWithFormik";
 import { Lock, CheckCircle, Person, Email } from "@mui/icons-material";
-import * as yup from "yup";
-
-const SignupSchema = yup.object().shape({
-  firstname: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-  lastname: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-  email: yup.string().email("Invalid email").required("Required"),
-  password: yup.string().required("Password is required"),
-  confirmPassword: yup.string().oneOf([yup.ref("password"), undefined], "Passwords must match"),
-});
-
-const validatePassword = yup.object().shape({
-  password: yup.string().required("Password is required"),
-  confirmPassword: yup.string().oneOf([yup.ref("password"), undefined], "Passwords must match"),
-});
+import { SignupSchema, validatePassword } from "../../../../validationSchema";
 
 const Step2 = () => {
   return (

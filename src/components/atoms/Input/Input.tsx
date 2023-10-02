@@ -17,7 +17,6 @@ import {
   Status,
   StyledFormControl,
   StyledImg,
-  StyledMenuItem,
 } from "./style";
 import { Fade, Grid, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import SilverPass from "../../../assets/Icon/SilverPass.svg";
@@ -324,7 +323,11 @@ const Input = ({
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
               value={select}
-              style={{ fontFamily: "Lato", fontSize: "16px", fontWeight: "700" }}
+              style={{
+                fontFamily: "Lato",
+                fontSize: "16px",
+                fontWeight: "700",
+              }}
               onChange={handleChange}
               label="select"
             >

@@ -14,7 +14,7 @@ export const InputField = styled(TextField)<InputStyleProps>`
     border-bottom: 1px solid #eceef5;
     padding-right: 0px;
     border-radius: 0px;
-    padding-bottom: 3px;
+    padding-bottom: 8px;
   }
   input {
     padding: 0;

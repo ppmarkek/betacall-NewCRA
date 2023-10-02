@@ -25,8 +25,9 @@ import Input from "../../atoms/Input/Input";
 import Plus from "../../../assets/Icon/Plus.svg";
 import { InputWithFormik } from "../../atoms/InputWithFormik/InputWithFormik";
 import { Formik } from "formik";
-import * as yup from "yup";
 import Button from "../../atoms/Button/Button";
+import { CreateContactSchema } from "../../../validationSchema";
+import { addContact } from "../../../requests";
 
 const AddNewContact = () => {
   const [addPhoneNumber, setAddPhoneNumber] = useState(false);
@@ -43,17 +44,6 @@ const AddNewContact = () => {
       value: 20,
     },
   ];
-
-  const CreateContactSchema = yup.object().shape({
-    fullName: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-    email: yup.string().email("Invalid email").required("Required"),
-    secondEmail: yup.string().email("Invalid email"),
-    phone: yup.string().min(7, "Too Short!").max(10, "Too Long!").required("Required"),
-    secondPhone: yup.string().min(7, "Too Short!").max(10, "Too Long!"),
-    address: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-    social: yup.object().required("Required"),
-    role: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-  });
 
   return (
     <Wrapper container item xs={12}>
@@ -112,12 +102,13 @@ const AddNewContact = () => {
             secondEmail: "",
             phone: "",
             secondPhone: "",
-            address: "",
+            addressLine: "",
             social: "",
             role: "",
+            bio: "",
           }}
           validationSchema={CreateContactSchema}
-          onSubmit={(values: any) => console.log(values)}
+          onSubmit={(values: any) => addContact(values)}
           validateOnChange
           validateOnBlur
         >
@@ -125,97 +116,128 @@ const AddNewContact = () => {
             <GeneralInformationGrid container item xs={9}>
               <StyledForm>
                 <Text variant="H4">General information</Text>
-                <InputGrid container>
-                  <Grid container gap="20px" width="440px" flexDirection="column">
-                    <InputWithFormik
-                      placeholder={"Start typing..."}
-                      name="fullName"
-                      label="Full Name"
-                      endIcon={<Person />}
-                    />
-                    <InputWithFormik
-                      placeholder={"Start typing..."}
-                      name="email"
-                      type="email"
-                      label="Email"
-                      endIcon={<Email />}
-                    />
-                    <InputWithFormik
-                      placeholder={"Start typing..."}
-                      name="phone"
-                      label="Phone"
-                      endIcon={<Phone />}
-                    />
-                    <InputWithFormik
-                      placeholder={"Start typing..."}
-                      name="address"
-                      label="Address line"
-                      endIcon={<LocationOn />}
-                    />
-                    <Input
-                      variant="Select"
-                      width="440px"
-                      title="Social"
-                      text="Select social profile"
-                      SelectArray={SocialCategoty}
-                      onChange={(value: number) =>
-                        SocialCategoty.some(
-                          x => x.value === value && props.setFieldValue("social", x.Text, true),
-                        )
-                      }
-                    />
+                <InputGrid>
+                  <Grid item xs={12} container justifyContent={"space-between"} height={"90px"}>
+                    <Grid item xs={4}>
+                      <InputWithFormik
+                        placeholder={"Start typing..."}
+                        name="fullName"
+                        label="Full Name"
+                        endIcon={<Person />}
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <InputWithFormik
+                        placeholder={"Start typing..."}
+                        name="role"
+                        label="Role"
+                        endIcon={<RecordVoiceOver />}
+                      />
+                    </Grid>
                   </Grid>
-                  <Grid container gap="20px" width="440px" flexDirection="column">
-                    <InputWithFormik
-                      placeholder={"Start typing..."}
-                      name="role"
-                      label="Role"
-                      endIcon={<RecordVoiceOver />}
-                    />
-                    <Grid container alignItems="center" height="67px">
-                      {addEmail === false ? (
-                        <Grid container gap="10px">
-                          <PlusImg src={Plus} alt="Add Email" onClick={() => setAddEmail(true)} />
-                          <Text variant="BOLD" color="#8083A3">
-                            Add Email
-                          </Text>
-                        </Grid>
-                      ) : (
-                        <Grid container height="67px">
-                          <InputWithFormik
-                            placeholder={"Start typing..."}
-                            name="secondEmail"
-                            type="email"
-                            label="Second Email"
-                            endIcon={<Email />}
-                          />
-                        </Grid>
-                      )}
+                  <Grid item xs={12} container justifyContent={"space-between"} height={"90px"}>
+                    <Grid item xs={4}>
+                      <InputWithFormik
+                        placeholder={"Start typing..."}
+                        name="email"
+                        type="email"
+                        label="Email"
+                        endIcon={<Email />}
+                      />
                     </Grid>
-                    <Grid container alignItems="center" height="67px">
-                      {addPhoneNumber === false ? (
-                        <Grid container gap="10px">
-                          <PlusImg
-                            src={Plus}
-                            alt="Add Email"
-                            onClick={() => setAddPhoneNumber(true)}
-                          />
-                          <Text variant="BOLD" color="#8083A3">
-                            Add Phone Number
-                          </Text>
-                        </Grid>
-                      ) : (
-                        <Grid container height="67px">
-                          <InputWithFormik
-                            placeholder={"Start typing..."}
-                            name="secondPhone"
-                            label="Second Phone"
-                            endIcon={<Phone />}
-                          />
-                        </Grid>
-                      )}
+                    <Grid item xs={4}>
+                      <Grid container alignItems="center" height="75px">
+                        {addEmail === false ? (
+                          <Grid container gap="10px">
+                            <PlusImg src={Plus} alt="Add Email" onClick={() => setAddEmail(true)} />
+                            <Text variant="BOLD" color="#8083A3">
+                              Add Email
+                            </Text>
+                          </Grid>
+                        ) : (
+                          <Grid container height="75px">
+                            <InputWithFormik
+                              placeholder={"Start typing..."}
+                              name="secondEmail"
+                              type="email"
+                              label="Second Email"
+                              endIcon={<Email />}
+                            />
+                          </Grid>
+                        )}
+                      </Grid>
                     </Grid>
-                    <Grid container paddingTop={"124px"}>
+                  </Grid>
+                  <Grid item xs={12} container justifyContent={"space-between"} height={"90px"}>
+                    <Grid item xs={4}>
+                      <InputWithFormik
+                        placeholder={"Start typing..."}
+                        name="phone"
+                        label="Phone"
+                        endIcon={<Phone />}
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <Grid container alignItems="center" height="75px">
+                        {addPhoneNumber === false ? (
+                          <Grid container gap="10px">
+                            <PlusImg
+                              src={Plus}
+                              alt="Add Email"
+                              onClick={() => setAddPhoneNumber(true)}
+                            />
+                            <Text variant="BOLD" color="#8083A3">
+                              Add Phone Number
+                            </Text>
+                          </Grid>
+                        ) : (
+                          <Grid container height="75px">
+                            <InputWithFormik
+                              placeholder={"Start typing..."}
+                              name="secondPhone"
+                              label="Second Phone"
+                              endIcon={<Phone />}
+                            />
+                          </Grid>
+                        )}
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12} container justifyContent={"space-between"} height={"90px"}>
+                    <Grid item xs={4}>
+                      <InputWithFormik
+                        placeholder={"Start typing..."}
+                        name="addressLine"
+                        label="Address line"
+                        endIcon={<LocationOn />}
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <InputWithFormik
+                        placeholder={"Start typing..."}
+                        name="bio"
+                        label="Bio"
+                        endIcon={<Person />}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12} container justifyContent={"space-between"} height={"90px"}>
+                    <Grid item xs={4}>
+                      <Grid container height="75px">
+                        <Input
+                          variant="Select"
+                          title="Social"
+                          text="Select social profile"
+                          SelectArray={SocialCategoty}
+                          onChange={(value: number) =>
+                            SocialCategoty.some(
+                              x => x.value === value && props.setFieldValue("social", x.Text, true),
+                            )
+                          }
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={4}>
                       <InputWithFormik
                         placeholder={"Enter link to your profile"}
                         name="link"

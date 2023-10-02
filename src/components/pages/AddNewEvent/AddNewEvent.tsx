@@ -40,12 +40,12 @@ import Delete from "../../../assets/AddNewEventIcon/Del.svg";
 import Input from "../../atoms/Input/Input";
 import Button from "../../atoms/Button/Button";
 import { Formik } from "formik";
-import * as yup from "yup";
 import { addEvent } from "../../../requests";
 import { InputWithFormik } from "../../atoms/InputWithFormik/InputWithFormik";
 import { Email } from "@mui/icons-material";
 import { defaultDate } from "../Schedule/Schedule";
 import dayjs from "dayjs";
+import { CreateEventSchema } from "../../../validationSchema";
 
 const AddNewEvent = () => {
   const [category, setCategory] = useState("General information");
@@ -145,14 +145,6 @@ const AddNewEvent = () => {
     setAllMembersUsers([...allMembersUsers.filter(value2 => !isEqual(value, value2))]);
     return setAddUsersArray([...addUsersArray, value]);
   };
-
-  const CreateEventSchema = yup.object().shape({
-    title: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-    note: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-    date: yup.object().required("Required"),
-    timeFrom: yup.object().required("Required"),
-    timeTo: yup.object().required("Required"),
-  });
 
   return (
     <Wrapper container item xs={12}>

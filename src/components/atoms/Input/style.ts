@@ -18,7 +18,6 @@ export const LightInput = styled(Input)<InputStyleProps>`
 `;
 
 export const InputGrid = styled(Grid)<InputStyleProps>`
-  gap: 10px;
   width: ${props => props.$width || "100px"};
   flex-direction: column;
   position: relative;

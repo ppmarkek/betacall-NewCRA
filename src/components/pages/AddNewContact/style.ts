@@ -19,7 +19,6 @@ export const GeneralInformationGrid = styled(Grid)`
 `;
 
 export const InputGrid = styled(Grid)`
-  justify-content: space-between;
   padding-top: 25px;
   height: calc(100% - 85px);
 `;

@@ -60,7 +60,7 @@ import dayjs from "dayjs";
 import Input from "../../atoms/Input/Input";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
-import { findAll, removeEvent, updateEvent } from "../../../requests";
+import { findAllEvents, removeEvent, updateEvent } from "../../../requests";
 import { Email } from "@mui/icons-material";
 import { InputWithFormik } from "../../atoms/InputWithFormik/InputWithFormik";
 import { Form, Formik } from "formik";
@@ -124,7 +124,7 @@ const Schedule = () => {
   }
 
   const getAllEvents = async () => {
-    const response = await findAll();
+    const response = await findAllEvents();
     setAllEventsRequests(response);
   };
 
@@ -248,14 +248,14 @@ const Schedule = () => {
 
   const updateMapWithDatabaseData = async (values: any) => {
     updateEvent(menuInfo?._id, values).then(async () => {
-      const response = await findAll();
+      const response = await findAllEvents();
       setAllEventsRequests(response);
     });
   };
 
   const DeleteEvent = async () => {
     removeEvent(menuInfo?._id).then(async () => {
-      const response = await findAll();
+      const response = await findAllEvents();
       setAllEventsRequests(response);
     });
   };

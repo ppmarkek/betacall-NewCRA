@@ -28,7 +28,7 @@ export const InputWithFormik = ({
 }: InputWithFormikProps) => {
   const [inputInFocus, setInputInFocus] = useState(false);
   return (
-    <Grid display={"flex"} flexDirection={"column"} height={"75px"} width={"100%"}>
+    <Grid display={"flex"} flexDirection={"column"} height={"90px"} gap={"10px"} width={"100%"}>
       <StyledInputLabel>{label}</StyledInputLabel>
       <Field
         component={InputField}
