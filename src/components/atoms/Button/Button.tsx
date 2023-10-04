@@ -9,11 +9,12 @@ type ButtonProps = {
   variant: "FilledActive" | "FilledRestingLight" | Variant
   children?: any
   width?: string
+  height?: any
   onClick?: (value: boolean) => void
   type?: "submit" | "reset" | "button" | undefined
 }
 
-const Button = ({ variant, children, width, onClick, type }: ButtonProps) => {
+const Button = ({ variant, children, width, height, onClick, type }: ButtonProps) => {
   const handleClick = () => {
     if (onClick) {
       onClick(true);
@@ -22,19 +23,29 @@ const Button = ({ variant, children, width, onClick, type }: ButtonProps) => {
   switch (variant) {
     case "FilledRestingLight":
       return (
-        <FilledRestingLight onClick={() => handleClick()} $width={width} type={type}>
+        <FilledRestingLight
+          onClick={() => handleClick()}
+          $height={height}
+          $width={width}
+          type={type}
+        >
           {children}
         </FilledRestingLight>
       );
     case "FilledActive":
       return (
-        <FilledActive onClick={() => handleClick()} $width={width} type={type}>
+        <FilledActive onClick={() => handleClick()} $height={height} $width={width} type={type}>
           {children}
         </FilledActive>
       );
     default:
       return (
-        <FilledRestingLight onClick={() => handleClick()} $width={width} type={type}>
+        <FilledRestingLight
+          onClick={() => handleClick()}
+          $height={height}
+          $width={width}
+          type={type}
+        >
           {children}
         </FilledRestingLight>
       );

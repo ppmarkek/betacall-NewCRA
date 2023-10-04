@@ -246,7 +246,7 @@ const Schedule = () => {
     return answ.map(value => value.value).toString();
   };
 
-  const updateMapWithDatabaseData = async (values: any) => {
+  const updateMapWithData = async (values: any) => {
     updateEvent(menuInfo?._id, values).then(async () => {
       const response = await findAllEvents();
       setAllEventsRequests(response);
@@ -274,193 +274,192 @@ const Schedule = () => {
     };
     return setMenuInfo(newArr);
   };
-  const EditMenu = () => {
-    return (
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            "&:before": {
-              content: "",
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 3,
-            },
+
+  const EditMenu = () => (
+    <Menu
+      anchorEl={anchorEl}
+      id="account-menu"
+      open={open}
+      onClose={handleClose}
+      PaperProps={{
+        elevation: 0,
+        sx: {
+          overflow: "visible",
+          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+          mt: 1.5,
+          "& .MuiAvatar-root": {
+            width: 32,
+            height: 32,
+            ml: -0.5,
+            mr: 1,
           },
+          "&:before": {
+            content: "",
+            display: "block",
+            position: "absolute",
+            top: 0,
+            right: 14,
+            width: 10,
+            height: 10,
+            bgcolor: "background.paper",
+            transform: "translateY(-50%) rotate(45deg)",
+            zIndex: 3,
+          },
+        },
+      }}
+      transformOrigin={{ horizontal: "right", vertical: "top" }}
+      anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+    >
+      <Formik
+        initialValues={{
+          title: menuInfo?.title,
+          note: menuInfo?.note,
+          date: menuInfo?.date,
+          timeFrom: menuInfo?.timeFrom,
+          timeTo: menuInfo?.timeTo,
+          group: menuInfo?.group,
+          members: menuInfo?.members,
         }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        onSubmit={(values: any) => updateMapWithData(values)}
+        validateOnChange
+        validateOnBlur
       >
-        <Formik
-          initialValues={{
-            title: menuInfo?.title,
-            note: menuInfo?.note,
-            date: menuInfo?.date,
-            timeFrom: menuInfo?.timeFrom,
-            timeTo: menuInfo?.timeTo,
-            group: menuInfo?.group,
-            members: menuInfo?.members,
-          }}
-          onSubmit={(values: any) => updateMapWithDatabaseData(values)}
-          validateOnChange
-          validateOnBlur
-        >
-          {props => (
-            <Form>
-              <EditInfoGrid container>
-                <Grid container justifyContent="space-between">
-                  <EditButtons
-                    onClick={() => props.setFieldValue("members", menuInfo?.members, true)}
-                    type="submit"
-                  >
-                    <img src={EditInfoIcon} alt="Edit Info" />
-                  </EditButtons>
-                  <EditButtons onClick={() => DeleteEvent()}>
-                    <img src={DeleteEventIcon} alt="Delete Event" />
-                  </EditButtons>
+        {props => (
+          <Form>
+            <EditInfoGrid container>
+              <Grid container justifyContent="space-between">
+                <EditButtons
+                  onClick={() => props.setFieldValue("members", menuInfo?.members, true)}
+                  type="submit"
+                >
+                  <img src={EditInfoIcon} alt="Edit Info" />
+                </EditButtons>
+                <EditButtons onClick={() => DeleteEvent()}>
+                  <img src={DeleteEventIcon} alt="Delete Event" />
+                </EditButtons>
+              </Grid>
+              <Grid container justifyContent="space-between">
+                <Grid item xs={5.5} container>
+                  <Text variant="LIGHT">Date</Text>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <StyledDatePicker
+                      onChange={value => props.setFieldValue("date", value, true)}
+                      defaultValue={dayjs(
+                        `${new Date(menuInfo?.date).getFullYear()}-${
+                          new Date(menuInfo?.date).getMonth() + 1
+                        }-${new Date(menuInfo?.date).getDate()}`,
+                      )}
+                    />
+                  </LocalizationProvider>
                 </Grid>
-                <Grid container justifyContent="space-between">
-                  <Grid item xs={5.5} container>
-                    <Text variant="LIGHT">Date</Text>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <StyledDatePicker
-                        onChange={value => props.setFieldValue("date", value, true)}
+                <Grid item xs={5.5}>
+                  <Input
+                    variant="Select"
+                    width="100%"
+                    title="Group"
+                    text="Select group"
+                    SelectDefaultValue={selectGroup()}
+                    SelectArray={GroupCategoty}
+                    onChange={(value: number) =>
+                      GroupCategoty.some(
+                        GroupCategotyValue =>
+                          GroupCategotyValue.value === value &&
+                          props.setFieldValue("group", GroupCategotyValue.Text, true),
+                      )
+                    }
+                  />
+                </Grid>
+              </Grid>
+              <Grid container justifyContent="space-between">
+                <TimePickerGrid container item xs={5.5}>
+                  <Text variant="LIGHT">Time from</Text>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer components={["TimePicker"]}>
+                      <StyledTimePicker
+                        onChange={value => props.setFieldValue("timeFrom", value, true)}
                         defaultValue={dayjs(
                           `${new Date(menuInfo?.date).getFullYear()}-${
                             new Date(menuInfo?.date).getMonth() + 1
-                          }-${new Date(menuInfo?.date).getDate()}`,
+                          }-${new Date(menuInfo?.date).getDate()}T${new Date(
+                            menuInfo?.timeFrom,
+                          ).getHours()}:${new Date(menuInfo?.timeFrom).getMinutes()}`,
                         )}
+                        viewRenderers={{
+                          hours: renderTimeViewClock,
+                          minutes: renderTimeViewClock,
+                          seconds: renderTimeViewClock,
+                        }}
                       />
-                    </LocalizationProvider>
-                  </Grid>
-                  <Grid item xs={5.5}>
-                    <Input
-                      variant="Select"
-                      width="100%"
-                      title="Group"
-                      text="Select group"
-                      SelectDefaultValue={selectGroup()}
-                      SelectArray={GroupCategoty}
-                      onChange={(value: number) =>
-                        GroupCategoty.some(
-                          GroupCategotyValue =>
-                            GroupCategotyValue.value === value &&
-                            props.setFieldValue("group", GroupCategotyValue.Text, true),
-                        )
-                      }
-                    />
-                  </Grid>
+                    </DemoContainer>
+                  </LocalizationProvider>
+                </TimePickerGrid>
+                <TimePickerGrid container item xs={5.5}>
+                  <Text variant="LIGHT">Time to</Text>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer components={["TimePicker"]}>
+                      <StyledTimePicker
+                        onChange={value => props.setFieldValue("timeTo", value, true)}
+                        defaultValue={dayjs(
+                          `${new Date(menuInfo?.date).getFullYear()}-${
+                            new Date(menuInfo?.date).getMonth() + 1
+                          }-${new Date(menuInfo?.date).getDate()}T${new Date(
+                            menuInfo?.timeTo,
+                          ).getHours()}:${new Date(menuInfo?.timeTo).getMinutes()}`,
+                        )}
+                        viewRenderers={{
+                          hours: renderTimeViewClock,
+                          minutes: renderTimeViewClock,
+                          seconds: renderTimeViewClock,
+                        }}
+                      />
+                    </DemoContainer>
+                  </LocalizationProvider>
+                </TimePickerGrid>
+              </Grid>
+              <Grid container flexDirection="column" gap="10px">
+                <Text variant="LIGHT">Shared with</Text>
+                <Grid container gap="5px">
+                  {menuInfo?.members.map((users: number) => (
+                    <DeleteUser key={users} container>
+                      <DeleteUserImgGrid
+                        container
+                        className={"DeleteUserImg"}
+                        onClick={() => updateMembers(users)}
+                      >
+                        <DeleteUserImg src={DeleteMembersIcon} alt="Delete Avatar" />
+                      </DeleteUserImgGrid>
+                      <MembersIcon src={MembersAvatar} alt="Avatar" />
+                    </DeleteUser>
+                  ))}
+                  {menuInfo?.members.length < 6 && (
+                    <AddNewGrid container>
+                      <AddNew src={AddNewGroup} alt="Add New Event By Date" />
+                    </AddNewGrid>
+                  )}
                 </Grid>
-                <Grid container justifyContent="space-between">
-                  <TimePickerGrid container item xs={5.5}>
-                    <Text variant="LIGHT">Time from</Text>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DemoContainer components={["TimePicker"]}>
-                        <StyledTimePicker
-                          onChange={value => props.setFieldValue("timeFrom", value, true)}
-                          defaultValue={dayjs(
-                            `${new Date(menuInfo?.date).getFullYear()}-${
-                              new Date(menuInfo?.date).getMonth() + 1
-                            }-${new Date(menuInfo?.date).getDate()}T${new Date(
-                              menuInfo?.timeFrom,
-                            ).getHours()}:${new Date(menuInfo?.timeFrom).getMinutes()}`,
-                          )}
-                          viewRenderers={{
-                            hours: renderTimeViewClock,
-                            minutes: renderTimeViewClock,
-                            seconds: renderTimeViewClock,
-                          }}
-                        />
-                      </DemoContainer>
-                    </LocalizationProvider>
-                  </TimePickerGrid>
-                  <TimePickerGrid container item xs={5.5}>
-                    <Text variant="LIGHT">Time to</Text>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DemoContainer components={["TimePicker"]}>
-                        <StyledTimePicker
-                          onChange={value => props.setFieldValue("timeTo", value, true)}
-                          defaultValue={dayjs(
-                            `${new Date(menuInfo?.date).getFullYear()}-${
-                              new Date(menuInfo?.date).getMonth() + 1
-                            }-${new Date(menuInfo?.date).getDate()}T${new Date(
-                              menuInfo?.timeTo,
-                            ).getHours()}:${new Date(menuInfo?.timeTo).getMinutes()}`,
-                          )}
-                          viewRenderers={{
-                            hours: renderTimeViewClock,
-                            minutes: renderTimeViewClock,
-                            seconds: renderTimeViewClock,
-                          }}
-                        />
-                      </DemoContainer>
-                    </LocalizationProvider>
-                  </TimePickerGrid>
-                </Grid>
-                <Grid container flexDirection="column" gap="10px">
-                  <Text variant="LIGHT">Shared with</Text>
-                  <Grid container gap="5px">
-                    {menuInfo?.members.map((users: number) => (
-                      <DeleteUser key={users} container>
-                        <DeleteUserImgGrid
-                          container
-                          className={"DeleteUserImg"}
-                          onClick={() => updateMembers(users)}
-                        >
-                          <DeleteUserImg src={DeleteMembersIcon} alt="Delete Avatar" />
-                        </DeleteUserImgGrid>
-                        <MembersIcon src={MembersAvatar} alt="Avatar" />
-                      </DeleteUser>
-                    ))}
-                    {menuInfo?.members.length < 6 && (
-                      <AddNewGrid container>
-                        <AddNew src={AddNewGroup} alt="Add New Event By Date" />
-                      </AddNewGrid>
-                    )}
-                  </Grid>
-                </Grid>
-                <InputWithFormik
-                  placeholder={"Start typing..."}
-                  name="title"
-                  value={props.values.title}
-                  type="text"
-                  label="Title"
-                  endIcon={<Email />}
-                />
-                <InputWithFormik
-                  placeholder={"Start typing..."}
-                  name="note"
-                  value={props.values.note}
-                  type="text"
-                  label="Note"
-                  endIcon={<Email />}
-                />
-              </EditInfoGrid>
-            </Form>
-          )}
-        </Formik>
-      </Menu>
-    );
-  };
+              </Grid>
+              <InputWithFormik
+                placeholder={"Start typing..."}
+                name="title"
+                value={props.values.title}
+                type="text"
+                label="Title"
+                endIcon={<Email />}
+              />
+              <InputWithFormik
+                placeholder={"Start typing..."}
+                name="note"
+                value={props.values.note}
+                type="text"
+                label="Note"
+                endIcon={<Email />}
+              />
+            </EditInfoGrid>
+          </Form>
+        )}
+      </Formik>
+    </Menu>
+  );
 
   return (
     <Wrapper container item xs={12}>

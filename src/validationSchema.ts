@@ -9,6 +9,7 @@ export const CreateContactSchema = yup.object().shape({
   addressLine: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
   social: yup.string().required("Required"),
   bio: yup.string().required("Required"),
+  dial: yup.string().email("Invalid email"),
   role: yup.string().min(2, "Too Short!").required("Required"),
 });
 

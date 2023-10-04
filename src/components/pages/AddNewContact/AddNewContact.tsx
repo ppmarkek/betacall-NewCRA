@@ -6,7 +6,7 @@ import AllContactActive from "../../../assets/AddNewContactIcon/AllContactActive
 import AddNewContactImg from "../../../assets/AddNewContactIcon/AddNewContactImg.svg";
 import NotificationsIcon from "../../../assets/AddNewContactIcon/NotificationsIcon.svg";
 import NotificationsActiveIcon from "../../../assets/AddNewContactIcon/NotificationsActiveIcon.svg";
-import { Person, Email, Phone, LocationOn, RecordVoiceOver } from "@mui/icons-material";
+import { Person, Email, Phone, LocationOn, RecordVoiceOver, Link } from "@mui/icons-material";
 import {
   Avatar,
   Border,
@@ -42,6 +42,25 @@ const AddNewContact = () => {
     {
       Text: "Facebook",
       value: 20,
+    },
+  ];
+
+  const GroupCategoty = [
+    {
+      Text: "Business",
+      value: 10,
+    },
+    {
+      Text: "Personal",
+      value: 20,
+    },
+    {
+      Text: "Cloud",
+      value: 30,
+    },
+    {
+      Text: "Customers",
+      value: 40,
     },
   ];
 
@@ -106,6 +125,9 @@ const AddNewContact = () => {
             social: "",
             role: "",
             bio: "",
+            group: "Business",
+            dial: "",
+            link: "",
           }}
           validationSchema={CreateContactSchema}
           onSubmit={(values: any) => addContact(values)}
@@ -231,7 +253,9 @@ const AddNewContact = () => {
                           SelectArray={SocialCategoty}
                           onChange={(value: number) =>
                             SocialCategoty.some(
-                              x => x.value === value && props.setFieldValue("social", x.Text, true),
+                              value2 =>
+                                value2.value === value &&
+                                props.setFieldValue("social", value2.Text, true),
                             )
                           }
                         />
@@ -242,7 +266,33 @@ const AddNewContact = () => {
                         placeholder={"Enter link to your profile"}
                         name="link"
                         label="Link"
-                        endIcon={<LocationOn />}
+                        endIcon={<Link />}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12} container justifyContent={"space-between"} height={"90px"}>
+                    <Grid item xs={4}>
+                      <Grid container height="75px">
+                        <Input
+                          variant="Select"
+                          title="Group"
+                          text="Select group"
+                          SelectDefaultValue="10"
+                          SelectArray={GroupCategoty}
+                          onChange={(value: number) =>
+                            GroupCategoty.some(
+                              x => x.value === value && props.setFieldValue("group", x.Text, true),
+                            )
+                          }
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <InputWithFormik
+                        placeholder={"Start typing..."}
+                        name="dial"
+                        label="Dial"
+                        endIcon={<Email />}
                       />
                     </Grid>
                   </Grid>

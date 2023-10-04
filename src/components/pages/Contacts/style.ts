@@ -1,12 +1,20 @@
-import { Button, Grid } from "@mui/material";
+import { Button, Drawer, Grid } from "@mui/material";
 import styled from "styled-components";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import PhoneIcon from "@mui/icons-material/Phone";
 import ForumIcon from "@mui/icons-material/Forum";
+import CloseIcon from "@mui/icons-material/Close";
+import ScreenShareIcon from "@mui/icons-material/ScreenShare";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
+import EditIcon from "@mui/icons-material/Edit";
 
 type CategoryProps = {
   $background?: any
   $color?: string
+  $width?: string
+  $height?: string
 }
 
 export const Wrapper = styled(Grid)`
@@ -103,8 +111,8 @@ export const ButtonsAbout = styled(Button)<CategoryProps>`
     display: none;
   }
   cursor: pointer;
-  width: 35px;
-  height: 35px;
+  width: ${props => (props.$width ? props.$width : "35px")};
+  height: ${props => (props.$height ? props.$height : "35px")};
   border: 1px solid #eceef5;
   border-radius: 10px;
   display: flex;
@@ -133,4 +141,96 @@ export const StyledForumIcon = styled(ForumIcon)`
   color: rgba(128, 131, 163, 1);
   width: 20px;
   height: 20px;
+`;
+
+export const StyledCloseIcon = styled(CloseIcon)`
+  color: rgba(128, 131, 163, 1);
+  width: 20px;
+  height: 20px;
+`;
+
+export const StyledScreenShareIcon = styled(ScreenShareIcon)`
+  color: rgba(128, 131, 163, 1);
+  width: 20px;
+  height: 20px;
+`;
+
+export const StyledFacebookIcon = styled(FacebookIcon)`
+  color: rgba(128, 131, 163, 1);
+  width: 20px;
+  height: 20px;
+`;
+
+export const StyledInstagramIcon = styled(InstagramIcon)`
+  color: rgba(128, 131, 163, 1);
+  width: 20px;
+  height: 20px;
+`;
+
+export const StyledDeleteSweepIcon = styled(DeleteSweepIcon)`
+  color: rgba(128, 131, 163, 1);
+  width: 20px;
+  height: 20px;
+`;
+
+export const StyledEditIcon = styled(EditIcon)`
+  color: rgba(128, 131, 163, 1);
+  width: 20px;
+  height: 20px;
+`;
+
+export const StyledDrawer = styled(Drawer)`
+  .MuiPaper-root {
+    border: unset;
+    box-shadow: 0px 6px 20px 0px rgba(153, 155, 168, 0.1);
+    width: 40%;
+    padding: 25px 40px;
+  }
+`;
+
+export const CloseGrid = styled(Grid)`
+  z-index: 1000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+`;
+
+export const MenuAvatar = styled.img`
+  width: 115px;
+  height: 115px;
+  border-radius: 25px;
+`;
+
+export const AvatarGrid = styled(Grid)`
+  padding-top: 60px;
+  padding-left: 100px;
+  flex-direction: column;
+  gap: 5px;
+`;
+
+export const InfoGrid = styled(Grid)`
+  padding-top: 25px;
+  gap: 30px;
+`;
+
+export const ContactsLength = styled(Grid)`
+  width: 30px;
+  height: 20px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+  background: #28c345;
+  border-radius: 12px;
+`;
+
+export const EditInfoGrid = styled(Grid)`
+  padding: 20px;
+  width: 300px;
+  height: 400px;
+  overflow-x: auto;
+  gap: 15px;
 `;
