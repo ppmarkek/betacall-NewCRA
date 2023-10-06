@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 
 type ButtonStyleProps = {
   $width?: string
+  $height: string
 }
 
 export const FilledRestingLight = styled(Button)<ButtonStyleProps>`
@@ -13,13 +14,13 @@ export const FilledRestingLight = styled(Button)<ButtonStyleProps>`
   border: 1px solid #eceef5;
   border-radius: 10px;
   text-align: center;
-  padding: 14px 0px 15px 0;
   cursor: pointer;
   font-size: 16px;
   font-family: "Lato";
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   width: ${props => props.$width || "98px"};
+  height: ${props => props.$height || "50px"};
   transition: all 0.4s;
   span {
     display: none;
@@ -37,14 +38,14 @@ export const FilledActive = styled(Button)<ButtonStyleProps>`
   cursor: pointer;
   font-family: "Lato";
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 16px;
   line-height: 19px;
   color: #ffffff;
   background: #6b59cc;
   border-radius: 10px;
   border: 1px solid #6b59cc;
-  height: 50px;
+  height: ${props => props.$height || "50px"};
   transition: all 0.4s;
   text-align: center;
   width: ${props => props.$width || "98px"};

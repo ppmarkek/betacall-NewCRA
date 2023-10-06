@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Grid, Button, FormControl, MenuItem, Input } from "@mui/material";
+import { Grid, Button, FormControl, Input } from "@mui/material";
 import { Link } from "react-router-dom";
 
 type InputStyleProps = {
@@ -15,14 +15,9 @@ export const LightInput = styled(Input)<InputStyleProps>`
     border-bottom-style: solid;
     border-bottom-color: ${props => props.$color || "#ECEEF5"};
   }
-  font-family: "Lato";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
 `;
 
 export const InputGrid = styled(Grid)<InputStyleProps>`
-  gap: 10px;
   width: ${props => props.$width || "100px"};
   flex-direction: column;
   position: relative;
@@ -81,11 +76,6 @@ export const SearchInput = styled(Input)`
   padding-left: 20px;
   padding-right: 42px;
   color: #6b59cc;
-  font-family: "Lato";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 21px;
   &::after {
     all: unset;
   }
@@ -167,10 +157,6 @@ export const StyledFormControl = styled(FormControl)`
     margin-top: unset;
   }
   label {
-    font-family: "Lato";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
     color: #a2a2a2;
     transform: unset;
     transition: color unset;
@@ -184,10 +170,4 @@ export const StyledFormControl = styled(FormControl)`
   .MuiFormLabel-filled {
     visibility: hidden;
   }
-`;
-
-export const StyledMenuItem = styled(MenuItem)`
-  font-size: 16px;
-  font-family: "Lato";
-  font-weight: 700;
 `;

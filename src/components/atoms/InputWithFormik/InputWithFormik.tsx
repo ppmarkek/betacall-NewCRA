@@ -1,7 +1,7 @@
-import { Grid, IconButton, InputLabel } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 import { Field } from "formik";
 import { MouseEventHandler, ReactNode, useState } from "react";
-import { InputAdornmentWithStyle, InputField } from "./style";
+import { InputAdornmentWithStyle, InputField, StyledInputLabel } from "./style";
 
 type InputWithFormikProps = {
   name: string
@@ -12,6 +12,7 @@ type InputWithFormikProps = {
   onIconClick?: MouseEventHandler<HTMLButtonElement>
   inputIconColor?: string
   value?: string
+  placeholder?: string
 }
 
 export const InputWithFormik = ({
@@ -23,15 +24,17 @@ export const InputWithFormik = ({
   onIconClick,
   inputIconColor = "black",
   value,
+  placeholder,
 }: InputWithFormikProps) => {
   const [inputInFocus, setInputInFocus] = useState(false);
   return (
-    <Grid display={"flex"} flexDirection={"column"} height={"75px"} width={"100%"}>
-      <InputLabel>{label}</InputLabel>
+    <Grid display={"flex"} flexDirection={"column"} height={"90px"} gap={"10px"} width={"100%"}>
+      <StyledInputLabel>{label}</StyledInputLabel>
       <Field
         component={InputField}
         name={name}
         value={value}
+        placeholder={placeholder}
         type={hideInput ? type : "password"}
         onBlur={() => setInputInFocus(false)}
         onFocus={() => setInputInFocus(true)}

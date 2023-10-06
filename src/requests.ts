@@ -2,6 +2,7 @@ import axios from "axios";
 
 const urlMessenger = "http://localhost:5000/api/messenger/";
 const urlEvents = "http://localhost:5000/api/events/";
+const urlContacts = "http://localhost:5000/api/contacts/";
 
 export async function addUser(data: any) {
   const response = await axios.post(`${urlMessenger}user-register`, data);
@@ -53,12 +54,12 @@ export async function addEvent(data: any) {
   return response.data;
 }
 
-export async function findAll() {
+export async function findAllEvents() {
   const response = await axios.get(`${urlEvents}get-events`);
   return response.data;
 }
 
-export async function findOne(id: string) {
+export async function findOneEvent(id: string) {
   const response = await axios.get(`${urlEvents}get-event/${id}`);
   return response.data;
 }
@@ -70,5 +71,30 @@ export async function updateEvent(id: string, data: any) {
 
 export async function removeEvent(id: string) {
   const response = await axios.delete(`${urlEvents}remove-event/${id}`);
+  return response.data;
+}
+
+export async function addContact(data: any) {
+  const response = await axios.post(`${urlContacts}add-contact`, data);
+  return response.data;
+}
+
+export async function findAllContacts() {
+  const response = await axios.get(`${urlContacts}get-contacts`);
+  return response.data;
+}
+
+export async function findOneContact(id: string) {
+  const response = await axios.get(`${urlContacts}get-contact/${id}`);
+  return response.data;
+}
+
+export async function updateContact(id: string, data: any) {
+  const response = await axios.put(`${urlContacts}update-contact/${id}`, data);
+  return response.data;
+}
+
+export async function removeContact(id: string) {
+  const response = await axios.delete(`${urlContacts}remove-contact/${id}`);
   return response.data;
 }

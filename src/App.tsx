@@ -12,6 +12,7 @@ import Settings from "./components/pages/Settings/Settings";
 import Schedule from "./components/pages/Schedule/Schedule";
 import AddNewEvent from "./components/pages/AddNewEvent/AddNewEvent";
 import Contacts from "./components/pages/Contacts/Contacts";
+import AddNewContact from "./components/pages/AddNewContact/AddNewContact";
 
 function App() {
   const LoginReg = ["/Login", "/Recover", "/Step1", "/Step2", "/Step3"];
@@ -36,6 +37,7 @@ function App() {
         <Route path="/Schedule" element={<Schedule />} />
         <Route path="/AddNewEvent" element={<AddNewEvent />} />
         <Route path="/Contacts" element={<Contacts />} />
+        <Route path="/AddNewContact" element={<AddNewContact />} />
       </Routes>
     </div>
   );

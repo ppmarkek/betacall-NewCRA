@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { TextField } from "formik-mui";
-import { InputAdornment } from "@mui/material";
+import { InputAdornment, InputLabel } from "@mui/material";
 
 type InputStyleProps = {
   fullWidth?: boolean
@@ -14,7 +14,7 @@ export const InputField = styled(TextField)<InputStyleProps>`
     border-bottom: 1px solid #eceef5;
     padding-right: 0px;
     border-radius: 0px;
-    padding-bottom: 3px;
+    padding-bottom: 8px;
   }
   input {
     padding: 0;
@@ -26,6 +26,15 @@ export const InputField = styled(TextField)<InputStyleProps>`
     margin: 0;
     margin-top: 5px;
   }
+`;
+
+export const StyledInputLabel = styled(InputLabel)`
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 21px;
+  color: #8083a3;
 `;
 
 export const InputAdornmentWithStyle = styled(InputAdornment)<{
