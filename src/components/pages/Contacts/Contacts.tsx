@@ -196,13 +196,6 @@ const Contacts = () => {
     });
   };
 
-  const DeleteContact = async (id: any) => {
-    removeContact(id).then(async () => {
-      const response = await findAllContacts();
-      getContacts(response);
-    });
-  };
-
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -220,6 +213,14 @@ const Contacts = () => {
     setAnchorEl(null);
   };
 
+  const DeleteContact = async (id: any, event: any) => {
+    handleClose(event);
+    removeContact(id).then(async () => {
+      const response = await findAllContacts();
+      getContacts(response);
+    });
+  };
+
   const openEdit = Boolean(anchorEl);
 
   useEffect(() => {
@@ -230,8 +231,6 @@ const Contacts = () => {
     const answ = value.filter((value2: any) => value2.Text === group);
     return answ.map((value2: any) => value2.value).toString();
   };
-
-  console.log(openMenu);
 
   const EditMenu = () => (
     <Menu
@@ -295,7 +294,7 @@ const Contacts = () => {
                 <ButtonsAbout type="submit">
                   <StyledEditIcon />
                 </ButtonsAbout>
-                <ButtonsAbout onClick={() => DeleteContact(menuData[0]?._id)}>
+                <ButtonsAbout onClick={event => DeleteContact(menuData[0]?._id, event)}>
                   <StyledDeleteSweepIcon />
                 </ButtonsAbout>
               </Grid>
