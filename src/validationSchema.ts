@@ -27,9 +27,20 @@ export const SignupSchema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Required"),
   password: yup.string().required("Password is required"),
   confirmPassword: yup.string().oneOf([yup.ref("password"), undefined], "Passwords must match"),
+  checkBox: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
 });
 
 export const validatePassword = yup.object().shape({
   password: yup.string().required("Password is required"),
   confirmPassword: yup.string().oneOf([yup.ref("password"), undefined], "Passwords must match"),
+});
+
+export const validateStep1 = yup.object().shape({
+  email: yup.string().email("Invalid email").required("Required"),
+  checkBox: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
+});
+
+export const validateLogin = yup.object().shape({
+  email: yup.string().email("Invalid email").required("Required"),
+  password: yup.string().required("Password is required"),
 });

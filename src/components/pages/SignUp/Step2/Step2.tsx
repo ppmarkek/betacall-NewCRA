@@ -1,26 +1,40 @@
 import { FormGrid, Title, Wrapper } from "./style";
 import Text from "../../../atoms/Text/Text";
 import Button from "../../../atoms/Button/Button";
-import Checkbox from "../../../atoms/Checkbox/Checkbox";
 import { addUser } from "../../../../requests";
 import { Formik, Form } from "formik";
 import { InputWithFormik } from "../../../atoms/InputWithFormik/InputWithFormik";
 import { Lock, CheckCircle, Person, Email } from "@mui/icons-material";
 import { SignupSchema, validatePassword } from "../../../../validationSchema";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setStep } from "../../../../redux/regReducer";
 
 const Step2 = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const regUser = useSelector((state: any) => state.regUser.email);
+
+  const SubmitStep = () => {
+    return dispatch(setStep(3));
+  };
+
   return (
     <Wrapper container>
       <Formik
         initialValues={{
-          email: "",
+          email: regUser,
           firstname: "",
           lastname: "",
           password: "",
           confirmPassword: "",
         }}
         validationSchema={SignupSchema}
-        onSubmit={(values: any) => addUser(values)}
+        onSubmit={(values: any) => {
+          addUser(values);
+          navigate("/step3");
+          SubmitStep();
+        }}
         validateOnChange
         validateOnBlur
       >
@@ -36,6 +50,7 @@ const Step2 = () => {
                 name="email"
                 type="email"
                 label="Email"
+                value={values.email}
                 endIcon={<Email />}
               />
               <InputWithFormik
@@ -51,6 +66,7 @@ const Step2 = () => {
                 endIcon={<Person />}
               />
               <InputWithFormik
+                placeholder={"Start typing..."}
                 name="password"
                 type="password"
                 label="Password"
@@ -67,7 +83,6 @@ const Step2 = () => {
                   />
                 }
               />
-              <Checkbox>I agree with terms & conditions</Checkbox>
             </FormGrid>
             <Button variant="FilledActive" width="420px" type="submit">
               Continue

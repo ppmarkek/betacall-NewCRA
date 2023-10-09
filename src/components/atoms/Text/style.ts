@@ -77,3 +77,13 @@ export const Light = styled(Typography)<TextStyleProps>`
   line-height: 21px;
   color: #8083a3;
 `;
+
+export const Error = styled(Typography)<TextStyleProps>`
+  color: rgb(211, 47, 47);
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.66;
+  letter-spacing: 0.03333em;
+  text-align: left;
+`;

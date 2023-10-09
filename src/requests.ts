@@ -14,8 +14,8 @@ export async function userLogin(data: any) {
   return response.data;
 }
 
-export async function userLogout(data: any) {
-  const response = await axios.post(`${urlMessenger}user-logout`, data);
+export async function userLogout() {
+  const response = await axios.post(`${urlMessenger}user-logout`);
   return response.data;
 }
 
