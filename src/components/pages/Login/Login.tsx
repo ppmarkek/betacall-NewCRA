@@ -60,7 +60,7 @@ const Login = () => {
             email: "",
             password: "",
           }}
-          validationSchema={LoginSchema(error)}
+          validationSchema={LoginSchema}
           onSubmit={(values: any) => handleSubmit(values)}
           validateOnChange
           validateOnBlu

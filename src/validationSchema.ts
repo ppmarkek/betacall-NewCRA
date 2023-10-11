@@ -40,13 +40,7 @@ export const Step1Schema = yup.object().shape({
   checkBox: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
 });
 
-export const LoginSchema = (error: boolean) =>
-  yup.object().shape({
-    email: yup.string().email("Invalid email").required("Email is required"),
-    password: yup.string().required("Password is required"),
-    ...(error && {
-      errorMessage: yup
-        .string()
-        .required("The email and/or password you specified are not correct."),
-    }),
-  });
+export const LoginSchema = yup.object().shape({
+  email: yup.string().email("Invalid email").required("Email is required"),
+  password: yup.string().required("Password is required"),
+});
