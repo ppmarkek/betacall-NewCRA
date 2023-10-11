@@ -22,7 +22,7 @@ import {
   StyledPersonAddIcon,
 } from "./style";
 import Logo from "../../../assets/Icon/Logo.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Home from "../../../assets/NavigationIcon/Home.svg";
 import Messenger from "../../../assets/NavigationIcon/Messenger.svg";
 import Calls from "../../../assets/NavigationIcon/Calls.svg";
@@ -55,6 +55,7 @@ import { useDispatch } from "react-redux";
 const Navigation = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [checkClass, setCheckClass] = useState("NotActive");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [checked, setChecked] = useState(false);
@@ -81,6 +82,9 @@ const Navigation = () => {
     dispatch(setStep(1));
     dispatch(setEmail(""));
     dispatch(setLoggedIn(false));
+    navigate("/Login");
+    userLogout();
+    return ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "0px");
   };
 
   const ChangeClass = () => {

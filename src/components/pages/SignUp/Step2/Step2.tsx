@@ -5,7 +5,7 @@ import { addUser } from "../../../../requests";
 import { Formik, Form } from "formik";
 import { InputWithFormik } from "../../../atoms/InputWithFormik/InputWithFormik";
 import { Lock, CheckCircle, Person, Email } from "@mui/icons-material";
-import { SignupSchema, validatePassword } from "../../../../validationSchema";
+import { SignupSchema, PasswordSchema } from "../../../../validationSchema";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setStep } from "../../../../redux/regReducer";
@@ -78,9 +78,7 @@ const Step2 = () => {
                 type="password"
                 label="Confirm Password"
                 endIcon={
-                  <CheckCircle
-                    color={validatePassword.isValidSync(values) ? "success" : "inherit"}
-                  />
+                  <CheckCircle color={PasswordSchema.isValidSync(values) ? "success" : "inherit"} />
                 }
               />
             </FormGrid>

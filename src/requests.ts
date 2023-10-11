@@ -5,18 +5,30 @@ const urlEvents = "http://localhost:5000/api/events/";
 const urlContacts = "http://localhost:5000/api/contacts/";
 
 export async function addUser(data: any) {
-  const response = await axios.post(`${urlMessenger}user-register`, data);
-  return response.data;
+  try {
+    const response = await axios.post(`${urlMessenger}user-register`, data);
+    return response.data;
+  } catch (error: any) {
+    return error.response.status;
+  }
 }
 
 export async function userLogin(data: any) {
-  const response = await axios.post(`${urlMessenger}user-login`, data);
-  return response.data;
+  try {
+    const response = await axios.post(`${urlMessenger}user-login`, data);
+    return response.data;
+  } catch (error: any) {
+    return error.response.status;
+  }
 }
 
 export async function userLogout() {
-  const response = await axios.post(`${urlMessenger}user-logout`);
-  return response.data;
+  try {
+    const response = await axios.post(`${urlMessenger}user-logout`);
+    return response.data;
+  } catch (error: any) {
+    return error.response.status;
+  }
 }
 
 export async function getFriends(data: any) {

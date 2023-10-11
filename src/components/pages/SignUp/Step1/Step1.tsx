@@ -9,7 +9,7 @@ import Facebook from "../../../../assets/Icon/facebook.svg";
 import Twitter from "../../../../assets/Icon/twitter.svg";
 import { InputWithFormik } from "../../../atoms/InputWithFormik/InputWithFormik";
 import { Email } from "@mui/icons-material";
-import { validateStep1 } from "../../../../validationSchema";
+import { Step1Schema } from "../../../../validationSchema";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setEmail, setStep } from "../../../../redux/regReducer";
@@ -41,7 +41,7 @@ const Step1 = () => {
           email: "",
           checkBox: false,
         }}
-        validationSchema={validateStep1}
+        validationSchema={Step1Schema}
         onSubmit={(values: any) => {
           SubmitEmail(values);
           navigate("/step2");

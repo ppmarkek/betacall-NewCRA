@@ -9,26 +9,43 @@ import { HoverGrid, IconGrid, OrGrid, SignIn, SocialLink, StyledLink, Title } fr
 import { Lock, Email } from "@mui/icons-material";
 import { InputWithFormik } from "../../atoms/InputWithFormik/InputWithFormik";
 import { Form, Formik } from "formik";
-import { validateLogin } from "../../../validationSchema";
+import { LoginSchema } from "../../../validationSchema";
 import { userLogin } from "../../../requests";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../../../redux/loginReducer";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const LoginReg = ["/Login", "/Recover", "/Step1", "/Step2", "/Step3"];
+  const [error, setError] = useState(false);
 
   const SubmitLogin = () => {
     return dispatch(setLoggedIn(true));
   };
 
   const setMargin = () => {
-    return (
-      LoginReg.some(value => value.toLowerCase() === location.pathname.toLowerCase()) === false &&
-      ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "80px")
-    );
+    return ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "80px");
+  };
+
+  const handleSubmit = async (values: any) => {
+    try {
+      const status = await userLogin(values);
+      if (status < 500) {
+        setError(true);
+        return error;
+      } else {
+        setError(false);
+        userLogin(values);
+        SubmitLogin();
+        navigate("/Dashboard");
+        setMargin();
+        return false;
+      }
+    } catch (errorValue) {
+      return error;
+    }
   };
 
   return (
@@ -43,19 +60,21 @@ const Login = () => {
             email: "",
             password: "",
           }}
-          validationSchema={validateLogin}
-          onSubmit={(values: any) => {
-            userLogin(values);
-            SubmitLogin();
-            navigate("/dashboard");
-            setMargin();
-          }}
+          validationSchema={LoginSchema(error)}
+          onSubmit={(values: any) => handleSubmit(values)}
           validateOnChange
           validateOnBlu
         >
           {() => (
             <Form>
-              <Grid container gap={"20px"} flexDirection="column">
+              <Grid container gap={"15px"} flexDirection="column">
+                <Grid height={"20px"}>
+                  {error && (
+                    <Text variant="ERROR">
+                      The email and/or password you specified are not correct.
+                    </Text>
+                  )}
+                </Grid>
                 <Grid container gap="20px" width="420px">
                   <InputWithFormik
                     placeholder={"Start typing..."}
@@ -76,7 +95,7 @@ const Login = () => {
                   <Checkbox>Remember me</Checkbox>
                   <StyledLink to="/Recover">Recover password</StyledLink>
                 </Grid>
-                <Button variant="FilledActive" width="420px" type="submit">
+                <Button variant="FilledActive" width="420px" type={"submit"}>
                   Sign In
                 </Button>
               </Grid>
