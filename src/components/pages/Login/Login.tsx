@@ -15,15 +15,13 @@ import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../../../redux/loginReducer";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { setStep } from "../../../redux/regReducer";
+import { useEffect } from "react";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [error, setError] = useState(false);
-
-  const SubmitLogin = () => {
-    return dispatch(setLoggedIn(true));
-  };
 
   const setMargin = () => {
     return ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "80px");
@@ -32,21 +30,23 @@ const Login = () => {
   const handleSubmit = async (values: any) => {
     try {
       const status = await userLogin(values);
-      if (status < 500) {
+      if (status === 500 || status === 400 || status === 404) {
         setError(true);
         return error;
       } else {
-        setError(false);
         userLogin(values);
-        SubmitLogin();
         navigate("/Dashboard");
         setMargin();
-        return false;
+        return dispatch(setLoggedIn(true));
       }
     } catch (errorValue) {
       return error;
     }
   };
+
+  useEffect(() => {
+    dispatch(setStep(1));
+  }, []);
 
   return (
     <SignIn container>

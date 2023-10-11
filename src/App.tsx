@@ -13,25 +13,16 @@ import Schedule from "./components/pages/Schedule/Schedule";
 import AddNewEvent from "./components/pages/AddNewEvent/AddNewEvent";
 import Contacts from "./components/pages/Contacts/Contacts";
 import AddNewContact from "./components/pages/AddNewContact/AddNewContact";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setStep } from "./redux/regReducer";
 
 function App() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const regUser = useSelector((state: any) => state.regUser.step);
   const loginUser = useSelector((state: any) => state.loginUser.isLoggedIn);
   const LoginReg = ["/Login", "/Recover", "/Step1", "/Step2", "/Step3"];
   const RegStep = ["/Login", "/Recover", "/Step1"];
   const location = useLocation();
-
-  const rebootStep = () => {
-    return (
-      RegStep.some(value => value.toLowerCase() === location.pathname.toLowerCase()) === true &&
-      dispatch(setStep(1))
-    );
-  };
 
   const setMargin = () => {
     return (
@@ -51,7 +42,6 @@ function App() {
   useEffect(() => {
     setMargin();
     regPages();
-    rebootStep();
   }, []);
 
   return (

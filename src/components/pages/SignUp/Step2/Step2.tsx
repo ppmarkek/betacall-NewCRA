@@ -9,14 +9,30 @@ import { SignupSchema, PasswordSchema } from "../../../../validationSchema";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setStep } from "../../../../redux/regReducer";
+import { useState } from "react";
+import { Grid } from "@mui/material";
 
 const Step2 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const regUser = useSelector((state: any) => state.regUser.email);
+  const [error, setError] = useState(false);
 
-  const SubmitStep = () => {
-    return dispatch(setStep(3));
+  const handleSubmit = async (values: any) => {
+    try {
+      const status = await addUser(values);
+      if (status === 500 || status === 400 || status === 404) {
+        setError(true);
+        return error;
+      } else {
+        setError(false);
+        addUser(values);
+        navigate("/step3");
+        return dispatch(setStep(3));
+      }
+    } catch (errorValue) {
+      return error;
+    }
   };
 
   return (
@@ -30,11 +46,7 @@ const Step2 = () => {
           confirmPassword: "",
         }}
         validationSchema={SignupSchema}
-        onSubmit={(values: any) => {
-          addUser(values);
-          navigate("/step3");
-          SubmitStep();
-        }}
+        onSubmit={(values: any) => handleSubmit(values)}
         validateOnChange
         validateOnBlur
       >
@@ -45,6 +57,9 @@ const Step2 = () => {
               <Text variant="LIGHT">Enter your details to proceed further</Text>
             </Title>
             <FormGrid container>
+              <Grid height={"20px"}>
+                {error && <Text variant="ERROR">The email are already using.</Text>}
+              </Grid>
               <InputWithFormik
                 placeholder={"Start typing..."}
                 name="email"

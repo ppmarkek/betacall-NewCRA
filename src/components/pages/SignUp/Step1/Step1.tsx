@@ -13,6 +13,7 @@ import { Step1Schema } from "../../../../validationSchema";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setEmail, setStep } from "../../../../redux/regReducer";
+import { useEffect } from "react";
 
 const Step1 = () => {
   const navigate = useNavigate();
@@ -25,6 +26,10 @@ const Step1 = () => {
   const SubmitStep = () => {
     return dispatch(setStep(2));
   };
+
+  useEffect(() => {
+    dispatch(setStep(1));
+  }, []);
 
   return (
     <Wrapper container>
