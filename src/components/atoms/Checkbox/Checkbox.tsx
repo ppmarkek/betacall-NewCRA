@@ -1,27 +1,26 @@
 import Text from "../Text/Text";
 import { CheckboxGrid, StyledCheckbox } from "./style";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 
 type Value = {
   children: string
+  name?: string
+  onChange?: (value: boolean) => void
 }
 
-const Checkbox = ({ children }: Value) => {
-  const [textColor, setTextColor] = useState("#8083A3");
-
+const Checkbox = ({ children, name, onChange }: Value) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    event.target.checked === false ? setTextColor("#8083A3") : setTextColor("");
+    if (onChange) {
+      onChange(event.target.checked);
+    }
   };
-
   return (
     <CheckboxGrid container>
       <StyledCheckbox>
-        <input type='checkbox' id='checkbox' onChange={event => handleChange(event)} />
-        <label htmlFor='checkbox' />
+        <input type="checkbox" id="checkbox" name={name} onChange={event => handleChange(event)} />
+        <label htmlFor="checkbox" />
       </StyledCheckbox>
-      <Text variant='LIGHT' color={textColor}>
-        {children}
-      </Text>
+      <Text variant="LIGHT">{children}</Text>
     </CheckboxGrid>
   );
 };

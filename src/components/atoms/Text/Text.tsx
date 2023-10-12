@@ -1,4 +1,4 @@
-import { Bold, H1, H2, H3, H4, H5, Light, Regular } from "./style";
+import { Bold, Error, H1, H2, H3, H4, H5, Light, Regular } from "./style";
 
 enum Variant {
   "H1",
@@ -9,10 +9,11 @@ enum Variant {
   "BOLD",
   "REGULAR",
   "LIGHT",
+  "ERROR",
 }
 
 type TextProps = {
-  variant: "H1" | "H2" | "H3" | "H4" | "H5" | "BOLD" | "REGULAR" | "LIGHT" | Variant
+  variant: "H1" | "H2" | "H3" | "H4" | "H5" | "BOLD" | "REGULAR" | "LIGHT" | "ERROR" | Variant
   small?: boolean
   children?: any
   color?: string
@@ -44,6 +45,8 @@ const Text = ({ variant, small, children, color }: TextProps) => {
       );
     case Variant[Variant.LIGHT]:
       return <Light $small={small}>{children}</Light>;
+    case Variant[Variant.ERROR]:
+      return <Error $color={color}>{children}</Error>;
     default:
       return <Regular $small={small}>{children}</Regular>;
   }

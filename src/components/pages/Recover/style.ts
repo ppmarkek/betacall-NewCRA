@@ -4,8 +4,7 @@ import styled from "styled-components";
 export const Wrapper = styled(Grid)`
   justify-content: center;
   align-items: center;
-  min-height: 900px;
-  height: 100%;
+  height: calc(100% - 85px);
 `;
 
 export const Title = styled(Grid)`
@@ -13,5 +12,4 @@ export const Title = styled(Grid)`
   gap: 35px;
   justify-content: center;
   align-items: center;
-  height: 935px;
 `;

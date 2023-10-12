@@ -66,7 +66,3 @@ export const HoverGrid = styled(Grid)`
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), #6b59cc;
   }
 `;
-
-export const StyledLink = styled(Link)`
-  text-decoration: none;
-`;

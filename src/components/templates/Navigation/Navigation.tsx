@@ -22,7 +22,7 @@ import {
   StyledPersonAddIcon,
 } from "./style";
 import Logo from "../../../assets/Icon/Logo.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Home from "../../../assets/NavigationIcon/Home.svg";
 import Messenger from "../../../assets/NavigationIcon/Messenger.svg";
 import Calls from "../../../assets/NavigationIcon/Calls.svg";
@@ -47,9 +47,15 @@ import Betacall from "../../../assets/Icon/betacall.svg";
 import ArrowDown from "../../../assets/ScheduleIcon/ArrowDown.svg";
 import ArrowTop from "../../../assets/ScheduleIcon/ArrowTop.svg";
 import CalendarIcon from "../../../assets/ScheduleIcon/CalendarIcon.svg";
+import { userLogout } from "../../../requests";
+import { setEmail } from "../../../redux/regReducer";
+import { setLoggedIn, setStep } from "../../../redux/loginReducer";
+import { useDispatch } from "react-redux";
 
 const Navigation = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [checkClass, setCheckClass] = useState("NotActive");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [checked, setChecked] = useState(false);
@@ -72,14 +78,23 @@ const Navigation = () => {
     return month[date.getMonth()] + " " + date.getFullYear();
   };
 
+  const SubmitLogOut = () => {
+    dispatch(setStep(1));
+    dispatch(setEmail(""));
+    dispatch(setLoggedIn(false));
+    navigate("/Login");
+    userLogout();
+    return ((document.getElementById("root") as HTMLInputElement).style.marginLeft = "0px");
+  };
+
   const ChangeClass = () => {
     return checkClass === "Active" ? setCheckClass("NotActive") : setCheckClass("Active");
   };
 
   const ButtonLink = [
     {
-      Icon: location.pathname === "/Home" ? HomeActive : Home,
-      Link: "/Home",
+      Icon: location.pathname === "/Dashboard" ? HomeActive : Home,
+      Link: "/Dashboard",
       Text: "Dashboard",
     },
     {
@@ -260,13 +275,20 @@ const Navigation = () => {
             <MenuLink to="/ProfileSettings">
               <MenuItem onClick={handleClose}>Profile Settings</MenuItem>
             </MenuLink>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleClose;
+                SubmitLogOut();
+              }}
+            >
+              Logout
+            </MenuItem>
           </Menu>
         </Grid>
       </TopNavigation>
       <LeftNavigation id="LeftNavigation" container>
         <Grid height="5%">
-          <LogoLink to="/">
+          <LogoLink to="/Dashboard">
             <img src={Logo} alt="Logo" />
             <img src={Betacall} alt="Logo" />
           </LogoLink>

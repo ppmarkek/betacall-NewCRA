@@ -1,14 +1,48 @@
-import { HoverGrid, IconGrid, OrGrid, SocialLink, StyledLink, Title, Wrapper } from "./style";
+import { HoverGrid, IconGrid, OrGrid, SocialLink, Title, Wrapper } from "./style";
 import Text from "../../../atoms/Text/Text";
 import { Grid } from "@mui/material";
-import Input from "../../../atoms/Input/Input";
+import { Formik, Form, ErrorMessage } from "formik";
 import Checkbox from "../../../atoms/Checkbox/Checkbox";
 import Button from "../../../atoms/Button/Button";
 import Google from "../../../../assets/Icon/google.svg";
 import Facebook from "../../../../assets/Icon/facebook.svg";
 import Twitter from "../../../../assets/Icon/twitter.svg";
+import { InputWithFormik } from "../../../atoms/InputWithFormik/InputWithFormik";
+import { Email } from "@mui/icons-material";
+import { Step1Schema } from "../../../../validationSchema";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setEmail, setStep } from "../../../../redux/regReducer";
+import { useEffect, useState } from "react";
+import { userValidate } from "../../../../requests";
 
 const Step1 = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [error, setError] = useState(false);
+
+  const handleSubmit = async (values: any) => {
+    try {
+      const status = await userValidate(values);
+      console.log(status);
+      if (status === 404) {
+        setError(false);
+        navigate("/step2");
+        dispatch(setEmail(values.email));
+        return dispatch(setStep(2));
+      } else {
+        setError(true);
+        return error;
+      }
+    } catch (errorValue) {
+      return error;
+    }
+  };
+
+  useEffect(() => {
+    dispatch(setStep(1));
+  }, []);
+
   return (
     <Wrapper container>
       <Title container>
@@ -16,25 +50,51 @@ const Step1 = () => {
           <Text variant={"H1"}>Welcome to BetaCall</Text>
           <Text variant={"H1"}>Sign Up to getting started.</Text>
         </Grid>
-
         <Text variant="LIGHT">Enter your details to proceed further</Text>
       </Title>
-      <Grid container gap={"36px"} flexDirection={"column"} width={"unset"}>
-        <Input
-          variant={"LightInput"}
-          type={"text"}
-          text={"catherine.shaw@gmail.com"}
-          width={"420px"}
-          title={"Email"}
-          IconType={"Email"}
-        />
-        <Checkbox>I agree with terms & conditions</Checkbox>
-        <StyledLink to={"/Step2"}>
-          <Button variant={"FilledActive"} width={"420px"}>
-            Sign Up
-          </Button>
-        </StyledLink>
-      </Grid>
+      <Formik
+        initialValues={{
+          email: "",
+          checkBox: false,
+        }}
+        validationSchema={Step1Schema}
+        onSubmit={(values: any) => handleSubmit({ email: values.email })}
+        validateOnChange
+        validateOnBlu
+      >
+        {props => (
+          <Form>
+            <Grid container gap={"20px"} flexDirection={"column"} width={"unset"}>
+              <Grid height={"20px"}>
+                {error && <Text variant="ERROR">The email are already using.</Text>}
+              </Grid>
+              <InputWithFormik
+                placeholder={"Start typing..."}
+                name="email"
+                type="email"
+                label="Email"
+                endIcon={<Email />}
+              />
+              <Grid>
+                <Checkbox onChange={value => props.setFieldValue("checkBox", value, true)}>
+                  I agree with terms & conditions
+                </Checkbox>
+                <Grid height={"20px"} marginTop={"5px"}>
+                  <ErrorMessage
+                    name="checkBox"
+                    render={msg => <Text variant={"ERROR"}>{msg}</Text>}
+                  />
+                </Grid>
+              </Grid>
+
+              <Button type={"submit"} variant={"FilledActive"} width={"420px"}>
+                Sign Up
+              </Button>
+            </Grid>
+          </Form>
+        )}
+      </Formik>
+
       <OrGrid container>
         <Grid borderBottom={"1px solid #EEEEEE"} width={"72px"} height={"1px"}></Grid>
         <Text variant="LIGHT" small>
