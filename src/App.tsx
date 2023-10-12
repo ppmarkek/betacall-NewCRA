@@ -15,6 +15,7 @@ import Contacts from "./components/pages/Contacts/Contacts";
 import AddNewContact from "./components/pages/AddNewContact/AddNewContact";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import Messages from "./components/pages/Messages/Messages";
 
 function App() {
   const navigate = useNavigate();
@@ -60,6 +61,7 @@ function App() {
             <Route path="/AddNewEvent" element={<AddNewEvent />} />
             <Route path="/Contacts" element={<Contacts />} />
             <Route path="/AddNewContact" element={<AddNewContact />} />
+            <Route path="/Messages" element={<Messages />} />
           </>
         ) : (
           <>
