@@ -34,7 +34,7 @@ export async function userLogout() {
 
 export async function userValidate(data: any) {
   try {
-    const response = await axios.get(`${urlAuthorization}validate`, data);
+    const response = await axios.post(`${urlAuthorization}validate`, data);
     return response.data;
   } catch (error: any) {
     return error.response.status;

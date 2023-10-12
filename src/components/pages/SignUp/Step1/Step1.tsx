@@ -25,15 +25,14 @@ const Step1 = () => {
     try {
       const status = await userValidate(values);
       console.log(status);
-      console.log(values);
-      if (status === 201) {
-        setError(true);
-        return error;
-      } else {
+      if (status === 404) {
         setError(false);
         navigate("/step2");
         dispatch(setEmail(values.email));
         return dispatch(setStep(2));
+      } else {
+        setError(true);
+        return error;
       }
     } catch (errorValue) {
       return error;
