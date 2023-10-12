@@ -63,7 +63,7 @@ function App() {
           </>
         ) : (
           <>
-            {regUser === 1 && <Route path="/Step1" element={<Step1 />} />}
+            <Route path="/Step1" element={<Step1 />} />
             {regUser === 2 && <Route path="/Step2" element={<Step2 />} />}
             {regUser === 3 && <Route path="/Step3" element={<Step3 />} />}
             <Route path="/Recover" element={<Recover />} />

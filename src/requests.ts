@@ -1,12 +1,13 @@
 import axios from "axios";
 
 const urlMessenger = "http://localhost:5000/api/messenger/";
+const urlAuthorization = "http://localhost:5000/api/authorization/";
 const urlEvents = "http://localhost:5000/api/events/";
 const urlContacts = "http://localhost:5000/api/contacts/";
 
 export async function addUser(data: any) {
   try {
-    const response = await axios.post(`${urlMessenger}user-register`, data);
+    const response = await axios.post(`${urlAuthorization}user-register`, data);
     return response.data;
   } catch (error: any) {
     return error.response.status;
@@ -15,7 +16,7 @@ export async function addUser(data: any) {
 
 export async function userLogin(data: any) {
   try {
-    const response = await axios.post(`${urlMessenger}user-login`, data);
+    const response = await axios.post(`${urlAuthorization}user-login`, data);
     return response.data;
   } catch (error: any) {
     return error.response.status;
@@ -24,7 +25,16 @@ export async function userLogin(data: any) {
 
 export async function userLogout() {
   try {
-    const response = await axios.post(`${urlMessenger}user-logout`);
+    const response = await axios.post(`${urlAuthorization}user-logout`);
+    return response.data;
+  } catch (error: any) {
+    return error.response.status;
+  }
+}
+
+export async function userValidate(data: any) {
+  try {
+    const response = await axios.get(`${urlAuthorization}validate`, data);
     return response.data;
   } catch (error: any) {
     return error.response.status;

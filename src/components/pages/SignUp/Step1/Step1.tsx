@@ -13,18 +13,31 @@ import { Step1Schema } from "../../../../validationSchema";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setEmail, setStep } from "../../../../redux/regReducer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { userValidate } from "../../../../requests";
 
 const Step1 = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [error, setError] = useState(false);
 
-  const SubmitEmail = (values: any) => {
-    return dispatch(setEmail(values.email));
-  };
-
-  const SubmitStep = () => {
-    return dispatch(setStep(2));
+  const handleSubmit = async (values: any) => {
+    try {
+      const status = await userValidate(values);
+      console.log(status);
+      console.log(values);
+      if (status === 201) {
+        setError(true);
+        return error;
+      } else {
+        setError(false);
+        navigate("/step2");
+        dispatch(setEmail(values.email));
+        return dispatch(setStep(2));
+      }
+    } catch (errorValue) {
+      return error;
+    }
   };
 
   useEffect(() => {
@@ -38,7 +51,6 @@ const Step1 = () => {
           <Text variant={"H1"}>Welcome to BetaCall</Text>
           <Text variant={"H1"}>Sign Up to getting started.</Text>
         </Grid>
-
         <Text variant="LIGHT">Enter your details to proceed further</Text>
       </Title>
       <Formik
@@ -47,17 +59,16 @@ const Step1 = () => {
           checkBox: false,
         }}
         validationSchema={Step1Schema}
-        onSubmit={(values: any) => {
-          SubmitEmail(values);
-          navigate("/step2");
-          SubmitStep();
-        }}
+        onSubmit={(values: any) => handleSubmit({ email: values.email })}
         validateOnChange
         validateOnBlu
       >
         {props => (
           <Form>
             <Grid container gap={"20px"} flexDirection={"column"} width={"unset"}>
+              <Grid height={"20px"}>
+                {error && <Text variant="ERROR">The email are already using.</Text>}
+              </Grid>
               <InputWithFormik
                 placeholder={"Start typing..."}
                 name="email"
