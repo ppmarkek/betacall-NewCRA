@@ -177,7 +177,7 @@ const Messages = () => {
               <MessagesGrid container>
                 <Grid container justifyContent={"flex-end"}>
                   <MyMessageGrid container>
-                    <Grid>
+                    <Grid item xs={11} container justifyContent={"flex-end"}>
                       <Grid
                         container
                         gap={"5px"}
@@ -201,9 +201,9 @@ const Messages = () => {
                   </MyMessageGrid>
                 </Grid>
                 <Grid container>
-                  <FrendsMessageGrid>
+                  <FrendsMessageGrid container>
                     <AvaratImg src={Avatar} alt="Avatar" />
-                    <Grid maxWidth={"90%"}>
+                    <Grid item xs={11} container>
                       <Grid container gap={"5px"} paddingBottom={"10px"}>
                         <Text variant={"LIGHT"} small>
                           8:21 PM

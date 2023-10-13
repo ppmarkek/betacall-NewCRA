@@ -174,7 +174,7 @@ export const Chat = styled(Grid)`
 
 export const MessagesGrid = styled(Grid)`
   height: 80%;
-  overflow-y: auto;
+  overflow: auto;
   flex-direction: column;
   gap: 10px;
 `;
@@ -192,7 +192,6 @@ export const MyMessageText = styled(Grid)`
 `;
 
 export const FrendsMessageGrid = styled(Grid)`
-  justify-content: flex-start;
   gap: 10px;
   max-width: 80%;
 `;
