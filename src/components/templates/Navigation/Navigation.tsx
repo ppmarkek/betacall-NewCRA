@@ -98,9 +98,9 @@ const Navigation = () => {
       Text: "Dashboard",
     },
     {
-      Icon: location.pathname === "/Messenger" ? MessengerActive : Messenger,
-      Link: "/Messenger",
-      Text: "Messenger",
+      Icon: location.pathname === "/Messages" ? MessengerActive : Messenger,
+      Link: "/Messages",
+      Text: "Messages",
     },
     {
       Icon: location.pathname === "/Calls" ? CallsActive : Calls,
