@@ -25,10 +25,16 @@ import {
   MyMessageText,
   FrendsMessageText,
   FrendsMessageGrid,
+  InputGrid,
+  StyledSentimentSatisfiedAltIcon,
+  StyledAddIcon,
+  StyledSendIcon,
+  StyledInput,
 } from "./style";
 import Text from "../../atoms/Text/Text";
 import Avatar from "../../../assets/Image/Avatar.svg";
 import SelectMessageImage from "../../../assets/MessagesIcon/SelectMessage.svg";
+import Button from "../../atoms/Button/Button";
 
 const Messages = () => {
   const [category, setCategory] = useState("All Events");
@@ -165,7 +171,7 @@ const Messages = () => {
             </SelectChatGrid>
           </SelectChatButton>
         </AllMessages>
-        <Grid item xs={8.7} padding={"20px"}>
+        <Grid item xs={8.7} padding={"20px 30px"}>
           {chat === "None" ? (
             <SelectMessage container>
               <SelectMessageImg src={SelectMessageImage} />
@@ -224,6 +230,27 @@ const Messages = () => {
                   </FrendsMessageGrid>
                 </Grid>
               </MessagesGrid>
+              <Grid container height={"20%"} alignItems={"flex-end"}>
+                <InputGrid container>
+                  <Grid item xs={9} container alignItems={"center"}>
+                    <StyledInput placeholder={"Write a message..."} />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={3}
+                    container
+                    justifyContent={"flex-end"}
+                    alignItems={"center"}
+                    gap={"20px"}
+                  >
+                    <StyledSentimentSatisfiedAltIcon />
+                    <StyledAddIcon />
+                    <Button variant={"FilledActive"} width="45px" height={"45px"}>
+                      <StyledSendIcon />
+                    </Button>
+                  </Grid>
+                </InputGrid>
+              </Grid>
             </Chat>
           )}
         </Grid>

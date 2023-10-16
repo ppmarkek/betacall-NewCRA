@@ -31,6 +31,10 @@ export const FilledRestingLight = styled(Button)<ButtonStyleProps>`
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), #6b59cc;
     border-radius: 8px;
   }
+  &:hover svg {
+    transition: all 0.4s;
+    color: rgba(255, 255, 255, 1);
+  }
 `;
 
 export const FilledActive = styled(Button)<ButtonStyleProps>`
@@ -56,5 +60,9 @@ export const FilledActive = styled(Button)<ButtonStyleProps>`
   }
   span {
     display: none;
+  }
+  &:hover svg {
+    transition: all 0.4s;
+    color: rgba(107, 89, 204, 1);
   }
 `;

@@ -1,10 +1,15 @@
-import { Button, Grid } from "@mui/material";
-import FolderIcon from "@mui/icons-material/Folder";
-import StarIcon from "@mui/icons-material/Star";
-import AlarmIcon from "@mui/icons-material/Alarm";
-import ModeIcon from "@mui/icons-material/Mode";
+import { Button, Grid, Input } from "@mui/material";
+import {
+  Send,
+  Add,
+  SentimentSatisfiedAlt,
+  MoreHoriz,
+  Mode,
+  Alarm,
+  Star,
+  Folder,
+} from "@mui/icons-material";
 import styled from "styled-components";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 type CategoryProps = {
   $background?: any
@@ -64,25 +69,25 @@ export const NewCategory = styled(Grid)`
   align-content: flex-start;
 `;
 
-export const StyledFolderIcon = styled(FolderIcon)<CategoryProps>`
+export const StyledFolderIcon = styled(Folder)<CategoryProps>`
   color: ${props => (props.$color ? props.$color : "rgba(128, 131, 163, 1)")};
   width: 22px;
   height: 22px;
 `;
 
-export const StyledStarIcon = styled(StarIcon)<CategoryProps>`
+export const StyledStarIcon = styled(Star)<CategoryProps>`
   color: ${props => (props.$color ? props.$color : "rgba(128, 131, 163, 1)")};
   width: 22px;
   height: 22px;
 `;
 
-export const StyledAlarmIcon = styled(AlarmIcon)<CategoryProps>`
+export const StyledAlarmIcon = styled(Alarm)<CategoryProps>`
   color: ${props => (props.$color ? props.$color : "rgba(128, 131, 163, 1)")};
   width: 22px;
   height: 22px;
 `;
 
-export const StyledModeIcon = styled(ModeIcon)<CategoryProps>`
+export const StyledModeIcon = styled(Mode)<CategoryProps>`
   color: ${props => (props.$color ? props.$color : "rgba(128, 131, 163, 1)")};
   width: 22px;
   height: 22px;
@@ -128,7 +133,7 @@ export const SelectChatGrid = styled(Grid)`
   justify-content: space-between;
 `;
 
-export const StyledMoreHorizIcon = styled(MoreHorizIcon)`
+export const StyledMoreHorizIcon = styled(MoreHoriz)`
   color: rgba(128, 131, 163, 1);
   width: 20px;
   height: 20px;
@@ -200,4 +205,55 @@ export const FrendsMessageText = styled(Grid)`
   border-radius: 0px 17px 17px 17px;
   background: #f3f4f9;
   padding: 5px 15px 5px 20px;
+`;
+
+export const InputGrid = styled(Grid)`
+  height: 70px;
+  background: #f3f4f9;
+  border-radius: 12px;
+  padding: 10px;
+`;
+
+export const StyledSentimentSatisfiedAltIcon = styled(SentimentSatisfiedAlt)`
+  color: rgba(128, 131, 163, 1);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: all 0.5s;
+  &:hover {
+    color: rgba(107, 89, 204, 1);
+  }
+`;
+
+export const StyledAddIcon = styled(Add)`
+  color: rgba(128, 131, 163, 1);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: all 0.5s;
+  &:hover {
+    color: rgba(107, 89, 204, 1);
+  }
+`;
+
+export const StyledSendIcon = styled(Send)`
+  color: rgba(255, 255, 255, 1);
+  width: 25px;
+  height: 25px;
+`;
+
+export const StyledInput = styled(Input)`
+  all: unset;
+  width: 100%;
+  height: 40px;
+  font-family: "Lato";
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  &::before {
+    all: unset;
+  }
+  &::after {
+    all: unset;
+  }
 `;

@@ -25,6 +25,7 @@ const Button = ({ variant, children, width, height, onClick, type, disabled }: B
     case "FilledRestingLight":
       return (
         <FilledRestingLight
+          id={"FilledRestingLight"}
           onClick={handleClick}
           $height={height}
           $width={width}
@@ -37,6 +38,7 @@ const Button = ({ variant, children, width, height, onClick, type, disabled }: B
     case "FilledActive":
       return (
         <FilledActive
+          id={"FilledActive"}
           onClick={handleClick}
           $height={height}
           $width={width}
@@ -49,6 +51,7 @@ const Button = ({ variant, children, width, height, onClick, type, disabled }: B
     default:
       return (
         <FilledRestingLight
+          id={"FilledRestingLight"}
           onClick={handleClick}
           $height={height}
           $width={width}
