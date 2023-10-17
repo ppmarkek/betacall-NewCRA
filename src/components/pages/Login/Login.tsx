@@ -35,6 +35,7 @@ const Login = () => {
         return error;
       } else {
         userLogin(values);
+        document.cookie = `authToken=${await userLogin(values).then(value => value.token)}`;
         navigate("/Dashboard");
         setMargin();
         return dispatch(setLoggedIn(true));

@@ -24,12 +24,8 @@ export async function userLogin(data: any) {
 }
 
 export async function userLogout() {
-  try {
-    const response = await axios.post(`${urlAuthorization}user-logout`);
-    return response.data;
-  } catch (error: any) {
-    return error.response.status;
-  }
+  const response = await axios.post(`${urlAuthorization}user-logout`);
+  return response.data;
 }
 
 export async function userValidate(data: any) {
@@ -51,8 +47,8 @@ export async function sendMessage(data: any) {
   return response.data;
 }
 
-export async function getMessage(data: any) {
-  const response = await axios.get(`${urlMessenger}get-message/`, data);
+export async function getMessage(id: string) {
+  const response = await axios.get(`${urlMessenger}get-message/${id}`);
   return response.data;
 }
 

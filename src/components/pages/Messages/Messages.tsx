@@ -35,10 +35,12 @@ import Text from "../../atoms/Text/Text";
 import Avatar from "../../../assets/Image/Avatar.svg";
 import SelectMessageImage from "../../../assets/MessagesIcon/SelectMessage.svg";
 import Button from "../../atoms/Button/Button";
+import { sendMessage } from "../../../requests";
 
 const Messages = () => {
   const [category, setCategory] = useState("All Events");
   const [chat, setChat] = useState("None");
+  const [message, setMessage] = useState("");
 
   return (
     <Wrapper container>
@@ -233,7 +235,10 @@ const Messages = () => {
               <Grid container height={"20%"} alignItems={"flex-end"}>
                 <InputGrid container>
                   <Grid item xs={9} container alignItems={"center"}>
-                    <StyledInput placeholder={"Write a message..."} />
+                    <StyledInput
+                      placeholder={"Write a message..."}
+                      onChange={props => setMessage(props.target.value)}
+                    />
                   </Grid>
                   <Grid
                     item
@@ -245,7 +250,19 @@ const Messages = () => {
                   >
                     <StyledSentimentSatisfiedAltIcon />
                     <StyledAddIcon />
-                    <Button variant={"FilledActive"} width="45px" height={"45px"}>
+                    <Button
+                      variant={"FilledActive"}
+                      width="45px"
+                      height={"45px"}
+                      onClick={() =>
+                        [...message].length !== 0 &&
+                        sendMessage({
+                          senderName: "652d24829fd0c484aca6bf5c",
+                          receiverId: "6523eda337c3f925b6d2e479",
+                          message: message,
+                        })
+                      }
+                    >
                       <StyledSendIcon />
                     </Button>
                   </Grid>
